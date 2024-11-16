@@ -95,7 +95,8 @@ public class MatchInfo {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 return new JSONObject(new JSONTokener(in));
             }
-        } else {
+        }
+        else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }

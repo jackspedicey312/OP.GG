@@ -98,7 +98,8 @@ public class RiotApp extends JFrame {
                 outputArea.append("\nMatch Details for match ID " + matchId + ":\n" + matchDetails.toString(2));
             }
 
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             outputArea.append("Error fetching match data: " + ex.getMessage());
         }
     }

@@ -54,6 +54,7 @@ public class RiotMain {
      * @throws IOException if the API call fails.
      * @throws IllegalArgumentException if unsupported region is called.
      */
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public void generatePUUID() throws IOException {
         final String baseURL;
         
@@ -70,17 +71,17 @@ public class RiotMain {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
-        String urlComplete = baseURL + username + "/" + tagline;
-        URL url = new URL(urlComplete);
+        final String urlComplete = baseURL + username + "/" + tagline;
+        final URL url = new URL(urlComplete);
 
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
 
-        int responseCode = request.getResponseCode();
+        final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
-                JSONObject playerData = new JSONObject(new JSONTokener(in));
+                final JSONObject playerData = new JSONObject(new JSONTokener(in));
                 this.puuid = playerData.getString("puuid");
             }
         } 

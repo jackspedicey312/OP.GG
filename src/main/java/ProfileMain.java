@@ -82,16 +82,26 @@ public class ProfileMain {
         return iconID;
     }
 
+    /**
+    @throws IOException if icon png cannot be found with the given iconID.
+     Returns the icon png with the given iconID.
+     */
+
     public ImageIcon getIconPng() throws IOException {
         final String iconId2 = Integer.toString(this.iconID);
-        String pngURL = "https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/" + iconId2 + ".png";
+        final String pngURL = "https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/"
+                + iconId2 + ".png";
 
-        URL url = new URL(pngURL);
-        BufferedImage img = ImageIO.read(url);
+        try {
+            final URL url = new URL(pngURL);
+            final BufferedImage img = ImageIO.read(url);
+            return new ImageIcon(img);
+        }
         catch (IOException e) {
-    System.err.println("Error fetching the icon: " + e.getMessage());
+            System.err.println("Error fetching the icon: " + e.getMessage());
             return null;
-    }}
+        }
+    }
 
     public String getAccountID() {
         return accountID;
