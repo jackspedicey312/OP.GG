@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -20,7 +19,7 @@ public class ProfileMain {
     private String accountID;
     private int summonerLevel;
     private int iconID;
-    private File iconPng;
+    private ImageIcon iconPng;
 
     public ProfileMain(String puuid, String region) {
         this.puuid = puuid;
@@ -28,7 +27,7 @@ public class ProfileMain {
     }
 
     public void generateProfileData() throws IOException {
-        HttpURLConnection request = getHttpURLConnection();
+        final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -95,7 +94,8 @@ public class ProfileMain {
         try {
             final URL url = new URL(pngURL);
             final BufferedImage img = ImageIO.read(url);
-            return new ImageIcon(img);
+            this.iconPng = new ImageIcon(img);
+            return iconPng;
         }
         catch (IOException e) {
             System.err.println("Error fetching the icon: " + e.getMessage());
