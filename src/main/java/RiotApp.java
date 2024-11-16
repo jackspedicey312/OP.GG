@@ -52,7 +52,7 @@ public class RiotApp extends JFrame {
      * Fetch data from RiotMain and MatchInfo based on user input
      */
     private void fetchData() {
-        outputArea.setText(""); // Clear previous output
+        outputArea.setText("");
 
         // Get user inputs
         String username = usernameField.getText().trim();

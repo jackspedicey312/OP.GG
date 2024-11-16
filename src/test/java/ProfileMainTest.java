@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 public class ProfileMainTest {
     @Test
     public void profileTest() throws IOException {
+
+        // Icon ID will be used to pull the png for the UI
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
 

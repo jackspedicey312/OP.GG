@@ -44,7 +44,8 @@ public class RiotMain {
             MatchInfo matchInfo = new MatchInfo(riotMain);
             matchInfo.displayRecentMatchesAndDetails();
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }

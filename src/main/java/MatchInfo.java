@@ -37,7 +37,8 @@ public class MatchInfo {
                 JSONObject matchDetails = getMatchDetails(matchId, region);
                 System.out.println("Match Details for match ID " + matchId + ": " + matchDetails.toString(2));
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println("Error fetching match data: " + e.getMessage());
         }
     }
@@ -46,11 +47,14 @@ public class MatchInfo {
         String baseURL;
         if (region.equalsIgnoreCase("NA") || region.equalsIgnoreCase("LATAM") || region.equalsIgnoreCase("BR")) {
             baseURL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-        } else if (region.equalsIgnoreCase("EU") || region.equalsIgnoreCase("EUNE") || region.equalsIgnoreCase("EUW") || region.equalsIgnoreCase("TR") || region.equalsIgnoreCase("RU")) {
+        }
+        else if (region.equalsIgnoreCase("EU") || region.equalsIgnoreCase("EUNE") || region.equalsIgnoreCase("EUW") || region.equalsIgnoreCase("TR") || region.equalsIgnoreCase("RU")) {
             baseURL = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-        } else if (region.equalsIgnoreCase("ASIA") || region.equalsIgnoreCase("KR") || region.equalsIgnoreCase("JP")) {
+        }
+        else if (region.equalsIgnoreCase("ASIA") || region.equalsIgnoreCase("KR") || region.equalsIgnoreCase("JP")) {
             baseURL = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
@@ -75,11 +79,14 @@ public class MatchInfo {
         String baseURL;
         if (region.equalsIgnoreCase("NA") || region.equalsIgnoreCase("LATAM") || region.equalsIgnoreCase("BR")) {
             baseURL = "https://americas.api.riotgames.com/lol/match/v5/matches/";
-        } else if (region.equalsIgnoreCase("EU") || region.equalsIgnoreCase("EUNE") || region.equalsIgnoreCase("EUW") || region.equalsIgnoreCase("TR") || region.equalsIgnoreCase("RU")) {
+        }
+        else if (region.equalsIgnoreCase("EU") || region.equalsIgnoreCase("EUNE") || region.equalsIgnoreCase("EUW") || region.equalsIgnoreCase("TR") || region.equalsIgnoreCase("RU")) {
             baseURL = "https://europe.api.riotgames.com/lol/match/v5/matches/";
-        } else if (region.equalsIgnoreCase("ASIA") || region.equalsIgnoreCase("KR") || region.equalsIgnoreCase("JP")) {
+        }
+        else if (region.equalsIgnoreCase("ASIA") || region.equalsIgnoreCase("KR") || region.equalsIgnoreCase("JP")) {
             baseURL = "https://asia.api.riotgames.com/lol/match/v5/matches/";
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
@@ -90,7 +97,7 @@ public class MatchInfo {
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
 
-        int responseCode = request.getResponseCode();
+        final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 return new JSONObject(new JSONTokener(in));

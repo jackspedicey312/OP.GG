@@ -28,7 +28,7 @@ public class ProfileMain {
     }
 
     public void generateProfileData() throws IOException {
-        HttpURLConnection request = getHttpURLConnection();
+        final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
