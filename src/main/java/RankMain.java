@@ -21,7 +21,6 @@ public class RankMain {
     private int leaguePoints;
     private int wins;
     private int losses;
-
     private int winRate;
 
 
@@ -75,9 +74,9 @@ public class RankMain {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
-        String urlComplete = baseURL + summonerID;
-        URL url = new URL(urlComplete);
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        final String urlComplete = baseURL + summonerID;
+        final URL url = new URL(urlComplete);
+        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
         return request;
