@@ -1,37 +1,71 @@
 package panel;
 
+import java.awt.*;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class PanelView {
+@SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
+public class PanelView extends JPanel implements ActionListener {
+    private final ButtonPresenter buttonPresenter;
     private final JButton overviewButton = new JButton("Overview");
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
     private final JButton championsButton = new JButton("Champions");
     private final JButton funFactsButton = new JButton("Fun Facts");
-    private final JButton logoutButton = new JButton("Logout");
+    private final JButton logoutButton = new JButton("Log out");
     private final JPanel panel;
 
-    public PanelView(ButtonPresenter buttonPresenter) {
-        final JPanel firstpanel = new JPanel();
-        firstpanel.setLayout(new BoxLayout(firstpanel, BoxLayout.X_AXIS));
-        firstpanel.add(logoutButton);
-        firstpanel.add(overviewButton);
-        final JPanel secondpanel = new JPanel();
-        secondpanel.setLayout(new BoxLayout(secondpanel, BoxLayout.X_AXIS));
-        secondpanel.add(matchHistoryButton);
-        secondpanel.add(friendsButton);
-        secondpanel.add(championsButton);
-        secondpanel.add(funFactsButton);
-        final JPanel mainpanel = new JPanel();
-        mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
-        mainpanel.add(firstpanel);
-        mainpanel.add(secondpanel);
-        this.panel = mainpanel;
+    public PanelView() {
+        final JPanel firstPanel = new JPanel();
+        this.buttonPresenter = new ButtonPresenter();
+        firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
+        firstPanel.add(logoutButton);
+        firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
+        firstPanel.add(overviewButton);
+        final JPanel secondPanel = new JPanel();
+        secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
+        secondPanel.add(matchHistoryButton);
+        secondPanel.add(friendsButton);
+        secondPanel.add(championsButton);
+        secondPanel.add(funFactsButton);
+        final JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(firstPanel);
+        mainPanel.add(secondPanel);
+        this.panel = mainPanel;
 
-        overviewButton.addActionListener(e -> {})
+        overviewButton.addActionListener(this);
+        matchHistoryButton.addActionListener(this);
+        friendsButton.addActionListener(this);
+        championsButton.addActionListener(this);
+        funFactsButton.addActionListener(this);
+        logoutButton.addActionListener(this);
     }
 
-    public JPanel getpanel() {
+    @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings", "checkstyle:ParameterName"})
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+        if (e.getSource() == overviewButton) {
+            this.buttonPresenter.OverviewButtonClicked();
+        }
+        else if (e.getSource() == matchHistoryButton) {
+            this.buttonPresenter.MatchHistoryButtonClicked();
+        }
+        else if (e.getSource() == friendsButton) {
+            this.buttonPresenter.FriendsButtonClicked();
+        }
+        else if (e.getSource() == championsButton) {
+            this.buttonPresenter.ChampionButtonClicked();
+        }
+        else if (e.getSource() == funFactsButton) {
+            this.buttonPresenter.FunFactsButtonClicked();
+        }
+        else if (e.getSource() == logoutButton) {
+            this.buttonPresenter.LogoutClicked();
+        }
+    }
+
+    public JPanel getPanel() {
         return this.panel;
-    }
+   }
 }
