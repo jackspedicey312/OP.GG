@@ -62,13 +62,13 @@ public class RankMain {
     private HttpURLConnection getHttpURLConnection() throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
-            baseURL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/;";
+            baseURL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
         }
         else if (region.equalsIgnoreCase("EU")) {
-            baseURL = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/;";
+            baseURL = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
         }
         else if (region.equalsIgnoreCase("ASIA")) {
-            baseURL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/;";
+            baseURL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/";
         }
         else {
             throw new IllegalArgumentException("Unsupported region: " + region);
