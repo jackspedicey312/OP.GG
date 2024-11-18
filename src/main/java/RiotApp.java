@@ -17,12 +17,11 @@ public class RiotApp extends JFrame {
         setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create input fields
         usernameField = new JTextField(15);
         taglineField = new JTextField(15);
         regionBox = new JComboBox<>(new String[]{"NA", "EU", "ASIA"});
         outputArea = new JTextArea(15, 30);
-        outputArea.setEditable(false); // Output area is read-only
+        outputArea.setEditable(false);
         fetchButton = new JButton("Fetch Data");
 
         // Set up layout and add components
@@ -53,7 +52,7 @@ public class RiotApp extends JFrame {
      * Fetch data from RiotMain and MatchInfo based on user input
      */
     private void fetchData() {
-        outputArea.setText(""); // Clear previous output
+        outputArea.setText("");
 
         // Get user inputs
         String username = usernameField.getText().trim();
@@ -99,7 +98,8 @@ public class RiotApp extends JFrame {
                 outputArea.append("\nMatch Details for match ID " + matchId + ":\n" + matchDetails.toString(2));
             }
 
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             outputArea.append("Error fetching match data: " + ex.getMessage());
         }
     }

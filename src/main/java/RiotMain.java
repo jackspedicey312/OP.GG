@@ -15,7 +15,6 @@ public class RiotMain {
     private String tagline;
     private String region;
 
-    // Constructor that initializes username, tagline, and region
     public RiotMain(String username, String tagline, String region) {
         this.username = username;
         this.tagline = tagline;
@@ -38,14 +37,15 @@ public class RiotMain {
 
         try {
             RiotMain riotMain = new RiotMain(username, tagline, region);
-            riotMain.generatePUUID(); // Generates PUUID without additional arguments
+            riotMain.generatePUUID();
             System.out.println("Generated PUUID: " + riotMain.getPuuid());
 
             // Create MatchInfo instance with the RiotMain instance and fetch match data
             MatchInfo matchInfo = new MatchInfo(riotMain);
             matchInfo.displayRecentMatchesAndDetails();
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
@@ -53,33 +53,40 @@ public class RiotMain {
     /**
      * Generates PUUID based on stored username, tagline, and region.
      * @throws IOException if the API call fails.
+     * @throws IllegalArgumentException if unsupported region is called.
      */
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public void generatePUUID() throws IOException {
-        String baseURL;
+        final String baseURL;
+        
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/";
-        } else if (region.equalsIgnoreCase("EU")) {
+        } 
+        else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/";
-        } else if (region.equalsIgnoreCase("ASIA")) {
+        } 
+        else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/";
-        } else {
+        } 
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
-        String urlComplete = baseURL + username + "/" + tagline;
-        URL url = new URL(urlComplete);
+        final String urlComplete = baseURL + username + "/" + tagline;
+        final URL url = new URL(urlComplete);
 
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
 
-        int responseCode = request.getResponseCode();
+        final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
-                JSONObject playerData = new JSONObject(new JSONTokener(in));
+                final JSONObject playerData = new JSONObject(new JSONTokener(in));
                 this.puuid = playerData.getString("puuid");
             }
-        } else {
+        } 
+        else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
@@ -100,4 +107,3 @@ public class RiotMain {
         return region;
     }
 }
-
