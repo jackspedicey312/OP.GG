@@ -2,8 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import New.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static data_access.generateMatch.generateMatch;
+import static data_access.generateMatchList.generateMatchList;
+import static data_access.generatePuuid.generatePuuid;
 
 public class RiotApp extends JFrame {
     private JTextField usernameField;
@@ -11,6 +17,7 @@ public class RiotApp extends JFrame {
     private JComboBox<String> regionBox;
     private JTextArea outputArea;
     private JButton fetchButton;
+    private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
     public RiotApp() {
         setTitle("Riot API Data Fetcher");
@@ -57,18 +64,26 @@ public class RiotApp extends JFrame {
         // Get user inputs
         String username = usernameField.getText().trim();
         String tagline = taglineField.getText().trim();
-        String region = (String) regionBox.getSelectedItem();
+        String region;
+        if (regionBox.getSelectedItem().equals("NA")) {
+            region = "americas";
+        }
+        else if (regionBox.getSelectedItem().equals("EU")) {
+            region = "europe";
+        }
+        else {
+            region = "asia";
+        }
+        String puuid = generatePuuid(username, tagline, region, API_KEY);
 
         // Create RiotMain instance and generate PUUID
+        User user = new User(username, tagline, region, puuid, generateMatchList(puuid, region, API_KEY));
         try {
-            RiotMain riotMain = new RiotMain(username, tagline, region);
-            riotMain.generatePUUID();
-            String puuid = riotMain.getPuuid();
+            final RiotMain riotMain = new RiotMain(user);
             outputArea.append("Generated PUUID: " + puuid + "\n\n");
 
             // Create MatchInfo instance and fetch recent matches and details
-            MatchInfo matchInfo = new MatchInfo(riotMain);
-            displayMatchData(matchInfo);
+            displayMatchData(riotMain);
 
         } catch (Exception ex) {
             outputArea.append("Error: " + ex.getMessage());
@@ -79,13 +94,13 @@ public class RiotApp extends JFrame {
      * Display recent matches and the details of the first match in the output area
      * @param matchInfo the MatchInfo instance
      */
-    private void displayMatchData(MatchInfo matchInfo) {
+    private void displayMatchData(RiotMain riotMain) {
         try {
-            String puuid = matchInfo.riotMain.getPuuid();
-            String region = matchInfo.riotMain.getRegion();
+            String puuid = riotMain.getPuuid();
+            String region = riotMain.getRegion();
 
             // Fetch recent matches
-            JSONArray recentMatches = matchInfo.getRecentMatches(puuid, region);
+            JSONArray recentMatches = riotMain.getMatchList();
             outputArea.append("Recent Matches: \n");
             for (int i = 0; i < recentMatches.length(); i++) {
                 outputArea.append(recentMatches.getString(i) + "\n");
@@ -94,7 +109,7 @@ public class RiotApp extends JFrame {
             // Display details of the first match if available
             if (recentMatches.length() > 0) {
                 String matchId = recentMatches.getString(0);
-                JSONObject matchDetails = matchInfo.getMatchDetails(matchId, region);
+                JSONObject matchDetails = generateMatch(matchId, region, API_KEY);
                 outputArea.append("\nMatch Details for match ID " + matchId + ":\n" + matchDetails.toString(2));
             }
 
