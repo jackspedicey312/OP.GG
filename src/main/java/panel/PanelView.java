@@ -7,7 +7,7 @@ import javax.swing.*;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class PanelView extends JPanel implements ActionListener {
-    private final ButtonPresenter buttonPresenter;
+    private final ButtonController buttonController;
     private final JButton overviewButton = new JButton("Overview");
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
@@ -18,7 +18,7 @@ public class PanelView extends JPanel implements ActionListener {
 
     public PanelView() {
         final JPanel firstPanel = new JPanel();
-        this.buttonPresenter = new ButtonPresenter();
+        this.buttonController = new ButtonController();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
         firstPanel.add(logoutButton);
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
@@ -46,22 +46,22 @@ public class PanelView extends JPanel implements ActionListener {
     @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings", "checkstyle:ParameterName"})
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (e.getSource() == overviewButton) {
-            this.buttonPresenter.OverviewButtonClicked();
+            this.buttonController.OverviewButtonClicked();
         }
         else if (e.getSource() == matchHistoryButton) {
-            this.buttonPresenter.MatchHistoryButtonClicked();
+            this.buttonController.MatchHistoryButtonClicked();
         }
         else if (e.getSource() == friendsButton) {
-            this.buttonPresenter.FriendsButtonClicked();
+            this.buttonController.FriendsButtonClicked();
         }
         else if (e.getSource() == championsButton) {
-            this.buttonPresenter.ChampionButtonClicked();
+            this.buttonController.ChampionButtonClicked();
         }
         else if (e.getSource() == funFactsButton) {
-            this.buttonPresenter.FunFactsButtonClicked();
+            this.buttonController.FunFactsButtonClicked();
         }
         else if (e.getSource() == logoutButton) {
-            this.buttonPresenter.LogoutClicked();
+            this.buttonController.LogoutButtonClicked();
         }
     }
 
