@@ -31,6 +31,7 @@ public class RankMainTest {
         assertEquals(winRate, rankMain.getWinRate());
     }
 
+    @org.junit.Test
     public void testRankMain2() throws IOException {
         String summonerID = "nItPoQnTxCT4hMMqcmUyqNcjKdDHRlPEEmj5CLiK7TWRWUAw";
         String region = "NA";
