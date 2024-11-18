@@ -13,6 +13,7 @@ public class FreeChampionTest {
 
         assertEquals("Aatrox", rotation.getChampionName(266));
         assertEquals("Twitch", rotation.getChampionName(29));
+        assertEquals("Kaisa", rotation.getChampionName(145));
 
     }
 }

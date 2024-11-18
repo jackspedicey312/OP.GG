@@ -32,21 +32,7 @@ public class FreeChampionRotation {
 
     public String getChampionName(int championId) throws IOException {
         final URL url = new URL("https://ddragon.leagueoflegends.com/cdn/14.22.1/data/en_US/champion.json");
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        request.setRequestMethod("GET");
-        request.connect();
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
-
-        while ((line = in.readLine()) != null) {
-            response.append(line);
-        }
-        in.close();
-
-        JSONObject championDatabase = new JSONObject(response.toString());
-        JSONObject data = championDatabase.getJSONObject("data");
+        JSONObject data = getJsonObject(url);
 
         for (String key : data.keySet()) {
             JSONObject champion = data.getJSONObject(key);
@@ -57,6 +43,25 @@ public class FreeChampionRotation {
             }
         }
         return null;
+    }
+
+    private static JSONObject getJsonObject(URL url) throws IOException {
+        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.setRequestMethod("GET");
+        request.connect();
+
+        final BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        final StringBuilder response = new StringBuilder();
+        String line;
+
+        while ((line = in.readLine()) != null) {
+            response.append(line);
+        }
+        in.close();
+
+        JSONObject championDatabase = new JSONObject(response.toString());
+        JSONObject data = championDatabase.getJSONObject("data");
+        return data;
     }
 
 
