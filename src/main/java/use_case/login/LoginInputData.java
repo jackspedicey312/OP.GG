@@ -1,24 +1,26 @@
 package use_case.login;
 
-/**
- * The Input Data for the Login Use Case.
- */
 public class LoginInputData {
-
     private final String username;
-    private final String password;
+    private final String tagline;
+    private final String region;
 
-    public LoginInputData(String username, String password) {
+    public LoginInputData(String username, String tagline, String region) {
         this.username = username;
-        this.password = password;
+        this.tagline = tagline;
+        this.region = region;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    String getPassword() {
-        return password;
+    public String getTagline() {
+        return tagline;
     }
 
+    public String getRegion() {
+        return region;
+    }
 }
+

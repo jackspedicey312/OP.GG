@@ -1,20 +1,35 @@
 package entity;
 
-/**
- * The representation of a user in our program.
- */
-public interface User {
+public class User {
+    private String username;
+    private String tagline;
+    private String region;
+    private String puuid;
 
-    /**
-     * Returns the username of the user.
-     * @return the username of the user.
-     */
-    String getName();
+    public User(String username, String tagline, String region) {
+        this.username = username;
+        this.tagline = tagline;
+        this.region = region;
+    }
 
-    /**
-     * Returns the password of the user.
-     * @return the password of the user.
-     */
-    String getPassword();
+    // Getters and Setters
+    public String getUsername() {
+        return username;
+    }
 
+    public String getTagline() {
+        return tagline;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getPuuid() {
+        return puuid;
+    }
+
+    public void setPuuid(String puuid) {
+        this.puuid = puuid;
+    }
 }

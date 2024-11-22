@@ -62,6 +62,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                         if (evt.getSource().equals(logIn)) {
                             final LoginState currentState = loginViewModel.getState();
 
+                            // Call the execute method of the LoginController
                             loginController.execute(
                                     currentState.getUsername(),
                                     currentState.getPassword()
@@ -70,6 +71,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     }
                 }
         );
+
 
         cancel.addActionListener(this);
 

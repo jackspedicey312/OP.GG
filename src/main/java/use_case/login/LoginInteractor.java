@@ -1,40 +1,33 @@
 package use_case.login;
 
+import data_access.RiotAPILoginDataAccess;
 import entity.User;
 
-/**
- * The Login Interactor.
- */
 public class LoginInteractor implements LoginInputBoundary {
-    private final LoginUserDataAccessInterface userDataAccessObject;
-    private final LoginOutputBoundary loginPresenter;
+    private final RiotAPILoginDataAccess dataAccess;
+    private final LoginOutputBoundary outputBoundary;
 
-    public LoginInteractor(LoginUserDataAccessInterface userDataAccessInterface,
-                           LoginOutputBoundary loginOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
-        this.loginPresenter = loginOutputBoundary;
+    public LoginInteractor(RiotAPILoginDataAccess dataAccess, LoginOutputBoundary outputBoundary) {
+        this.dataAccess = dataAccess;
+        this.outputBoundary = outputBoundary;
     }
 
     @Override
-    public void execute(LoginInputData loginInputData) {
-        final String username = loginInputData.getUsername();
-        final String password = loginInputData.getPassword();
-        if (!userDataAccessObject.existsByName(username)) {
-            loginPresenter.prepareFailView(username + ": Account does not exist.");
-        }
-        else {
-            final String pwd = userDataAccessObject.get(username).getPassword();
-            if (!password.equals(pwd)) {
-                loginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
-            }
-            else {
+    public void login(LoginInputData inputData) {
+        try {
+            // Create a User instance
+            User user = new User(inputData.getUsername(), inputData.getTagline(), inputData.getRegion());
 
-                final User user = userDataAccessObject.get(loginInputData.getUsername());
+            // Fetch PUUID
+            String puuid = dataAccess.fetchPUUID(user);
 
-                userDataAccessObject.setCurrentUsername(user.getName());
-                final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
-                loginPresenter.prepareSuccessView(loginOutputData);
-            }
+            // Create success output data
+            LoginOutputData outputData = new LoginOutputData(true, puuid, "Login successful!");
+            outputBoundary.present(outputData);
+        } catch (Exception e) {
+            // Create failure output data
+            LoginOutputData outputData = new LoginOutputData(false, null, "Login failed: " + e.getMessage());
+            outputBoundary.present(outputData);
         }
     }
 }

@@ -1,12 +1,10 @@
-package interface_adapter.login;
+package app;
 
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
-public class LoginPresenter implements LoginOutputBoundary {
-
-    private String puuid; // Stores the PUUID for later use
-    private String message; // Stores the success or failure message
+public class CLIOutputPresenter implements LoginOutputBoundary {
+    private String puuid;
 
     @Override
     public void present(LoginOutputData outputData) {
@@ -16,16 +14,10 @@ public class LoginPresenter implements LoginOutputBoundary {
             this.puuid = outputData.getPuuid();
         } else {
             System.err.println(outputData.getMessage());
-            this.puuid = null;
         }
-        this.message = outputData.getMessage();
     }
 
     public String getPuuid() {
         return puuid;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

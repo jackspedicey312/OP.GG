@@ -3,26 +3,23 @@ package interface_adapter.login;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
 
-/**
- * The controller for the Login Use Case.
- */
 public class LoginController {
 
-    private final LoginInputBoundary loginUseCaseInteractor;
+    private final LoginInputBoundary loginInputBoundary;
 
-    public LoginController(LoginInputBoundary loginUseCaseInteractor) {
-        this.loginUseCaseInteractor = loginUseCaseInteractor;
+    public LoginController(LoginInputBoundary loginInputBoundary) {
+        this.loginInputBoundary = loginInputBoundary;
     }
 
     /**
-     * Executes the Login Use Case.
-     * @param username the username of the user logging in
-     * @param password the password of the user logging in
+     * Handles a login request by converting inputs and delegating to the use case.
+     *
+     * @param username The username provided by the user.
+     * @param password The password provided by the user.
      */
     public void execute(String username, String password) {
-        final LoginInputData loginInputData = new LoginInputData(
-                username, password);
-
-        loginUseCaseInteractor.execute(loginInputData);
+        // Transform input and call the use case
+        LoginInputData inputData = new LoginInputData(username, password, "NA"); // Default region example
+        loginInputBoundary.login(inputData);
     }
 }
