@@ -10,22 +10,33 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class FreeChampionRotation {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private ImageIcon iconPng;
-    private Object freeChampions;
+
+    // This list converts the championIDs to actual character names.
+    private ArrayList<String> freeChampionsList = new ArrayList<>();
+    private ArrayList<ImageIcon> freeChampionsIcons = new ArrayList<>();
 
     public void generateCurrentFreeRotation() throws IOException {
         final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
+            final JSONArray freeChampions;
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONObject playerData = new JSONObject(new JSONTokener(in));
-                this.freeChampions = playerData.get("freeChampionIds");
+                freeChampions = playerData.getJSONArray("freeChampionIds");
+            }
+
+            // Converts int champion Ids into String Champion names for the UI along with the matching icon.
+            for (int i = 0; i < freeChampions.length(); i++) {
+                int iD = freeChampions.getInt(i);
+                freeChampionsList.add(getChampionName(iD));
+                freeChampionsIcons.add(getChampionIcon(iD));
             }
         }
     }
@@ -70,8 +81,15 @@ public class FreeChampionRotation {
         if (champName != null) {
             final String url = "https://ddragon.canisback.com/img/champion/tiles/" + champName + "_0.jpg";
             final URL completeUrl = new URL(url);
-            final BufferedImage img = ImageIO.read(completeUrl);
-            return new ImageIcon(img);
+            System.out.println("Constructed URL: " + url);
+
+            try {
+                final BufferedImage img = ImageIO.read(completeUrl);
+                return new ImageIcon(img);
+            }
+            catch (IOException e) {
+                return new ImageIcon();
+            }
         }
         return null;
 
@@ -87,4 +105,13 @@ public class FreeChampionRotation {
 
         return request;
     }
+
+    public ArrayList<String> getFreeChampionsList() throws IOException {
+        return freeChampionsList;
+    }
+
+    public ArrayList<ImageIcon> getFreeChampionsListIcons() throws IOException {
+        return freeChampionsIcons;
+    }
+
 }
