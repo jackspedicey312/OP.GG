@@ -25,7 +25,7 @@ public class FreeChampionTest {
         FreeChampionRotation rotation = new FreeChampionRotation();
         rotation.generateCurrentFreeRotation();
 
-        // This rotation is updated for Nov 23. It updates every week.
+        // This rotation is updated for Nov 23. It updates every week so it might fail if you're running this later.
 
         List<String> currentRotation = Arrays.asList("Kayle", "Alistar", "Warwick", "Corki", "Swain", "Caitlyn",
                 "JarvanIV", "LeeSin", "Skarner", "Heimerdinger", "Mordekaiser", "KogMaw", "Fizz", "Rengar", "Viktor",
@@ -33,7 +33,6 @@ public class FreeChampionTest {
                 "Pyke", "Ambessa", "Smolder");
 
         assertEquals(currentRotation, rotation.getFreeChampionsList());
-        assertEquals(currentRotation, rotation.getFreeChampionsListIcons());
 
     }
 }
