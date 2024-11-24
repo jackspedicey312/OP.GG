@@ -1,56 +1,34 @@
 package app;
 
-import entity.UserFactory;
-import use_case.login.*;
-import use_case.match.*;
+import interface_adapter.login.LoginController;
+import interface_adapter.login.LoginPresenter;
+import interface_adapter.match.MatchController;
+import interface_adapter.match.MatchPresenter;
+import use_case.login.LoginInteractor;
+import use_case.match.FetchRecentMatchesUseCase;
+import data_access.RiotAPIUserDataAccess;
+import data_access.RiotAPIMatchDataAccess;
+import view.LoginView;
 
-import java.io.IOException;
-import java.util.Scanner;
-
+/**
+ * RiotApp sets up and launches the application.
+ */
 public class RiotApp {
 
-    public void run() {
-        // Step 1: Gather user input
-        Scanner scanner = new Scanner(System.in);
+    public void start() {
+        // Initialize login components
+        final LoginPresenter loginPresenter = new LoginPresenter();
+        final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
+        final LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, loginPresenter);
+        final LoginController loginController = new LoginController(loginInteractor);
 
-        System.out.println("Enter username:");
-        String username = scanner.nextLine();
+        // Initialize match components
+        final MatchPresenter matchPresenter = new MatchPresenter();
+        final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
+        final FetchRecentMatchesUseCase matchInteractor = new FetchRecentMatchesUseCase(matchDataAccess, matchPresenter);
+        final MatchController matchController = new MatchController(matchInteractor);
 
-        System.out.println("Enter tagline:");
-        String tagline = scanner.nextLine();
-
-        System.out.println("Enter your region (NA, ASIA, EU):");
-        String region = scanner.nextLine();
-
-        scanner.close();
-
-        // Step 2: Initialize UserFactory
-        UserFactory factory = new UserFactory();
-
-        // Step 3: Create and execute login use case
-        CLIOutputPresenter loginPresenter = new CLIOutputPresenter();
-        LoginInteractor loginInteractor = factory.createLoginInteractor(loginPresenter);
-
-        LoginInputData loginInputData = new LoginInputData(username, tagline, region);
-        loginInteractor.login(loginInputData);
-
-        // Step 4: Check if login was successful
-        String puuid = loginPresenter.getPuuid();
-        if (puuid != null) {
-            System.out.println("\nFetching recent matches...");
-
-            // Step 5: Fetch and display recent matches
-            MatchPresenter matchPresenter = new MatchPresenter(); // Implements MatchOutputBoundary
-            FetchRecentMatchesUseCase matchInteractor = factory.createFetchRecentMatchesUseCase(matchPresenter);
-
-            try {
-                matchInteractor.fetchRecentMatches(puuid, 5); // Fetch 5 recent matches
-            } catch (IOException e) {
-                System.err.println("Error fetching matches: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Login failed. Cannot fetch matches.");
-        }
+        // Launch the login view
+        new LoginView(loginController, matchController, loginPresenter);
     }
 }
-

@@ -1,28 +1,29 @@
 package use_case.match;
 
-import use_case.match.boundaries.MatchAPIDataAccess;
+import data_access.RiotAPIMatchDataAccess;
 
-import java.io.IOException;
+import java.util.List;
 
+/**
+ * Implements the use case for fetching recent matches.
+ */
 public class FetchRecentMatchesUseCase implements MatchInputBoundary {
-    private final MatchAPIDataAccess dataAccess;
-    private final MatchOutputBoundary outputBoundary;
 
-    public FetchRecentMatchesUseCase(MatchAPIDataAccess dataAccess, MatchOutputBoundary outputBoundary) {
+    private final RiotAPIMatchDataAccess dataAccess;
+    private final MatchOutputBoundary presenter;
+
+    public FetchRecentMatchesUseCase(RiotAPIMatchDataAccess dataAccess, MatchOutputBoundary presenter) {
         this.dataAccess = dataAccess;
-        this.outputBoundary = outputBoundary;
+        this.presenter = presenter;
     }
 
     @Override
-    public void fetchRecentMatches(String puuid, int count) throws IOException {
-        // Fetch recent match IDs
-        var matchIds = dataAccess.fetchRecentMatchIds(puuid, count);
-
-        // Fetch match details
-        var matches = dataAccess.fetchMatchDetails(matchIds);
-
-        // Present the matches
-        outputBoundary.presentMatches(matches);
+    public void fetchRecentMatches(String puuid, String region, int count) {
+        try {
+            List<String> matchIds = dataAccess.fetchRecentMatchIds(puuid, region, count);
+            presenter.presentMatches(matchIds);
+        } catch (Exception e) {
+            presenter.presentError("Failed to fetch matches: " + e.getMessage());
+        }
     }
 }
-

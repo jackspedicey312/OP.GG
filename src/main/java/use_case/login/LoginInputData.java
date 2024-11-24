@@ -1,5 +1,8 @@
 package use_case.login;
 
+/**
+ * The input data for the login use case.
+ */
 public class LoginInputData {
     private final String username;
     private final String tagline;
@@ -23,4 +26,5 @@ public class LoginInputData {
         return region;
     }
 }
+
 

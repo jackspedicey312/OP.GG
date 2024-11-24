@@ -1,80 +1,70 @@
 package data_access;
 
-import entity.Match;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-import use_case.match.boundaries.MatchAPIDataAccess;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+public class RiotAPIMatchDataAccess {
 
-public class RiotAPIMatchDataAccess implements MatchAPIDataAccess {
+    private static final String API_KEY = "RGAPI-26d1c2d7-7907-4cac-b967-46da73c5faa4";
 
-    private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
+    public List<String> fetchRecentMatchIds(String puuid, String region, int count) throws Exception {
+        String baseURL = "https://" + region + ".api.riotgames.com/lol/match/v5/matches/by-puuid/";
+        String urlString = baseURL + puuid + "/ids?start=0&count=" + count;
+        URL url = new URL(urlString);
 
-    @Override
-    public List<String> fetchRecentMatchIds(String puuid, int count) throws IOException {
-        String url = String.format(
-                "https://<region>.api.riotgames.com/lol/match/v5/matches/by-puuid/%s/ids?count=%d",
-                puuid, count
-        );
-
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("X-Riot-Token", API_KEY);
 
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                JSONArray matchIdsJson = new JSONArray(new JSONTokener(reader));
-                List<String> matchIds = new ArrayList<>();
-                for (int i = 0; i < matchIdsJson.length(); i++) {
-                    matchIds.add(matchIdsJson.getString(i));
-                }
-                return matchIds;
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
             }
+            in.close();
+
+            JSONArray jsonResponse = new JSONArray(response.toString());
+            List<String> matchIds = new ArrayList<>();
+            for (int i = 0; i < jsonResponse.length(); i++) {
+                matchIds.add(jsonResponse.getString(i));
+            }
+            return matchIds;
         } else {
-            throw new IOException("Failed to fetch match IDs. Response code: " + responseCode);
+            throw new Exception("Failed to fetch match IDs. HTTP Code: " + responseCode);
         }
     }
 
-    @Override
-    public List<Match> fetchMatchDetails(List<String> matchIds) throws IOException {
-        List<Match> matches = new ArrayList<>();
+    public JSONObject fetchMatchDetails(String matchId, String region) throws Exception {
+        String urlString = "https://" + region + ".api.riotgames.com/lol/match/v5/matches/" + matchId;
+        URL url = new URL(urlString);
 
-        for (String matchId : matchIds) {
-            String url = String.format(
-                    "https://<region>.api.riotgames.com/lol/match/v5/matches/%s",
-                    matchId
-            );
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("X-Riot-Token", API_KEY);
 
-            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("X-Riot-Token", API_KEY);
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                    JSONObject matchJson = new JSONObject(new JSONTokener(reader));
-                    String timestamp = matchJson.getString("gameCreation");
-                    String participants = matchJson.getJSONArray("participantIdentities").toString();
-                    String result = "Win";  // Simplified; parse from match details as needed
-
-                    matches.add(new Match(matchId, timestamp, result, participants));
-                }
-            } else {
-                throw new IOException("Failed to fetch match details for matchId: " + matchId);
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
             }
-        }
+            in.close();
 
-        return matches;
+            return new JSONObject(response.toString());
+        } else {
+            throw new Exception("Failed to fetch match details. HTTP Code: " + responseCode);
+        }
     }
 }
-

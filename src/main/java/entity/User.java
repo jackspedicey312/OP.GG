@@ -1,18 +1,21 @@
 package entity;
 
+/**
+ * Represents a user in the system.
+ */
 public class User {
-    private String username;
-    private String tagline;
-    private String region;
-    private String puuid;
+    private final String username;
+    private final String tagline;
+    private final String region;
+    private final String puuid; // Unique identifier from Riot API
 
-    public User(String username, String tagline, String region) {
+    public User(String username, String tagline, String region, String puuid) {
         this.username = username;
         this.tagline = tagline;
         this.region = region;
+        this.puuid = puuid;
     }
 
-    // Getters and Setters
     public String getUsername() {
         return username;
     }
@@ -29,7 +32,13 @@ public class User {
         return puuid;
     }
 
-    public void setPuuid(String puuid) {
-        this.puuid = puuid;
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", tagline='" + tagline + '\'' +
+                ", region='" + region + '\'' +
+                ", puuid='" + puuid + '\'' +
+                '}';
     }
 }
