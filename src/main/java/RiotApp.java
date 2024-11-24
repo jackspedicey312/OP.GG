@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import panel.PanelView;
 
 public class RiotApp extends JFrame {
     private JTextField usernameField;
@@ -38,6 +39,8 @@ public class RiotApp extends JFrame {
         container.setLayout(new BorderLayout());
         container.add(inputPanel, BorderLayout.NORTH);
         container.add(new JScrollPane(outputArea), BorderLayout.CENTER);
+        PanelView panelView = new PanelView();
+        container.add(panelView.getPanel(), BorderLayout.CENTER);
 
         // Add action listener to fetch button
         fetchButton.addActionListener(new ActionListener() {

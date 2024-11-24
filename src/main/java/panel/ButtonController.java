@@ -6,16 +6,22 @@ public class ButtonController {
     private final MatchHistoryUseCase matchHistoryUseCase;
     private final FriendsUseCase friendsUseCase;
     private final ChampionUseCase championUseCase;
+    private final FreeChampionRotationUseCase freeChampionRotationUseCase;
     private final FunFactsUseCase funFactsUseCase;
     private final LogoutUseCase logoutUseCase;
+    private String puuid;
+    private String region;
 
-    public ButtonController() {
-        this.overviewUseCase = new OverviewUseCase();
-        this.matchHistoryUseCase = new MatchHistoryUseCase();
-        this.friendsUseCase = new FriendsUseCase();
-        this.championUseCase = new ChampionUseCase();
-        this.funFactsUseCase = new FunFactsUseCase();
+    public ButtonController(String puuid, String region) {
+        this.overviewUseCase = new OverviewUseCase(puuid, region);
+        this.matchHistoryUseCase = new MatchHistoryUseCase(puuid, region);
+        this.friendsUseCase = new FriendsUseCase(puuid, region);
+        this.championUseCase = new ChampionUseCase(puuid, region);
+        this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);
+        this.funFactsUseCase = new FunFactsUseCase(puuid, region);
         this.logoutUseCase = new LogoutUseCase();
+        this.puuid = puuid;
+        this.region = region;
 
     }
 
@@ -34,6 +40,10 @@ public class ButtonController {
 
     public void ChampionButtonClicked() {
         this.championUseCase.execute();
+    }
+
+    public void FreeChampionRotationButtonClicked() {
+        this.freeChampionRotationUseCase.execute();
     }
 
     public void FunFactsButtonClicked() {

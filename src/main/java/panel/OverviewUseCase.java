@@ -1,6 +1,10 @@
 package panel;
 
 public class OverviewUseCase implements ButtonUseCase {
+    public OverviewUseCase(String puuid, String region) {
+
+    }
+
     @Override
     public void execute() {
 
