@@ -3,6 +3,7 @@ package view;
 import interface_adapter.login.LoginController;
 import interface_adapter.match.MatchController;
 import interface_adapter.login.LoginPresenter;
+import interface_adapter.match.MatchPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.awt.*;
  */
 public class LoginView extends JFrame {
 
-    public LoginView(LoginController loginController, MatchController matchController, LoginPresenter loginPresenter) {
+    public LoginView(LoginController loginController, MatchController matchController, LoginPresenter loginPresenter, MatchPresenter matchPresenter) {
         setTitle("Login Screen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -56,7 +57,7 @@ public class LoginView extends JFrame {
 
             // If login is successful, open the MatchView
             if (loginPresenter.getPuuid() != null) {
-                new MatchView(matchController, loginPresenter.getPuuid(), region);
+                new MatchView(matchPresenter, loginPresenter.getPuuid(), region); // Pass MatchPresenter to MatchView
                 dispose(); // Close the login window
             } else {
                 JOptionPane.showMessageDialog(this, "Login failed: " + loginPresenter.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

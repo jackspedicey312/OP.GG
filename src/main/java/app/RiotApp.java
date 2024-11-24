@@ -28,7 +28,7 @@ public class RiotApp {
         final FetchRecentMatchesUseCase matchInteractor = new FetchRecentMatchesUseCase(matchDataAccess, matchPresenter);
         final MatchController matchController = new MatchController(matchInteractor);
 
-        // Launch the login view
-        new LoginView(loginController, matchController, loginPresenter);
+        // Pass MatchPresenter to LoginView
+        new LoginView(loginController, matchController, loginPresenter, matchPresenter);
     }
 }

@@ -1,22 +1,22 @@
 package view;
 
-import interface_adapter.match.MatchController;
+import interface_adapter.match.MatchPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import org.json.JSONObject;
 
 /**
  * The view for displaying match data.
  */
 public class MatchView extends JFrame {
 
-    public MatchView(MatchController matchController, String puuid, String region) {
+    public MatchView(MatchPresenter matchPresenter, String puuid, String region) {
         setTitle("Match History");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
 
-        // Panel for match data
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -25,20 +25,18 @@ public class MatchView extends JFrame {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
 
-        // Fetch recent matches
-        try {
-            // Retrieve match IDs from the controller
-            matchController.fetchRecentMatches(puuid, region, 5);
-
-            // Display matches (Assume MatchPresenter prints match data to the console or logs)
-            JLabel matchLabel = new JLabel("Match data displayed in console/logs.");
-            matchLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panel.add(matchLabel);
-
-        } catch (Exception e) {
-            JLabel errorLabel = new JLabel("Error fetching matches: " + e.getMessage());
-            errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panel.add(errorLabel);
+        // Fetch match details from the presenter
+        List<JSONObject> matchDetails = matchPresenter.getMatchDetails();
+        if (matchDetails != null && !matchDetails.isEmpty()) {
+            for (JSONObject match : matchDetails) {
+                JLabel matchLabel = new JLabel(match.toString(4)); // Pretty-print JSON
+                matchLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                panel.add(matchLabel);
+            }
+        } else {
+            JLabel noMatchesLabel = new JLabel("No match data available.");
+            noMatchesLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panel.add(noMatchesLabel);
         }
 
         JScrollPane scrollPane = new JScrollPane(panel);

@@ -1,7 +1,7 @@
 package data_access;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,12 +10,46 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles Riot API requests related to match data.
+ */
 public class RiotAPIMatchDataAccess {
 
     private static final String API_KEY = "RGAPI-26d1c2d7-7907-4cac-b967-46da73c5faa4";
 
+    /**
+     * Fetches recent match IDs for a user.
+     *
+     * @param puuid  The user's PUUID.
+     * @param region The user's region.
+     * @param count  The number of matches to fetch.
+     * @return A list of recent match IDs.
+     * @throws Exception If the API call fails.
+     */
     public List<String> fetchRecentMatchIds(String puuid, String region, int count) throws Exception {
-        String baseURL = "https://" + region + ".api.riotgames.com/lol/match/v5/matches/by-puuid/";
+        String baseURL;
+        switch (region.toLowerCase()) {
+            case "na":
+            case "latam":
+            case "br":
+                baseURL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/";
+                break;
+            case "euw":
+            case "eune":
+            case "tr":
+            case "ru":
+                baseURL = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/";
+                break;
+            case "kr":
+            case "jp":
+            case "oce":
+            case "sea":
+                baseURL = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid region: " + region);
+        }
+
         String urlString = baseURL + puuid + "/ids?start=0&count=" + count;
         URL url = new URL(urlString);
 
@@ -40,12 +74,25 @@ public class RiotAPIMatchDataAccess {
             }
             return matchIds;
         } else {
-            throw new Exception("Failed to fetch match IDs. HTTP Code: " + responseCode);
+            throw new Exception("Failed to fetch match IDs. HTTP Code: " + responseCode +
+                    "\nResponse Message: " + connection.getResponseMessage() +
+                    "\nURL: " + urlString);
         }
     }
 
+
+
+    /**
+     * Fetches detailed information for a specific match.
+     *
+     * @param matchId The match ID.
+     * @param region  The region where the match was played.
+     * @return A JSONObject containing match details.
+     * @throws Exception If the API call fails.
+     */
     public JSONObject fetchMatchDetails(String matchId, String region) throws Exception {
-        String urlString = "https://" + region + ".api.riotgames.com/lol/match/v5/matches/" + matchId;
+        String baseURL = getRegionBaseURL(region);
+        String urlString = baseURL + matchId;
         URL url = new URL(urlString);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -64,7 +111,36 @@ public class RiotAPIMatchDataAccess {
 
             return new JSONObject(response.toString());
         } else {
-            throw new Exception("Failed to fetch match details. HTTP Code: " + responseCode);
+            throw new Exception("Failed to fetch match details. HTTP Code: " + responseCode +
+                    "\nResponse Message: " + connection.getResponseMessage() +
+                    "\nURL: " + urlString);
+        }
+    }
+
+    /**
+     * Maps the user region to the Riot API's shard group.
+     *
+     * @param region The user's region (e.g., "NA", "EUW").
+     * @return The base URL for the match API.
+     */
+    private String getRegionBaseURL(String region) {
+        switch (region.toLowerCase()) {
+            case "na":
+            case "latam":
+            case "br":
+                return "https://americas.api.riotgames.com/lol/match/v5/matches/";
+            case "euw":
+            case "eune":
+            case "tr":
+            case "ru":
+                return "https://europe.api.riotgames.com/lol/match/v5/matches/";
+            case "kr":
+            case "jp":
+            case "oce":
+            case "sea":
+                return "https://asia.api.riotgames.com/lol/match/v5/matches/";
+            default:
+                throw new IllegalArgumentException("Invalid region: " + region);
         }
     }
 }
