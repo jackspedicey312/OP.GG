@@ -14,6 +14,7 @@ import data_access.RiotAPIMatchDataAccess;
 import data_access.RiotAPIChampionDataAccess;
 import view.LoginView;
 import view.ChampionView;
+import view.MatchView;
 
 /**
  * RiotApp sets up and launches the application.
@@ -33,16 +34,10 @@ public class RiotApp {
         final FetchRecentMatchesUseCase matchInteractor = new FetchRecentMatchesUseCase(matchDataAccess, matchPresenter);
         final MatchController matchController = new MatchController(matchInteractor);
 
-        // Initialize champion components
-        final ChampionPresenter championPresenter = new ChampionPresenter();
-        final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
-        final FetchTopChampionsUseCase championInteractor = new FetchTopChampionsUseCase(championDataAccess, championPresenter);
-        final ChampionController championController = new ChampionController(championInteractor);
-
         // Launch Champion View for demonstration purposes (can also be part of LoginView)
-        new ChampionView(championController, championPresenter);
+        // new ChampionView(championController, championPresenter);
 
         // Pass MatchPresenter to LoginView (optional if you want to start from login)
-        // new LoginView(loginController, matchController, loginPresenter, matchPresenter);
+        new LoginView(loginController, matchController, loginPresenter, matchPresenter);
     }
 }
