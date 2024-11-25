@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RiotAPIChampionDataAccess {
@@ -17,50 +18,53 @@ public class RiotAPIChampionDataAccess {
     private String summonerID;
     private String region;
 
-    private String championName;
-    private int championID;
-    private int magicDamage;
-    private int physicalDamage;
-    private int totalDamage;
-    private int kills;
-    private int trueDamage;
-    private int masteryPoints;
-
-    // Corrected Constructor Name
     public RiotAPIChampionDataAccess(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
     }
 
-    public void generateChampionData() throws IOException {
-        final HttpURLConnection request = getHttpURLConnection();
+    public void setSummonerIDAndRegion(String summonerID, String region) {
+        this.summonerID = summonerID;
+        this.region = region;
+    }
 
+    public List<ChampionOutputData> fetchAllChampions() throws IOException {
+        List<ChampionOutputData> championDataList = new ArrayList<>();
+
+        final HttpURLConnection request = getHttpURLConnection();
         final int responseCode = request.getResponseCode();
+
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
-                final JSONArray championInfo = new JSONArray(new JSONTokener(in));
+                final JSONArray championInfoArray = new JSONArray(new JSONTokener(in));
 
-                if (championInfo.isEmpty()) {
-                    System.out.println("No champions found.");
-                } else {
-                    JSONObject playerData = championInfo.getJSONObject(0);
+                for (int i = 0; i < championInfoArray.length(); i++) {
+                    JSONObject championData = championInfoArray.getJSONObject(i);
 
-                    this.championName = playerData.getString("championName");
-                    this.championID = playerData.getInt("championId");
-                    this.magicDamage = playerData.getInt("magicDamageDealt");
-                    this.physicalDamage = playerData.getInt("physicalDamageDealt");
-                    this.totalDamage = playerData.getInt("totalDamageDealt");
-                    this.trueDamage = playerData.getInt("trueDamageDealt");
-                    this.kills = playerData.getInt("kills");
+                    String championName = championData.getString("championName");
+                    int championId = championData.getInt("championId");
+                    int magicDamage = championData.getInt("magicDamageDealt");
+                    int physicalDamage = championData.getInt("physicalDamageDealt");
+                    int totalDamage = championData.getInt("totalDamageDealt");
+                    int trueDamage = championData.getInt("trueDamageDealt");
+                    int kills = championData.getInt("kills");
 
-                    this.masteryPoints = calculateMasteryPoints(
+                    int masteryPoints = calculateMasteryPoints(
                             totalDamage, magicDamage, physicalDamage, trueDamage, kills
                     );
+
+                    ChampionOutputData championOutput = new ChampionOutputData(
+                            championName, championId, magicDamage, physicalDamage, totalDamage, trueDamage, kills, masteryPoints
+                    );
+
+                    championDataList.add(championOutput);
                 }
             }
         } else {
             throw new IOException("HTTP error code: " + responseCode);
         }
+
+        return championDataList;
     }
 
     private HttpURLConnection getHttpURLConnection() throws IOException {
@@ -102,45 +106,5 @@ public class RiotAPIChampionDataAccess {
     private int normalize(int value, int min, int max) {
         return (int) (((double) (value - min) / (max - min)) * 1000);
     }
-
-    public String getChampionName() {
-        return championName;
-    }
-
-    public int getChampionID() {
-        return championID;
-    }
-
-    public int getMagicDamage() {
-        return magicDamage;
-    }
-
-    public int getPhysicalDamage() {
-        return physicalDamage;
-    }
-
-    public int getTotalDamage() {
-        return totalDamage;
-    }
-
-    public int getKills() {
-        return kills;
-    }
-
-    public int getTrueDamage() {
-        return trueDamage;
-    }
-
-    public int getMasteryPoints() {
-        return masteryPoints;
-    }
-
-    public List<ChampionOutputData> fetchAllChampions() {
-        // THIS IS PLACEHOLDER. I ADDED THIS BECAUSE THE FILES NOT WORKING IF THIS METHOD DOESNT EXIST
-        return null;
-    }
-
-    public void setSummonerIDAndRegion(String summonerID, String region) {
-        // SAME ABOVE
-    }
 }
+
