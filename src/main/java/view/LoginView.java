@@ -1,9 +1,12 @@
 package view;
 
+import data_access.RiotAPIProfileDataAccess;
 import interface_adapter.login.LoginController;
 import interface_adapter.match.MatchController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.match.MatchPresenter;
+import interface_adapter.profile.ProfilePresenter;
+import use_case.overview.OverviewUseCase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +16,8 @@ import java.awt.*;
  */
 public class LoginView extends JFrame {
 
-    public LoginView(LoginController loginController, MatchController matchController, LoginPresenter loginPresenter, MatchPresenter matchPresenter) {
+    public LoginView(LoginController loginController, ProfilePresenter profilePresenter,
+                     MatchController matchController, LoginPresenter loginPresenter, MatchPresenter matchPresenter) {
         setTitle("Login Screen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -57,6 +61,13 @@ public class LoginView extends JFrame {
 
             // If login is successful, open the MatchView
             if (loginPresenter.getPuuid() != null) {
+
+                final RiotAPIProfileDataAccess dataAccess = new RiotAPIProfileDataAccess(loginPresenter.getPuuid(), region);
+                final OverviewUseCase overviewUseCase = new OverviewUseCase(dataAccess, profilePresenter);
+                overviewUseCase.fetchOverview();
+
+                new ProfileView(profilePresenter);
+
                 new MatchView(matchPresenter, loginPresenter.getPuuid(), region); // Pass MatchPresenter to MatchView
                 dispose(); // Close the login window
             } else {
