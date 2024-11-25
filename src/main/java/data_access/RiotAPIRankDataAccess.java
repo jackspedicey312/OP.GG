@@ -26,7 +26,7 @@ public class RiotAPIRankDataAccess {
     private int winRate;
 
 
-    public RankMain(String summonerID, String region) {
+    public void RankMain(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
     }
