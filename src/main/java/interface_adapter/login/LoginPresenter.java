@@ -1,45 +1,33 @@
 package interface_adapter.login;
 
-import interface_adapter.ViewManagerModel;
-import interface_adapter.change_password.LoggedInState;
-import interface_adapter.change_password.LoggedInViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
 /**
- * The Presenter for the Login Use Case.
+ * Presenter for formatting the output of login use case.
  */
 public class LoginPresenter implements LoginOutputBoundary {
-
-    private final LoginViewModel loginViewModel;
-    private final LoggedInViewModel loggedInViewModel;
-    private final ViewManagerModel viewManagerModel;
-
-    public LoginPresenter(ViewManagerModel viewManagerModel,
-                          LoggedInViewModel loggedInViewModel,
-                          LoginViewModel loginViewModel) {
-        this.viewManagerModel = viewManagerModel;
-        this.loggedInViewModel = loggedInViewModel;
-        this.loginViewModel = loginViewModel;
-    }
+    private String puuid;
+    private String message;
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
-        // On success, switch to the logged in view.
+    public void present(LoginOutputData outputData) {
+        this.puuid = outputData.getPuuid();
+        this.message = outputData.getMessage();
 
-        final LoggedInState loggedInState = loggedInViewModel.getState();
-        loggedInState.setUsername(response.getUsername());
-        this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
-
-        this.viewManagerModel.setState(loggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        if (outputData.isSuccess()) {
+            System.out.println("Login Successful! PUUID: " + puuid);
+        } else {
+            System.err.println("Login Failed: " + message);
+        }
     }
 
-    @Override
-    public void prepareFailView(String error) {
-        final LoginState loginState = loginViewModel.getState();
-        loginState.setLoginError(error);
-        loginViewModel.firePropertyChanged();
+    public String getPuuid() {
+        return puuid;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
+
