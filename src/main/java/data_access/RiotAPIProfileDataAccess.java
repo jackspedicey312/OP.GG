@@ -15,15 +15,23 @@ import java.net.URL;
 
 public class RiotAPIProfileDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
+
     private String summonerID;
     private String accountID;
     private int summonerLevel;
     private int iconID;
     private ImageIcon iconPng;
+    private String puuid;
+    private String region;
 
+    public RiotAPIProfileDataAccess(String puuid, String region) {
+        this.puuid = puuid;
+        this.region = region;
+    }
 
-    public void generateProfileData(String puuid, String region) throws IOException {
-        final HttpURLConnection request = getHttpURLConnection(puuid, region);
+    public void generateProfileData() throws IOException {
+
+        final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -42,7 +50,7 @@ public class RiotAPIProfileDataAccess {
     }
 
     @NotNull
-    private HttpURLConnection getHttpURLConnection(String puuid, String region) throws IOException {
+    private HttpURLConnection getHttpURLConnection() throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";

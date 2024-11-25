@@ -26,7 +26,7 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     }
 
     public ImageIcon getProfileIcon() {
-        return new ImageIcon(profileIcon.getImage());
+        return profileIcon;
     }
 
     public int getProfileLevel() {

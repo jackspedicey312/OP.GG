@@ -1,5 +1,7 @@
 package interface_adapter.button;
 
+import data_access.RiotAPIProfileDataAccess;
+import interface_adapter.profile.ProfilePresenter;
 import use_case.freechampionrotation.FreeChampionRotationUseCase;
 import use_case.friends.FriendsUseCase;
 import use_case.funfacts.FunFactsUseCase;
@@ -18,10 +20,14 @@ public class ButtonController {
     private final LogoutUseCase logoutUseCase;
     private String puuid;
     private String region;
-    private OverviewOutputBoundary overviewOutputBoundary;
+    private ProfilePresenter profilePresenter;
+    private RiotAPIProfileDataAccess riotAPIProfileDataAccess;
 
     public ButtonController(String puuid, String region) {
-        this.overviewUseCase = new OverviewUseCase(overviewOutputBoundary, puuid, region);
+        this.profilePresenter = new ProfilePresenter();
+        this.riotAPIProfileDataAccess = new RiotAPIProfileDataAccess(puuid, region);
+
+        this.overviewUseCase = new OverviewUseCase(riotAPIProfileDataAccess, profilePresenter);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);
         this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);
