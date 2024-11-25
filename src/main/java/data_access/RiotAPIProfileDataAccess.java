@@ -23,7 +23,7 @@ public class RiotAPIProfileDataAccess {
     private int iconID;
     private ImageIcon iconPng;
 
-    public ProfileMain(String puuid, String region) {
+    public void ProfileMain(String puuid, String region) {
         this.puuid = puuid;
         this.region = region;
     }
