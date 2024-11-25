@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class RiotAPIUserDataAccess {
 
-    private static final String API_KEY = "RGAPI-26d1c2d7-7907-4cac-b967-46da73c5faa4";
+    private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
     public String fetchPUUID(String username, String tagline, String region) throws Exception {
         String baseURL;

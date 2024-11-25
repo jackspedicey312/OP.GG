@@ -6,15 +6,17 @@ import use_case.button.ButtonUseCase;
 import java.io.IOException;
 
 public class OverviewUseCase implements ButtonUseCase {
-    private final RiotAPIProfileDataAccess profileDataAccess;
     private final OverviewOutputBoundary presenter;
+    private final String puuid;
+    private final String region;
 
-    public OverviewUseCase(RiotAPIProfileDataAccess profileDataAccess, OverviewOutputBoundary presenter) {
-        this.profileDataAccess = profileDataAccess;
+    public OverviewUseCase(OverviewOutputBoundary presenter, String puuid, String region) {
         this.presenter = presenter;
+        this.puuid = puuid;
+        this.region = region;
     }
 
-    public void fetchOverview(String puuid, String region) {
+    public void fetchOverview() {
         try {
             final RiotAPIProfileDataAccess profile = new RiotAPIProfileDataAccess();
             profile.generateProfileData(puuid, region);
