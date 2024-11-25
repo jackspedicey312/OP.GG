@@ -1,40 +1,30 @@
 package use_case.login;
 
-import entity.User;
+import data_access.RiotAPIUserDataAccess;
 
 /**
- * The Login Interactor.
+ * The interactor for the login use case.
  */
 public class LoginInteractor implements LoginInputBoundary {
-    private final LoginUserDataAccessInterface userDataAccessObject;
-    private final LoginOutputBoundary loginPresenter;
 
-    public LoginInteractor(LoginUserDataAccessInterface userDataAccessInterface,
-                           LoginOutputBoundary loginOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
-        this.loginPresenter = loginOutputBoundary;
+    private final RiotAPIUserDataAccess dataAccess;
+    private final LoginOutputBoundary presenter;
+
+    public LoginInteractor(RiotAPIUserDataAccess dataAccess, LoginOutputBoundary presenter) {
+        this.dataAccess = dataAccess;
+        this.presenter = presenter;
     }
 
     @Override
-    public void execute(LoginInputData loginInputData) {
-        final String username = loginInputData.getUsername();
-        final String password = loginInputData.getPassword();
-        if (!userDataAccessObject.existsByName(username)) {
-            loginPresenter.prepareFailView(username + ": Account does not exist.");
-        }
-        else {
-            final String pwd = userDataAccessObject.get(username).getPassword();
-            if (!password.equals(pwd)) {
-                loginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
-            }
-            else {
-
-                final User user = userDataAccessObject.get(loginInputData.getUsername());
-
-                userDataAccessObject.setCurrentUsername(user.getName());
-                final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
-                loginPresenter.prepareSuccessView(loginOutputData);
-            }
+    public void login(LoginInputData inputData) {
+        try {
+            // Fetch PUUID using the data access layer
+            String puuid = dataAccess.fetchPUUID(inputData.getUsername(), inputData.getTagline(), inputData.getRegion());
+            // Pass successful login data to the presenter
+            presenter.present(new LoginOutputData(true, "Login successful!", puuid));
+        } catch (Exception e) {
+            // Pass error data to the presenter
+            presenter.present(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
         }
     }
 }

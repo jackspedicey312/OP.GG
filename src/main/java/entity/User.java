@@ -1,20 +1,44 @@
 package entity;
 
 /**
- * The representation of a user in our program.
+ * Represents a user in the system.
  */
-public interface User {
+public class User {
+    private final String username;
+    private final String tagline;
+    private final String region;
+    private final String puuid; // Unique identifier from Riot API
 
-    /**
-     * Returns the username of the user.
-     * @return the username of the user.
-     */
-    String getName();
+    public User(String username, String tagline, String region, String puuid) {
+        this.username = username;
+        this.tagline = tagline;
+        this.region = region;
+        this.puuid = puuid;
+    }
 
-    /**
-     * Returns the password of the user.
-     * @return the password of the user.
-     */
-    String getPassword();
+    public String getUsername() {
+        return username;
+    }
 
+    public String getTagline() {
+        return tagline;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getPuuid() {
+        return puuid;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", tagline='" + tagline + '\'' +
+                ", region='" + region + '\'' +
+                ", puuid='" + puuid + '\'' +
+                '}';
+    }
 }
