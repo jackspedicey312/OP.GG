@@ -30,6 +30,7 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     }
 
     public int getProfileLevel() {
+
         return profileLevel;
     }
 
