@@ -2,6 +2,7 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import interface_adapter.button.ButtonController;
 
 import javax.swing.*;
 
@@ -12,13 +13,16 @@ public class PanelView extends JPanel implements ActionListener {
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
     private final JButton championsButton = new JButton("Champions");
+    private final JButton freeChampionRotationButton = new JButton("Free Champion Rotation");
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
     private final JPanel panel;
+    private String puuid;
+    private String region;
 
-    public PanelView() {
+    public PanelView(String puuid, String region) {
         final JPanel firstPanel = new JPanel();
-        this.buttonController = new ButtonController();
+        this.buttonController = new ButtonController(puuid, region);
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
         firstPanel.add(logoutButton);
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
@@ -28,17 +32,21 @@ public class PanelView extends JPanel implements ActionListener {
         secondPanel.add(matchHistoryButton);
         secondPanel.add(friendsButton);
         secondPanel.add(championsButton);
+        secondPanel.add(freeChampionRotationButton);
         secondPanel.add(funFactsButton);
         final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
         this.panel = mainPanel;
+        this.puuid = puuid;
+        this.region = region;
 
         overviewButton.addActionListener(this);
         matchHistoryButton.addActionListener(this);
         friendsButton.addActionListener(this);
         championsButton.addActionListener(this);
+        freeChampionRotationButton.addActionListener(this);
         funFactsButton.addActionListener(this);
         logoutButton.addActionListener(this);
     }
@@ -56,6 +64,9 @@ public class PanelView extends JPanel implements ActionListener {
         }
         else if (e.getSource() == championsButton) {
             this.buttonController.ChampionButtonClicked();
+        }
+        else if (e.getSource() == freeChampionRotationButton) {
+            this.buttonController.FreeChampionRotationButtonClicked();
         }
         else if (e.getSource() == funFactsButton) {
             this.buttonController.FunFactsButtonClicked();
