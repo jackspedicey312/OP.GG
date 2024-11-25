@@ -7,41 +7,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Presenter for formatting and displaying match data.
+ * Presenter for handling match output.
  */
 public class MatchPresenter implements MatchOutputBoundary {
 
-    private final List<JSONObject> matchDetailsList = new ArrayList<>();
-    private final List<String> matchIdsList = new ArrayList<>();
+    private final List<String> matchIds = new ArrayList<>();
+    private final List<JSONObject> matchDetails = new ArrayList<>();
+    private String errorMessage;
 
     @Override
     public void presentMatches(List<String> matchIds) {
-        // Store and log match IDs
-        matchIdsList.clear();
-        matchIdsList.addAll(matchIds);
-        System.out.println("Presenter received match IDs: " + matchIds);
+        this.matchIds.clear();
+        this.matchIds.addAll(matchIds);
+        System.out.println("Match IDs received: " + matchIds);
     }
 
     @Override
     public void presentMatchDetails(List<JSONObject> matchDetails) {
-        // Store and log match details
-        matchDetailsList.clear();
-        matchDetailsList.addAll(matchDetails);
-        System.out.println("Presenter received match details: " + matchDetails.size() + " matches");
+        this.matchDetails.clear();
+        this.matchDetails.addAll(matchDetails);
+        System.out.println("Match details received: " + matchDetails.size() + " matches");
     }
 
     @Override
     public void presentError(String message) {
-        // Log the error
+        this.errorMessage = message;
         System.err.println("Error: " + message);
     }
 
-    // Expose stored data for UI components
-    public List<JSONObject> getMatchDetails() {
-        return new ArrayList<>(matchDetailsList);
+    public List<String> getMatchIds() {
+        return new ArrayList<>(matchIds);
     }
 
-    public List<String> getMatchIds() {
-        return new ArrayList<>(matchIdsList);
+    public List<JSONObject> getMatchDetails() {
+        return new ArrayList<>(matchDetails);
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }
+

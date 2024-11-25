@@ -4,9 +4,10 @@ import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
 /**
- * Presenter for formatting the output of login use case.
+ * Presenter for handling login output.
  */
 public class LoginPresenter implements LoginOutputBoundary {
+
     private String puuid;
     private String message;
 
@@ -14,12 +15,6 @@ public class LoginPresenter implements LoginOutputBoundary {
     public void present(LoginOutputData outputData) {
         this.puuid = outputData.getPuuid();
         this.message = outputData.getMessage();
-
-        if (outputData.isSuccess()) {
-            System.out.println("Login Successful! PUUID: " + puuid);
-        } else {
-            System.err.println("Login Failed: " + message);
-        }
     }
 
     public String getPuuid() {
@@ -30,4 +25,3 @@ public class LoginPresenter implements LoginOutputBoundary {
         return message;
     }
 }
-
