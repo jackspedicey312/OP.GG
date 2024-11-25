@@ -15,8 +15,8 @@ import java.net.URL;
 
 public class RiotAPIProfileDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private final String puuid;
-    private final String region;
+    private String puuid;
+    private String region;
     private String summonerID;
     private String accountID;
     private int summonerLevel;

@@ -16,6 +16,8 @@ public class MatchView extends JFrame {
         setTitle("Match History");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
+        final PanelView panelview = new PanelView(puuid, region);
+        add(panelview.getPanel(), BorderLayout.CENTER);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

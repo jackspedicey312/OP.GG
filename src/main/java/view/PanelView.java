@@ -2,7 +2,12 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+
+import data_access.RiotAPIChampionDataAccess;
 import interface_adapter.button.ButtonController;
+import interface_adapter.champion.ChampionController;
+import interface_adapter.champion.ChampionPresenter;
+import use_case.champion.FetchTopChampionsUseCase;
 
 import javax.swing.*;
 
@@ -63,7 +68,11 @@ public class PanelView extends JPanel implements ActionListener {
             this.buttonController.FriendsButtonClicked();
         }
         else if (e.getSource() == championsButton) {
-            this.buttonController.ChampionButtonClicked();
+            final ChampionPresenter championPresenter = new ChampionPresenter();
+            final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess(puuid, region);
+            final FetchTopChampionsUseCase championInteractor = new FetchTopChampionsUseCase(championDataAccess, championPresenter);
+            final ChampionController championController = new ChampionController(championInteractor);
+            new ChampionView(championController, championPresenter);
         }
         else if (e.getSource() == freeChampionRotationButton) {
             this.buttonController.FreeChampionRotationButtonClicked();
