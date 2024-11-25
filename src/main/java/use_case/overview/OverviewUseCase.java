@@ -5,21 +5,22 @@ import use_case.button.ButtonUseCase;
 
 import java.io.IOException;
 
-public class OverviewUseCase implements ButtonUseCase {
+public class OverviewUseCase implements OverviewInputBoundary {
+
+    private final RiotAPIProfileDataAccess dataAccess;
     private final OverviewOutputBoundary presenter;
-    private final RiotAPIProfileDataAccess profileDataAccess;
 
     public OverviewUseCase(RiotAPIProfileDataAccess profileDataAccess, OverviewOutputBoundary presenter) {
-
-        this.profileDataAccess = profileDataAccess;
+        this.dataAccess = profileDataAccess;
         this.presenter = presenter;
     }
 
-    public void fetchOverview() {
+    public void fetchOverview(String puuid, String region) {
         try {
-            profileDataAccess.generateProfileData();
-            presenter.presentProfileIcon(profileDataAccess.getIconPng());
-            presenter.presentProfileLevel(profileDataAccess.getSummonerLevel());
+            final RiotAPIProfileDataAccess profile = new RiotAPIProfileDataAccess();
+            profile.generateProfileData(puuid, region);
+            presenter.presentProfileIcon(profile.getIconPng());
+            presenter.presentProfileLevel(profile.getSummonerLevel());
 
         }
         catch (IOException e) {
