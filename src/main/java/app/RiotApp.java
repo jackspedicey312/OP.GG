@@ -1,17 +1,20 @@
 package app;
 
+import data_access.RiotAPIProfileDataAccess;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.match.MatchController;
 import interface_adapter.match.MatchPresenter;
 import interface_adapter.champion.ChampionController;
 import interface_adapter.champion.ChampionPresenter;
+import interface_adapter.profile.ProfilePresenter;
 import use_case.login.LoginInteractor;
 import use_case.match.FetchRecentMatchesUseCase;
 import use_case.champion.FetchTopChampionsUseCase;
 import data_access.RiotAPIUserDataAccess;
 import data_access.RiotAPIMatchDataAccess;
 import data_access.RiotAPIChampionDataAccess;
+import use_case.overview.OverviewUseCase;
 import view.LoginView;
 import view.ChampionView;
 import view.MatchView;
