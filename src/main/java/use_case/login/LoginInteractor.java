@@ -16,7 +16,7 @@ public class LoginInteractor implements LoginInputBoundary {
     }
 
     @Override
-    public void login(LoginInputData inputData) {
+    public void execute(LoginInputData inputData) {
         try {
             // Fetch PUUID using the data access layer
             String puuid = dataAccess.fetchPUUID(inputData.getUsername(), inputData.getTagline(), inputData.getRegion());

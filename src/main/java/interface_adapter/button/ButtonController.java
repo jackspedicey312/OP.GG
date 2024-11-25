@@ -1,6 +1,6 @@
 package interface_adapter.button;
 
-import use_case.freechampionrotation.FreeChampionRotationUseCase;
+import use_case.freechampionrotation.FreeChampionRotationInteractor;
 import use_case.friends.FriendsUseCase;
 import use_case.funfacts.FunFactsUseCase;
 import use_case.logout.LogoutUseCase;
@@ -13,7 +13,7 @@ public class ButtonController {
     private final OverviewUseCase overviewUseCase;
     private final MatchHistoryUseCase matchHistoryUseCase;
     private final FriendsUseCase friendsUseCase;
-    private final FreeChampionRotationUseCase freeChampionRotationUseCase;
+    private final FreeChampionRotationInteractor freeChampionRotationInteractor;
     private final FunFactsUseCase funFactsUseCase;
     private final LogoutUseCase logoutUseCase;
     private String puuid;
@@ -24,7 +24,7 @@ public class ButtonController {
         this.overviewUseCase = new OverviewUseCase(overviewOutputBoundary, puuid, region);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);
-        this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);
+        this.freeChampionRotationInteractor = new FreeChampionRotationInteractor(puuid, region);
         this.funFactsUseCase = new FunFactsUseCase(puuid, region);
         this.logoutUseCase = new LogoutUseCase();
         this.puuid = puuid;
@@ -47,7 +47,7 @@ public class ButtonController {
     }
 
     public void FreeChampionRotationButtonClicked() {
-        this.freeChampionRotationUseCase.execute();
+        this.freeChampionRotationInteractor.execute();
     }
 
     public void FunFactsButtonClicked() {
