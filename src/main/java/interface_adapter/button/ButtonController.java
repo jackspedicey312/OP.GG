@@ -20,7 +20,7 @@ public class ButtonController {
     private final String region;
 
     public ButtonController(String puuid, String region) {
-        // THIS NEEDS TO BE CHANGED
+        // THIS NEEDS TO BE CHANGED.
         this.overviewUseCase = new OverviewUseCase(null, null);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);

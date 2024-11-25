@@ -1,7 +1,6 @@
 package use_case.overview;
 
 import data_access.RiotAPIProfileDataAccess;
-import use_case.button.ButtonUseCase;
 
 import java.io.IOException;
 
@@ -10,6 +9,7 @@ public class OverviewUseCase implements OverviewInputBoundary {
     private final RiotAPIProfileDataAccess dataAccess;
     private final OverviewOutputBoundary presenter;
 
+    // NEEDS DATA ACCESS AND PRESENTER TO INITIALIZE NO MATTER WHAT.
     public OverviewUseCase(RiotAPIProfileDataAccess profileDataAccess, OverviewOutputBoundary presenter) {
         this.dataAccess = profileDataAccess;
         this.presenter = presenter;

@@ -41,7 +41,7 @@ public class RiotApp {
         // Launch Champion View for demonstration purposes (can also be part of LoginView)
         // new ChampionView(championController, championPresenter);
 
-        // Initialize main profile
+        // Initialize main profile.
         final ProfilePresenter profilePresenter = new ProfilePresenter();
         final RiotAPIProfileDataAccess profileDataAccess = new RiotAPIProfileDataAccess();
         final OverviewUseCase overviewUseCase = new OverviewUseCase(profileDataAccess, profilePresenter);

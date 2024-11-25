@@ -21,6 +21,7 @@ public class RiotAPIProfileDataAccess {
     private int iconID;
     private ImageIcon iconPng;
 
+    // PUUID AND REGION NEEDED TO CALL API
     public void generateProfileData(String puuid, String region) throws IOException {
         final HttpURLConnection request = getHttpURLConnection(puuid, region);
 
