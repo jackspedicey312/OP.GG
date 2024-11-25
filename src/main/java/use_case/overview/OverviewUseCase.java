@@ -23,6 +23,7 @@ public class OverviewUseCase implements ButtonUseCase {
 
         }
         catch (IOException e) {
+
             presenter.presentError("Failed to fetch profile" + e.getMessage());
         }
     }

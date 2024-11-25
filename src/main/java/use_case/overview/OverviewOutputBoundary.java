@@ -9,4 +9,5 @@ public interface OverviewOutputBoundary {
     void presentProfileLevel(int level);
 
     void presentError(String message);
+
 }
