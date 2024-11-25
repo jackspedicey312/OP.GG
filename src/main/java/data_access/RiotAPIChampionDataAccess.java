@@ -3,12 +3,14 @@ package data_access;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import use_case.champion.ChampionOutputData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class RiotAPIChampionDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
@@ -131,5 +133,14 @@ public class RiotAPIChampionDataAccess {
 
     public int getMasteryPoints() {
         return masteryPoints;
+    }
+
+    public List<ChampionOutputData> fetchAllChampions() {
+        // THIS IS PLACEHOLDER. I ADDED THIS BECAUSE THE FILES NOT WORKING IF THIS METHOD DOESNT EXIST
+        return null;
+    }
+
+    public void setSummonerIDAndRegion(String summonerID, String region) {
+        // SAME ABOVE
     }
 }
