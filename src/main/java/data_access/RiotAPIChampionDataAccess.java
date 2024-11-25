@@ -1,4 +1,5 @@
 package data_access;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -8,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import static java.lang.Math.round;
 
 public class RiotAPIChampionDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
@@ -25,7 +24,8 @@ public class RiotAPIChampionDataAccess {
     private int trueDamage;
     private int masteryPoints;
 
-    public Champion(String summonerID, String region) {
+    // Corrected Constructor Name
+    public RiotAPIChampionDataAccess(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
     }
@@ -40,8 +40,7 @@ public class RiotAPIChampionDataAccess {
 
                 if (championInfo.isEmpty()) {
                     System.out.println("No champions found.");
-                }
-                else {
+                } else {
                     JSONObject playerData = championInfo.getJSONObject(0);
 
                     this.championName = playerData.getString("championName");
@@ -57,8 +56,7 @@ public class RiotAPIChampionDataAccess {
                     );
                 }
             }
-        }
-        else {
+        } else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
@@ -67,14 +65,11 @@ public class RiotAPIChampionDataAccess {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else if (region.equalsIgnoreCase("EU")) {
+        } else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else if (region.equalsIgnoreCase("ASIA")) {
+        } else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
