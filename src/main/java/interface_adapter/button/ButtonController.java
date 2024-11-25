@@ -5,6 +5,7 @@ import use_case.friends.FriendsUseCase;
 import use_case.funfacts.FunFactsUseCase;
 import use_case.logout.LogoutUseCase;
 import use_case.matchhistory.MatchHistoryUseCase;
+import use_case.overview.OverviewOutputBoundary;
 import use_case.overview.OverviewUseCase;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
@@ -17,9 +18,10 @@ public class ButtonController {
     private final LogoutUseCase logoutUseCase;
     private String puuid;
     private String region;
+    private OverviewOutputBoundary overviewOutputBoundary;
 
     public ButtonController(String puuid, String region) {
-        this.overviewUseCase = new OverviewUseCase(puuid, region);
+        this.overviewUseCase = new OverviewUseCase(overviewOutputBoundary, puuid, region);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);
         this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);

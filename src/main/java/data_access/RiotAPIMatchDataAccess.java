@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class RiotAPIMatchDataAccess {
 
-    private static final String API_KEY = "RGAPI-26d1c2d7-7907-4cac-b967-46da73c5faa4";
+    private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
     /**
      * Fetches recent match IDs for a user.
