@@ -22,7 +22,7 @@ public class LoginController {
      * @param region The region selected by the user.
      */
     public void execute(String username, String tagline, String region) {
-        LoginInputData inputData = new LoginInputData(username, tagline, region);
+        final LoginInputData inputData = new LoginInputData(username, tagline, region);
         loginInputBoundary.execute(inputData);
     }
 }

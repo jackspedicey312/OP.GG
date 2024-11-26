@@ -6,8 +6,8 @@ public class MatchList {
 
     private final List<Match> matches;
 
-    public MatchList(List<Match> matches) {
-        this.matches = matches;
+    public MatchList(List<Match> matchList) {
+        this.matches = matchList;
     }
 
     public List<Match> getMatches() {

@@ -20,11 +20,12 @@ public class LoginInteractor implements LoginInputBoundary {
         try {
             // Fetch PUUID using the data access layer
             String puuid = dataAccess.fetchPUUID(inputData.getUsername(), inputData.getTagline(), inputData.getRegion());
+
             // Pass successful login data to the presenter
-            presenter.present(new LoginOutputData(true, "Login successful!", puuid));
+            presenter.prepareSuccessView(new LoginOutputData(true, "Login successful!", puuid));
         } catch (Exception e) {
             // Pass error data to the presenter
-            presenter.present(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
+            presenter.prepareFailView(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
         }
     }
 }

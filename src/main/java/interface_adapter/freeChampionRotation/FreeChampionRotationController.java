@@ -1,7 +1,6 @@
 package interface_adapter.freeChampionRotation;
 
 import use_case.freechampionrotation.FreeChampionRotationInputBoundary;
-import use_case.freechampionrotation.FreeChampionRotationInputData;
 
 public class FreeChampionRotationController {
     private final FreeChampionRotationInputBoundary freeChampionRotationUseCaseInteractor;
@@ -11,8 +10,6 @@ public class FreeChampionRotationController {
     }
 
     public void execute(String region) {
-        final FreeChampionRotationInputData inputData = new FreeChampionRotationInputData(region);
-
-        freeChampionRotationUseCaseInteractor.execute(inputData);
+        freeChampionRotationUseCaseInteractor.execute();
     }
 }

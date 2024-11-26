@@ -41,7 +41,7 @@ public class MatchView extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane);
-        final PanelView panelview = new PanelView(puuid, region);
+        final LoggedInView panelview = new LoggedInView(puuid, region);
         add(panelview.getPanel(), BorderLayout.CENTER);
 
         setVisible(true);

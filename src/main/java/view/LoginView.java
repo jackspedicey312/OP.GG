@@ -1,22 +1,34 @@
 package view;
 
 import interface_adapter.login.LoginController;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
 import interface_adapter.match.MatchController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.match.MatchPresenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * The view for logging into the application.
  */
-public class LoginView extends JFrame {
+public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final LoginViewModel loginViewModel;
+    private LoginController loginController;
 
-    public LoginView(LoginController loginController, MatchController matchController, LoginPresenter loginPresenter, MatchPresenter matchPresenter) {
-        setTitle("Login Screen");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+    private final JTextField usernameField = new JTextField();
+    private final JTextField taglineField = new JTextField();
+    private final JComboBox<String> regionField = new JComboBox<>(new String[]{"NA", "EU", "ASIA"});
+    private final JButton loginButton = new JButton("Log In");
+
+    public LoginView(LoginViewModel loginViewModel) {
+        this.loginViewModel = loginViewModel;
+        this.loginViewModel.addPropertyChangeListener(this);
 
         // Create the panel layout
         JPanel panel = new JPanel();
@@ -24,15 +36,12 @@ public class LoginView extends JFrame {
 
         // Input fields
         JLabel usernameLabel = new JLabel("Username:");
-        JTextField usernameField = new JTextField();
 
         JLabel taglineLabel = new JLabel("Tagline:");
-        JTextField taglineField = new JTextField();
 
         JLabel regionLabel = new JLabel("Region:");
-        JComboBox<String> regionField = new JComboBox<>(new String[]{"NA", "EU", "ASIA"});
 
-        JButton loginButton = new JButton("Log In");
+        loginButton.addActionListener(this);
 
         // Add components to the panel
         panel.add(usernameLabel);
@@ -45,25 +54,20 @@ public class LoginView extends JFrame {
         panel.add(loginButton);
 
         add(panel);
-
-        // Add action listener for the login button
-        loginButton.addActionListener(e -> {
-            String username = usernameField.getText();
-            String tagline = taglineField.getText();
-            String region = (String) regionField.getSelectedItem();
-
-            // Call the login controller
-            loginController.execute(username, tagline, region);
-
-            // If login is successful, open the MatchView
-            if (loginPresenter.getPuuid() != null) {
-                new MatchView(matchPresenter, loginPresenter.getPuuid(), region); // Pass MatchPresenter to MatchView
-                dispose(); // Close the login window
-            } else {
-                JOptionPane.showMessageDialog(this, "Login failed: " + loginPresenter.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
         setVisible(true);
+    }
+
+    public void propertyChange(PropertyChangeEvent evt) {
+        final LoginState state = (LoginState) evt.getNewValue();
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Call the login controller
+        loginController.execute(usernameField.getText(), taglineField.getText(), (String) regionField.getSelectedItem());
     }
 }

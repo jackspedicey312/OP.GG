@@ -1,27 +1,44 @@
 package interface_adapter.login;
 
+import interface_adapter.ViewManagerModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
+import view.LoggedInState;
+import view.LoggedInView;
+import view.LoggedInViewModel;
 
 /**
  * Presenter for handling login output.
  */
 public class LoginPresenter implements LoginOutputBoundary {
 
-    private String puuid;
-    private String message;
+    private final LoginViewModel loginViewModel;
+    private final LoggedInViewModel loggedInViewModel;
+    private final ViewManagerModel managerModel;
+
+    public LoginPresenter(LoginViewModel loginViewModel,
+                          LoggedInViewModel loggedInViewModel,
+                          ViewManagerModel managerModel) {
+        this.loginViewModel = loginViewModel;
+        this.loggedInViewModel = loggedInViewModel;
+        this.managerModel = managerModel;
+    }
 
     @Override
-    public void present(LoginOutputData outputData) {
-        this.puuid = outputData.getPuuid();
-        this.message = outputData.getMessage();
+    public void prepareSuccessView(LoginOutputData outputData) {
+        final LoggedInState loggedInState = loggedInViewModel.getState();
+
+        this.loggedInViewModel.setState(loggedInState);
+        this.loggedInViewModel.firePropertyChanged();
+
+        this.managerModel.setState(LoggedInViewModel.getViewName());
+        this.managerModel.firePropertyChanged();
     }
 
-    public String getPuuid() {
-        return puuid;
-    }
+    @Override
+    public void prepareFailView(LoginOutputData outputData) {
+        final LoginState loginState = loginViewModel.getState();
 
-    public String getMessage() {
-        return message;
+
     }
 }

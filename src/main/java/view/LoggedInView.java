@@ -12,7 +12,7 @@ import use_case.champion.FetchTopChampionsUseCase;
 import javax.swing.*;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
-public class PanelView extends JPanel implements ActionListener {
+public class LoggedInView extends JPanel implements ActionListener {
     private final ButtonController buttonController;
     private final JButton overviewButton = new JButton("Overview");
     private final JButton matchHistoryButton = new JButton("Match History");
@@ -25,7 +25,7 @@ public class PanelView extends JPanel implements ActionListener {
     private String puuid;
     private String region;
 
-    public PanelView(String puuid, String region) {
+    public LoggedInView(String puuid, String region) {
         final JPanel firstPanel = new JPanel();
         this.buttonController = new ButtonController(puuid, region);
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));

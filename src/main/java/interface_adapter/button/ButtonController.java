@@ -24,7 +24,7 @@ public class ButtonController {
         this.overviewUseCase = new OverviewUseCase(overviewOutputBoundary, puuid, region);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);
-        this.freeChampionRotationInteractor = new FreeChampionRotationInteractor(puuid, region);
+        this.freeChampionRotationInteractor = new FreeChampionRotationInteractor();
         this.funFactsUseCase = new FunFactsUseCase(puuid, region);
         this.logoutUseCase = new LogoutUseCase();
         this.puuid = puuid;
