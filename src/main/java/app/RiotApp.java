@@ -6,9 +6,9 @@ import java.io.IOException;
 import data_access.*;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.freeChampionRotation.FreeChampionRotationController;
-import interface_adapter.freeChampionRotation.FreeChampionRotationPresenter;
-import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
+//import interface_adapter.freeChampionRotation.FreeChampionRotationController;
+//import interface_adapter.freeChampionRotation.FreeChampionRotationPresenter;
+//import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -17,9 +17,9 @@ import interface_adapter.match.MatchPresenter;
 import interface_adapter.champion.ChampionController;
 import interface_adapter.champion.ChampionPresenter;
 import interface_adapter.profile.ProfilePresenter;
-import use_case.freechampionrotation.FreeChampionRotationInputBoundary;
-import use_case.freechampionrotation.FreeChampionRotationInteractor;
-import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
+//import use_case.freechampionrotation.FreeChampionRotationInputBoundary;
+//import use_case.freechampionrotation.FreeChampionRotationInteractor;
+//import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -47,8 +47,8 @@ public class RiotApp {
     private LoginViewModel loginViewModel;
     private LoggedInView loggedInView;
     private LoggedinViewModel loggedinViewModel;
-    private FreeChampionRotationView freeChampionRotationView;
-    private FreeChampionRotationViewModel freeChampionRotationViewModel;
+//    private FreeChampionRotationView freeChampionRotationView;
+//    private FreeChampionRotationViewModel freeChampionRotationViewModel;
 
     public RiotApp addLoginView() {
         loginViewModel = new LoginViewModel();
@@ -57,12 +57,12 @@ public class RiotApp {
         return this;
     }
 
-    public RiotApp addFreeChampionRotationView() throws IOException {
-        freeChampionRotationViewModel = new FreeChampionRotationViewModel();
-        freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
-        cardPanel.add(freeChampionRotationView);
-        return this;
-    }
+//    public RiotApp addFreeChampionRotationView() throws IOException {
+//        freeChampionRotationViewModel = new FreeChampionRotationViewModel();
+//        freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
+//        cardPanel.add(freeChampionRotationView);
+//        return this;
+//    }
 
     public RiotApp addLoginUseCase() {
         final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedinViewModel, viewManagerModel);
@@ -73,13 +73,13 @@ public class RiotApp {
         return this;
     }
 
-    public RiotApp addFreeChampionRotationUseCase() {
-        final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter();
-        final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor();
-        final FreeChampionRotationController freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
-
-        return this;
-    }
+//    public RiotApp addFreeChampionRotationUseCase() {
+//        final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter();
+//        final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor();
+//        final FreeChampionRotationController freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
+//
+//        return this;
+//    }
 
     public JFrame build() {
         final JFrame application = new JFrame();

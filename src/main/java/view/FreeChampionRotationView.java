@@ -20,7 +20,7 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
 
     public FreeChampionRotationView(FreeChampionRotationViewModel viewModel) throws IOException {
         this.viewModel = viewModel;
-        this.viewModel.addPropertyChangeLIstener(this);
+        this.viewModel.addPropertyChangeListener(this);
 
         setSize(400,300);
 
