@@ -16,12 +16,12 @@ public class ButtonController {
     private final FreeChampionRotationUseCase freeChampionRotationUseCase;
     private final FunFactsUseCase funFactsUseCase;
     private final LogoutUseCase logoutUseCase;
-    private String puuid;
-    private String region;
-    private OverviewOutputBoundary overviewOutputBoundary;
+    private final String puuid;
+    private final String region;
 
     public ButtonController(String puuid, String region) {
-        this.overviewUseCase = new OverviewUseCase(overviewOutputBoundary, puuid, region);
+        // THIS NEEDS TO BE CHANGED.
+        this.overviewUseCase = new OverviewUseCase(null, null);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
         this.friendsUseCase = new FriendsUseCase(puuid, region);
         this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);

@@ -3,39 +3,57 @@ package use_case.match;
 import data_access.RiotAPIMatchDataAccess;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implements the use case for fetching recent matches with detailed information.
+ * Use Case Implementation for Fetching Recent Matches.
  */
 public class FetchRecentMatchesUseCase implements MatchInputBoundary {
 
-    private final RiotAPIMatchDataAccess dataAccess;
-    private final MatchOutputBoundary presenter;
+    private final RiotAPIMatchDataAccess matchDataAccess;
+    private final MatchOutputBoundary outputBoundary;
 
-    public FetchRecentMatchesUseCase(RiotAPIMatchDataAccess dataAccess, MatchOutputBoundary presenter) {
-        this.dataAccess = dataAccess;
-        this.presenter = presenter;
+    public FetchRecentMatchesUseCase(RiotAPIMatchDataAccess matchDataAccess, MatchOutputBoundary outputBoundary) {
+        this.matchDataAccess = matchDataAccess;
+        this.outputBoundary = outputBoundary;
     }
 
     @Override
-    public void fetchRecentMatches(String puuid, String region, int count) {
+    public void fetchRecentMatches(MatchInputData inputData) {
         try {
-            // Fetch match IDs
-            List<String> matchIds = dataAccess.fetchRecentMatchIds(puuid, region, count);
+            String puuid = inputData.getPuuid();
+            String region = inputData.getRegion();
+            int count = inputData.getCount();
 
-            // Fetch detailed match data for each match ID
-            List<JSONObject> matchDetailsList = new ArrayList<>();
-            for (String matchId : matchIds) {
-                JSONObject matchDetails = dataAccess.fetchMatchDetails(matchId, region);
-                matchDetailsList.add(matchDetails);
+            // Step 1: Fetch Match IDs
+            List<String> matchIds = matchDataAccess.fetchRecentMatchIds(puuid, region, count);
+            if (matchIds.isEmpty()) {
+                outputBoundary.presentError("No matches found for the user.");
+                return;
             }
 
-            // Present match details to the presenter
-            presenter.presentMatchDetails(matchDetailsList);
+            outputBoundary.presentMatches(matchIds);
+
+            // Step 2: Fetch Match Details for each Match ID
+            List<JSONObject> matchDetails = new ArrayList<>();
+            for (String matchId : matchIds) {
+                JSONObject matchDetail = matchDataAccess.fetchMatchDetails(matchId, region);
+                matchDetails.add(matchDetail);
+            }
+
+            // Step 3: Send the match details to the output boundary
+            outputBoundary.presentMatchDetails(matchDetails);
+
+        } catch (IOException e) {
+            outputBoundary.presentError("Failed to fetch matches due to an IO error: " + e.getMessage());
         } catch (Exception e) {
-            presenter.presentError("Failed to fetch matches: " + e.getMessage());
+            outputBoundary.presentError("An unexpected error occurred: " + e.getMessage());
         }
     }
 }
+
+
+
+
