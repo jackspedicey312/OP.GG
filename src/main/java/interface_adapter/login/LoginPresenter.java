@@ -1,27 +1,44 @@
 package interface_adapter.login;
 
+import interface_adapter.ViewManagerModel;
+import interface_adapter.overview.OverviewState;
+import interface_adapter.overview.OverviewViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
 /**
- * Presenter for handling login output.
+ * The Presenter for the Login Use Case.
  */
 public class LoginPresenter implements LoginOutputBoundary {
 
-    private String puuid;
-    private String message;
+    private final LoginViewModel loginViewModel;
+    private final OverviewViewModel overviewViewModel;
+    private final ViewManagerModel viewManagerModel;
+
+    public LoginPresenter(ViewManagerModel viewManagerModel,
+                          OverviewViewModel overviewViewModel,
+                          LoginViewModel loginViewModel) {
+        this.viewManagerModel = viewManagerModel;
+        this.OverviewViewModel = overviewViewModel;
+        this.loginViewModel = loginViewModel;
+    }
 
     @Override
-    public void present(LoginOutputData outputData) {
-        this.puuid = outputData.getPuuid();
-        this.message = outputData.getMessage();
+    public void prepareSuccessView(LoginOutputData response) {
+        // On success, switch to the logged in view.
+
+        final OverviewState overviewState = overviewViewModel.getState();
+       overviewState.setUsername(response.getUsername());
+        this.overviewViewModel.setState(overviewState);
+        this.overviewViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(overviewViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
-    public String getPuuid() {
-        return puuid;
+    @Override
+    public void prepareFailView(String error) {
+        final LoginState loginState = loginViewModel.getState();
+        loginState.setLoginError(error);
+        loginViewModel.firePropertyChanged();
     }
-
-    public String getMessage() {
-        return message;
-    }
-}
