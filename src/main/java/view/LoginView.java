@@ -61,6 +61,8 @@ public class LoginView extends JFrame implements ActionListener, PropertyChangeL
 
         add(panel);
 
+        setVisible(true);
+
         final LoginState currentState = loginViewModel.getState();
         currentState.setLoginError("");
 
@@ -75,12 +77,11 @@ public class LoginView extends JFrame implements ActionListener, PropertyChangeL
 
         });
 
-
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        LoginState state= (LoginState) evt.getNewValue();
+        final LoginState state = (LoginState) evt.getNewValue();
         setFields(state);
         errorLabel.setText(state.getLoginError());
     }
@@ -96,8 +97,6 @@ public class LoginView extends JFrame implements ActionListener, PropertyChangeL
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
-
-    setVisible(true);
 
     @Override
     public void actionPerformed(ActionEvent e) {
