@@ -88,4 +88,7 @@ public class LoggedInView extends JPanel implements ActionListener {
     public JPanel getPanel() {
         return this.panel;
     }
+
+    public String getViewName() {
+    }
 }
