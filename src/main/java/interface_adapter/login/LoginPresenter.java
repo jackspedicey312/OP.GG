@@ -4,7 +4,6 @@ import interface_adapter.ViewManagerModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 import view.LoggedInState;
-import view.LoggedInView;
 import view.LoggedInViewModel;
 
 /**
@@ -17,11 +16,11 @@ public class LoginPresenter implements LoginOutputBoundary {
     private final ViewManagerModel managerModel;
 
     public LoginPresenter(LoginViewModel loginViewModel,
-                          LoggedInViewModel loggedInViewModel,
-                          ViewManagerModel managerModel) {
+                          LoggedinViewModel loggedInViewModel,
+                          ViewManagerModel viewManagerModel) {
         this.loginViewModel = loginViewModel;
         this.loggedInViewModel = loggedInViewModel;
-        this.managerModel = managerModel;
+        this.managerModel = viewManagerModel;
     }
 
     @Override
