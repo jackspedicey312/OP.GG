@@ -16,7 +16,7 @@ public class LoginPresenter implements LoginOutputBoundary {
     private final ViewManagerModel managerModel;
 
     public LoginPresenter(LoginViewModel loginViewModel,
-                          LoggedinViewModel loggedInViewModel,
+                          LoggedInViewModel loggedInViewModel,
                           ViewManagerModel viewManagerModel) {
         this.loginViewModel = loginViewModel;
         this.loggedInViewModel = loggedInViewModel;
@@ -37,7 +37,6 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareFailView(LoginOutputData outputData) {
         final LoginState loginState = loginViewModel.getState();
-
 
     }
 }

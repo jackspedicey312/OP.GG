@@ -2,8 +2,10 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 
 import data_access.RiotAPIChampionDataAccess;
+import data_access.RiotUserDataAccessObject;
 import interface_adapter.button.ButtonController;
 import interface_adapter.champion.ChampionController;
 import interface_adapter.champion.ChampionPresenter;
@@ -13,7 +15,6 @@ import javax.swing.*;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class LoggedInView extends JPanel implements ActionListener {
-    private final ButtonController buttonController;
     private final JButton overviewButton = new JButton("Overview");
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
@@ -22,12 +23,10 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
     private final JPanel panel;
-    private String puuid;
-    private String region;
+    private final RiotUserDataAccessObject userDataAccessObject;
 
-    public LoggedInView(String puuid, String region) {
+    public LoggedInView(RiotUserDataAccessObject userDataAccessObject) {
         final JPanel firstPanel = new JPanel();
-        this.buttonController = new ButtonController(puuid, region);
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
         firstPanel.add(logoutButton);
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
@@ -44,8 +43,7 @@ public class LoggedInView extends JPanel implements ActionListener {
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
         this.panel = mainPanel;
-        this.puuid = puuid;
-        this.region = region;
+        this.userDataAccessObject = userDataAccessObject;
 
         overviewButton.addActionListener(this);
         matchHistoryButton.addActionListener(this);
@@ -59,7 +57,7 @@ public class LoggedInView extends JPanel implements ActionListener {
     @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings", "checkstyle:ParameterName"})
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (e.getSource() == overviewButton) {
-            this.buttonController.OverviewButtonClicked();
+
         }
         else if (e.getSource() == matchHistoryButton) {
             this.buttonController.MatchHistoryButtonClicked();
@@ -88,6 +86,8 @@ public class LoggedInView extends JPanel implements ActionListener {
     public JPanel getPanel() {
         return this.panel;
     }
+
+
 
     public String getViewName() {
     }

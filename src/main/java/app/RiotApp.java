@@ -42,11 +42,12 @@ public class RiotApp {
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
+    private LoginController loginController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
     private LoggedInView loggedInView;
-    private LoggedinViewModel loggedinViewModel;
+    private LoggedInViewModel loggedInViewModel;
     private FreeChampionRotationView freeChampionRotationView;
     private FreeChampionRotationViewModel freeChampionRotationViewModel;
 
@@ -57,6 +58,12 @@ public class RiotApp {
         return this;
     }
 
+    public RiotApp addLoggedInView() {
+        loggedInViewModel = new LoggedInViewModel();
+        loggedInView = new LoggedInView()
+
+    }
+
     public RiotApp addFreeChampionRotationView() throws IOException {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
         freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
@@ -65,10 +72,10 @@ public class RiotApp {
     }
 
     public RiotApp addLoginUseCase() {
-        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedinViewModel, viewManagerModel);
+        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel, viewManagerModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
 
-        final LoginController loginController = new LoginController(loginInteractor);
+        loginController = new LoginController(loginInteractor);
         loginView.setLoginController(loginController);
         return this;
     }

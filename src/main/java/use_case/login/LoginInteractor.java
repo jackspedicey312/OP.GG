@@ -8,27 +8,26 @@ import data_access.RiotUserDataAccessObject;
 public class LoginInteractor implements LoginInputBoundary {
 
     private final RiotUserDataAccessObject userDataAccessObject;
-    private final LoginOutputBoundary presenter;
+    private final LoginOutputBoundary loginPresenter;
 
     public LoginInteractor(RiotUserDataAccessObject userDataAccessObject, LoginOutputBoundary presenter) {
         this.userDataAccessObject = userDataAccessObject;
-        this.presenter = presenter;
+        this.loginPresenter = presenter;
     }
 
     @Override
     public void execute(LoginInputData inputData) {
         try {
-            String username = inputData.getUsername();
-            String tagline = inputData.getTagline();
-            String region = inputData.getRegion();
             // Fetch PUUID using the data access layer
-            final String puuid = userDataAccessObject.fetchPUUID(username, tagline, region);
-            userDataAccessObject.createUser(username, tagline, region);
+            final String puuid = userDataAccessObject.fetchPUUID(inputData.getUsername(),
+                    inputData.getTagline(), inputData.getRegion());
+            userDataAccessObject.createUser(inputData.getUsername(),
+                    inputData.getTagline(), inputData.getRegion());
             // Pass successful login data to the presenter
-            presenter.prepareSuccessView(new LoginOutputData(true, "Login successful!", puuid));
+            loginPresenter.prepareSuccessView(new LoginOutputData(true, "Login successful!", puuid));
         } catch (Exception e) {
             // Pass error data to the presenter
-            presenter.prepareFailView(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
+            loginPresenter.prepareFailView(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
         }
     }
 }

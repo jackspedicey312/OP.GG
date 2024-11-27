@@ -57,17 +57,17 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Call the login controller
+        loginController.execute(usernameField.getText(), taglineField.getText(), (String) regionField.getSelectedItem());
+    }
+
     public void propertyChange(PropertyChangeEvent evt) {
         final LoginState state = (LoginState) evt.getNewValue();
     }
 
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Call the login controller
-        loginController.execute(usernameField.getText(), taglineField.getText(), (String) regionField.getSelectedItem());
     }
 }
