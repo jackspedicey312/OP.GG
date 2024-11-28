@@ -1,6 +1,8 @@
 package use_case.login;
 
 import data_access.RiotUserDataAccessObject;
+import entity.MatchList;
+import entity.User;
 
 /**
  * The interactor for the login use case.
@@ -19,8 +21,9 @@ public class LoginInteractor implements LoginInputBoundary {
     public void execute(LoginInputData inputData) {
         try {
             // Fetch PUUID using the data access layer
-            final String puuid = userDataAccessObject.fetchPuuId(inputData.getUsername(),
+            final User user = userDataAccessObject.getUser(inputData.getUsername(),
                     inputData.getTagline(), inputData.getRegion());
+            final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
             // Pass successful login data to the presenter
             loginPresenter.prepareSuccessView(new LoginOutputData(true, "Login successful!",
                     inputData.getUsername(), inputData.getTagline(), inputData.getRegion(), puuid));

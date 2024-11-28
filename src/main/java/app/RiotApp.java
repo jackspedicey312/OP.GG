@@ -47,7 +47,7 @@ public class RiotApp {
     private LoginView loginView;
     private LoginViewModel loginViewModel;
     private LoggedInView loggedInView;
-    private LoggedinViewModel loggedInViewModel;
+    private LoggedInViewModel loggedInViewModel;
     private FreeChampionRotationView freeChampionRotationView;
     private FreeChampionRotationViewModel freeChampionRotationViewModel;
 
@@ -59,8 +59,9 @@ public class RiotApp {
     }
 
     public RiotApp addLoggedInView() {
-        loggedInViewModel = new LoggedinViewModel();
-        loggedInView
+        loggedInViewModel = new LoggedInViewModel();
+        loggedInView = new LoggedInView(loggedInView);
+        cardPanel.add(loggedInView, "LoggedIn");
 
     }
 
@@ -72,7 +73,7 @@ public class RiotApp {
     }
 
     public RiotApp addLoginUseCase() {
-        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedinViewModel, viewManagerModel);
+        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel, viewManagerModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
 
         loginController = new LoginController(loginInteractor);

@@ -1,13 +1,18 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatchList {
 
-    private final List<Match> matches;
+    private List<Match> matches = new ArrayList<>();
 
     public MatchList(List<Match> matchList) {
-        this.matches = matchList;
+        matches.addAll(matchList);
+    }
+
+    public MatchList(Match match) {
+        matches.add(match);
     }
 
     public List<Match> getMatches() {
