@@ -10,5 +10,7 @@ public class RiotMain {
     public static void main(String[] args) {
         final RiotApp app = new RiotApp();
         final JFrame application = app.addLoginView().addLoginUseCase().build();
+        application.pack();
+        application.setVisible(true);
     }
 }

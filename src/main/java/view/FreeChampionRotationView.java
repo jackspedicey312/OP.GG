@@ -14,25 +14,20 @@ import javax.swing.JPanel;
 import java.io.IOException;
 
 public class FreeChampionRotationView extends JPanel implements PropertyChangeListener {
-    private RiotAPIFreeRotationDataAccess dataAccess;
+    private final JPanel mainPanel = new JPanel();
     private FreeChampionRotationController controller;
     private final FreeChampionRotationViewModel viewModel;
 
     public FreeChampionRotationView(FreeChampionRotationViewModel viewModel) throws IOException {
         this.viewModel = viewModel;
         this.viewModel.addPropertyChangeListener(this);
+    }
 
-        setSize(400,300);
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
-        for (ImageIcon champion : dataAccess.getFreeChampionsListIcons()) {
-            final JPanel championPanel = new JPanel();
-            championPanel.add(new JLabel(champion));
-            mainPanel.add(championPanel);
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("loggedIn")) {
+            for ( )
         }
-        add(mainPanel);
     }
 
     public setFreeChampionRotationController(FreeChampionRotationController controller) {

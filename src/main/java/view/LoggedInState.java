@@ -1,31 +1,22 @@
 package view;
 
-public class LoggedInState {
-    private String username = "";
-    private String tagline = "";
-    private String puuid = "";
+import entity.*;
 
-    public String getUsername() {
+public class LoggedInState {
+    private User user;
+    private MatchList matchList;
+    private PlayerStats playerStats;
+    private FreeChampionRotation freeChampionRotation;
+
+    private final UserFactory userFactory = new UserFactory();
+    private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
+
+    public String getUser() {
         return username;
     }
 
-    public String getTagline() {
-        return tagline;
-    }
-
-    public String getPuuid() {
-        return puuid;
-    }
-
     public void setUsername(String username) {
-        this.username = username;
+        this.user = userFactory.createUser()
     }
 
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
-
-    public void setPuuid(String puuid) {
-        this.puuid = puuid;
-    }
 }
