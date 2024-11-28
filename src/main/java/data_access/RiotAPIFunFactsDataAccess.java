@@ -85,7 +85,8 @@ public class RiotAPIFunFactsDataAccess {
 
             }
             catch (Exception e) {
-                System.err.println("Could not retrieve details for this match: " + matches.get(i) + e.getMessage());
+                System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
+                        + e.getMessage());
                 continue;
             }
         }
