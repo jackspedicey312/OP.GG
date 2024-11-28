@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.FunFacts;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,20 +8,7 @@ import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
 
-    private int totalPlaytime;
-    private int totalWins;
-    private int totalLosses;
-    private int totalKills;
-    private int totalDeaths;
-    private long oldestGamePlayedUnix;
-    private int longestGamePlayed;
-    private long longestGamePlayedDate;
-    private int totalSurrenders;
-    private int totalPentakills;
-    private int totalsurvivedSingleDigitHp;
-    private int totalSnowballsHit;
-    private int totalSavedAllies;
-
+    private final FunFacts funFacts = new FunFacts();
 
     public void fetchFunFacts (String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
@@ -91,49 +79,5 @@ public class RiotAPIFunFactsDataAccess {
             }
         }
     }
-
-    public int getTotalPlaytime() {
-        return totalPlaytime;
-    }
-
-    public int getLongestGamePlayed() {
-        return longestGamePlayed;
-    }
-
-    public long getoldestGamePlayedUnix() {
-        return oldestGamePlayedUnix;
-    }
-
-    public long getLongestGamePlayedDate() {
-        return longestGamePlayedDate;
-    }
-    public int getTotalSurvivedSingleDigitHp() {
-        return totalsurvivedSingleDigitHp;
-    }
-    public int getTotalSurrenders() {
-        return totalSurrenders;
-    }
-    public int getTotalPentakills() {
-        return totalPentakills;
-    }
-    public int getTotalKills() {
-        return totalKills;
-    }
-    public int getTotalDeaths() {
-        return totalDeaths;
-    }
-    public int getTotalLosses() {
-        return totalLosses;
-    }
-    public int getTotalWins() {
-        return totalWins;
-    }
-    public int getTotalSnowballsHit() {
-        return totalSnowballsHit;
-    }
-    public int getTotalSavedAllies() {
-        return totalSavedAllies;
-    }
-
 
 }
