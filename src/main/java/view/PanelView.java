@@ -35,7 +35,6 @@ public class PanelView extends JPanel implements ActionListener {
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
         secondPanel.add(matchHistoryButton);
-        secondPanel.add(friendsButton);
         secondPanel.add(championsButton);
         secondPanel.add(freeChampionRotationButton);
         secondPanel.add(funFactsButton);
@@ -49,7 +48,6 @@ public class PanelView extends JPanel implements ActionListener {
 
         overviewButton.addActionListener(this);
         matchHistoryButton.addActionListener(this);
-        friendsButton.addActionListener(this);
         championsButton.addActionListener(this);
         freeChampionRotationButton.addActionListener(this);
         funFactsButton.addActionListener(this);
@@ -64,9 +62,7 @@ public class PanelView extends JPanel implements ActionListener {
         else if (e.getSource() == matchHistoryButton) {
             this.buttonController.MatchHistoryButtonClicked();
         }
-        else if (e.getSource() == friendsButton) {
-            this.buttonController.FriendsButtonClicked();
-        }
+
         else if (e.getSource() == championsButton) {
             final ChampionPresenter championPresenter = new ChampionPresenter();
             final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess(puuid, region);

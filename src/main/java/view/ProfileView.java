@@ -29,6 +29,41 @@ public class ProfileView extends JFrame {
         profileLevelLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(profileLevelLabel);
 
+        final String gameMode = profile.getGameMode();
+        final JLabel gameModeLabel = new JLabel(gameMode);
+        gameModeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(gameModeLabel);
+
+        final String profileRank = profile.getRank();
+        final JLabel profileRankLabel = new JLabel(profileRank);
+        profileRankLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(profileRankLabel);
+
+        final String profileDivision = profile.getDivision();
+        final JLabel profileDivisionLabel = new JLabel(profileDivision);
+        profileDivisionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(profileDivisionLabel);
+
+        final int profileLeaguePoints = profile.getLeaguePoints();
+        final JLabel profileLeaguePointsLabel = new JLabel(String.valueOf(profileLeaguePoints));
+        profileLeaguePointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(profileLeaguePointsLabel);
+
+        final int profileWins = profile.getWins();
+        final JLabel profileWinsLabel = new JLabel(String.valueOf(profileWins));
+        profileWinsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(profileWinsLabel);
+
+        final int profileLosses = profile.getLosses();
+        final JLabel profileLossesLabel = new JLabel(String.valueOf(profileLosses));
+        profileLossesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(profileLossesLabel);
+
+        final int profileWinRate = profile.getWinRate();
+        final JLabel profileWinRateLabel = new JLabel(String.valueOf(profileWinRate));
+        profileWinRateLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(profileWinRateLabel);
+
         final JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane);
 

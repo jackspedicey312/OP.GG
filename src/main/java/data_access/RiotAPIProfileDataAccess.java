@@ -16,7 +16,6 @@ import java.net.URL;
 public class RiotAPIProfileDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
     private String summonerID;
-    private String accountID;
     private int summonerLevel;
     private int iconID;
     private ImageIcon iconPng;
@@ -33,10 +32,8 @@ public class RiotAPIProfileDataAccess {
                 this.summonerID = playerData.getString("id");
                 this.summonerLevel = playerData.getInt("summonerLevel");
                 this.iconID = playerData.getInt("profileIconId");
-                this.accountID = playerData.getString("accountId");
             }
-        }
-        else {
+        } else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
@@ -46,14 +43,11 @@ public class RiotAPIProfileDataAccess {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        }
-        else if (region.equalsIgnoreCase("EU")) {
+        } else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        }
-        else if (region.equalsIgnoreCase("ASIA")) {
+        } else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
@@ -78,8 +72,8 @@ public class RiotAPIProfileDataAccess {
     }
 
     /**
-     @throws IOException if icon png cannot be found with the given iconID.
-     Returns the icon png with the given iconID.
+     * @throws IOException if icon png cannot be found with the given iconID.
+     *                     Returns the icon png with the given iconID.
      */
 
     public ImageIcon getIconPng() throws IOException {
@@ -93,14 +87,9 @@ public class RiotAPIProfileDataAccess {
             this.iconPng = new ImageIcon(img);
             return iconPng;
         }
-
         catch (IOException e) {
             System.err.println("Error fetching the icon: " + e.getMessage());
             return null;
         }
-    }
-
-    public String getAccountID() {
-        return accountID;
     }
 }

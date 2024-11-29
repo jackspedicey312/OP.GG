@@ -12,7 +12,6 @@ import use_case.overview.OverviewUseCase;
 public class ButtonController {
     private final OverviewUseCase overviewUseCase;
     private final MatchHistoryUseCase matchHistoryUseCase;
-    private final FriendsUseCase friendsUseCase;
     private final FreeChampionRotationUseCase freeChampionRotationUseCase;
     private final FunFactsUseCase funFactsUseCase;
     private final LogoutUseCase logoutUseCase;
@@ -21,11 +20,10 @@ public class ButtonController {
 
     public ButtonController(String puuid, String region) {
         // THIS NEEDS TO BE CHANGED.
-        this.overviewUseCase = new OverviewUseCase(null, null);
+        this.overviewUseCase = new OverviewUseCase(null, null, null);
         this.matchHistoryUseCase = new MatchHistoryUseCase();
-        this.friendsUseCase = new FriendsUseCase(puuid, region);
         this.freeChampionRotationUseCase = new FreeChampionRotationUseCase(puuid, region);
-        this.funFactsUseCase = new FunFactsUseCase(puuid, region);
+        this.funFactsUseCase = new FunFactsUseCase(null, null);
         this.logoutUseCase = new LogoutUseCase();
         this.puuid = puuid;
         this.region = region;
@@ -40,10 +38,6 @@ public class ButtonController {
     @SuppressWarnings({"checkstyle:MethodName", "checkstyle:MissingJavadocMethod"})
     public void MatchHistoryButtonClicked() {
         this.matchHistoryUseCase.execute();
-    }
-
-    public void FriendsButtonClicked() {
-        this.friendsUseCase.execute();
     }
 
     public void FreeChampionRotationButtonClicked() {

@@ -14,8 +14,6 @@ import static java.lang.Math.round;
 
 public class RiotAPIRankDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private String summonerID;
-    private String region;
 
     private String gameMode;
     private String rank;
@@ -25,14 +23,8 @@ public class RiotAPIRankDataAccess {
     private int losses;
     private int winRate;
 
-
-    public void RankMain(String summonerID, String region) {
-        this.summonerID = summonerID;
-        this.region = region;
-    }
-
-    public void generateRank() throws IOException {
-        final HttpURLConnection request = getHttpURLConnection();
+    public void generateRank(String summonerID, String region) throws IOException {
+        final HttpURLConnection request = getHttpURLConnection(summonerID, region);
 
         final int responseCode = request.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -42,7 +34,8 @@ public class RiotAPIRankDataAccess {
                 if (rankInfo.isEmpty()) {
                     this.rank = "unranked";
                     this.gameMode = "RANKED_SOLO_5x5";
-                } else {
+                }
+                else {
                     final JSONObject playerData = rankInfo.getJSONObject(0);
 
                     this.rank = playerData.getString("tier");
@@ -61,7 +54,7 @@ public class RiotAPIRankDataAccess {
         }
     }
 
-    private HttpURLConnection getHttpURLConnection() throws IOException {
+    private HttpURLConnection getHttpURLConnection(String summonerID, String region) throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/";

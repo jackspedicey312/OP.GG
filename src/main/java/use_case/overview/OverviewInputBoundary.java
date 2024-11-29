@@ -4,4 +4,5 @@ public interface OverviewInputBoundary {
 
     void fetchOverview(String puuid, String region);
 
+    void execute();
 }
