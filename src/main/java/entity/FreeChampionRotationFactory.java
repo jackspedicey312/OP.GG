@@ -1,8 +1,12 @@
 package entity;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class FreeChampionRotationFactory {
 
-    public FreeChampionRotation createFreeChampionRotation() {
-        return new FreeChampionRotation()
+    public FreeChampionRotation createFreeChampionRotation(ArrayList<String> freeChampionsNames,
+                                                           ArrayList<ImageIcon> freeChampionIcons) {
+        return new FreeChampionRotation(freeChampionsNames, freeChampionIcons);
     }
 }

@@ -73,7 +73,8 @@ public class RiotApp {
     }
 
     public RiotApp addLoginUseCase() {
-        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel, viewManagerModel);
+        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel,
+                freeChampionRotationViewModel, viewManagerModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
 
         loginController = new LoginController(loginInteractor);

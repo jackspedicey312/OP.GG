@@ -8,6 +8,4 @@ public class LoggedInViewModel extends ViewModel<LoggedInState> {
         super("logged in");
         setState(new LoggedInState());
     }
-
-    public
 }

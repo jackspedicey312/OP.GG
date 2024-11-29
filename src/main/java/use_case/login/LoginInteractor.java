@@ -1,6 +1,7 @@
 package use_case.login;
 
 import data_access.RiotUserDataAccessObject;
+import entity.FreeChampionRotation;
 import entity.MatchList;
 import entity.User;
 
@@ -25,6 +26,7 @@ public class LoginInteractor implements LoginInputBoundary {
                     inputData.getTagline(), inputData.getRegion());
             final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
             // Pass successful login data to the presenter
+            final FreeChampionRotation freeChampionRotation = userDataAccessObject.
             loginPresenter.prepareSuccessView(new LoginOutputData(true, "Login successful!",
                     inputData.getUsername(), inputData.getTagline(), inputData.getRegion(), puuid));
         } catch (Exception e) {
