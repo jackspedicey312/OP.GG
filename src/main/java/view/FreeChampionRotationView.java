@@ -25,7 +25,7 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("loggedIn")) {
+        if (evt.getPropertyName().equals("login")) {
             for ( )
         }
     }
