@@ -33,6 +33,11 @@ public class RiotAPIChampionDataAccess {
         this.region = region;
     }
 
+    public void setSummonerIDAndRegion(String summonerID, String region) {
+        this.summonerID = summonerID;
+        this.region = region;
+    }
+
     /**
      * Fetch champion data for all champions for the summoner.
      * @return A list of ChampionOutputData objects containing champion data.
