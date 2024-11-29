@@ -13,9 +13,9 @@ public class LoginInteractor implements LoginInputBoundary {
     private final RiotUserDataAccessObject userDataAccessObject;
     private final LoginOutputBoundary loginPresenter;
 
-    public LoginInteractor(RiotUserDataAccessObject userDataAccessObject, LoginOutputBoundary presenter) {
+    public LoginInteractor(RiotUserDataAccessObject userDataAccessObject, LoginOutputBoundary loginPresenter) {
         this.userDataAccessObject = userDataAccessObject;
-        this.loginPresenter = presenter;
+        this.loginPresenter = loginPresenter;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class LoginInteractor implements LoginInputBoundary {
                     inputData.getTagline(), inputData.getRegion());
             final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
             // Pass successful login data to the presenter
-            final FreeChampionRotation freeChampionRotation = userDataAccessObject.
+            final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation()
             loginPresenter.prepareSuccessView(new LoginOutputData(true, "Login successful!",
                     inputData.getUsername(), inputData.getTagline(), inputData.getRegion(), puuid));
         } catch (Exception e) {
