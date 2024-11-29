@@ -1,12 +1,12 @@
 package data_access;
 
+import entity.FunFacts;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
-
     private int totalPlaytime;
     private int totalWins;
     private int totalLosses;
@@ -20,9 +20,9 @@ public class RiotAPIFunFactsDataAccess {
     private int totalsurvivedSingleDigitHp;
     private int totalSnowballsHit;
     private int totalSavedAllies;
+    private final FunFacts funFacts = new FunFacts();
 
-
-    public void fetchFunFacts (String puuid, String region) throws Exception {
+    public FunFacts fetchFunFacts (String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
         final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
 
@@ -83,6 +83,22 @@ public class RiotAPIFunFactsDataAccess {
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
 
+                funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
+                funFacts.setLongestGamePlayed(longestGamePlayed);
+                funFacts.setTotalDeaths(totalDeaths);
+                funFacts.setTotalKills(totalKills);
+                funFacts.setTotalPlaytime(totalPlaytime);
+                funFacts.setTotalWins(totalWins);
+                funFacts.setTotalLosses(totalLosses);
+                funFacts.setTotalSurvivedSingleDigitHp(totalsurvivedSingleDigitHp);
+                funFacts.setTotalSurrenders(totalSurrenders);
+                funFacts.setTotalPentakills(totalPentakills);
+                funFacts.setTotalSnowballsHit(totalSnowballsHit);
+                funFacts.setOldestGamePlayedUnix(oldestGamePlayedUnix);
+                funFacts.setTotalSavedAllies(totalSavedAllies);
+
+                return funFacts;
+
             }
             catch (Exception e) {
                 System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
@@ -91,49 +107,5 @@ public class RiotAPIFunFactsDataAccess {
             }
         }
     }
-
-    public int getTotalPlaytime() {
-        return totalPlaytime;
-    }
-
-    public int getLongestGamePlayed() {
-        return longestGamePlayed;
-    }
-
-    public long getoldestGamePlayedUnix() {
-        return oldestGamePlayedUnix;
-    }
-
-    public long getLongestGamePlayedDate() {
-        return longestGamePlayedDate;
-    }
-    public int getTotalSurvivedSingleDigitHp() {
-        return totalsurvivedSingleDigitHp;
-    }
-    public int getTotalSurrenders() {
-        return totalSurrenders;
-    }
-    public int getTotalPentakills() {
-        return totalPentakills;
-    }
-    public int getTotalKills() {
-        return totalKills;
-    }
-    public int getTotalDeaths() {
-        return totalDeaths;
-    }
-    public int getTotalLosses() {
-        return totalLosses;
-    }
-    public int getTotalWins() {
-        return totalWins;
-    }
-    public int getTotalSnowballsHit() {
-        return totalSnowballsHit;
-    }
-    public int getTotalSavedAllies() {
-        return totalSavedAllies;
-    }
-
 
 }
