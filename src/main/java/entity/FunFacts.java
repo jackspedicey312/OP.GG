@@ -15,7 +15,7 @@ public class FunFacts {
     private long longestGamePlayedDate;
     private int totalSurrenders;
     private int totalPentakills;
-    private int totalsurvivedSingleDigitHp;
+    private int totalSurvivedSingleDigitHp;
     private int totalSnowballsHit;
     private int totalSavedAllies;
 
@@ -59,7 +59,7 @@ public class FunFacts {
         this.totalPentakills = totalPentakills;
     }
     public int setTotalSurvivedSingleDigitHp(int totalSurvivedSingleDigitHp) {
-        this.totalsurvivedSingleDigitHp = totalSurvivedSingleDigitHp;
+        this.totalSurvivedSingleDigitHp = totalSurvivedSingleDigitHp;
     }
     public int setTotalSnowballsHit(int totalSnowballsHit) {
         this.totalSnowballsHit = totalSnowballsHit;
@@ -77,7 +77,7 @@ public class FunFacts {
         return longestGamePlayed / 60;
     }
 
-    public String getoldestGamePlayedUnix() {
+    public String getOldestGamePlayed() {
         return unixConverter(oldestGamePlayedUnix);
     }
 
@@ -85,7 +85,7 @@ public class FunFacts {
         return unixConverter(longestGamePlayedDate);
     }
     public int getTotalSurvivedSingleDigitHp() {
-        return totalsurvivedSingleDigitHp;
+        return totalSurvivedSingleDigitHp;
     }
     public int getTotalSurrenders() {
         return totalSurrenders;

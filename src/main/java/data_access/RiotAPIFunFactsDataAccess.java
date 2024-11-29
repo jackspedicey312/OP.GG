@@ -22,7 +22,7 @@ public class RiotAPIFunFactsDataAccess {
     private int totalSavedAllies;
     private final FunFacts funFacts = new FunFacts();
 
-    public FunFacts fetchFunFacts (String puuid, String region) throws Exception {
+    public FunFacts fetchFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
         final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
 
@@ -83,22 +83,6 @@ public class RiotAPIFunFactsDataAccess {
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
 
-                funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
-                funFacts.setLongestGamePlayed(longestGamePlayed);
-                funFacts.setTotalDeaths(totalDeaths);
-                funFacts.setTotalKills(totalKills);
-                funFacts.setTotalPlaytime(totalPlaytime);
-                funFacts.setTotalWins(totalWins);
-                funFacts.setTotalLosses(totalLosses);
-                funFacts.setTotalSurvivedSingleDigitHp(totalsurvivedSingleDigitHp);
-                funFacts.setTotalSurrenders(totalSurrenders);
-                funFacts.setTotalPentakills(totalPentakills);
-                funFacts.setTotalSnowballsHit(totalSnowballsHit);
-                funFacts.setOldestGamePlayedUnix(oldestGamePlayedUnix);
-                funFacts.setTotalSavedAllies(totalSavedAllies);
-
-                return funFacts;
-
             }
             catch (Exception e) {
                 System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
@@ -106,6 +90,21 @@ public class RiotAPIFunFactsDataAccess {
                 continue;
             }
         }
+        funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
+        funFacts.setLongestGamePlayed(longestGamePlayed);
+        funFacts.setTotalDeaths(totalDeaths);
+        funFacts.setTotalKills(totalKills);
+        funFacts.setTotalPlaytime(totalPlaytime);
+        funFacts.setTotalWins(totalWins);
+        funFacts.setTotalLosses(totalLosses);
+        funFacts.setTotalSurvivedSingleDigitHp(totalsurvivedSingleDigitHp);
+        funFacts.setTotalSurrenders(totalSurrenders);
+        funFacts.setTotalPentakills(totalPentakills);
+        funFacts.setTotalSnowballsHit(totalSnowballsHit);
+        funFacts.setOldestGamePlayedUnix(oldestGamePlayedUnix);
+        funFacts.setTotalSavedAllies(totalSavedAllies);
+
+        return funFacts;
     }
 
 }

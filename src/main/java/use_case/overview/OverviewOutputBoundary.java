@@ -8,6 +8,20 @@ public interface OverviewOutputBoundary {
 
     void presentProfileLevel(int level);
 
+    void presentGamemode(String gameMode);
+
+    void presentRank(String rank);
+
+    void presentDivision(String division);
+
+    void presentLeaguePoints(int leaguePoints);
+
+    void presentWins(int wins);
+
+    void presentLosses(int losses);
+
+    void presentWinRate(int winrate);
+
     void presentError(String message);
 
 }
