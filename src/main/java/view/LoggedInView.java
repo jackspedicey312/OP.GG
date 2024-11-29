@@ -2,13 +2,12 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
 import data_access.RiotAPIChampionDataAccess;
 import data_access.RiotUserDataAccessObject;
 import interface_adapter.button.ButtonController;
-import interface_adapter.champion.ChampionController;
-import interface_adapter.champion.ChampionPresenter;
+import interface_adapter.Champion.ChampionController;
+import interface_adapter.Champion.ChampionPresenter;
 import use_case.champion.FetchTopChampionsUseCase;
 
 import javax.swing.*;

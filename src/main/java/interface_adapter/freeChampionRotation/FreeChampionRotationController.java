@@ -9,7 +9,7 @@ public class FreeChampionRotationController {
         this.freeChampionRotationUseCaseInteractor = freeChampionRotationUseCaseInteractor;
     }
 
-    public void execute(String region) {
+    public void execute() {
         freeChampionRotationUseCaseInteractor.execute();
     }
 }

@@ -1,7 +1,4 @@
-package entity;
-
-import java.util.ArrayList;
-import java.util.List;
+package entity.User;
 
 /**
  * Represents a user in the system.

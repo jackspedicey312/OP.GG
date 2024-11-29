@@ -1,4 +1,6 @@
-package entity;
+package entity.Match;
+
+import entity.PlayerStats.PlayerStats;
 
 import java.util.List;
 

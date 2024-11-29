@@ -1,6 +1,6 @@
 package interface_adapter.freeChampionRotation;
 
-import entity.FreeChampionRotation;
+import entity.FreeChampionRotation.FreeChampionRotation;
 
 public class FreeChampionRotationState {
     private FreeChampionRotation freeChampionRotation;

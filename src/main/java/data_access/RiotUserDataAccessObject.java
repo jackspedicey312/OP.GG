@@ -1,7 +1,16 @@
 package data_access;
 
-import entity.*;
 //import use_case.freechampionrotation.FreeChampionRotationUserDataAccessInterface;
+import entity.FreeChampionRotation.FreeChampionRotation;
+import entity.FreeChampionRotation.FreeChampionRotationFactory;
+import entity.Match.Match;
+import entity.Match.MatchFactory;
+import entity.MatchList.MatchList;
+import entity.MatchList.MatchListFactory;
+import entity.PlayerStats.PlayerStatsFactory;
+import entity.User.User;
+import entity.User.UserFactory;
+import org.json.JSONObject;
 import use_case.login.LoginUserDataAccessInterface;
 
 import java.io.IOException;
@@ -29,7 +38,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         List<Match> matchList = new ArrayList<>();
         final List<String> matchListId = matchDataAccess.fetchRecentMatchIds(puuId, region, count);
         for (String matchId : matchListId) {
-            matchDataAccess.fetchMatchDetails(matchId, region);
+            final JSONObject matchData = matchDataAccess.fetchMatchDetails(matchId, region);
         }
     }
 
@@ -37,5 +46,4 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         return freeChampionRotationFactory.createFreeChampionRotation(freeRotationDataAccess.getFreeChampionsNames(),
                 freeRotationDataAccess.getFreeChampionsIcons());
     }
-
 }

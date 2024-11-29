@@ -1,6 +1,5 @@
 package data_access;
 
-import entity.PlayerStats;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

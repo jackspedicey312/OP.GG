@@ -1,12 +1,20 @@
 package interface_adapter.freeChampionRotation;
 
-import use_case.freechampionrotation.FreeChampionRotationOuputData;
+import interface_adapter.ViewManagerModel;
 import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
 
 public class FreeChampionRotationPresenter implements FreeChampionRotationOutputBoundary {
+    private final FreeChampionRotationViewModel freeChampionRotationViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    @Override
-    public void prepareView() {
-
+    public FreeChampionRotationPresenter(FreeChampionRotationViewModel freeChampionRotationViewModel,
+                                         ViewManagerModel viewmanagerModel) {
+        this.freeChampionRotationViewModel = freeChampionRotationViewModel;
+        this.viewManagerModel = viewmanagerModel;
     }
-]
+
+    public void prepareView() {
+        viewManagerModel.setState(freeChampionRotationViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+}

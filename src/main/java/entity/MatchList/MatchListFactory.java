@@ -1,4 +1,6 @@
-package entity;
+package entity.MatchList;
+
+import entity.Match.Match;
 
 import java.util.List;
 

@@ -1,17 +1,14 @@
 package use_case.freechampionrotation;
 
-import data_access.RiotAPIFreeRotationDataAccess;
-import use_case.button.ButtonUseCase;
-
 public class FreeChampionRotationInteractor implements FreeChampionRotationInputBoundary {
-    public FreeChampionRotationInteractor() {
-        private final FreeChampionRotationUserDataAccessInterface dataAccess;
-        private final FreeChampionRotationOutputBoundary presenter;
+    private final FreeChampionRotationOutputBoundary freeChampionRotationPresenter;
 
+    public FreeChampionRotationInteractor(FreeChampionRotationOutputBoundary freeChampionRotationPresenter) {
+        this.freeChampionRotationPresenter = freeChampionRotationPresenter;
     }
 
     @Override
     public void execute() {
-
+        freeChampionRotationPresenter.prepareView();
     }
 }

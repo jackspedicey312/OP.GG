@@ -1,6 +1,4 @@
-package entity;
-
-import data_access.RiotUserDataAccessObject;
+package entity.User;
 
 public class UserFactory {
 

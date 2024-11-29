@@ -1,9 +1,9 @@
 package use_case.login;
 
 import data_access.RiotUserDataAccessObject;
-import entity.FreeChampionRotation;
-import entity.MatchList;
-import entity.User;
+import entity.FreeChampionRotation.FreeChampionRotation;
+import entity.MatchList.MatchList;
+import entity.User.User;
 
 /**
  * The interactor for the login use case.
@@ -21,18 +21,13 @@ public class LoginInteractor implements LoginInputBoundary {
     @Override
     public void execute(LoginInputData inputData) {
         try {
-            // Fetch PUUID using the data access layer
             final User user = userDataAccessObject.getUser(inputData.getUsername(),
                     inputData.getTagline(), inputData.getRegion());
             final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
-            // Pass successful login data to the presenter
-            final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation()
-            loginPresenter.prepareSuccessView(new LoginOutputData(true, "Login successful!",
-                    inputData.getUsername(), inputData.getTagline(), inputData.getRegion(), puuid));
+            final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, matchList, freeChampionRotation));
         } catch (Exception e) {
-            // Pass error data to the presenter
-            loginPresenter.prepareFailView(new LoginOutputData(false, "Login failed: " + e.getMessage(),
-                    null, null, null, null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, null, null));
         }
     }
 }
