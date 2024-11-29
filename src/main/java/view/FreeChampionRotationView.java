@@ -25,12 +25,10 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("login")) {
-            for ( )
-        }
+        mainPanel.add(new JPanel());
     }
 
-    public setFreeChampionRotationController(FreeChampionRotationController controller) {
+    public void setFreeChampionRotationController(FreeChampionRotationController controller) {
         this.controller = controller;
     }
 }

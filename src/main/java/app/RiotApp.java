@@ -35,6 +35,7 @@ public class RiotApp {
 
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
+    private FreeChampionRotationController freeChampionRotationController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -52,9 +53,9 @@ public class RiotApp {
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInView);
+        loggedInView = new LoggedInView(loggedInViewModel, freeChampionRotationController);
         cardPanel.add(loggedInView, "LoggedIn");
-
+        return this;
     }
 
     public RiotApp addFreeChampionRotationView() throws IOException {
@@ -68,17 +69,15 @@ public class RiotApp {
         final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel,
                 freeChampionRotationViewModel, viewManagerModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
-
         loginController = new LoginController(loginInteractor);
         loginView.setLoginController(loginController);
         return this;
     }
 
     public RiotApp addFreeChampionRotationUseCase() {
-        final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter();
-        final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor();
-        final FreeChampionRotationController freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
-
+        final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter(freeChampionRotationViewModel, viewManagerModel);
+        final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor(freeChampionRotationOutputBoundary);
+        freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
         return this;
     }
 
@@ -88,7 +87,7 @@ public class RiotApp {
 
         application.add(cardPanel);
 
-        viewManagerModel.setState(loggedInView.getViewName());
+        viewManagerModel.setState(loginView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;

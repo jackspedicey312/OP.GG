@@ -18,6 +18,7 @@ import java.beans.PropertyChangeListener;
  * The view for logging into the application.
  */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "login";
     private final LoginViewModel loginViewModel;
     private LoginController loginController;
 
@@ -55,6 +56,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         add(panel);
         setVisible(true);
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 
     @Override

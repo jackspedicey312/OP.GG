@@ -5,16 +5,16 @@ import java.awt.event.ActionListener;
 
 import data_access.RiotAPIChampionDataAccess;
 import data_access.RiotUserDataAccessObject;
-import interface_adapter.button.ButtonController;
 import interface_adapter.Champion.ChampionController;
 import interface_adapter.Champion.ChampionPresenter;
+import interface_adapter.freeChampionRotation.FreeChampionRotationController;
+import interface_adapter.login.LoginController;
 import use_case.champion.FetchTopChampionsUseCase;
 
 import javax.swing.*;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class LoggedInView extends JPanel implements ActionListener {
-    private final JButton overviewButton = new JButton("Overview");
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
     private final JButton championsButton = new JButton("Champions");
@@ -22,14 +22,18 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
     private final JPanel panel;
-    private final RiotUserDataAccessObject userDataAccessObject;
+    private final LoggedInViewModel loggedInViewModel;
+    private final FreeChampionRotationController freeChampionRotationController;
 
-    public LoggedInView(RiotUserDataAccessObject userDataAccessObject) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel,
+                        FreeChampionRotationController freeChampionRotationController) {
+        this.loggedInViewModel = loggedInViewModel;
+        this.freeChampionRotationController = freeChampionRotationController;
+
         final JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
         firstPanel.add(logoutButton);
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
-        firstPanel.add(overviewButton);
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
         secondPanel.add(matchHistoryButton);
@@ -42,9 +46,7 @@ public class LoggedInView extends JPanel implements ActionListener {
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
         this.panel = mainPanel;
-        this.userDataAccessObject = userDataAccessObject;
 
-        overviewButton.addActionListener(this);
         matchHistoryButton.addActionListener(this);
         friendsButton.addActionListener(this);
         championsButton.addActionListener(this);
@@ -55,30 +57,8 @@ public class LoggedInView extends JPanel implements ActionListener {
 
     @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings", "checkstyle:ParameterName"})
     public void actionPerformed(java.awt.event.ActionEvent e) {
-        if (e.getSource() == overviewButton) {
-
-        }
-        else if (e.getSource() == matchHistoryButton) {
-            this.buttonController.MatchHistoryButtonClicked();
-        }
-        else if (e.getSource() == friendsButton) {
-            this.buttonController.FriendsButtonClicked();
-        }
-        else if (e.getSource() == championsButton) {
-            final ChampionPresenter championPresenter = new ChampionPresenter();
-            final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess(puuid, region);
-            final FetchTopChampionsUseCase championInteractor = new FetchTopChampionsUseCase(championDataAccess, championPresenter);
-            final ChampionController championController = new ChampionController(championInteractor);
-            new ChampionView(championController, championPresenter);
-        }
-        else if (e.getSource() == freeChampionRotationButton) {
-            this.buttonController.FreeChampionRotationButtonClicked();
-        }
-        else if (e.getSource() == funFactsButton) {
-            this.buttonController.FunFactsButtonClicked();
-        }
-        else if (e.getSource() == logoutButton) {
-            this.buttonController.LogoutButtonClicked();
+        if (e.getSource() == freeChampionRotationButton) {
+            freeChampionRotationController.execute();
         }
     }
 
@@ -86,8 +66,4 @@ public class LoggedInView extends JPanel implements ActionListener {
         return this.panel;
     }
 
-
-
-    public String getViewName() {
-    }
 }
