@@ -7,10 +7,22 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
-
+    private int totalPlaytime;
+    private int totalWins;
+    private int totalLosses;
+    private int totalKills;
+    private int totalDeaths;
+    private long oldestGamePlayedUnix;
+    private int longestGamePlayed;
+    private long longestGamePlayedDate;
+    private int totalSurrenders;
+    private int totalPentakills;
+    private int totalsurvivedSingleDigitHp;
+    private int totalSnowballsHit;
+    private int totalSavedAllies;
     private final FunFacts funFacts = new FunFacts();
 
-    public void fetchFunFacts (String puuid, String region) throws Exception {
+    public FunFacts fetchFunFacts (String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
         final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
 
@@ -70,6 +82,22 @@ public class RiotAPIFunFactsDataAccess {
 
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
+
+                funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
+                funFacts.setLongestGamePlayed(longestGamePlayed);
+                funFacts.setTotalDeaths(totalDeaths);
+                funFacts.setTotalKills(totalKills);
+                funFacts.setTotalPlaytime(totalPlaytime);
+                funFacts.setTotalWins(totalWins);
+                funFacts.setTotalLosses(totalLosses);
+                funFacts.setTotalSurvivedSingleDigitHp(totalsurvivedSingleDigitHp);
+                funFacts.setTotalSurrenders(totalSurrenders);
+                funFacts.setTotalPentakills(totalPentakills);
+                funFacts.setTotalSnowballsHit(totalSnowballsHit);
+                funFacts.setOldestGamePlayedUnix(oldestGamePlayedUnix);
+                funFacts.setTotalSavedAllies(totalSavedAllies);
+
+                return funFacts;
 
             }
             catch (Exception e) {

@@ -28,6 +28,45 @@ public class FunFacts {
 
         return formatter.format(instant);
     }
+    public int setTotalPlaytime(int totalPlaytime) {
+        this.totalPlaytime = totalPlaytime;
+    }
+    public int setTotalWins(int totalWins) {
+        this.totalWins = totalWins;
+    }
+    public int setTotalLosses(int totalLosses) {
+        this.totalLosses = totalLosses;
+    }
+    public int setTotalKills(int totalKills) {
+        this.totalKills = totalKills;
+    }
+    public int setTotalDeaths(int totalDeaths) {
+        this.totalDeaths = totalDeaths;
+    }
+    public int setOldestGamePlayedUnix(long oldestGamePlayedUnix) {
+        this.oldestGamePlayedUnix = oldestGamePlayedUnix;
+    }
+    public int setLongestGamePlayed(int longestGamePlayed) {
+        this.longestGamePlayed = longestGamePlayed;
+    }
+    public int setLongestGamePlayedDate(long longestGamePlayedDate) {
+        this.longestGamePlayedDate = longestGamePlayedDate;
+    }
+    public int setTotalSurrenders(int totalSurrenders) {
+        this.totalSurrenders = totalSurrenders;
+    }
+    public int setTotalPentakills(int totalPentakills) {
+        this.totalPentakills = totalPentakills;
+    }
+    public int setTotalSurvivedSingleDigitHp(int totalSurvivedSingleDigitHp) {
+        this.totalsurvivedSingleDigitHp = totalSurvivedSingleDigitHp;
+    }
+    public int setTotalSnowballsHit(int totalSnowballsHit) {
+        this.totalSnowballsHit = totalSnowballsHit;
+    }
+    public int setTotalSavedAllies(int totalSavedAllies) {
+        this.totalSavedAllies = totalSavedAllies;
+    }
 
 
     public int getTotalPlaytime() {

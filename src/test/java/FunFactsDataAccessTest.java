@@ -1,4 +1,5 @@
 import data_access.RiotAPIFunFactsDataAccess;
+import entity.FunFacts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +15,9 @@ public class FunFactsDataAccessTest {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(111, funFactsDataAccess.getTotalPlaytime());
+        Assertions.assertEquals(111, funFactsDataAccess2.getTotalPlaytime());
 
     }
     @Test
@@ -24,9 +25,9 @@ public class FunFactsDataAccessTest {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(242, funFactsDataAccess.getLongestGamePlayed());
+        Assertions.assertEquals(242, funFactsDataAccess2.getLongestGamePlayed());
 
     }
     @Test
@@ -34,9 +35,9 @@ public class FunFactsDataAccessTest {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(123, funFactsDataAccess.getoldestGamePlayedUnix());
+        Assertions.assertEquals(123, funFactsDataAccess2.getoldestGamePlayedUnix());
 
     }
     @Test
@@ -44,71 +45,71 @@ public class FunFactsDataAccessTest {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(222, funFactsDataAccess.getLongestGamePlayedDate());
+        Assertions.assertEquals(222, funFactsDataAccess2.getLongestGamePlayedDate());
     }
     @Test
     public void testFunFactsDataAccess5() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(16, funFactsDataAccess.getTotalSurrenders());
+        Assertions.assertEquals(16, funFactsDataAccess2.getTotalSurrenders());
     }
     @Test
     public void testFunFactsDataAccess6() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalSnowballsHit());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalSnowballsHit());
     }
     @Test
     public void testFunFactsDataAccess7() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalPentakills());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalPentakills());
     }
     @Test
     public void testFunFactsDataAccess8() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalKills());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalKills());
     }
     @Test
     public void testFunFactsDataAccess9() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalWins());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalWins());
     }
     @Test
     public void testFunFactsDataAccess10() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalSavedAllies());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalSavedAllies());
     }
     @Test
     public void testFunFactsDataAccess11() throws Exception {
         RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
         String puuid = "8hoXdNc3LTEFi-kOUujabW4_Am7Hk_aH9vCCX2XkqxgtQ9z1myhd76IQk14Cjhd2bw4RPeZsev363w";
         String region = "NA";
-        funFactsDataAccess.fetchFunFacts(puuid, region);
+        FunFacts funFactsDataAccess2 = funFactsDataAccess.fetchFunFacts(puuid, region);
 
-        Assertions.assertEquals(2234, funFactsDataAccess.getTotalSurvivedSingleDigitHp());
+        Assertions.assertEquals(2234, funFactsDataAccess2.getTotalSurvivedSingleDigitHp());
     }
 }
