@@ -1,23 +1,86 @@
-# Lab 5: Logout
+# League of Legends Player Stats (change this to a proper name)
 
-## Preamble
+## Authors
+- [Jason](https://github.com/jhao5)
+- [Kha](https://github.com/kha-act)
+- [Bryan](https://github.com/DBRYAN350)
+- [Jack](https://github.com/jackspedicey312)
+- [Patricia](https://github.com/pwatana)
 
-In the current homework, you added code to the login use case to save the currently-logged-in
-user by saving the user in the Data Access Layer. You also added a unit test for this.
+## Summary
+This project is a companion app for _League of Legends_ players and provides detailed game data and 
+statistics using the Riot API. This application was design to help players track their progress, 
+improve their gameplay, analyze match performance features like player profiles, match history,
+and champion mastery.  
 
-In this lab, you will complete a logout use case as a team. You will also begin to discuss your project
-and the use cases that need to be implemented. 
+## Table of Contents
+1. [Features](#features)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Guide](#usage-guide)
+4. [License](#license)
+5. [Feedback](#feedback)
+6. [Contributing](#contributing)
 
-We have created all the Clean Architecture classes necessary for the logout use case.
+## Features
+- Player Profile (Overview Summoner Data):
+  - Provides player details like rank, summoner level, and account stats.
+- Match History:
+  - Provides the five most recent match stats including KDA and win/loss ratio.
+- Champion Mastery:
+  - Track performance for specific champions and evaluate mastery progress.
+- Friends:
+  - Track friends played with in the five most recent matches with the game stats.
+- Fun Facts:
+  - Provides player's fun facts including total play time, wins, losses kills, 
+  deaths, oldest played unix and so on.
+- Riot API Real-Time Data Fetching
+  - Uses Riot API to fetch data directly from the game's servers.
 
-By Friday, your team will submit:
-- your completed lab code [for credit]
-- a draft of your project blueprint proposal. [required, but not for credit]
+Here is an example code for Player Profile (overview) feature:
+1. Add your Riot API key to the API_KEY variable in the RiotAPIProfileDataAccess class.
+2. Execute the OverviewUseCase
 
-# Phase 2 [for credit]
-_(recall, Phase 1 was your solo task of adding the storage of the currently-logged-in user)_
+## Installation Instructions
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/jackspedicey312/OP.GG.git
+2. Register for an API key at the [Riot Developer Portal](https://developer.riotgames.com/)
+3. Add your API key to the api_key variable in the RiotAPIDataAccess class:
+   public class RiotAPIDataAccess {
+   private static final String API_KEY = "your_api_key_here";
+   }
+4. Build and run the project
 
-## Task 0: Fork this repo on GitHub
+## Usage Guide
+
+# Instruction on How to Use the Software
+
+1. Clone the Repository
+    ```bash
+    git clone https://github.com/jackspedicey312/OP.GG.git
+    cd OP.GG
+
+2. Install Dependencies
+    We are using Maven for this project:
+    ```bash
+   mvn install
+   
+3. Run the application
+
+
+
+## License
+
+## Feedbacks
+
+We welcome your feedback to improve the project :)
+
+# How to provide Feedback:
+- Google Form: submit your feedba
+
+## Contributing
+
+
 **To get started, one team member should fork this repo on GitHub and share it with the team. 
 All of you should then clone it.**
 
