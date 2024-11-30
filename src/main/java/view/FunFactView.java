@@ -8,6 +8,7 @@ import java.awt.*;
 public class FunFactView extends JFrame {
 
     public FunFactView(FunFactPresenter presenter) {
+
         setTitle("Fun Facts");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1500, 1250);
