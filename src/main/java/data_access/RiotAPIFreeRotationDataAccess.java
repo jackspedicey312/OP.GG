@@ -16,11 +16,7 @@ import java.util.ArrayList;
 public class RiotAPIFreeRotationDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
-    // This list converts the championIDs to actual character names.
-    private ArrayList<String> freeChampionsList = new ArrayList<>();
-    private ArrayList<ImageIcon> freeChampionsIcons = new ArrayList<>();
-
-    public void generateCurrentFreeRotation() throws IOException {
+    public JSONArray generateCurrentFreeRotation() throws IOException {
         final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
@@ -28,21 +24,35 @@ public class RiotAPIFreeRotationDataAccess {
             final JSONArray freeChampions;
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONObject playerData = new JSONObject(new JSONTokener(in));
-                freeChampions = playerData.getJSONArray("freeChampionIds");
-            }
-
-            // Converts int champion Ids into String Champion names for the UI along with the matching icon.
-            for (int i = 0; i < freeChampions.length(); i++) {
-                int iD = freeChampions.getInt(i);
-                freeChampionsList.add(getChampionName(iD));
-                freeChampionsIcons.add(getChampionIcon(iD));
+                return playerData.getJSONArray("freeChampionIds");
             }
         }
+        return null;
+    }
+
+    public ArrayList<String> getFreeChampionsNames() throws IOException {
+        final JSONArray freeChampions = generateCurrentFreeRotation();
+        final ArrayList<String> freeChampionsList = new ArrayList<>();
+        for (int i = 0; i < freeChampions.length(); i++) {
+            final int iD = freeChampions.getInt(i);
+            freeChampionsList.add(getChampionName(iD));
+        }
+        return freeChampionsList;
+    }
+
+    public ArrayList<ImageIcon> getFreeChampionsIcons() throws IOException {
+        final JSONArray freeChampions = generateCurrentFreeRotation();
+        final ArrayList<ImageIcon> freeChampionsIcons = new ArrayList<>();
+        for (int i = 0; i < freeChampions.length(); i++) {
+            final int iD = freeChampions.getInt(i);
+            freeChampionsIcons.add(getChampionIcon(iD));
+        }
+        return freeChampionsIcons;
     }
 
     public String getChampionName(int championId) throws IOException {
         final URL url = new URL("https://ddragon.leagueoflegends.com/cdn/14.22.1/data/en_US/champion.json");
-        JSONObject data = getJsonObject(url);
+        final JSONObject data = getJsonObject(url);
 
         for (String key : data.keySet()) {
             JSONObject champion = data.getJSONObject(key);
@@ -105,12 +115,5 @@ public class RiotAPIFreeRotationDataAccess {
         return request;
     }
 
-    public ArrayList<String> getFreeChampionsList() throws IOException {
-        return freeChampionsList;
-    }
-
-    public ArrayList<ImageIcon> getFreeChampionsListIcons() throws IOException {
-        return freeChampionsIcons;
-    }
 
 }

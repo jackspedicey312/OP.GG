@@ -1,4 +1,4 @@
-package entity;
+package entity.User;
 
 /**
  * Represents a user in the system.
@@ -14,6 +14,7 @@ public class User {
         this.tagline = tagline;
         this.region = region;
         this.puuid = puuid;
+
     }
 
     public String getUsername() {

@@ -1,4 +1,4 @@
-package interface_adapter.champion;
+package interface_adapter.Champion;
 
 import use_case.champion.ChampionInputBoundary;
 
