@@ -9,13 +9,13 @@ import entity.User.User;
  */
 public class LoginOutputData {
     private final User user;
-    private final MatchList matchList;
+//    private final MatchList matchList;
     private final FreeChampionRotation freeChampionRotation;
 
-    public LoginOutputData(User user, MatchList matchList,
+    public LoginOutputData(User user, /*MatchList matchList,*/
                            FreeChampionRotation freeChampionRotation) {
         this.user = user;
-        this.matchList = matchList;
+//        this.matchList = matchList;
         this.freeChampionRotation = freeChampionRotation;
     }
 
@@ -23,9 +23,9 @@ public class LoginOutputData {
         return user;
     }
 
-    public MatchList getMatchList() {
-        return matchList;
-    }
+//    public MatchList getMatchList() {
+//        return matchList;
+//    }
 
     public FreeChampionRotation getFreeChampionRotation() {
         return freeChampionRotation;

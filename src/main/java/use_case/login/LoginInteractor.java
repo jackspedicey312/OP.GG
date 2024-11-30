@@ -23,11 +23,11 @@ public class LoginInteractor implements LoginInputBoundary {
         try {
             final User user = userDataAccessObject.getUser(inputData.getUsername(),
                     inputData.getTagline(), inputData.getRegion());
-            final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
+//            final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
             final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
-            loginPresenter.prepareSuccessView(new LoginOutputData(user, matchList, freeChampionRotation));
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, /*matchListZ,*/ freeChampionRotation));
         } catch (Exception e) {
-            loginPresenter.prepareFailView(new LoginOutputData(null, null, null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, /*null,*/ null));
         }
     }
 }

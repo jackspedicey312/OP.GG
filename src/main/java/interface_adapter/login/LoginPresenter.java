@@ -36,7 +36,6 @@ public class LoginPresenter implements LoginOutputBoundary {
         freeChampionRotationState.setFreeChampionRotation(outputData.getFreeChampionRotation());
 
         this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
 
         this.freeChampionRotationViewModel.setState(freeChampionRotationState);
         this.freeChampionRotationViewModel.firePropertyChanged();

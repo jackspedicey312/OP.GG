@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import java.io.IOException;
 
 public class FreeChampionRotationView extends JPanel implements PropertyChangeListener {
+    private final String viewName = "freeChampionRotation";
     private final JPanel mainPanel = new JPanel();
     private FreeChampionRotationController controller;
     private final FreeChampionRotationViewModel viewModel;
@@ -26,6 +27,10 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         mainPanel.add(new JPanel());
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 
     public void setFreeChampionRotationController(FreeChampionRotationController controller) {

@@ -31,7 +31,7 @@ public class RiotApp {
     // thought question: is the hard dependency below a problem?
     private final UserFactory userFactory = new UserFactory();
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
-    private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
+    private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
@@ -44,24 +44,28 @@ public class RiotApp {
     private FreeChampionRotationView freeChampionRotationView;
     private FreeChampionRotationViewModel freeChampionRotationViewModel;
 
+    public RiotApp() {
+        cardPanel.setLayout(cardLayout);
+    }
+
     public RiotApp addLoginView() {
         loginViewModel = new LoginViewModel();
         loginView = new LoginView(loginViewModel);
-        cardPanel.add(loginView, "Login");
+        cardPanel.add(loginView, loginView.getViewName());
         return this;
     }
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
         loggedInView = new LoggedInView(loggedInViewModel, freeChampionRotationController);
-        cardPanel.add(loggedInView, "LoggedIn");
+        cardPanel.add(loggedInView, loggedInView.getViewName());
         return this;
     }
 
     public RiotApp addFreeChampionRotationView() throws IOException {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
         freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
-        cardPanel.add(freeChampionRotationView);
+        cardPanel.add(freeChampionRotationView, freeChampionRotationView.getViewName());
         return this;
     }
 

@@ -2,6 +2,8 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import data_access.RiotAPIChampionDataAccess;
 import data_access.RiotUserDataAccessObject;
@@ -15,13 +17,13 @@ import javax.swing.*;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class LoggedInView extends JPanel implements ActionListener {
+    private final String viewName = "loggedIn";
     private final JButton matchHistoryButton = new JButton("Match History");
     private final JButton friendsButton = new JButton("Friends");
     private final JButton championsButton = new JButton("Champions");
     private final JButton freeChampionRotationButton = new JButton("Free Champion Rotation");
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
-    private final JPanel panel;
     private final LoggedInViewModel loggedInViewModel;
     private final FreeChampionRotationController freeChampionRotationController;
 
@@ -45,7 +47,8 @@ public class LoggedInView extends JPanel implements ActionListener {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
-        this.panel = mainPanel;
+        add(mainPanel);
+        setVisible(true);
 
         matchHistoryButton.addActionListener(this);
         friendsButton.addActionListener(this);
@@ -62,8 +65,8 @@ public class LoggedInView extends JPanel implements ActionListener {
         }
     }
 
-    public JPanel getPanel() {
-        return this.panel;
+    public String getViewName() {
+        return viewName;
     }
 
 }
