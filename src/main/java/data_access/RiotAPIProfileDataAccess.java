@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.ProfileOverview;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -15,13 +16,10 @@ import java.net.URL;
 
 public class RiotAPIProfileDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private String summonerID;
-    private int summonerLevel;
-    private int iconID;
-    private ImageIcon iconPng;
 
     // PUUID AND REGION NEEDED TO CALL API
-    public void generateProfileData(String puuid, String region) throws IOException {
+    public ProfileOverview generateProfileData(String puuid, String region) throws IOException {
+
         final HttpURLConnection request = getHttpURLConnection(puuid, region);
 
         final int responseCode = request.getResponseCode();
@@ -29,11 +27,15 @@ public class RiotAPIProfileDataAccess {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONObject playerData = new JSONObject(new JSONTokener(in));
 
-                this.summonerID = playerData.getString("id");
-                this.summonerLevel = playerData.getInt("summonerLevel");
-                this.iconID = playerData.getInt("profileIconId");
+                String summonerID = playerData.getString("id");
+                int summonerLevel = playerData.getInt("summonerLevel");
+                int iconID = playerData.getInt("profileIconId");
+
+                ProfileOverview profile = new ProfileOverview(summonerID, summonerLevel, iconID);
+                return profile;
             }
-        } else {
+        }
+        else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
@@ -59,33 +61,4 @@ public class RiotAPIProfileDataAccess {
         return request;
     }
 
-    public String getSummonerID() {
-        return summonerID;
-    }
-
-    public int getSummonerLevel() {
-        return summonerLevel;
-    }
-
-    /**
-     * @throws IOException if icon png cannot be found with the given iconID.
-     *                     Returns the icon png with the given iconID.
-     */
-
-    public ImageIcon getIconPng() throws IOException {
-        final String iconId2 = Integer.toString(this.iconID);
-        final String pngURL = "https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/"
-                + iconId2 + ".png";
-
-        try {
-            final URL url = new URL(pngURL);
-            final BufferedImage img = ImageIO.read(url);
-            this.iconPng = new ImageIcon(img);
-            return iconPng;
-        }
-        catch (IOException e) {
-            System.err.println("Error fetching the icon: " + e.getMessage());
-            return null;
-        }
-    }
 }
