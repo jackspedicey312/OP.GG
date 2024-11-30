@@ -1,6 +1,7 @@
 package data_access;
 
-import entity.Champion;
+import entity.Champion.Champion;
+import entity.Champion.ChampionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -21,12 +22,26 @@ public class RiotAPIChampionDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
     private String summonerID;
     private String region;
+    private final ChampionFactory championFactory;
 
+    /**
+     * Constructor to initialize the data access with summoner ID, region, and factory.
+     *
+     * @param summonerID The unique identifier of the summoner.
+     * @param region     The region of the summoner ("NA", "EU", "ASIA").
+     */
     public RiotAPIChampionDataAccess(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
+        this.championFactory = new ChampionFactory();
     }
 
+    /**
+     * Updates the summoner ID and region for fetching champion data.
+     *
+     * @param summonerID The summoner's ID.
+     * @param region     The region of the summoner.
+     */
     public void setSummonerIDAndRegion(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
@@ -35,7 +50,7 @@ public class RiotAPIChampionDataAccess {
     /**
      * Fetch champion data for all champions for the summoner.
      * @return A list of Champion entities containing champion data.
-     * @throws IOException If no champion found in data.
+     * @throws IOException If the API request fails or not champions are found.
      */
     public List<Champion> fetchAllChampions() throws IOException {
         List<Champion> championList = new ArrayList<>();
@@ -60,7 +75,7 @@ public class RiotAPIChampionDataAccess {
                     int trueDamage = participant.getInt("trueDamageDealt");
                     int kills = participant.getInt("kills");
 
-                    Champion champion = new Champion(
+                    Champion champion = championFactory.createChampion(
                             championName,
                             championId,
                             magicDamage,
@@ -81,6 +96,12 @@ public class RiotAPIChampionDataAccess {
         return championList;
     }
 
+    /**
+     * Prepares the HTTP connection to fetch champion data.
+     *
+     * @return An HttpURLConnection object.
+     * @throws IOException If the connection cannot be established.
+     */
     private HttpURLConnection getHttpURLConnection() throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {

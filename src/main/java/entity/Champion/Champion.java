@@ -1,4 +1,4 @@
-package entity;
+package entity.Champion;
 
 public class Champion {
     private final String championName;
