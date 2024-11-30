@@ -4,7 +4,8 @@ Features Adhering to the Principles of Universal Design
 Our program provides equal access to features and information regardless of the user's ability. For example, it avoids
 requiring complex technical skills to operate and a high cognitive load, making it accessible to all users. Future 
 improvements could include incorporating high-contrast color modes or avoiding color reliance to ensure accessibility 
-for users with color vision deficiencies.
+for users with color vision deficiencies. We can further implement a setting where users can choose the language to
+display information and also include more regions where League of Legends is played.
 2. Flexibility in Use  
 Our program can fetch data for different summoners in various regions and accommodates different user needs. 
 In the future, we could include customizable views or options to prioritize specific statistics based on user 
@@ -20,31 +21,35 @@ users who have difficulty reading or understanding written language, also as par
 important information be visually distinct to ensure it is noticeable and avoid overwhelming users with unnecessary
 information.
 5. Tolerance for Error  
-The program handles invalid inputs, such as incorrect summoner IDs or region names, by displaying error messages without
-crashing. In the future, we could enhance this by suggesting possible corrections or valid inputs.
+Our program handles invalid inputs, including incorrect summoner IDs or region names and displays error messages without
+crashing. In the future, we could incorporate a system that suggests possible corrections or valid inputs so users know 
+what went wrong and correct without struggling.
 6. Low Physical Effort  
-The program minimizes effort by providing simple buttons to fetch data, requiring no complex keyboard shortcuts or
-manual input processes. Features like automatic data updates could further reduce physical effort. 
+Our program provides simple and easy to read/click buttons that minimizes physical effort to fetch data. Our program 
+doesn't require complex keyboard shortcuts or manual input processes. In the future, we can incorporate features like 
+automatic data updates to reduce even more physical effort. 
 7. Size and Space for Approach and Use  
-While this principle applies more to physical spaces, our program ensures interface elements like buttons and labesl are
-appropriately spaced and easy to interact with. We could further implement adjustable font sizes and layouts for users 
-who require large text or additional spacing.
+Although this principle applies more to physical spaces, our program ensures interface elements like buttons and labels 
+are appropriately spaced and easy to interact with. Our frames and panels are of adequate sizes. In the future, we could
+implement adjustable font sizes and layouts for users who require large text or additional spacing.
 ---
 
 Target Market
 
-If marketed, we are aiming toward casual and competitive gamers who play League of Legends, particularly in regions we
+If marketed, we would aim for casual and competitive gamers who play League of Legends, particularly in regions we
 have this system available - not all regions where League of Legends is available was included. These users often want 
 quick and easy access to data about their performance or other players. The tool could also appeal to esports analysts, 
-content creators, or the game company itself looking to explore gaming data as part of solutions architecture. By 
-providing visually engaging and straightforward access to in-game statistics, the program bridges the gap between data 
-enthusiasts and gamers. 
+content creators, or the game company itself looking to explore gaming data as part of solutions architecture analysis. 
+Our program aims to bridge the gap between data enthusiasts and gamers with the game itself by providing visually 
+engaging and straightforward access to in-game statistics. 
 ---
 Demographic Inclusivity 
 
-The program may be less likely to be used by people unfamiliar with gaming or without access to technology.
-For example, older adults or those without regular access to the internet may find the program less relevant.
-Additionally, users with disabilities, such as those with visual ro motor impairments, may face challenges
-without specific accessibility features. To mitigate this, future iterations could incorporate assistive technologies
-such as screen reader support or voice controls, fostering inclusivity and reducing barriers to entry. Ethical
-considerations, such as avoiding excessive reliance on color or small text, will also ensure greater demographic reach.
+The program may be less likely to be used by people unfamiliar with gaming or without access to technology. The program 
+is particularly designed for the targeted demographic; who are familiar or plays League of Legends and favors data 
+analysis, therefore most audience outside this demographic is opted out. Any non League of Legends players or older 
+adults or those without regular access to the internet may find the program irrelevant. Additionally, users with 
+disabilities, such as those with visual ro motor impairments, may face challenges without specific accessibility 
+features. To mitigate this, we could incorporate assistive technologies such as screen reader support or voice controls.
+This aims to foster inclusivity and reducing barriers to entry. Ethical considerations, such as avoiding excessive 
+reliance on color or small text, will also ensure greater demographic reach.
