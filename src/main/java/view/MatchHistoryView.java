@@ -40,5 +40,4 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         return viewName;
     }
 
-
 }
