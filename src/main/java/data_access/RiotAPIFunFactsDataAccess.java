@@ -7,35 +7,34 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
-    private int totalPlaytime;
-    private int totalWins;
-    private int totalLosses;
-    private int totalKills;
-    private int totalDeaths;
-    private long oldestGamePlayedUnix;
-    private int longestGamePlayed;
-    private long longestGamePlayedDate;
-    private int totalSurrenders;
-    private int totalPentakills;
-    private int totalsurvivedSingleDigitHp;
-    private int totalSnowballsHit;
-    private int totalSavedAllies;
-    private final FunFacts funFacts = new FunFacts();
 
     public FunFacts fetchFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
         final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
+        int totalPlaytime = 0;
+        int totalWins = 0;
+        int totalLosses = 0;
+        int totalKills = 0;
+        int totalDeaths = 0;
+        long oldestGamePlayedUnix = 0;
+        int longestGamePlayed = 0;
+        long longestGamePlayedDate = 0;
+        int totalSurrenders = 0;
+        int totalPentakills = 0;
+        int totalsurvivedSingleDigitHp = 0;
+        int totalSnowballsHit = 0;
+        int totalSavedAllies = 0;
 
         for (int i = 0; i < matches.size(); i++) {
 
             try {
                 JSONObject matchDetail = riotAPIMatchDataAccess.fetchMatchDetails(matches.get(i), region);
 
-                // The json file is split into 2 sections. We want the info section mainly.
+                // The json file is split into 2 sections. We want the info section for the stats.
                 JSONObject matchInfo = matchDetail.getJSONObject("info");
                 JSONObject metaData = matchDetail.getJSONObject("metadata");
 
-                // gameDuration is returned in seconds(int). Will be converted into hours later.
+                // gameDuration is returned in seconds(int). Will be converted into hours inside the entity file.
                 int gameDuration = matchInfo.getInt("gameDuration");
 
                 totalPlaytime += gameDuration;
@@ -90,6 +89,7 @@ public class RiotAPIFunFactsDataAccess {
                 continue;
             }
         }
+        final FunFacts funFacts = new FunFacts();
         funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
         funFacts.setLongestGamePlayed(longestGamePlayed);
         funFacts.setTotalDeaths(totalDeaths);
