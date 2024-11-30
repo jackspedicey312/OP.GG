@@ -11,6 +11,7 @@ public class RiotMain {
     public static void main(String[] args) throws IOException {
         final RiotApp app = new RiotApp();
         final JFrame application = app
+                .addBackUseCase()
                 .addLoginView()
                 .addFreeChampionRotationView()
                 .addFreeChampionRotationUseCase()
