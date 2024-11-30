@@ -84,7 +84,5 @@ public class FunFactView extends JFrame {
         savedAlliesLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(savedAlliesLabel);
 
-
-
     }
 }
