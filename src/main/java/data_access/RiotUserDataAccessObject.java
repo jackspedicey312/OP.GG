@@ -2,19 +2,14 @@ package data_access;
 
 import entity.FreeChampionRotation.FreeChampionRotation;
 import entity.FreeChampionRotation.FreeChampionRotationFactory;
-import entity.Match.Match;
-import entity.Match.MatchFactory;
-import entity.MatchList.MatchList;
+import entity.match.MatchFactory;
 import entity.MatchList.MatchListFactory;
 import entity.PlayerStats.PlayerStatsFactory;
 import entity.User.User;
 import entity.User.UserFactory;
 
-import org.json.JSONObject;
 import use_case.login.LoginUserDataAccessInterface;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private User user;
