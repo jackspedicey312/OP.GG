@@ -1,11 +1,11 @@
 package use_case.champion;
 
 /**
- * Output data for a champion.
+ * Represents the output data for a champion, processed and ready for presentation or further use.
  */
 public class ChampionOutputData {
     private final String championName;
-    private final int championID;
+    private final int championId;
     private final int magicDamage;
     private final int physicalDamage;
     private final int totalDamage;
@@ -13,10 +13,10 @@ public class ChampionOutputData {
     private final int kills;
     private final int masteryPoints;
 
-    public ChampionOutputData(String championName, int championID, int magicDamage, int physicalDamage,
+    public ChampionOutputData(String championName, int championId, int magicDamage, int physicalDamage,
                               int totalDamage, int trueDamage, int kills, int masteryPoints) {
         this.championName = championName;
-        this.championID = championID;
+        this.championId = championId;
         this.magicDamage = magicDamage;
         this.physicalDamage = physicalDamage;
         this.totalDamage = totalDamage;
@@ -25,12 +25,13 @@ public class ChampionOutputData {
         this.masteryPoints = masteryPoints;
     }
 
+    // Getter methods
     public String getChampionName() {
         return championName;
     }
 
-    public int getChampionID() {
-        return championID;
+    public int getChampionId() {
+        return championId;
     }
 
     public int getMagicDamage() {
@@ -55,5 +56,19 @@ public class ChampionOutputData {
 
     public int getMasteryPoints() {
         return masteryPoints;
+    }
+
+    @Override
+    public String toString() {
+        return "ChampionOutputData{" +
+                "championName='" + championName + '\'' +
+                ", championId=" + championId +
+                ", magicDamage=" + magicDamage +
+                ", physicalDamage=" + physicalDamage +
+                ", totalDamage=" + totalDamage +
+                ", trueDamage=" + trueDamage +
+                ", kills=" + kills +
+                ", masteryPoints=" + masteryPoints +
+                '}';
     }
 }

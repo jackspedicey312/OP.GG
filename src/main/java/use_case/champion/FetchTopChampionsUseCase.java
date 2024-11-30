@@ -2,6 +2,7 @@ package use_case.champion;
 
 import data_access.RiotAPIChampionDataAccess;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,14 +20,38 @@ public class FetchTopChampionsUseCase implements ChampionInputBoundary {
     public void fetchTopChampions(String summonerID, String region) {
         try {
             championDataAccess.setSummonerIDAndRegion(summonerID, region);
-            List<ChampionOutputData> champions = championDataAccess.fetchAllChampions();
+            var champions = championDataAccess.fetchAllChampions();
 
-            // Sort by mastery points and pick the top 3
-            champions.sort(Comparator.comparingInt(ChampionOutputData::getMasteryPoints).reversed());
-            List<ChampionOutputData> topChampions = champions.subList(0, Math.min(3, champions.size()));
+            List<ChampionOutputData> processedChampions = new ArrayList<>();
+            for (var champion : champions) {
+                int masteryPoints = CalculateMastery.calculateMasteryPoints(
+                        champion.getTotalDamage(),
+                        champion.getMagicDamage(),
+                        champion.getPhysicalDamage(),
+                        champion.getTrueDamage(),
+                        champion.getKills()
+                );
+
+                ChampionOutputData outputData = new ChampionOutputData(
+                        champion.getChampionName(),
+                        champion.getChampionId(),
+                        champion.getMagicDamage(),
+                        champion.getPhysicalDamage(),
+                        champion.getTotalDamage(),
+                        champion.getTrueDamage(),
+                        champion.getKills(),
+                        masteryPoints
+                );
+
+                processedChampions.add(outputData);
+            }
+
+            processedChampions.sort(Comparator.comparingInt(ChampionOutputData::getMasteryPoints).reversed());
+            List<ChampionOutputData> topChampions = processedChampions.subList(0, Math.min(3, processedChampions.size()));
 
             outputBoundary.presentTopChampions(topChampions);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println("Error fetching champion data: " + e.getMessage());
         }
     }

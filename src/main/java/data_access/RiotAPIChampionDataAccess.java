@@ -1,9 +1,9 @@
 package data_access;
 
+import entity.Champion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import use_case.champion.ChampionOutputData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***
- * Fetches champion data and calculates mastery points from the Riot API.
+ * Fetches champion data from the Riot API.
  */
 public class RiotAPIChampionDataAccess {
 
@@ -22,12 +22,6 @@ public class RiotAPIChampionDataAccess {
     private String summonerID;
     private String region;
 
-    /**
-     * To create a new data access object to fetch champion data.
-     *
-     * @param summonerID The unique identified of the summoner.
-     * @param region The region fo the summoner ("NA", "EU", "ASIA").
-     */
     public RiotAPIChampionDataAccess(String summonerID, String region) {
         this.summonerID = summonerID;
         this.region = region;
@@ -40,11 +34,11 @@ public class RiotAPIChampionDataAccess {
 
     /**
      * Fetch champion data for all champions for the summoner.
-     * @return A list of ChampionOutputData objects containing champion data.
+     * @return A list of Champion entities containing champion data.
      * @throws IOException If no champion found in data.
      */
-    public List<ChampionOutputData> fetchAllChampions() throws IOException {
-        List<ChampionOutputData> championDataList = new ArrayList<>();
+    public List<Champion> fetchAllChampions() throws IOException {
+        List<Champion> championList = new ArrayList<>();
 
         final HttpURLConnection request = getHttpURLConnection();
         final int responseCode = request.getResponseCode();
@@ -66,22 +60,17 @@ public class RiotAPIChampionDataAccess {
                     int trueDamage = participant.getInt("trueDamageDealt");
                     int kills = participant.getInt("kills");
 
-                    int masteryPoints = CalculateMastery.calculateMasteryPoints(
-                            totalDamage, magicDamage, physicalDamage, trueDamage, kills
-                    );
-
-                    ChampionOutputData championOutput = new ChampionOutputData(
+                    Champion champion = new Champion(
                             championName,
                             championId,
                             magicDamage,
                             physicalDamage,
                             totalDamage,
                             trueDamage,
-                            kills,
-                            masteryPoints
+                            kills
                     );
 
-                    championDataList.add(championOutput);
+                    championList.add(champion);
                 }
             }
         }
@@ -89,21 +78,18 @@ public class RiotAPIChampionDataAccess {
             throw new IOException("HTTP error code: " + responseCode);
         }
 
-        return championDataList;
+        return championList;
     }
 
     private HttpURLConnection getHttpURLConnection() throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else if (region.equalsIgnoreCase("EU")) {
+        } else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else if (region.equalsIgnoreCase("ASIA")) {
+        } else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
@@ -115,4 +101,3 @@ public class RiotAPIChampionDataAccess {
         return request;
     }
 }
-
