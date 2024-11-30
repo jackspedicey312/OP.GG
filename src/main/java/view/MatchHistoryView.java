@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import interface_adapter.back.BackController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
@@ -26,9 +27,9 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         this.listPanel = new JPanel(new BorderLayout());
         this.buttonPanel = new JPanel(new BorderLayout());
         backbutton.addActionListener(this);
-
-        this.mainPanel.add(listPanel, BorderLayout.WEST);
-        this.mainPanel.add(buttonPanel, BorderLayout.EAST);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        this.mainPanel.add(listPanel);
+        this.mainPanel.add(buttonPanel);
     }
 
     public void actionPerformed(ActionEvent e) {
