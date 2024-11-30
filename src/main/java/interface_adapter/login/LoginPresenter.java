@@ -1,44 +1,52 @@
 package interface_adapter.login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.overview.OverviewState;
-import interface_adapter.overview.OverviewViewModel;
+import interface_adapter.freeChampionRotation.FreeChampionRotationState;
+import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
+import view.LoggedInState;
+import view.LoggedInViewModel;
 
 /**
- * The Presenter for the Login Use Case.
+ * Presenter for handling login output.
  */
 public class LoginPresenter implements LoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
-    private final OverviewViewModel overviewViewModel;
-    private final ViewManagerModel viewManagerModel;
+    private final LoggedInViewModel loggedInViewModel;
+    private final FreeChampionRotationViewModel freeChampionRotationViewModel;
+    private final ViewManagerModel managerModel;
 
-    public LoginPresenter(ViewManagerModel viewManagerModel,
-                          OverviewViewModel overviewViewModel,
-                          LoginViewModel loginViewModel) {
-        this.viewManagerModel = viewManagerModel;
-        this.OverviewViewModel = overviewViewModel;
+    public LoginPresenter(LoginViewModel loginViewModel,
+                          LoggedInViewModel loggedInViewModel,
+                          FreeChampionRotationViewModel freeChampionRotationViewModel,
+                          ViewManagerModel viewManagerModel) {
         this.loginViewModel = loginViewModel;
+        this.loggedInViewModel = loggedInViewModel;
+        this.freeChampionRotationViewModel = freeChampionRotationViewModel;
+        this.managerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
-        // On success, switch to the logged in view.
+    public void prepareSuccessView(LoginOutputData outputData) {
+        final LoggedInState loggedInState = loggedInViewModel.getState();
+        final FreeChampionRotationState freeChampionRotationState = freeChampionRotationViewModel.getState();
+        loggedInState.setUser(outputData.getUser());
+        freeChampionRotationState.setFreeChampionRotation(outputData.getFreeChampionRotation());
 
-        final OverviewState overviewState = overviewViewModel.getState();
-       overviewState.setUsername(response.getUsername());
-        this.overviewViewModel.setState(overviewState);
-        this.overviewViewModel.firePropertyChanged();
+        this.loggedInViewModel.setState(loggedInState);
 
-        this.viewManagerModel.setState(overviewViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        this.freeChampionRotationViewModel.setState(freeChampionRotationState);
+        this.freeChampionRotationViewModel.firePropertyChanged();
+
+        this.managerModel.setState(loggedInViewModel.getViewName());
+        this.managerModel.firePropertyChanged();
     }
 
     @Override
-    public void prepareFailView(String error) {
+    public void prepareFailView(LoginOutputData outputData) {
         final LoginState loginState = loginViewModel.getState();
-        loginState.setLoginError(error);
-        loginViewModel.firePropertyChanged();
+
     }
+}

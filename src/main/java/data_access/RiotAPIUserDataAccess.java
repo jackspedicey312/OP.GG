@@ -1,6 +1,5 @@
 package data_access;
 
-import entity.User;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,7 +10,7 @@ public class RiotAPIUserDataAccess {
 
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
-    public String fetchPUUID(String username, String tagline, String region) throws Exception {
+    public String fetchPuuId(String username, String tagline, String region) throws Exception {
         String baseURL;
         switch (region.toLowerCase()) {
             case "na":

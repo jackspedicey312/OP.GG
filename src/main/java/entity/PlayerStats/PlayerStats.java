@@ -1,4 +1,4 @@
-package entity;
+package entity.PlayerStats;
 
 /**
  * Represents a player's performance in a match.

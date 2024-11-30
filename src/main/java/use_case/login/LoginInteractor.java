@@ -1,30 +1,33 @@
 package use_case.login;
 
-import data_access.RiotAPIUserDataAccess;
+import data_access.RiotUserDataAccessObject;
+import entity.FreeChampionRotation.FreeChampionRotation;
+import entity.MatchList.MatchList;
+import entity.User.User;
 
 /**
  * The interactor for the login use case.
  */
 public class LoginInteractor implements LoginInputBoundary {
 
-    private final RiotAPIUserDataAccess dataAccess;
-    private final LoginOutputBoundary presenter;
+    private final RiotUserDataAccessObject userDataAccessObject;
+    private final LoginOutputBoundary loginPresenter;
 
-    public LoginInteractor(RiotAPIUserDataAccess dataAccess, LoginOutputBoundary presenter) {
-        this.dataAccess = dataAccess;
-        this.presenter = presenter;
+    public LoginInteractor(RiotUserDataAccessObject userDataAccessObject, LoginOutputBoundary loginPresenter) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.loginPresenter = loginPresenter;
     }
 
     @Override
-    public void login(LoginInputData inputData) {
+    public void execute(LoginInputData inputData) {
         try {
-            // Fetch PUUID using the data access layer
-            String puuid = dataAccess.fetchPUUID(inputData.getUsername(), inputData.getTagline(), inputData.getRegion());
-            // Pass successful login data to the presenter
-            presenter.present(new LoginOutputData(true, "Login successful!", puuid));
+            final User user = userDataAccessObject.getUser(inputData.getUsername(),
+                    inputData.getTagline(), inputData.getRegion());
+//            final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
+            final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, /*matchListZ,*/ freeChampionRotation));
         } catch (Exception e) {
-            // Pass error data to the presenter
-            presenter.present(new LoginOutputData(false, "Login failed: " + e.getMessage(), null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, /*null,*/ null));
         }
     }
 }
