@@ -7,20 +7,22 @@ import data_access.RiotAPIFreeRotationDataAccess;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.io.IOException;
 
 public class FreeChampionRotationView extends JPanel implements PropertyChangeListener {
     private final String viewName = "freeChampionRotation";
+    private JButton backbutton = new JButton("Back");
     private final JPanel mainPanel = new JPanel();
     private FreeChampionRotationController controller;
     private final FreeChampionRotationViewModel viewModel;
+    private BackControlller backControlller
 
-    public FreeChampionRotationView(FreeChampionRotationViewModel viewModel) throws IOException {
+    public FreeChampionRotationView(FreeChampionRotationViewModel viewModel,
+                                    BackController backController) throws IOException {
         this.viewModel = viewModel;
+        this.viewModel.addPropertyChangeListener(this);
+        this.backControlller = backController;
         this.viewModel.addPropertyChangeListener(this);
     }
 
