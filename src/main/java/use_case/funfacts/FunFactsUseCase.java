@@ -27,7 +27,6 @@ public class FunFactsUseCase implements FunFactsInputBoundary {
         presenter.presentTotalSnowballs(funFacts.getTotalSnowballsHit());
         presenter.presentTotalSurvivedSingleDigitHp(funFacts.getTotalSurvivedSingleDigitHp());
         presenter.presentOldestGamePlayed(funFacts.getOldestGamePlayed());
-
     }
 
     @Override

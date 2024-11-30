@@ -32,12 +32,14 @@ public class PanelView extends JPanel implements ActionListener {
         firstPanel.add(logoutButton);
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
         firstPanel.add(overviewButton);
+
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
         secondPanel.add(matchHistoryButton);
         secondPanel.add(championsButton);
         secondPanel.add(freeChampionRotationButton);
         secondPanel.add(funFactsButton);
+
         final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(firstPanel);

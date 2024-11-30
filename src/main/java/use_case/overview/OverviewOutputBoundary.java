@@ -23,5 +23,4 @@ public interface OverviewOutputBoundary {
     void presentWinRate(int winrate);
 
     void presentError(String message);
-
 }

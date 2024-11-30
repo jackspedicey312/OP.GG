@@ -49,6 +49,7 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     public void presentWins(int wins) {
         this.wins = wins;
     }
+
     public void presentLosses(int losses) {
         this.losses = losses;
     }

@@ -85,6 +85,7 @@ public class FunFactPresenter implements FunFactsOutputBoundary {
     public int getTotalDeaths() {
         return totalDeaths;
     }
+
     public String getOldestGamePlayed() {
         return oldestGamePlayed;
     }

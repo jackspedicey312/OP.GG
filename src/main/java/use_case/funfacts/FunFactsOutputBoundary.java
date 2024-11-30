@@ -1,7 +1,6 @@
 package use_case.funfacts;
 
 public interface FunFactsOutputBoundary {
-
     void presentTotalPlaytime(int totalPlaytime);
 
     void presentTotalWins(int wins);

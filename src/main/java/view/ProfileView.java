@@ -10,7 +10,7 @@ public class ProfileView extends JFrame {
     public ProfileView(ProfilePresenter profile) {
         setTitle("Profile");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(1000, 800);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 

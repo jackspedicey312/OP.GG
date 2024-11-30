@@ -104,4 +104,5 @@ public class RiotAPIRankDataAccess {
     public int getWinRate() {
         return winRate;
     }
+
 }

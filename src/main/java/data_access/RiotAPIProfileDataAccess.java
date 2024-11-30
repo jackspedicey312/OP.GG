@@ -67,10 +67,6 @@ public class RiotAPIProfileDataAccess {
         return summonerLevel;
     }
 
-    public int getIconID() {
-        return iconID;
-    }
-
     /**
      * @throws IOException if icon png cannot be found with the given iconID.
      *                     Returns the icon png with the given iconID.

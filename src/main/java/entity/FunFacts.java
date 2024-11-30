@@ -68,7 +68,6 @@ public class FunFacts {
         this.totalSavedAllies = totalSavedAllies;
     }
 
-
     public int getTotalPlaytime() {
         return totalPlaytime / 3600;
     }

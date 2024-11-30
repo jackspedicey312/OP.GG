@@ -9,6 +9,11 @@ public class FunFactController {
         this.funFactsInputBoundary = funFactsInputBoundary;
     }
 
+    /**
+     * @param puuid the puuid.
+     * @param region the region.
+     * @throws Exception if function fails.
+     */
     public void fetchFunFacts(String puuid, String region) throws Exception {
         funFactsInputBoundary.fetchFunFacts(puuid, region);
     }

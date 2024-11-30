@@ -27,7 +27,6 @@ public class ButtonController {
         this.logoutUseCase = new LogoutUseCase();
         this.puuid = puuid;
         this.region = region;
-
     }
 
     @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:MethodName"})

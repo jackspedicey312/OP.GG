@@ -38,7 +38,6 @@ public class OverviewUseCase implements OverviewInputBoundary {
 
         }
         catch (IOException e) {
-
             presenter.presentError("Failed to fetch profile" + e.getMessage());
         }
     }

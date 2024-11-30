@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FunFactView extends JFrame {
+
     public FunFactView(FunFactPresenter presenter) {
         setTitle("Fun Facts");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
