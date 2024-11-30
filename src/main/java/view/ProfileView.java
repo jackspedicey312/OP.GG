@@ -15,7 +15,7 @@ public class ProfileView extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         JLabel title = new JLabel("Player Profile");
-        title.setFont(new Font("Arial", Font.BOLD, 18));
+        title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
 

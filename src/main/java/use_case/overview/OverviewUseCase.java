@@ -2,6 +2,8 @@ package use_case.overview;
 
 import data_access.RiotAPIProfileDataAccess;
 import data_access.RiotAPIRankDataAccess;
+import entity.ProfileOverview;
+import entity.Rank;
 
 import java.io.IOException;
 
@@ -21,20 +23,20 @@ public class OverviewUseCase implements OverviewInputBoundary {
 
     public void fetchOverview(String puuid, String region) {
         try {
-            profiledataAccess.generateProfileData(puuid, region);
-            presenter.presentProfileIcon(profiledataAccess.getIconPng());
-            presenter.presentProfileLevel(profiledataAccess.getSummonerLevel());
 
-            final String summonerId = profiledataAccess.getSummonerID();
-            rankDataAccess.generateRank(summonerId, region);
+            ProfileOverview profileOverview = profiledataAccess.generateProfileData(puuid, region);
+            presenter.presentProfileIcon(profileOverview.getSummonerImage());
+            presenter.presentProfileLevel(profileOverview.getSummonerLevel());
 
-            presenter.presentGamemode(rankDataAccess.getGameMode());
-            presenter.presentRank(rankDataAccess.getRank());
-            presenter.presentDivision(rankDataAccess.getDivision());
-            presenter.presentWins(rankDataAccess.getWins());
-            presenter.presentLosses(rankDataAccess.getLosses());
-            presenter.presentLeaguePoints(rankDataAccess.getLeaguePoints());
-            presenter.presentWinRate(rankDataAccess.getWinRate());
+            final String summonerId = profileOverview.getSummonerID();
+            Rank rank = rankDataAccess.generateRank(summonerId, region);
+            presenter.presentGamemode(rank.getGameMode());
+            presenter.presentRank(rank.getRank());
+            presenter.presentDivision(rank.getDivision());
+            presenter.presentWins(rank.getWins());
+            presenter.presentLosses(rank.getLosses());
+            presenter.presentLeaguePoints(rank.getLeaguePoints());
+            presenter.presentWinRate(rank.getWinRate());
 
         }
         catch (IOException e) {

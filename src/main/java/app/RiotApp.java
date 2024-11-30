@@ -6,12 +6,17 @@ import java.io.IOException;
 import data_access.*;
 import entity.User.UserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.back.BackController;
+import interface_adapter.back.BackPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.freeChampionRotation.FreeChampionRotationPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
+import use_case.back.BackInputBoundary;
+import use_case.back.BackInteractor;
+import use_case.back.BackOutputBoundary;
 import use_case.freechampionrotation.FreeChampionRotationInputBoundary;
 import use_case.freechampionrotation.FreeChampionRotationInteractor;
 import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
@@ -36,6 +41,7 @@ public class RiotApp {
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
     private FreeChampionRotationController freeChampionRotationController;
+    private BackController backController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -82,6 +88,13 @@ public class RiotApp {
         final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter(freeChampionRotationViewModel, viewManagerModel);
         final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor(freeChampionRotationOutputBoundary);
         freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
+        return this;
+    }
+
+    public RiotApp addBackUseCase() {
+        final BackOutputBoundary backPresenter = new BackPresenter(viewManagerModel);
+        final BackInputBoundary backInteractor = new BackInteractor(backPresenter);
+        backController = new BackController(backInteractor);
         return this;
     }
 
