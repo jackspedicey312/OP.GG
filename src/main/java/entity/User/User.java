@@ -7,7 +7,7 @@ public class User {
     private final String username;
     private final String tagline;
     private final String region;
-    private final String puuid; // Unique identifier from Riot API
+    private final String puuid;
 
     public User(String username, String tagline, String region, String puuid) {
         this.username = username;
