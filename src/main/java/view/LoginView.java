@@ -3,34 +3,33 @@ package view;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import java.awt.Component;
+import interface_adapter.match.MatchController;
+import interface_adapter.login.LoginPresenter;
+import interface_adapter.match.MatchPresenter;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * The view for logging into the application.
  */
-public class LoginView extends JFrame implements ActionListener, PropertyChangeListener {
-    private LoginViewModel loginViewModel;
-    private final String viewName = "log in";
+public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "login";
+    private final LoginViewModel loginViewModel;
     private LoginController loginController;
-    private String username;
-    private String tagline;
-    private String region;
-    private JLabel errorLabel = new JLabel();
+
+    private final JTextField usernameField = new JTextField();
+    private final JTextField taglineField = new JTextField();
+    private final JComboBox<String> regionField = new JComboBox<>(new String[]{"NA", "EU", "ASIA"});
+    private final JButton loginButton = new JButton("Log In");
 
     public LoginView(LoginViewModel loginViewModel) {
-        // Add listener for the property change
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
-        setTitle("Login Screen");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
 
         // Create the panel layout
         JPanel panel = new JPanel();
@@ -38,16 +37,12 @@ public class LoginView extends JFrame implements ActionListener, PropertyChangeL
 
         // Input fields
         JLabel usernameLabel = new JLabel("Username:");
-        JTextField usernameField = new JTextField();
 
         JLabel taglineLabel = new JLabel("Tagline:");
-        JTextField taglineField = new JTextField();
 
         JLabel regionLabel = new JLabel("Region:");
-        JComboBox<String> regionField = new JComboBox<>(new String[]{"NA", "EU", "ASIA"});
 
-        JButton loginButton = new JButton("Log In");
-
+        loginButton.addActionListener(this);
 
         // Add components to the panel
         panel.add(usernameLabel);
@@ -56,50 +51,28 @@ public class LoginView extends JFrame implements ActionListener, PropertyChangeL
         panel.add(taglineField);
         panel.add(regionLabel);
         panel.add(regionField);
-        panel.add(errorLabel); // Spacer
+        panel.add(new JLabel()); // Spacer
         panel.add(loginButton);
 
         add(panel);
-
         setVisible(true);
-
-        final LoginState currentState = loginViewModel.getState();
-        currentState.setLoginError("");
-
-        // Add action listener for the login button
-        loginButton.addActionListener(e -> {
-            this.username = usernameField.getText();
-            this.tagline = taglineField.getText();
-            this.region = (String) regionField.getSelectedItem();
-
-            // Call the login controller
-            loginController.execute(username, tagline, region);
-
-        });
-
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        final LoginState state = (LoginState) evt.getNewValue();
-        setFields(state);
-        errorLabel.setText(state.getLoginError());
-    }
-
-    private void setFields(LoginState state) {
-        errorLabel.setText(state.getLoginError());
     }
 
     public String getViewName() {
         return viewName;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Call the login controller
+        loginController.execute(usernameField.getText(), taglineField.getText(), (String) regionField.getSelectedItem());
+    }
 
+    public void propertyChange(PropertyChangeEvent evt) {
+        final LoginState state = (LoginState) evt.getNewValue();
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 }

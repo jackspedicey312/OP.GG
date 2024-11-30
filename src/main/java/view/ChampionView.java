@@ -1,7 +1,7 @@
 package view;
 
-import interface_adapter.champion.ChampionController;
-import interface_adapter.champion.ChampionPresenter;
+import interface_adapter.Champion.ChampionController;
+import interface_adapter.Champion.ChampionPresenter;
 
 import javax.swing.*;
 import java.awt.*;
