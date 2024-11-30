@@ -23,6 +23,7 @@ public class OverviewUseCase implements OverviewInputBoundary {
 
     public void fetchOverview(String puuid, String region) {
         try {
+
             ProfileOverview profileOverview = profiledataAccess.generateProfileData(puuid, region);
             presenter.presentProfileIcon(profileOverview.getSummonerImage());
             presenter.presentProfileLevel(profileOverview.getSummonerLevel());

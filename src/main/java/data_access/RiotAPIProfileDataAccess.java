@@ -45,11 +45,14 @@ public class RiotAPIProfileDataAccess {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else if (region.equalsIgnoreCase("EU")) {
+        }
+        else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else if (region.equalsIgnoreCase("ASIA")) {
+        }
+        else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 

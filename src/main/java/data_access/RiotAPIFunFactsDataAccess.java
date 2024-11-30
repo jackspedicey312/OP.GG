@@ -30,11 +30,11 @@ public class RiotAPIFunFactsDataAccess {
             try {
                 JSONObject matchDetail = riotAPIMatchDataAccess.fetchMatchDetails(matches.get(i), region);
 
-                // The json file is split into 2 sections. We want the info section mainly.
+                // The json file is split into 2 sections. We want the info section for the stats.
                 JSONObject matchInfo = matchDetail.getJSONObject("info");
                 JSONObject metaData = matchDetail.getJSONObject("metadata");
 
-                // gameDuration is returned in seconds(int). Will be converted into hours later.
+                // gameDuration is returned in seconds(int). Will be converted into hours inside the entity file.
                 int gameDuration = matchInfo.getInt("gameDuration");
 
                 totalPlaytime += gameDuration;

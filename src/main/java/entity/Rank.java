@@ -11,6 +11,7 @@ public class Rank {
 
     public Rank(String gameMode, String rank, String division, int leaguePoints, int wins,
                 int losses, int winRate) {
+
         this.gameMode = gameMode;
         this.rank = rank;
         this.division = division;

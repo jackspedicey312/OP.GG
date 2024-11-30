@@ -50,7 +50,6 @@ public class RiotAPIRankDataAccess {
                 }
             }
         }
-
         else {
             throw new IOException("HTTP error code: " + responseCode);
         }

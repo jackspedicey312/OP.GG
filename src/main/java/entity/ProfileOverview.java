@@ -35,6 +35,7 @@ public class ProfileOverview {
      */
 
     public ImageIcon getIconPng(int iconID) throws IOException {
+
         final String iconId2 = Integer.toString(iconID);
         final String pngURL = "https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/"
                 + iconId2 + ".png";
