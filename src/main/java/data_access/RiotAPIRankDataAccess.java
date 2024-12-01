@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.OverviewProfile.Rank;
+import entity.OverviewProfile.RankFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -15,7 +16,7 @@ import static java.lang.Math.round;
 
 public class RiotAPIRankDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-
+    private final RankFactory rankFactory = new RankFactory();
 
     public Rank generateRank(String summonerID, String region) throws IOException {
         final HttpURLConnection request = getHttpURLConnection(summonerID, region);
@@ -54,7 +55,7 @@ public class RiotAPIRankDataAccess {
             throw new IOException("HTTP error code: " + responseCode);
         }
 
-        return new Rank(gameMode, rank, division, leaguePoints, wins, losses, winRate);
+        return rankFactory.createRank(gameMode, rank, division, leaguePoints, wins, losses, winRate);
     }
 
     private HttpURLConnection getHttpURLConnection(String summonerID, String region) throws IOException {
