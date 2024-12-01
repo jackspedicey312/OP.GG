@@ -1,6 +1,7 @@
 package use_case.login;
 
 import data_access.RiotUserDataAccessObject;
+import entity.FunFacts.FunFacts;
 import entity.OverviewProfile.ProfileOverview;
 import entity.OverviewProfile.Rank;
 import entity.freeChampionRotation.FreeChampionRotation;
@@ -29,9 +30,10 @@ public class LoginInteractor implements LoginInputBoundary {
             final Rank rank = userDataAccessObject.getRank(profileOverview.getSummonerId(), user.getRegion());
             final MatchHistory matchHistory = userDataAccessObject.getMatchHistory(user.getPuuid(), user.getRegion(), 20);
             final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
-            loginPresenter.prepareSuccessView(new LoginOutputData(user, profileOverview,rank, matchHistory, freeChampionRotation));
+            final FunFacts funFacts = userDataAccessObject.getFunFacts(user.getPuuid(), user.getRegion());
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, profileOverview, rank, matchHistory, freeChampionRotation, funFacts));
         } catch (Exception e) {
-            loginPresenter.prepareFailView(new LoginOutputData(null, null, null, null, null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, null, null, null, null, null));
         }
     }
 }
