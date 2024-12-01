@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.FunFacts.FunFacts;
 import entity.FunFacts.FunFactsFactory;
 import entity.OverviewProfile.ProfileOverview;
 import entity.OverviewProfile.ProfileOverviewFactory;
@@ -81,5 +82,9 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     public FreeChampionRotation getFreeChampionRotation() throws IOException {
         return freeChampionRotationFactory.createFreeChampionRotation(freeRotationDataAccess.getFreeChampionsNames(),
                 freeRotationDataAccess.getFreeChampionsIcons());
+    }
+
+    public FunFacts getFunFactsFactory(String puuId, String region) throws Exception {
+        return funFactsDataAccess.getFunFacts(puuId, region);
     }
 }
