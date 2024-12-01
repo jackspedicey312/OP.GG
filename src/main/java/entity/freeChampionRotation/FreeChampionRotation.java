@@ -19,4 +19,7 @@ public class FreeChampionRotation {
     public ArrayList<ImageIcon> getFreeChampionIcons() {
         return freeChampionIcons;
     }
+
+    public int getChampionsCount() {
+        return freeChampionsNames.size();}
 }
