@@ -20,24 +20,23 @@ import java.util.Properties;
 
 public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "Main Profile";
+    private final String viewName = "profile";
     private final ProfileViewModel profileViewModel;
     private final BackController backController;
-    private final JPanel mainPanel = new JPanel();
 
     public ProfileView(ProfileViewModel profileViewModel, BackController backController) throws IOException {
         this.profileViewModel = profileViewModel;
         this.backController = backController;
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // Title Section
         JLabel title = new JLabel("Player Profile");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(title);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(title);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
     }
 
     /**
@@ -73,23 +72,23 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
         ImageIcon profileIcon = profileViewModel.getState().getProfileIcon();
         JLabel profileIconLabel = new JLabel(profileIcon);
         profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(profileIconLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(profileIconLabel);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Profile Stats Section
         JPanel profileStatsPanel = createInfoPanel("Profile Stats", new String[]{
                 "Level: " + profileViewModel.getState().getProfileLevel(),
 
         });
-        mainPanel.add(profileStatsPanel);
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
+        this.add(profileStatsPanel);
+        this.add(Box.createRigidArea(new Dimension(10, 20)));
 
         // Rank Stats Section
         ImageIcon rankIcon = profileViewModel.getState().getRankIcon();
         JLabel rankIconLabel = new JLabel(rankIcon);
         rankIconLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        mainPanel.add(rankIconLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(rankIconLabel);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         JPanel performanceStatsPanel = createInfoPanel("Performance Stats", new String[]{
                 "Rank: " + profileViewModel.getState().getRank() + " " + profileViewModel.getState().getDivision(),
@@ -99,12 +98,10 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
                 "Losses: " + profileViewModel.getState().getLosses(),
                 "Win Rate: " + profileViewModel.getState().getWinRate() + "%",
         });
-        mainPanel.add(performanceStatsPanel);
+        this.add(performanceStatsPanel);
 
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        JScrollPane scrollPane = new JScrollPane(this);
         add(scrollPane);
-
-        setVisible(true);
     }
 
     public String getViewName() {

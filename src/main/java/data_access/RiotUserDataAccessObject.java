@@ -1,11 +1,8 @@
 package data_access;
 
 import entity.FunFacts.FunFacts;
-import entity.FunFacts.FunFactsFactory;
 import entity.OverviewProfile.ProfileOverview;
-import entity.OverviewProfile.ProfileOverviewFactory;
 import entity.OverviewProfile.Rank;
-import entity.OverviewProfile.RankFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
@@ -16,14 +13,12 @@ import entity.user.User;
 import entity.user.UserFactory;
 
 import org.json.JSONObject;
-import use_case.login.LoginUserDataAccessInterface;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
+public class RiotUserDataAccessObject {
     private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
@@ -33,12 +28,9 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
-    private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
-    private final RankFactory rankFactory = new RankFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
-    private final FunFactsFactory funFactsFactory = new FunFactsFactory();
 
     public User getUser(String username, String tagline, String region) throws Exception {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
@@ -59,7 +51,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         for (String matchId : matchListId) {
             final JSONObject matchData = matchDataAccess.getMatchDetails(matchId, region);
             final int j = funFactsDataAccess.getPlayerMatchIndex(puuId,
-                    matchData.getJSONObject("metaData").getJSONArray("participants"));
+                    matchData.getJSONObject("metadata").getJSONArray("participants"));
 
             final JSONObject gameInfo = matchData.getJSONObject("info");
             final JSONObject playerData = gameInfo.getJSONArray("participants").getJSONObject(j);

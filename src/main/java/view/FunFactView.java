@@ -14,7 +14,6 @@ import java.beans.PropertyChangeListener;
 public class FunFactView extends JPanel implements ActionListener, PropertyChangeListener {
     private final FunFactViewModel funFactViewModel;
     private final BackController backController;
-    private final JPanel mainPanel = new JPanel();
     private final JPanel contentPanel = new JPanel();
 
     public FunFactView(FunFactViewModel funFactViewModel, BackController backController) {
@@ -23,17 +22,17 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
 
         // Main panel with padding
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        this.setLayout(new BorderLayout(10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Title
         JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
-        mainPanel.add(title, BorderLayout.NORTH);
+        this.add(title, BorderLayout.NORTH);
 
         // Content panel for stats
         contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        this.add(contentPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -72,8 +71,5 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
                 funFactViewModel.getState().getTotalSurvivedSingleDigitHp());
         addStat(contentPanel, "Total Snowballs Hit:", funFactViewModel.getState().getTotalSnowballsHit());
         addStat(contentPanel, "Total times you have saved your teammate:", funFactViewModel.getState().getTotalSavedAllies());
-
-        // Show frame
-        mainPanel.setVisible(true);
     }
 }

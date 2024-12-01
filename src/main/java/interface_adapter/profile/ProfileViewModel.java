@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 public class ProfileViewModel extends ViewModel<ProfileState> {
 
     public ProfileViewModel() {
-        super("Profile");
+        super("profile");
         setState(new ProfileState());
     }
 }

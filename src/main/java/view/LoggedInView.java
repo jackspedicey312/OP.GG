@@ -28,6 +28,7 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final JButton freeChampionRotationButton = new JButton("Free Champion Rotation");
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
+
     private final LoggedInViewModel loggedInViewModel;
 
     private final ProfileController profileController;
@@ -62,7 +63,6 @@ public class LoggedInView extends JPanel implements ActionListener {
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
         add(mainPanel);
-        setVisible(true);
 
         matchHistoryButton.addActionListener(this);
         friendsButton.addActionListener(this);

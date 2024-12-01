@@ -52,7 +52,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         panel.add(loginButton);
 
         add(panel);
-        setVisible(true);
     }
 
     public String getViewName() {

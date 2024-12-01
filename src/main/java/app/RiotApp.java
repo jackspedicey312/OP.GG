@@ -11,6 +11,8 @@ import interface_adapter.back.BackPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.freeChampionRotation.FreeChampionRotationPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
+import interface_adapter.funfacts.FunFactController;
+import interface_adapter.funfacts.FunFactPresenter;
 import interface_adapter.funfacts.FunFactViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
@@ -27,6 +29,9 @@ import use_case.back.BackOutputBoundary;
 import use_case.freechampionrotation.FreeChampionRotationInputBoundary;
 import use_case.freechampionrotation.FreeChampionRotationInteractor;
 import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
+import use_case.funfacts.FunFactsInputBoundary;
+import use_case.funfacts.FunFactsOutputBoundary;
+import use_case.funfacts.FunFactsUseCase;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -56,6 +61,7 @@ public class RiotApp {
     private MatchHistoryController matchHistoryController;
     private FreeChampionRotationController freeChampionRotationController;
     private BackController backController;
+    private FunFactController funFactController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -110,7 +116,7 @@ public class RiotApp {
     public RiotApp addFunFactView() {
         funFactViewModel = new FunFactViewModel();
         funFactView = new FunFactView(funFactViewModel, backController);
-        cardPanel.add(funFactView,funFactViewModel.getViewName());
+        cardPanel.add(funFactView, funFactViewModel.getViewName());
         return this;
     }
 
@@ -149,6 +155,13 @@ public class RiotApp {
         final FreeChampionRotationOutputBoundary freeChampionRotationOutputBoundary = new FreeChampionRotationPresenter(freeChampionRotationViewModel, viewManagerModel);
         final FreeChampionRotationInputBoundary freeChampionRotationInteractor = new FreeChampionRotationInteractor(freeChampionRotationOutputBoundary);
         freeChampionRotationController = new FreeChampionRotationController(freeChampionRotationInteractor);
+        return this;
+    }
+
+    public RiotApp addFunFactsUseCase() {
+        final FunFactsOutputBoundary funFactsOutputBoundary = new FunFactPresenter(funFactViewModel, viewManagerModel);
+        final FunFactsInputBoundary funFactsInteractor = new FunFactsUseCase(funFactsOutputBoundary);
+        funFactController = new FunFactController(funFactsInteractor);
         return this;
     }
 

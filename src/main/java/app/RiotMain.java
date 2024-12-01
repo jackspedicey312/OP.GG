@@ -20,6 +20,7 @@ public class RiotMain {
                 .addProfileUseCase()
                 .addMatchHistoryUseCase()
                 .addFreeChampionRotationUseCase()
+                .addFunFactsUseCase()
                 .addLoggedInView()
                 .addLoginUseCase()
                 .build();

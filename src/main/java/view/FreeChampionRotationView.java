@@ -35,6 +35,7 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        final FreeChampionRotationState state = (FreeChampionRotationState) evt.getNewValue();
         final JPanel panelone = new JPanel();
         panelone.setLayout(new BoxLayout(panelone, BoxLayout.X_AXIS));
         final JPanel paneltwo = new JPanel();
@@ -45,33 +46,32 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         panelfour.setLayout(new BoxLayout(panelfour, BoxLayout.X_AXIS));
         final JPanel panelfive = new JPanel();
         panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
-        mainPanel.removeAll();
-        mainPanel.add(panelone);
-        mainPanel.add(paneltwo);
-        mainPanel.add(panelthree);
-        mainPanel.add(panelfour);
-        mainPanel.add(panelfive);
-        final FreeChampionRotationState freeChampionRotationState = viewModel.getState();
-        final int length = freeChampionRotationState.getChampionCount();
+        this.removeAll();
+        this.add(panelone);
+        this.add(paneltwo);
+        this.add(panelthree);
+        this.add(panelfour);
+        this.add(panelfive);
+        final int length = state.getChampionCount();
         for (int i = 0; i < length; i++) {
             if (i <= 5) {
-                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                final JPanel eachPanel = geteachPanel(state, i);
                 panelone.add(eachPanel);
             }
             else if (i <= 11) {
-                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                final JPanel eachPanel = geteachPanel(state, i);
                 paneltwo.add(eachPanel);
             }
             else if (i <= 17) {
-                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                final JPanel eachPanel = geteachPanel(state, i);
                 panelthree.add(eachPanel);
             }
             else if (i <= 23) {
-                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                final JPanel eachPanel = geteachPanel(state, i);
                 panelfour.add(eachPanel);
             }
             else {
-                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                final JPanel eachPanel = geteachPanel(state, i);
                 panelfive.add(eachPanel);
             }
         }
