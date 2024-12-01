@@ -19,7 +19,6 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
     private final String viewName = "freeChampionRotation";
     private JButton backbutton = new JButton("Back");
     private final JPanel mainPanel = new JPanel();
-    private JPanel listPanel;
     private FreeChampionRotationController controller;
     private final FreeChampionRotationViewModel viewModel;
     private BackController backController;
@@ -31,27 +30,28 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         this.viewModel.addPropertyChangeListener(this);
         this.backController = backController;
 
-
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        this.listPanel = new JPanel(new BorderLayout());
-        listPanel.setBorder(BorderFactory.createTitledBorder("Weekly Free Champion Rotation"));
-        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        listPanel.add(backbutton, BorderLayout.WEST);
-
-        backbutton.addActionListener(this);
-
-
-        // Set up the main content panel
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         this.add(mainPanel, BorderLayout.CENTER);
-        this.add(listPanel, BorderLayout.NORTH);
 
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final FreeChampionRotationState state = (FreeChampionRotationState) evt.getNewValue();
+
+
+        final JPanel titlePanel = new JPanel();
+        JLabel titleLabel = new JLabel("Free Champion Rotation");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titlePanel.add(titleLabel);
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        final JPanel buttonPanel = new JPanel();
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+        backbutton.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         final JPanel panelone = new JPanel();
         panelone.setLayout(new BoxLayout(panelone, BoxLayout.X_AXIS));
@@ -64,6 +64,9 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         final JPanel panelfive = new JPanel();
         panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
         this.removeAll();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(buttonPanel, BorderLayout.WEST);
         this.add(panelone);
         this.add(paneltwo);
         this.add(panelthree);
