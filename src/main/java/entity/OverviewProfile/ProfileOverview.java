@@ -1,4 +1,4 @@
-package entity;
+package entity.OverviewProfile;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

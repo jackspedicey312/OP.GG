@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.FunFacts;
+import entity.FunFacts.FunFacts;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

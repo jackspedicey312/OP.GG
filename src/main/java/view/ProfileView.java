@@ -1,72 +1,95 @@
 package view;
 
+import entity.OverviewProfile.ProfileOverview;
+import entity.OverviewProfile.Rank;
 import interface_adapter.profile.ProfilePresenter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 public class ProfileView extends JFrame {
 
-    public ProfileView(ProfilePresenter profile) {
-        setTitle("Profile");
+    public ProfileView(ProfilePresenter profilePresenter) throws IOException {
+        setTitle("Player Profile");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 800);
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        setSize(500, 300);
 
+        // Main Panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        // Title Section
         JLabel title = new JLabel("Player Profile");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(title);
+        mainPanel.add(title);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        final ImageIcon profileIcon = profile.getProfileIcon();
-        final JLabel profileIconLabel = new JLabel(profileIcon);
+        // SummonerIcon Section
+
+        ImageIcon profileIcon = profilePresenter.getProfileIcon();
+        JLabel profileIconLabel = new JLabel(profileIcon);
         profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(profileIconLabel);
+        mainPanel.add(profileIconLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        final int profileLevel = profile.getProfileLevel();
-        final JLabel profileLevelLabel = new JLabel(String.valueOf(profileLevel));
-        profileLevelLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(profileLevelLabel);
+        // Profile Stats Section
+        JPanel profileStatsPanel = createInfoPanel("Profile Stats", new String[]{
+                "Level: " + profilePresenter.getProfileLevel(),
 
-        final String gameMode = profile.getGameMode();
-        final JLabel gameModeLabel = new JLabel(gameMode);
-        gameModeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(gameModeLabel);
+        });
+        mainPanel.add(profileStatsPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
 
-        final String profileRank = profile.getRank();
-        final JLabel profileRankLabel = new JLabel(profileRank);
-        profileRankLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(profileRankLabel);
+        // Rank Stats Section
+        ImageIcon rankIcon = profilePresenter.getRankIcon();
+        JLabel rankIconLabel = new JLabel(rankIcon);
+        rankIconLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(rankIconLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        final String profileDivision = profile.getDivision();
-        final JLabel profileDivisionLabel = new JLabel(profileDivision);
-        profileDivisionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(profileDivisionLabel);
+        JPanel performanceStatsPanel = createInfoPanel("Performance Stats", new String[]{
+                "Rank: " + profilePresenter.getRank() + " " + profilePresenter.getDivision(),
+                "Game Mode: " + profilePresenter.getGameMode(),
+                "LP: " + profilePresenter.getLeaguePoints(),
+                "Wins: " + profilePresenter.getWins(),
+                "Losses: " + profilePresenter.getLosses(),
+                "Win Rate: " + profilePresenter.getWinRate() + "%",
+        });
+        mainPanel.add(performanceStatsPanel);
 
-        final int profileLeaguePoints = profile.getLeaguePoints();
-        final JLabel profileLeaguePointsLabel = new JLabel(String.valueOf(profileLeaguePoints));
-        profileLeaguePointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(profileLeaguePointsLabel);
-
-        final int profileWins = profile.getWins();
-        final JLabel profileWinsLabel = new JLabel(String.valueOf(profileWins));
-        profileWinsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.add(profileWinsLabel);
-
-        final int profileLosses = profile.getLosses();
-        final JLabel profileLossesLabel = new JLabel(String.valueOf(profileLosses));
-        profileLossesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.add(profileLossesLabel);
-
-        final int profileWinRate = profile.getWinRate();
-        final JLabel profileWinRateLabel = new JLabel(String.valueOf(profileWinRate));
-        profileWinRateLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.add(profileWinRateLabel);
-
-        final JScrollPane scrollPane = new JScrollPane(panel);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
         add(scrollPane);
 
         setVisible(true);
+    }
+
+    /**
+     * Creates a labeled panel for displaying grouped information.
+     *
+     * @param title    the title of the panel.
+     * @param infoRows an array of strings containing the information to display.
+     * @return a JPanel containing the information.
+     */
+    private JPanel createInfoPanel(String title, String[] infoRows) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createTitledBorder(title));
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        for (String info : infoRows) {
+            JLabel label = new JLabel(info);
+            label.setFont(new Font("Arial", Font.PLAIN, 14));
+            panel.add(label);
+            panel.add(Box.createRigidArea(new Dimension(0, 5))); // Spacing between rows
+        }
+
+        return panel;
     }
 }

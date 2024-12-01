@@ -1,5 +1,5 @@
 import data_access.RiotAPIFunFactsDataAccess;
-import entity.FunFacts;
+import entity.FunFacts.FunFacts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

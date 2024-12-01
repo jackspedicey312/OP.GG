@@ -12,6 +12,8 @@ public interface OverviewOutputBoundary {
 
     void presentRank(String rank);
 
+    void presentRankIcon(ImageIcon icon);
+
     void presentDivision(String division);
 
     void presentLeaguePoints(int leaguePoints);

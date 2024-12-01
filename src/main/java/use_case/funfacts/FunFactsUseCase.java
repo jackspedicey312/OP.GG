@@ -1,7 +1,7 @@
 package use_case.funfacts;
 
 import data_access.RiotAPIFunFactsDataAccess;
-import entity.FunFacts;
+import entity.FunFacts.FunFacts;
 
 public class FunFactsUseCase implements FunFactsInputBoundary {
     private final RiotAPIFunFactsDataAccess dataAccess;

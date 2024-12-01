@@ -1,4 +1,4 @@
-package entity;
+package entity.FunFacts;
 
 import java.time.Instant;
 import java.time.ZoneId;

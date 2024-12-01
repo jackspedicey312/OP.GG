@@ -7,6 +7,7 @@ import javax.swing.*;
 public class ProfilePresenter implements OverviewOutputBoundary {
 
     private ImageIcon profileIcon;
+    private ImageIcon rankIcon;
     private int profileLevel;
     private String gameMode;
     private String rank;
@@ -16,7 +17,6 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     private int losses;
     private int winRate;
     private String errorMessage;
-
 
     public void presentProfileIcon(ImageIcon icon) {
         this.profileIcon = icon;
@@ -36,6 +36,10 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     public void presentRank(String rank) {
         this.rank = rank;
         System.out.println(rank);
+    }
+
+    public void presentRankIcon(ImageIcon icon) {
+        this.rankIcon = icon;
     }
     public void presentDivision(String division) {
         this.division = division;
@@ -93,7 +97,9 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     public int getWinRate() {
         return winRate;
     }
-
+    public ImageIcon getRankIcon() {
+        return rankIcon;
+    }
     public String getErrorMessage() {
         return errorMessage;
     }

@@ -2,8 +2,8 @@ package use_case.overview;
 
 import data_access.RiotAPIProfileDataAccess;
 import data_access.RiotAPIRankDataAccess;
-import entity.ProfileOverview;
-import entity.Rank;
+import entity.OverviewProfile.ProfileOverview;
+import entity.OverviewProfile.Rank;
 
 import java.io.IOException;
 
@@ -37,6 +37,7 @@ public class OverviewUseCase implements OverviewInputBoundary {
             presenter.presentLosses(rank.getLosses());
             presenter.presentLeaguePoints(rank.getLeaguePoints());
             presenter.presentWinRate(rank.getWinRate());
+            presenter.presentRankIcon(rank.getRankImage());
 
         }
         catch (IOException e) {

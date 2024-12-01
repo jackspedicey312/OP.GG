@@ -1,13 +1,10 @@
 package data_access;
 
-import entity.ProfileOverview;
+import entity.OverviewProfile.ProfileOverview;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
