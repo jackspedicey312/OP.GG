@@ -1,6 +1,6 @@
 package entity.OverviewProfile;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
 public class Rank {
     private String gameMode;
@@ -10,6 +10,7 @@ public class Rank {
     private int wins;
     private int losses;
     private int winRate;
+    private ImageIcon rankIcon;
 
     public Rank(String gameMode, String rank, String division, int leaguePoints, int wins,
                 int losses, int winRate) {
@@ -21,6 +22,7 @@ public class Rank {
         this.wins = wins;
         this.losses = losses;
         this.winRate = winRate;
+        this.rankIcon = getRankImage();
     }
 
     public int getLeaguePoints() {
@@ -49,6 +51,10 @@ public class Rank {
 
     public int getWinRate() {
         return winRate;
+    }
+
+    public ImageIcon getRankIcon() {
+        return rankIcon;
     }
 
     public ImageIcon getRankImage() {

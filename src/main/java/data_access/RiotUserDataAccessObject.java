@@ -1,12 +1,16 @@
 package data_access;
 
+import entity.FunFacts.FunFactsFactory;
+import entity.OverviewProfile.ProfileOverview;
+import entity.OverviewProfile.ProfileOverviewFactory;
+import entity.OverviewProfile.Rank;
+import entity.OverviewProfile.RankFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
 import entity.match.MatchFactory;
 import entity.matchHistory.MatchHistory;
 import entity.matchHistory.MatchHistoryFactory;
-import entity.playerStats.PlayerStatsFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 
@@ -26,15 +30,28 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
     private final RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
     private final RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
+    private final RiotAPIProfileDataAccess profileDataAccess = new RiotAPIProfileDataAccess();
+    private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
+    private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
+    private final RankFactory rankFactory = new RankFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
-    private final PlayerStatsFactory playerStatsFactory = new PlayerStatsFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
+    private final FunFactsFactory funFactsFactory = new FunFactsFactory();
 
     public User getUser(String username, String tagline, String region) throws Exception {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
+    }
+
+    public ProfileOverview getProfileOverview(String puuId, String region) throws IOException {
+
+        return profileDataAccess.generateProfileData(puuId, region);
+    }
+
+    public Rank getRank(String summonerId, String region) throws IOException {
+        return rankDataAccess.generateRank(summonerId, region);
     }
 
     public MatchHistory getMatchHistory(String puuId, String region, int count) throws Exception {

@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.FunFacts.FunFacts;
+import entity.FunFacts.FunFactsFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,7 +9,9 @@ import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
 
-    public FunFacts fetchFunFacts(String puuid, String region) throws Exception {
+    private final FunFactsFactory funFactsFactory = new FunFactsFactory();
+
+    public FunFacts getFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
         final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 100);
         int totalPlaytime = 0;
@@ -79,7 +82,7 @@ public class RiotAPIFunFactsDataAccess {
                 continue;
             }
         }
-        final FunFacts funFacts = new FunFacts();
+        final FunFacts funFacts = funFactsFactory.createFunFacts();
         funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
         funFacts.setLongestGamePlayed(longestGamePlayed);
         funFacts.setTotalDeaths(totalDeaths);
