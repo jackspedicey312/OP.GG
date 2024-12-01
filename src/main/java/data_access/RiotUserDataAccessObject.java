@@ -53,6 +53,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
                     playerData.getInt("kills"),
                     playerData.getInt("deaths"),
                     playerData.getInt("assists"),
+                    playerData.getBoolean("win"),
                     gameInfo.getInt("gameDuration"),
                     gameInfo.getString("gameMode"),
                     gameInfo.getInt("gameCreation")));

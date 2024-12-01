@@ -14,15 +14,22 @@ public class Match {
     private final int kills;
     private final int deaths;
     private final int assissts;
+    private final String winOrLoss;
     private final String duration;
     private final String gameMode;
     private final String date;
 
-    public Match(ImageIcon championIcon, int kills, int deaths, int assissts, int time, String gameMode, long unixTime) {
+    public Match(ImageIcon championIcon, int kills, int deaths, int assissts, boolean winOrLoss, int time, String gameMode, long unixTime) {
         this.championIcon = championIcon;
         this.kills = kills;
         this.deaths = deaths;
         this.assissts = assissts;
+        if (winOrLoss) {
+            this.winOrLoss = "Win";
+        }
+        else {
+            this.winOrLoss = "Defeat";
+        }
         this.duration = secondsToMinutes(time);
         this.gameMode = gameMode;
         this.date = unixConverter(unixTime);
@@ -52,6 +59,10 @@ public class Match {
 
     public int getAssissts() {
         return assissts;
+    }
+
+    public String getWinOrLoss() {
+        return winOrLoss;
     }
 
     public String getDuration() {

@@ -85,7 +85,7 @@ public class RiotApp {
 
     public RiotApp addFreeChampionRotationView() throws IOException {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
-        freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
+        freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel, backController);
         cardPanel.add(freeChampionRotationView, freeChampionRotationView.getViewName());
         return this;
     }
