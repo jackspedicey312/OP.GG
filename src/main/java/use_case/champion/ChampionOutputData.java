@@ -60,15 +60,24 @@ public class ChampionOutputData {
 
     @Override
     public String toString() {
-        return "ChampionOutputData{" +
-                "championName='" + championName + '\'' +
-                ", championId=" + championId +
-                ", magicDamage=" + magicDamage +
-                ", physicalDamage=" + physicalDamage +
-                ", totalDamage=" + totalDamage +
-                ", trueDamage=" + trueDamage +
-                ", kills=" + kills +
-                ", masteryPoints=" + masteryPoints +
+        return "ChampionOutputData{"
+                +
+                "championName='" + championName + '\''
+                +
+                ", championId=" + championId
+                +
+                ", magicDamage=" + magicDamage
+                +
+                ", physicalDamage=" + physicalDamage
+                +
+                ", totalDamage=" + totalDamage
+                +
+                ", trueDamage=" + trueDamage
+                +
+                ", kills=" + kills
+                +
+                ", masteryPoints=" + masteryPoints
+                +
                 '}';
     }
 }

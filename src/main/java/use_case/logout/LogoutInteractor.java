@@ -1,13 +1,16 @@
 package use_case.logout;
 
+import data_access.RiotUserDataAccessObject;
+import use_case.login.LoginUserDataAccessInterface;
+
 /**
  * The Logout Interactor.
  */
 public class LogoutInteractor implements LogoutInputBoundary {
-    private UserDataAccessInterface userDataAccessObject;
+    private RiotUserDataAccessObject userDataAccessObject;
     private LogoutOutputBoundary logoutPresenter;
 
-    public LogoutInteractor(UserDataAccessInterface userDataAccessInterface,
+    public LogoutInteractor(LoginUserDataAccessInterface userDataAccessInterface,
                             LogoutOutputBoundary logoutOutputBoundary) {
         this.userDataAccessObject = userDataAccessInterface;
         this.logoutPresenter = logoutOutputBoundary;

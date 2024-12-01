@@ -1,4 +1,4 @@
-package entity;
+package entity.champion;
 
 public class Champion {
     private final String championName;

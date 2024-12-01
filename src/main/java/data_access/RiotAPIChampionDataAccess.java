@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.Champion;
+import entity.champion.Champion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -19,28 +19,17 @@ import java.util.List;
 public class RiotAPIChampionDataAccess {
 
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private String summonerID;
-    private String region;
 
-    public RiotAPIChampionDataAccess(String summonerID, String region) {
-        this.summonerID = summonerID;
-        this.region = region;
-    }
-
-    public void setSummonerIDAndRegion(String summonerID, String region) {
-        this.summonerID = summonerID;
-        this.region = region;
-    }
 
     /**
      * Fetch champion data for all champions for the summoner.
      * @return A list of Champion entities containing champion data.
      * @throws IOException If no champion found in data.
      */
-    public List<Champion> fetchAllChampions() throws IOException {
-        List<Champion> championList = new ArrayList<>();
+    public List<Champion> fetchAllChampions(String puuid, String region) throws IOException {
+        final List<Champion> championList = new ArrayList<>();
 
-        final HttpURLConnection request = getHttpURLConnection();
+        final HttpURLConnection request = getHttpURLConnection(puuid, region);
         final int responseCode = request.getResponseCode();
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -50,15 +39,15 @@ public class RiotAPIChampionDataAccess {
                 final JSONArray participants = info.getJSONArray("participants");
 
                 for (int i = 0; i < participants.length(); i++) {
-                    JSONObject participant = participants.getJSONObject(i);
+                    final JSONObject participant = participants.getJSONObject(i);
 
-                    String championName = participant.getString("championName");
-                    int championId = participant.getInt("championId");
-                    int magicDamage = participant.getInt("magicDamageDealt");
-                    int physicalDamage = participant.getInt("physicalDamageDealt");
-                    int totalDamage = participant.getInt("totalDamageDealt");
-                    int trueDamage = participant.getInt("trueDamageDealt");
-                    int kills = participant.getInt("kills");
+                    final String championName = participant.getString("championName");
+                    final int championId = participant.getInt("championId");
+                    final int magicDamage = participant.getInt("magicDamageDealt");
+                    final int physicalDamage = participant.getInt("physicalDamageDealt");
+                    final int totalDamage = participant.getInt("totalDamageDealt");
+                    final int trueDamage = participant.getInt("trueDamageDealt");
+                    final int kills = participant.getInt("kills");
 
                     Champion champion = new Champion(
                             championName,
@@ -81,19 +70,19 @@ public class RiotAPIChampionDataAccess {
         return championList;
     }
 
-    private HttpURLConnection getHttpURLConnection() throws IOException {
+    private HttpURLConnection getHttpURLConnection(String puuid, String region) throws IOException {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
-            baseURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
+            baseURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/";
         } else if (region.equalsIgnoreCase("EU")) {
-            baseURL = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
+            baseURL = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/";
         } else if (region.equalsIgnoreCase("ASIA")) {
-            baseURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
+            baseURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/";
         } else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
-        final String urlComplete = baseURL + summonerID;
+        final String urlComplete = baseURL + puuid;
         final URL url = new URL(urlComplete);
         final HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
