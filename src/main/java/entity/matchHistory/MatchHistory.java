@@ -1,7 +1,6 @@
 package entity.matchHistory;
 
 import entity.match.Match;
-
 import java.util.ArrayList;
 import java.util.List;
 
