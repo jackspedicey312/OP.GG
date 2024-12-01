@@ -101,6 +101,13 @@ public class RiotApp {
         return this;
     }
 
+    public RiotApp addFunFactView() {
+        funFactViewModel = new FunFactViewModel();
+        funFactView = new FunFactView(funFactViewModel, backController);
+        cardPanel.add(funFactView,funFactViewModel.getViewName());
+        return this;
+    }
+
     public RiotApp addFreeChampionRotationView() throws IOException {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
         freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel, backController);
