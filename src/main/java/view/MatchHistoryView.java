@@ -88,7 +88,7 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         JPanel rightupPanel = new JPanel();
         JPanel rightmiddlePanel = new JPanel();
-        JLabel kda = new JLabel(getKDA(match));
+        JLabel kda = new JLabel(getkda(match));
         rightmiddlePanel.add(kda);
         JPanel rightdownPanel = new JPanel();
 
@@ -102,13 +102,13 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         return backPanel;
     }
 
-    private String getKDA(Match match) {
-        int k = match.getKills();
-        int d = match.getDeaths();
-        int a = match.getAssissts();
-        String strk = String.valueOf(k);
-        String strd = String.valueOf(d);
-        String stra = String.valueOf(a);
+    private String getkda(Match match) {
+        final int k = match.getKills();
+        final int d = match.getDeaths();
+        final int a = match.getAssissts();
+        final String strk = String.valueOf(k);
+        final String strd = String.valueOf(d);
+        final String stra = String.valueOf(a);
         return strk + "/" + strd + "/" + stra;
     }
 
