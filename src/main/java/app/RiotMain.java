@@ -16,6 +16,7 @@ public class RiotMain {
                 .addProfileView()
                 .addMatchHistoryView()
                 .addFreeChampionRotationView()
+                .addFunFactView()
                 .addMatchHistoryUseCase()
                 .addFreeChampionRotationUseCase()
                 .addLoggedInView()
