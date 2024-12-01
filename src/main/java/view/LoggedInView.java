@@ -63,7 +63,6 @@ public class LoggedInView extends JPanel implements ActionListener {
         mainPanel.add(firstPanel);
         mainPanel.add(secondPanel);
         add(mainPanel);
-        setVisible(true);
 
         matchHistoryButton.addActionListener(this);
         friendsButton.addActionListener(this);

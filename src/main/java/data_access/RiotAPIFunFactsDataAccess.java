@@ -13,7 +13,7 @@ public class RiotAPIFunFactsDataAccess {
 
     public FunFacts getFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
-        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 100);
+        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 3);
         int totalPlaytime = 0;
         int totalWins = 0;
         int totalLosses = 0;
