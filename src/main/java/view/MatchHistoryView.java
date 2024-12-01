@@ -1,19 +1,21 @@
 package view;
 
-import javax.swing.*;
 import java.awt.*;
-
-import entity.match.Match;
-import entity.matchHistory.MatchHistory;
-import interface_adapter.back.BackController;
-import interface_adapter.login.LoginState;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
+import javax.swing.*;
+
+import org.jetbrains.annotations.NotNull;
+
+import entity.match.Match;
+import entity.matchHistory.MatchHistory;
+import interface_adapter.back.BackController;
+import interface_adapter.matchHistory.MatchHistoryViewModel;
+
+@SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class MatchHistoryView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "MatchHistory";
     private MatchHistoryViewModel matchHistoryViewModel;
@@ -26,7 +28,7 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     public MatchHistoryView(MatchHistoryViewModel matchHistoryViewModel,
                             BackController backController) {
 
-        this.matchHistoryViewModel = loggedInViewModel;
+        this.matchHistoryViewModel = matchHistoryViewModel;
         this.backController = backController;
         this.matchHistoryViewModel.addPropertyChangeListener(this);
 
@@ -42,7 +44,7 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
-        final MatchHistory matches = matchHistoryViewModel.getstate().getMatchHistory();
+        final MatchHistory matches = matchHistoryViewModel.getState().getMatchHistory();
         final int length = matches.getLength();
         listPanel.removeAll();
         for (int i = 0; i < length; i++) {
@@ -54,52 +56,65 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
 
     @SuppressWarnings({"checkstyle:MethodName", "checkstyle:SuppressWarnings"})
     private JPanel createMatchDetails(Match match) {
-        JPanel backPanel = new JPanel();
+        final JPanel backPanel = new JPanel();
         backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.X_AXIS));
-        JPanel leftPanel = new JPanel();
+
+        final JPanel leftPanel = getleftjPanel(match);
+
+        final JPanel middlePanel = new JPanel();
+        middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
+        final JLabel icon = new JLabel(match.getChampionIcon());
+        middlePanel.add(icon);
+
+        final JPanel rightPanel = getrightjPanel(match);
+
+        backPanel.add(leftPanel);
+        backPanel.add(middlePanel);
+        backPanel.add(rightPanel);
+        return backPanel;
+    }
+
+    @NotNull
+    private static JPanel getleftjPanel(Match match) {
+        final JPanel leftPanel = new JPanel();
 
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        JPanel leftupPanel = new JPanel();
+        final JPanel leftupPanel = new JPanel();
         leftupPanel.setLayout(new BoxLayout(leftupPanel, BoxLayout.Y_AXIS));
-        JLabel aram = new JLabel(match.getGameMode());
-        JLabel date = new JLabel(match.getDate());
+        final JLabel aram = new JLabel(match.getGameMode());
+        final JLabel date = new JLabel(match.getDate());
         leftPanel.add(aram);
         leftPanel.add(date);
 
-        JPanel leftmiddlePanel = new JPanel();
+        final JPanel leftmiddlePanel = new JPanel();
 
-        JPanel leftdownPanel = new JPanel();
+        final JPanel leftdownPanel = new JPanel();
         leftdownPanel.setLayout(new BoxLayout(leftdownPanel, BoxLayout.Y_AXIS));
-        JLabel result = new JLabel(match.getResult());
-        JLabel duration = new JLabel(match.getDuration());
+        final JLabel result = new JLabel(match.getResult());
+        final JLabel duration = new JLabel(match.getDuration());
         leftdownPanel.add(result);
         leftdownPanel.add(duration);
 
         leftPanel.add(leftupPanel);
         leftPanel.add(leftmiddlePanel);
         leftPanel.add(leftdownPanel);
+        return leftPanel;
+    }
 
-        JPanel middlePanel = new JPanel();
-        middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
-        JLabel icon = new JLabel(match.getChampionIcon());
-        middlePanel.add(icon);
-
-        JPanel rightPanel = new JPanel();
+    @NotNull
+    private JPanel getrightjPanel(Match match) {
+        final JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        JPanel rightupPanel = new JPanel();
-        JPanel rightmiddlePanel = new JPanel();
-        JLabel kda = new JLabel(getkda(match));
+        final JPanel rightupPanel = new JPanel();
+        final JPanel rightmiddlePanel = new JPanel();
+        final JLabel kda = new JLabel(getkda(match));
         rightmiddlePanel.add(kda);
-        JPanel rightdownPanel = new JPanel();
+        final JPanel rightdownPanel = new JPanel();
 
         rightPanel.add(rightupPanel);
         rightPanel.add(rightmiddlePanel);
         rightPanel.add(rightdownPanel);
-
-        backPanel.add(leftPanel);
-        backPanel.add(middlePanel);
-        backPanel.add(rightPanel);
-        return backPanel;
+        return rightPanel;
     }
 
     private String getkda(Match match) {
