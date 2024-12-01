@@ -6,13 +6,14 @@
 - [Boyuan Dong](https://github.com/DBRYAN350)
 - [Jack Li](https://github.com/jackspedicey312)
 - [Patricia Watanabe](https://github.com/pwatana)
+---
 
 ## Summary  
 This project is a companion app for _League of Legends_ players and provides detailed game data and 
 statistics using the Riot API. This application was design to help players track their progress, 
 improve their gameplay, analyze match performance features like player profiles, match history,
 and champion mastery.  
-
+---
 ## Table of Contents  
 1. [Features](#features)
 2. [Installation Instructions](#installation-instructions)
@@ -21,54 +22,58 @@ and champion mastery.
 5. [Feedback](#feedback-and-discussions-)
 6. [Contributing](#contributing)
 7. [Code of Conduct](#code-of-conduct)
-
+---
 ## Features  
 
 **Feature Overview**  
 Our application provides features that provides insights into League of Legends gameplay:  
-- Player Profile (Overview Summoner Data):
-  - Provides player details like rank, summoner level, and account stats with the summoner ID and icon.
-- Match History:
-  - Provides information about the five most recent matches including Kills, Deaths, Assists and match outcome. 
-- Champion Mastery:
-  - Evaluates performance for specific champions played by calculating the mastery points using performance metrics
-  such as Damage Dealt to opponent champions.
-- Friends:
-  - Track friends played with in the most recent matches with the game outcomes.
-- Fun Facts:
-  - Provides player's fun facts including total play time, wins, losses kills, deaths, oldest played unix and so on.
-- Riot API Real-Time Data Fetching
-  - Uses Riot API to fetch data directly from the League of Legends's servers.
+- Player Profile (Overview Summoner Data):  
+Provides player details like rank, summoner level, and account stats with the summoner ID and icon.
+- Match History:  
+Provides information about the five most recent matches including Kills, Deaths, Assists and match outcome. 
+- Champion Mastery:  
+Evaluates performance for specific champions played by calculating the mastery points using performance metrics
+such as Damage Dealt to opponent champions.
+- Friends:  
+Track friends played with in the most recent matches with the game outcomes.
+- Fun Facts:  
+Provides player's fun facts including total play time, wins, losses kills, deaths, oldest played unix and so on.
+- Riot API Real-Time Data Fetching  
+Uses Riot API to fetch data directly from the League of Legends's servers.
 
 Here is an example code for Player Profile (overview) feature:
 1. Add your Riot API key to the API_KEY variable in the RiotAPIProfileDataAccess class.
 2. Execute the OverviewUseCase
-
+---
 ## Installation Instructions  
+To set up and the run Summoner Buddy, one person needs to clone the repository first:
 
-Follow these steps to set up and the run Summoner Buddy:
-
-**Step1: Clone the Repository**
-Begin by cloning the project repository from GitHub to your local development environment:
-    ```
-    git clone https://github.com/jackspedicey312/OP.GG.git
+### **Step1: Clone the Repository**  
+Begin by cloning the project repository from GitHub to your local development environment:  
+``` 
+    git clone https://github.com/jackspedicey312/OP.GG.git  
+```
 This will create a local copy of the codebase.  
-**Step 2: Register for a Riot API Key**
+
+
+### **Step 2: Register for a Riot API Key**  
 The application uses the Riot Games API for fetching player and match data. To acquire API key:
 1. Visit the [Riot Developer Portal](https://developer.riotgames.com/)
 2. Sign up for an account or log in if you already have one.
 3. Navigate to the API Keys section.
 4. Generate Development API Key. Note that development keys expire after 24 hours, so you will need to regenerate them
-if necessary.
-**Step 3: Add the API Key to the project**
+if necessary.  
+
+### **Step 3: Add the API Key to the project**  
 1. Open the project in your preferred IDE  (e.g., IntelliJ).
 2. Locate any RiotAPIDataAccess class in the data_access package (e.g., RiotAPIUserDataAccess).
 3. Replace the placeholder API_KEY with your actual API key:
    public class RiotAPIDataAccess {
    private static final String API_KEY = "your_api_key_here";
    }
-4. Save your changes and your key is now securely added!
-**Step 4: Install Project Dependencies**
+4. Save your changes and your key is now securely added!  
+
+### **Step 4: Install Project Dependencies**  
 The application may rely on external libraries to function. To make sure all dependencies are properly installed, follow
 these steps:
 1. Open the pom.xml (Maven) file in the root directory.
@@ -76,7 +81,8 @@ these steps:
    ```
    mvn install
 3. Your dependencies are now downloaded in the project! 
-**Step 5: Build and Run the Project**
+
+### **Step 5: Build and Run the Project**
 1. Compile the codebase:
     In IntelliJ: Click Build > Build Project.
     In the terminal (for Maven)
@@ -88,7 +94,8 @@ these steps:
     Run the main method to start the application.
     You should now be able to navigate through the application from the main menu or login interface.
 
-**Step 6: Verify Functionality**
+### **Step 6: Verify Functionality**  
+
 To test the main features:
 - Log in using a summoner's name and region.
 - View the player profile, match history, champion mastery and other stats and pages.
@@ -96,34 +103,17 @@ To troubleshoot any errors:
 - Double check that your API key is active.
 - Check network connectivity to Riot's servers.
 
-**Important Notes:**
+**Important Notes:**  
 Please consider that the Riot's development API keys are temporary. Always verify the key's validity if requests fail.
 And please make sure that you are connected to the internet to fetch real-time data from the Riot API.
 
-
-## Usage Guide  
-
-## Instruction on How to Use the Software  
-
-1. Clone the Repository
-    ```
-    git clone https://github.com/jackspedicey312/OP.GG.git
-    cd OP.GG
-
-2. Install Dependencies
-    We are using Maven for this project:
-    ```
-   mvn install
-   
-3. Run the application
-
-
-
+---
 ## License  
 Please refer to the LICENSE file for details about usage permissions and restrictions. The software is licensed under 
 the MIT License, allowing developers to use, modify, and distribute the software freely, provided that the original 
 copyright notice is retained. Note that the software is provided 'as-is' without any warranties.
 
+---
 ## Feedback and Discussions  
 We are excited to hear your feedback and suggestions to make our League of Legends analytics application better! This 
 repository is the official space for public feedback discussions related to all aspects of the project, including 
@@ -144,7 +134,7 @@ duplicate issue.
 Please note that any forward-looking statements or development plans shared in this repository are subject to change. 
 These discussion are not guarantees or commitments to deliver specific features by a particular date.
 Thank you for helping us improve the project and creating a better experience for all users!
-
+---
 ## Contributing  
 We're excited to welcome contributions to our League of Legends analytics app! Whether you’re fixing bugs, adding new 
 features, improving documentation, or sharing feedback, your contributions help make this project better for everyone.
