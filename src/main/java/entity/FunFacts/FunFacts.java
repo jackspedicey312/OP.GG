@@ -20,7 +20,7 @@ public class FunFacts {
     private int totalSavedAllies;
 
     public static String unixConverter(long unixCode) {
-        Instant instant = Instant.ofEpochSecond(unixCode);
+        Instant instant = Instant.ofEpochMilli(unixCode);
 
         // Define a formatter for a readable date-time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")

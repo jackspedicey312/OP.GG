@@ -80,7 +80,8 @@ public class LoggedInView extends JPanel implements ActionListener {
             matchHistoryController.execute();
         } else if (e.getSource() == funFactsButton) {
             funFactController.execute();
-        } else if (e.getSource() == profileButton) {
+        }
+        else if (e.getSource() == profileButton) {
             profileController.execute();
         }
         else {

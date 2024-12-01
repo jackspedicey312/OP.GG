@@ -64,11 +64,18 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         final JPanel middlePanel = new JPanel();
         middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
         ImageIcon icon = match.getChampionIcon(ind);
-        Image image = icon.getImage();
-        Image newimage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        icon = new ImageIcon(newimage);
-        final JLabel iconlabel = new JLabel(icon);
-        middlePanel.add(iconlabel);
+
+        if (icon != null) {
+            Image image = icon.getImage();
+            Image newimage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimage);
+            final JLabel iconlabel = new JLabel(icon);
+            middlePanel.add(iconlabel);
+        }
+        else {
+            JLabel iconLabel = new JLabel("No Image Available");
+            middlePanel.add(iconLabel);
+        }
 
         final JPanel rightPanel = getrightjPanel(match, ind);
 

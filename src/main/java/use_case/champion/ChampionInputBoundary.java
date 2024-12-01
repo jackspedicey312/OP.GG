@@ -1,5 +1,6 @@
 package use_case.champion;
+import java.io.IOException;
 
 public interface ChampionInputBoundary {
-    void fetchTopChampions(String summonerID, String region);
+    void execute(String puuId, String region) throws IOException;
 }

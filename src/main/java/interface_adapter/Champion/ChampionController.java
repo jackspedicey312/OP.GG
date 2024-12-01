@@ -1,15 +1,18 @@
-package interface_adapter.Champion;
+package interface_adapter.champion;
 
 import use_case.champion.ChampionInputBoundary;
 
-public class ChampionController {
-    private final ChampionInputBoundary inputBoundary;
+import java.io.IOException;
 
-    public ChampionController(ChampionInputBoundary inputBoundary) {
-        this.inputBoundary = inputBoundary;
+public class ChampionController {
+
+    private final ChampionInputBoundary championInputBoundary;
+
+    public ChampionController(ChampionInputBoundary championInputBoundary) {
+        this.championInputBoundary = championInputBoundary;
     }
 
-    public void onFetchTopChampionsClicked(String summonerID, String region) {
-        inputBoundary.fetchTopChampions(summonerID, region);
+    public void execute(String puuId, String region) throws IOException {
+        championInputBoundary.execute(puuId, region);
     }
 }

@@ -3,6 +3,8 @@ package data_access;
 import entity.FunFacts.FunFacts;
 import entity.OverviewProfile.ProfileOverview;
 import entity.OverviewProfile.Rank;
+import entity.champion.Champion;
+import entity.champion.ChampionFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
@@ -26,11 +28,13 @@ public class RiotUserDataAccessObject {
     private final RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
     private final RiotAPIProfileDataAccess profileDataAccess = new RiotAPIProfileDataAccess();
     private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
+    private final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
+    private final ChampionFactory championFactory = new ChampionFactory();
 
     public User getUser(String username, String tagline, String region) throws Exception {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
@@ -77,4 +81,28 @@ public class RiotUserDataAccessObject {
     public FunFacts getFunFacts(String puuId, String region) throws Exception {
         return funFactsDataAccess.getFunFacts(puuId, region);
     }
+
+    public List<Champion> getChampions(String puuId, String region) throws Exception {
+        final List<Champion> championList = new ArrayList<>();
+
+        final List<Champion> allChampions = championDataAccess.fetchAllChampions(puuId, region);
+
+        for (Champion champion : allChampions) {
+            championList.add(championFactory.createChampion(
+                    champion.getChampionName(),
+                    champion.getChampionId(),
+                    champion.getMagicDamage(),
+                    champion.getPhysicalDamage(),
+                    champion.getTotalDamage(),
+                    champion.getTrueDamage(),
+                    champion.getKills(),
+                    champion.getMasteryPoints()
+            ));
+        }
+
+        // Return the processed list of champions
+        return championList;
+    }
+
 }
+

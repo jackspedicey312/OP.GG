@@ -90,7 +90,7 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
         this.add(rankIconLabel);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        JPanel performanceStatsPanel = createInfoPanel("Performance Stats", new String[]{
+        JPanel performanceStatsPanel = createInfoPanel("Ranked Stats", new String[]{
                 "Rank: " + profileViewModel.getState().getRank() + " " + profileViewModel.getState().getDivision(),
                 "Game Mode: " + profileViewModel.getState().getGameMode(),
                 "LP: " + profileViewModel.getState().getLeaguePoints(),

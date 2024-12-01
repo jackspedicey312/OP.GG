@@ -1,24 +1,30 @@
-package interface_adapter.Champion;
+package interface_adapter.champion;
 
+import entity.champion.Champion;
+import interface_adapter.ViewManagerModel;
 import use_case.champion.ChampionOutputBoundary;
-import use_case.champion.ChampionOutputData;
 
 import java.util.List;
 
 public class ChampionPresenter implements ChampionOutputBoundary {
+    private final ChampionViewModel championViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    private List<ChampionOutputData> champions;
-
-    @Override
-    public void presentTopChampions(List<ChampionOutputData> champions) {
-        this.champions = champions;
-        System.out.println("Top Champions:");
-        for (ChampionOutputData champion : champions) {
-            System.out.println(champion.getChampionName() + " - " + champion.getMasteryPoints() + " points");
-        }
+    public ChampionPresenter(ChampionViewModel championViewModel, ViewManagerModel viewManagerModel) {
+        this.championViewModel = championViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
-    public List<ChampionOutputData> getChampions() {
-        return champions;
+    @Override
+    public void presentChampions(List<Champion> champions) {
+        ChampionState state = championViewModel.getState();
+        state.setChampions(champions);
+        championViewModel.setState(state);
+        championViewModel.firePropertyChanged();
+    }
+
+    public void prepareView() {
+        viewManagerModel.setState(championViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }
