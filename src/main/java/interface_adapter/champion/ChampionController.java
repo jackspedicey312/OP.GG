@@ -1,7 +1,8 @@
 package interface_adapter.champion;
 
-import entity.champion.Champion;
 import use_case.champion.ChampionInputBoundary;
+
+import java.io.IOException;
 
 public class ChampionController {
 
@@ -11,7 +12,7 @@ public class ChampionController {
         this.championInputBoundary = championInputBoundary;
     }
 
-    public void execute() {
-        championInputBoundary.execute();
+    public void execute(String puuId, String region) throws IOException {
+        championInputBoundary.execute(puuId, region);
     }
 }
