@@ -32,6 +32,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
     private final RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
     private final RiotAPIProfileDataAccess profileDataAccess = new RiotAPIProfileDataAccess();
+    private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
     private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
@@ -47,11 +48,11 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
 
     public ProfileOverview getProfileOverview(String puuId, String region) {
 
-        return profileOverviewFactory.createProfileOverview();
+        return profileDataAccess.generateProfileData(puuId, region);
     }
 
-    public Rank getRank() {
-        return rankFactory.createRank();
+    public Rank getRank(String summonerId, String region) {
+        return rankDataAccess.generateRank();
     }
 
     public MatchHistory getMatchHistory(String puuId, String region, int count) throws Exception {
