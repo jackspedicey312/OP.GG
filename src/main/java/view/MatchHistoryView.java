@@ -21,7 +21,6 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     private final String viewName = "matchHistory";
     private MatchHistoryViewModel matchHistoryViewModel;
     private BackController backController;
-    private JPanel mainPanel;
     private JPanel listPanel;
     private JPanel buttonPanel;
     private JButton backbutton = new JButton("Back");
@@ -33,15 +32,13 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         this.backController = backController;
         this.matchHistoryViewModel.addPropertyChangeListener(this);
 
-        this.mainPanel = new JPanel(new BorderLayout());
         this.listPanel = new JPanel(new BorderLayout());
         listPanel.setBorder(BorderFactory.createTitledBorder("Match History"));
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         this.buttonPanel = new JPanel(new BorderLayout());
         backbutton.addActionListener(this);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        this.mainPanel.add(listPanel);
-        this.mainPanel.add(buttonPanel);
+        this.add(listPanel);
+        this.add(buttonPanel);
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
