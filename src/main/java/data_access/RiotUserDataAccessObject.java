@@ -33,12 +33,9 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
-    private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
-    private final RankFactory rankFactory = new RankFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
-    private final FunFactsFactory funFactsFactory = new FunFactsFactory();
 
     public User getUser(String username, String tagline, String region) throws Exception {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));

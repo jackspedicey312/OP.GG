@@ -90,7 +90,6 @@ public class RiotAPIFunFactsDataAccess {
         funFacts.setTotalPlaytime(totalPlaytime);
         funFacts.setTotalWins(totalWins);
         funFacts.setTotalLosses(totalLosses);
-
         funFacts.setTotalSurvivedSingleDigitHp(totalsurvivedSingleDigitHp);
         funFacts.setTotalSurrenders(totalSurrenders);
         funFacts.setTotalPentakills(totalPentakills);
