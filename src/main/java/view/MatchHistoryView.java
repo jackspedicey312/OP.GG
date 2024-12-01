@@ -8,6 +8,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 
+import interface_adapter.matchHistory.MatchHistoryState;
 import org.jetbrains.annotations.NotNull;
 
 import entity.match.Match;
@@ -44,29 +45,28 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
-        final MatchHistory matches = matchHistoryViewModel.getState().getMatchHistory();
-        final int length = matches.getLength();
+        final MatchHistoryState match = matchHistoryViewModel.getState();
+        final int length = match.getLength();
         listPanel.removeAll();
         for (int i = 0; i < length; i++) {
-            final Match match = matches.getMatch(i);
-            final JPanel eachmatch = createMatchDetails(match);
+            final JPanel eachmatch = createMatchDetails(match, i);
             listPanel.add(eachmatch);
         }
     }
 
     @SuppressWarnings({"checkstyle:MethodName", "checkstyle:SuppressWarnings"})
-    private JPanel createMatchDetails(Match match) {
+    private JPanel createMatchDetails(MatchHistoryState match, int ind) {
         final JPanel backPanel = new JPanel();
         backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.X_AXIS));
 
-        final JPanel leftPanel = getleftjPanel(match);
+        final JPanel leftPanel = getleftjPanel(match, ind);
 
         final JPanel middlePanel = new JPanel();
         middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
-        final JLabel icon = new JLabel(match.getChampionIcon());
+        final JLabel icon = new JLabel(match.getChampionIcon(ind));
         middlePanel.add(icon);
 
-        final JPanel rightPanel = getrightjPanel(match);
+        final JPanel rightPanel = getrightjPanel(match, ind);
 
         backPanel.add(leftPanel);
         backPanel.add(middlePanel);
@@ -75,14 +75,14 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     }
 
     @NotNull
-    private static JPanel getleftjPanel(Match match) {
+    private static JPanel getleftjPanel(MatchHistoryState match, int ind) {
         final JPanel leftPanel = new JPanel();
 
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         final JPanel leftupPanel = new JPanel();
         leftupPanel.setLayout(new BoxLayout(leftupPanel, BoxLayout.Y_AXIS));
-        final JLabel aram = new JLabel(match.getGameMode());
-        final JLabel date = new JLabel(match.getDate());
+        final JLabel aram = new JLabel(match.getGameMode(ind));
+        final JLabel date = new JLabel(match.getDate(ind));
         leftPanel.add(aram);
         leftPanel.add(date);
 
@@ -90,8 +90,8 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
 
         final JPanel leftdownPanel = new JPanel();
         leftdownPanel.setLayout(new BoxLayout(leftdownPanel, BoxLayout.Y_AXIS));
-        final JLabel result = new JLabel(match.getResult());
-        final JLabel duration = new JLabel(match.getDuration());
+        final JLabel result = new JLabel(match.getWinOrLoss(ind));
+        final JLabel duration = new JLabel(match.getDuration(ind));
         leftdownPanel.add(result);
         leftdownPanel.add(duration);
 
@@ -102,12 +102,12 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     }
 
     @NotNull
-    private JPanel getrightjPanel(Match match) {
+    private JPanel getrightjPanel(MatchHistoryState match, int ind) {
         final JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         final JPanel rightupPanel = new JPanel();
         final JPanel rightmiddlePanel = new JPanel();
-        final JLabel kda = new JLabel(getkda(match));
+        final JLabel kda = new JLabel(getkda(match, ind));
         rightmiddlePanel.add(kda);
         final JPanel rightdownPanel = new JPanel();
 
@@ -117,10 +117,10 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         return rightPanel;
     }
 
-    private String getkda(Match match) {
-        final int k = match.getKills();
-        final int d = match.getDeaths();
-        final int a = match.getAssissts();
+    private String getkda(MatchHistoryState match, int ind) {
+        final int k = match.getKills(ind);
+        final int d = match.getDeaths(ind);
+        final int a = match.getAssissts(ind);
         final String strk = String.valueOf(k);
         final String strd = String.valueOf(d);
         final String stra = String.valueOf(a);
