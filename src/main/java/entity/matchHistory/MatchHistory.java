@@ -1,19 +1,19 @@
-package entity.MatchList;
+package entity.matchHistory;
 
 import entity.match.Match;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchList {
+public class MatchHistory {
 
     private List<Match> matches = new ArrayList<>();
 
-    public MatchList(List<Match> matchList) {
+    public MatchHistory(List<Match> matchList) {
         matches.addAll(matchList);
     }
 
-    public MatchList(Match match) {
+    public MatchHistory(Match match) {
         matches.add(match);
     }
 

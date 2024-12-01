@@ -1,4 +1,4 @@
-package entity.User;
+package entity.user;
 
 /**
  * Represents a user in the system.

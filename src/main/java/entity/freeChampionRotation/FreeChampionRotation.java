@@ -1,4 +1,4 @@
-package entity.FreeChampionRotation;
+package entity.freeChampionRotation;
 
 import javax.swing.*;
 import java.util.ArrayList;

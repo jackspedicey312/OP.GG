@@ -1,8 +1,7 @@
 package use_case.login;
 
-import entity.FreeChampionRotation.FreeChampionRotation;
-import entity.MatchList.MatchList;
-import entity.User.User;
+import entity.freeChampionRotation.FreeChampionRotation;
+import entity.user.User;
 
 /**
  * The output data for the login use case.

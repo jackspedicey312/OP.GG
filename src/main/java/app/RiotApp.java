@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 import java.io.IOException;
 
 import data_access.*;
-import entity.User.UserFactory;
+import entity.user.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.back.BackController;
 import interface_adapter.back.BackPresenter;
@@ -14,6 +14,9 @@ import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.matchHistory.MatchHistoryController;
+import interface_adapter.matchHistory.MatchHistoryPresenter;
+import interface_adapter.matchHistory.MatchHistoryViewModel;
 import use_case.back.BackInputBoundary;
 import use_case.back.BackInteractor;
 import use_case.back.BackOutputBoundary;
@@ -23,6 +26,9 @@ import use_case.freechampionrotation.FreeChampionRotationOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
+import use_case.matchHistory.MatchHistoryInputBoundary;
+import use_case.matchHistory.MatchHistoryInteractor;
+import use_case.matchHistory.MatchHistoryOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -40,6 +46,7 @@ public class RiotApp {
 
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
+    private MatchHistoryController matchHistoryController;
     private FreeChampionRotationController freeChampionRotationController;
     private BackController backController;
 
@@ -47,6 +54,8 @@ public class RiotApp {
     private LoginViewModel loginViewModel;
     private LoggedInView loggedInView;
     private LoggedInViewModel loggedInViewModel;
+    private MatchHistoryView matchHistoryView;
+    private MatchHistoryViewModel matchHistoryViewModel;
     private FreeChampionRotationView freeChampionRotationView;
     private FreeChampionRotationViewModel freeChampionRotationViewModel;
 
@@ -68,6 +77,12 @@ public class RiotApp {
         return this;
     }
 
+    public RiotApp addMatchHistoryView() {
+        matchHistoryViewModel = new MatchHistoryViewModel();
+        matchHistoryView = new MatchHistoryView(matchHistoryViewModel, backController);
+        cardPanel.add(matchHistoryView, matchHistoryView.getViewName());
+    }
+
     public RiotApp addFreeChampionRotationView() throws IOException {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
         freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel);
@@ -81,6 +96,14 @@ public class RiotApp {
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
         loginController = new LoginController(loginInteractor);
         loginView.setLoginController(loginController);
+        return this;
+    }
+
+    public RiotApp addMatchHistoryUseCase() {
+        final MatchHistoryOutputBoundary matchHistoryOutputBoundary = new MatchHistoryPresenter(matchHistoryViewModel, viewManagerModel);
+        final MatchHistoryInputBoundary matchHistoryInteractor = new MatchHistoryInteractor(matchHistoryOutputBoundary);
+        matchHistoryController = new MatchHistoryController(matchHistoryInteractor);
+        matchHistoryView.setBackController(backController);
         return this;
     }
 
