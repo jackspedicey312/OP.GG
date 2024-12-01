@@ -23,6 +23,10 @@ public class MatchHistoryState {
         return matchHistory.getMatch(index).getAssissts();
     }
 
+    public String getWinOrLoss(int index) {
+        return matchHistory.getMatch(index).getWinOrLoss();
+    }
+
     public String getDuration(int index) {
         return matchHistory.getMatch(index).getDuration();
     }
