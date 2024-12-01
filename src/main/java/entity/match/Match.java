@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.ImageIcon;
 
-import static jdk.internal.org.jline.utils.Colors.s;
-
 /**
  * Represents a match retrieved from Riot API.
  */
@@ -16,7 +14,7 @@ public class Match {
     private final int kills;
     private final int deaths;
     private final int assissts;
-    private final int duration;
+    private final String duration;
     private final String gameMode;
     private final String date;
 
@@ -25,7 +23,7 @@ public class Match {
         this.kills = kills;
         this.deaths = deaths;
         this.assissts = assissts;
-        this.duration = duration;
+        this.duration = secondsToMinutes(duration);
         this.gameMode = gameMode;
         this.date = unixConverter(unixTime);
     }
@@ -57,6 +55,18 @@ public class Match {
     }
 
     public String getDuration() {
+        return duration;
+    }
+
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String secondsToMinutes(int time) {
         final int hour = duration / 3600;
         final int minute = (duration - hour * 3600) / 60;
         final int second = (duration - hour * 3600) % 60;
@@ -75,13 +85,5 @@ public class Match {
         else {
             return seconds + s;
         }
-    }
-
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public String getDate() {
-        return date;
     }
 }
