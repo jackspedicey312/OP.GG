@@ -2,20 +2,11 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import data_access.RiotAPIChampionDataAccess;
-import data_access.RiotUserDataAccessObject;
-import entity.match.Match;
-import interface_adapter.Champion.ChampionController;
-import interface_adapter.Champion.ChampionPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.funfacts.FunFactController;
-import interface_adapter.login.LoginController;
 import interface_adapter.ProfilePresenter.ProfileController;
 import interface_adapter.matchHistory.MatchHistoryController;
-import use_case.champion.FetchTopChampionsUseCase;
 
 import javax.swing.*;
 
