@@ -23,7 +23,6 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
     private final String viewName = "profile";
     private final ProfileViewModel profileViewModel;
     private final BackController backController;
-    private final JPanel this = new JPanel();
 
     public ProfileView(ProfileViewModel profileViewModel, BackController backController) throws IOException {
         this.profileViewModel = profileViewModel;
