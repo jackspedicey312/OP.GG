@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.ImageIcon;
 
+import static jdk.internal.org.jline.utils.Colors.s;
+
 /**
  * Represents a match retrieved from Riot API.
  */
@@ -54,8 +56,25 @@ public class Match {
         return assissts;
     }
 
-    public int getDuration() {
-        return duration;
+    public String getDuration() {
+        final int hour = duration / 3600;
+        final int minute = (duration - hour * 3600) / 60;
+        final int second = (duration - hour * 3600) % 60;
+        final String hours = String.valueOf(hour);
+        final String minutes = String.valueOf(minute);
+        final String seconds = String.valueOf(second);
+        final String h = "h";
+        final String m = "min";
+        final String s = "s";
+        if (hour != 0) {
+            return hours + h + minutes + m + seconds + s;
+        }
+        else if (minute != 0) {
+            return minutes + m + seconds + s;
+        }
+        else {
+            return seconds + s;
+        }
     }
 
     public String getGameMode() {
