@@ -7,14 +7,25 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ProfileOverview {
+    private String username;
+    private String tag;
     private String summonerID;
     private int summonerLevel;
     private ImageIcon summonerImage;
 
-    public ProfileOverview(String summonerID, int summonerLevel, int iconID) throws IOException {
+    public ProfileOverview(String username, String tag, String summonerID, int summonerLevel, int iconID)
+            throws IOException {
+        this.username = username;
+        this.tag = tag;
         this.summonerID = summonerID;
         this.summonerLevel = summonerLevel;
         this.summonerImage = getIconPng(iconID);
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getTag() {
+        return tag;
     }
 
     public String getSummonerID() {
