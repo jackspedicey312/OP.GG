@@ -26,7 +26,7 @@ public class LoginInteractor implements LoginInputBoundary {
             final User user = userDataAccessObject.getUser(inputData.getUsername(),
                     inputData.getTagline(), inputData.getRegion());
             final ProfileOverview profileOverview = userDataAccessObject.getProfileOverview(user.getPuuid(), user.getRegion());
-            final Rank rank = userDataAccessObject.getRank(profileOverview.getSummonerId(), user.getRegion())
+            final Rank rank = userDataAccessObject.getRank(profileOverview.getSummonerId(), user.getRegion());
             final MatchHistory matchHistory = userDataAccessObject.getMatchHistory(user.getPuuid(), user.getRegion(), 20);
             final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
             loginPresenter.prepareSuccessView(new LoginOutputData(user, profileOverview,rank, matchHistory, freeChampionRotation));

@@ -11,7 +11,6 @@ import entity.match.Match;
 import entity.match.MatchFactory;
 import entity.matchHistory.MatchHistory;
 import entity.matchHistory.MatchHistoryFactory;
-import entity.playerStats.PlayerStatsFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 
@@ -46,13 +45,13 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
     }
 
-    public ProfileOverview getProfileOverview(String puuId, String region) {
+    public ProfileOverview getProfileOverview(String puuId, String region) throws IOException {
 
         return profileDataAccess.generateProfileData(puuId, region);
     }
 
-    public Rank getRank(String summonerId, String region) {
-        return rankDataAccess.generateRank();
+    public Rank getRank(String summonerId, String region) throws IOException {
+        return rankDataAccess.generateRank(summonerId, region);
     }
 
     public MatchHistory getMatchHistory(String puuId, String region, int count) throws Exception {
