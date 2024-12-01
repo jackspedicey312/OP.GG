@@ -7,10 +7,14 @@ import java.beans.PropertyChangeListener;
 
 import data_access.RiotAPIChampionDataAccess;
 import data_access.RiotUserDataAccessObject;
+import entity.match.Match;
 import interface_adapter.Champion.ChampionController;
 import interface_adapter.Champion.ChampionPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
+import interface_adapter.funfacts.FunFactController;
 import interface_adapter.login.LoginController;
+import interface_adapter.ProfilePresenter.ProfileController;
+import interface_adapter.matchHistory.MatchHistoryController;
 import use_case.champion.FetchTopChampionsUseCase;
 
 import javax.swing.*;
@@ -25,7 +29,11 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final JButton funFactsButton = new JButton("Fun Facts");
     private final JButton logoutButton = new JButton("Log out");
     private final LoggedInViewModel loggedInViewModel;
+
+    private final ProfileController profileController;
+    private final MatchHistoryController matchHistoryController;
     private final FreeChampionRotationController freeChampionRotationController;
+    private final FunFactController funFactController;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel,
                         FreeChampionRotationController freeChampionRotationController) {
@@ -62,6 +70,12 @@ public class LoggedInView extends JPanel implements ActionListener {
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (e.getSource() == freeChampionRotationButton) {
             freeChampionRotationController.execute();
+        } else if (e.getSource() == matchHistoryButton) {
+            matchHistoryController.execute();
+        } else if (e.getSource() == funFactsButton) {
+            funFactController.execute();
+        } else {
+            profileController.execute();
         }
     }
 

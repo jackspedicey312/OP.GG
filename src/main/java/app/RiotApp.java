@@ -42,7 +42,6 @@ public class RiotApp {
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
     // thought question: is the hard dependency below a problem?
-    private final UserFactory userFactory = new UserFactory();
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
