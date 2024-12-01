@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.Champion;
+import entity.ChampionMastery.Champion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
