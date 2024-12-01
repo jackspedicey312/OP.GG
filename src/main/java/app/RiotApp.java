@@ -18,6 +18,8 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.matchHistory.MatchHistoryController;
 import interface_adapter.matchHistory.MatchHistoryPresenter;
 import interface_adapter.matchHistory.MatchHistoryViewModel;
+import interface_adapter.ProfilePresenter.ProfileController
+import interface_adapter.profile.ProfilePresenter;
 import interface_adapter.profile.ProfileViewModel;
 import use_case.back.BackInputBoundary;
 import use_case.back.BackInteractor;
@@ -31,6 +33,9 @@ import use_case.login.LoginOutputBoundary;
 import use_case.matchHistory.MatchHistoryInputBoundary;
 import use_case.matchHistory.MatchHistoryInteractor;
 import use_case.matchHistory.MatchHistoryOutputBoundary;
+import use_case.overview.ProfileInputBoundary;
+import use_case.overview.ProfileInteractor;
+import use_case.overview.ProfileOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -47,6 +52,7 @@ public class RiotApp {
 
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
+    private ProfileController profileController;
     private MatchHistoryController matchHistoryController;
     private FreeChampionRotationController freeChampionRotationController;
     private BackController backController;
@@ -82,7 +88,7 @@ public class RiotApp {
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInViewModel, freeChampionRotationController);
+        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController);
         cardPanel.add(loggedInView, loggedInView.getViewName());
         return this;
     }
@@ -121,6 +127,13 @@ public class RiotApp {
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
         loginController = new LoginController(loginInteractor);
         loginView.setLoginController(loginController);
+        return this;
+    }
+
+    public RiotApp addProfileUseCase() {
+        final ProfileOutputBoundary profileOutputBoundary = new ProfilePresenter(profileViewModel, viewManagerModel);
+        final ProfileInputBoundary profileInteractor = new ProfileInteractor(profileOutputBoundary);
+        profileController = new ProfileController(profileInteractor);
         return this;
     }
 

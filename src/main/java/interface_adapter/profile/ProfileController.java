@@ -1,18 +1,18 @@
 package interface_adapter.ProfilePresenter;
 
-import use_case.overview.OverviewInputBoundary;
+import use_case.overview.ProfileInputBoundary;
 
 public class ProfileController {
 
-    private final OverviewInputBoundary overviewInputBoundary;
+    private final ProfileInputBoundary profileInputBoundary;
 
-    public ProfileController(OverviewInputBoundary overviewInputBoundary) {
-        this.overviewInputBoundary = overviewInputBoundary;
+    public ProfileController(ProfileInputBoundary profileInputBoundary) {
+        this.profileInputBoundary = profileInputBoundary;
 
     }
 
     public void execute() {
-        overviewInputBoundary.execute();
+        profileInputBoundary.execute();
     }
 
 }

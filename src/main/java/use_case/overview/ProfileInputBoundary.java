@@ -1,6 +1,6 @@
 package use_case.overview;
 
-public interface OverviewInputBoundary {
+public interface ProfileInputBoundary {
 
     void execute();
 

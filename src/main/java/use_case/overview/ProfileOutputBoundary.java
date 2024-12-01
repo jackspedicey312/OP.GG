@@ -1,5 +1,5 @@
 package use_case.overview;
 
-public interface OverviewOutputBoundary {
+public interface ProfileOutputBoundary {
     void prepareView();
 }

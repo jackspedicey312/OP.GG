@@ -36,9 +36,15 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final FunFactController funFactController;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel,
-                        FreeChampionRotationController freeChampionRotationController) {
+                        ProfileController profileController,
+                        FreeChampionRotationController freeChampionRotationController,
+                        MatchHistoryController matchHistoryController,
+                        FunFactController funFactController) {
         this.loggedInViewModel = loggedInViewModel;
+        this.profileController = profileController;
         this.freeChampionRotationController = freeChampionRotationController;
+        this.funFactController = funFactController;
+        this.matchHistoryController = matchHistoryController;
 
         final JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
