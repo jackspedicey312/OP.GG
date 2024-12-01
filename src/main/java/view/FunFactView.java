@@ -1,25 +1,30 @@
 package view;
 
+import interface_adapter.back.BackController;
 import interface_adapter.funfacts.FunFactPresenter;
+import interface_adapter.funfacts.FunFactViewModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class FunFactView extends JFrame {
+public class FunFactView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final FunFactViewModel funFactViewModel;
+    private final BackController backController;
+    private final JPanel mainPanel = new JPanel();
+    private final JPanel contentPanel = new JPanel();
 
-    public FunFactView(FunFactPresenter presenter) {
-
-        // Set up frame
-        setTitle("Fun Facts");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600); // Adjusted size for better layout
-        setLocationRelativeTo(null);
+    public FunFactView(FunFactViewModel funFactViewModel, BackController backController) {
+        this.funFactViewModel = funFactViewModel;
+        this.backController = backController;
 
         // Main panel with padding
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        add(mainPanel);
 
         // Title
         JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
@@ -27,29 +32,8 @@ public class FunFactView extends JFrame {
         mainPanel.add(title, BorderLayout.NORTH);
 
         // Content panel for stats
-        JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns
         mainPanel.add(contentPanel, BorderLayout.CENTER);
-
-        // Helper method to add labeled statistics
-        addStat(contentPanel, "The oldest match analyzed:", presenter.getOldestGamePlayed());
-        addStat(contentPanel, "Total Playtime (Hours):", presenter.getTotalPlaytime());
-        addStat(contentPanel, "Total Wins:", presenter.getTotalWins());
-        addStat(contentPanel, "Total Losses:", presenter.getTotalLosses());
-        addStat(contentPanel, "Total Kills:", presenter.getTotalKills());
-        addStat(contentPanel, "Total Deaths:", presenter.getTotalDeaths());
-        addStat(contentPanel, "Longest game you played (Minutes):", presenter.getLongestGamePlayed());
-        addStat(contentPanel, "What a great use of time! You played that super long game on :",
-                presenter.getLongestGamePlayedDate());
-        addStat(contentPanel, "Total times you have surrendered:", presenter.getTotalSurrenders());
-        addStat(contentPanel, "Total Pentakills:", presenter.getTotalPentakills());
-        addStat(contentPanel, "Total times you have survived with single digit HP:",
-                presenter.getTotalSurvivedSingleDigitHp());
-        addStat(contentPanel, "Total Snowballs Hit:", presenter.getTotalSnowballsHit());
-        addStat(contentPanel, "Total times you have saved your teammate:", presenter.getTotalSavedAllies());
-
-        // Show frame
-        setVisible(true);
     }
 
     /**
@@ -63,5 +47,33 @@ public class FunFactView extends JFrame {
         JLabel valueLabel = new JLabel(String.valueOf(value));
         valueLabel.setFont(new Font("Arial", Font.BOLD, 16));
         panel.add(valueLabel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        backController.execute();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // Helper method to add labeled statistics
+        addStat(contentPanel, "The oldest match analyzed:", funFactViewModel.getState().getOldestGamePlayed());
+        addStat(contentPanel, "Total Playtime (Hours):", funFactViewModel.getState().getTotalPlaytime());
+        addStat(contentPanel, "Total Wins:", funFactViewModel.getState().getTotalWins());
+        addStat(contentPanel, "Total Losses:", funFactViewModel.getState().getTotalLosses());
+        addStat(contentPanel, "Total Kills:", funFactViewModel.getState().getTotalKills());
+        addStat(contentPanel, "Total Deaths:", funFactViewModel.getState().getTotalDeaths());
+        addStat(contentPanel, "Longest game you played (Minutes):", funFactViewModel.getState().getLongestGamePlayed());
+        addStat(contentPanel, "What a great use of time! You played that super long game on :",
+                funFactViewModel.getState().getLongestGamePlayedDate());
+        addStat(contentPanel, "Total times you have surrendered:", funFactViewModel.getState().getTotalSurrenders());
+        addStat(contentPanel, "Total Pentakills:", funFactViewModel.getState().getTotalPentakills());
+        addStat(contentPanel, "Total times you have survived with single digit HP:",
+                funFactViewModel.getState().getTotalSurvivedSingleDigitHp());
+        addStat(contentPanel, "Total Snowballs Hit:", funFactViewModel.getState().getTotalSnowballsHit());
+        addStat(contentPanel, "Total times you have saved your teammate:", funFactViewModel.getState().getTotalSavedAllies());
+
+        // Show frame
+        mainPanel.setVisible(true);
     }
 }

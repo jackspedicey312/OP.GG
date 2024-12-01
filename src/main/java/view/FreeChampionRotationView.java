@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -81,10 +82,13 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         eachPanel.setLayout(new BoxLayout(eachPanel, BoxLayout.Y_AXIS));
         final String name = state.getFreeChampionsName(ind);
         final JLabel namelabel = new JLabel(name);
-        final ImageIcon icon = state.getFreeChampionIcons(ind);
-        final JLabel iconLabel = new JLabel(icon);
+        ImageIcon icon = state.getFreeChampionIcons(ind);
+        Image image = icon.getImage();
+        Image newimage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimage);
+        final JLabel iconlabel = new JLabel(icon);
         eachPanel.add(namelabel);
-        eachPanel.add(iconLabel);
+        eachPanel.add(iconlabel);
         return eachPanel;
     }
 

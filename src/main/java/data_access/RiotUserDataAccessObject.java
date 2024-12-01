@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
-    private User user;
-
     private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
@@ -84,7 +82,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
                 freeRotationDataAccess.getFreeChampionsIcons());
     }
 
-    public FunFacts getFunFactsFactory(String puuId, String region) throws Exception {
+    public FunFacts getFunFacts(String puuId, String region) throws Exception {
         return funFactsDataAccess.getFunFacts(puuId, region);
     }
 }
