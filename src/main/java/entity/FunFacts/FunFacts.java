@@ -28,43 +28,56 @@ public class FunFacts {
 
         return formatter.format(instant);
     }
-    public int setTotalPlaytime(int totalPlaytime) {
+
+    public void setTotalPlaytime(int totalPlaytime) {
         this.totalPlaytime = totalPlaytime;
     }
-    public int setTotalWins(int totalWins) {
+
+    public void setTotalWins(int totalWins) {
         this.totalWins = totalWins;
     }
-    public int setTotalLosses(int totalLosses) {
+
+    public void setTotalLosses(int totalLosses) {
         this.totalLosses = totalLosses;
     }
-    public int setTotalKills(int totalKills) {
+
+    public void setTotalKills(int totalKills) {
         this.totalKills = totalKills;
     }
-    public int setTotalDeaths(int totalDeaths) {
+
+    public void setTotalDeaths(int totalDeaths) {
         this.totalDeaths = totalDeaths;
     }
-    public int setOldestGamePlayedUnix(long oldestGamePlayedUnix) {
+
+    public void setOldestGamePlayedUnix(long oldestGamePlayedUnix) {
         this.oldestGamePlayedUnix = oldestGamePlayedUnix;
     }
-    public int setLongestGamePlayed(int longestGamePlayed) {
+
+    public void setLongestGamePlayed(int longestGamePlayed) {
         this.longestGamePlayed = longestGamePlayed;
     }
-    public int setLongestGamePlayedDate(long longestGamePlayedDate) {
+
+    public void setLongestGamePlayedDate(long longestGamePlayedDate) {
         this.longestGamePlayedDate = longestGamePlayedDate;
     }
-    public int setTotalSurrenders(int totalSurrenders) {
+
+    public void setTotalSurrenders(int totalSurrenders) {
         this.totalSurrenders = totalSurrenders;
     }
-    public int setTotalPentakills(int totalPentakills) {
+
+    public void setTotalPentakills(int totalPentakills) {
         this.totalPentakills = totalPentakills;
     }
-    public int setTotalSurvivedSingleDigitHp(int totalSurvivedSingleDigitHp) {
+
+    public void setTotalSurvivedSingleDigitHp(int totalSurvivedSingleDigitHp) {
         this.totalSurvivedSingleDigitHp = totalSurvivedSingleDigitHp;
     }
-    public int setTotalSnowballsHit(int totalSnowballsHit) {
+
+    public void setTotalSnowballsHit(int totalSnowballsHit) {
         this.totalSnowballsHit = totalSnowballsHit;
     }
-    public int setTotalSavedAllies(int totalSavedAllies) {
+
+    public void setTotalSavedAllies(int totalSavedAllies) {
         this.totalSavedAllies = totalSavedAllies;
     }
 
@@ -83,12 +96,15 @@ public class FunFacts {
     public String getLongestGamePlayedDate() {
         return unixConverter(longestGamePlayedDate);
     }
+
     public int getTotalSurvivedSingleDigitHp() {
         return totalSurvivedSingleDigitHp;
     }
+
     public int getTotalSurrenders() {
         return totalSurrenders;
     }
+
     public int getTotalPentakills() {
         return totalPentakills;
     }
@@ -96,18 +112,23 @@ public class FunFacts {
     public int getTotalKills() {
         return totalKills;
     }
+
     public int getTotalDeaths() {
         return totalDeaths;
     }
+
     public int getTotalLosses() {
         return totalLosses;
     }
+
     public int getTotalWins() {
         return totalWins;
     }
+
     public int getTotalSnowballsHit() {
         return totalSnowballsHit;
     }
+
     public int getTotalSavedAllies() {
         return totalSavedAllies;
     }
