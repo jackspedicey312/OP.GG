@@ -122,6 +122,10 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         totalDamageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         championPanel.add(totalDamageLabel);
 
+        JLabel masteryPointsLabel = new JLabel("Mastery Point: " + champion.getMasteryPoints());
+        masteryPointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        championPanel.add(masteryPointsLabel);
+
         return championPanel;
     }
 }
