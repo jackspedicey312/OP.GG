@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "Main Profile";
+    private final String viewName = "profile";
     private final ProfileViewModel profileViewModel;
     private final BackController backController;
     private final JPanel mainPanel = new JPanel();

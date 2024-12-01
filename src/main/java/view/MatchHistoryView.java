@@ -18,7 +18,7 @@ import interface_adapter.matchHistory.MatchHistoryViewModel;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class MatchHistoryView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "MatchHistory";
+    private final String viewName = "matchHistory";
     private MatchHistoryViewModel matchHistoryViewModel;
     private BackController backController;
     private JPanel mainPanel;
