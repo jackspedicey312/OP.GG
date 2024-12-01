@@ -92,12 +92,14 @@ public class RiotApp {
         profileViewModel = new ProfileViewModel();
         profileView = new ProfileView(profileViewModel, backController);
         cardPanel.add(profileView, profileView.getViewName());
+        return this;
     }
 
     public RiotApp addMatchHistoryView() {
         matchHistoryViewModel = new MatchHistoryViewModel();
         matchHistoryView = new MatchHistoryView(matchHistoryViewModel, backController);
         cardPanel.add(matchHistoryView, matchHistoryView.getViewName());
+        return this;
     }
 
     public RiotApp addFreeChampionRotationView() throws IOException {
