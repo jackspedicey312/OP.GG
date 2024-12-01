@@ -109,4 +109,5 @@ public class RiotAPIFunFactsDataAccess {
         }
         return 0;
     }
+
 }
