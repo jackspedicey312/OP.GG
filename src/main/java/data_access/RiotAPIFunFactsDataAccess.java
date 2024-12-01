@@ -49,22 +49,13 @@ public class RiotAPIFunFactsDataAccess {
                 JSONObject playerStats = null;
                 JSONObject playerStats2 = null;
                 JSONArray participants = metaData.getJSONArray("participants");
-                for (int j = 0; j < participants.length(); j++) {
-                    String player = participants.getString(j);
-                    if (puuid.equals(player)) {
-                        playerStats = matchInfo.getJSONArray("participants").getJSONObject(j);
-                        playerStats2 = playerStats.getJSONObject("challenges");
-                        break;
-                    }
-                    else {
-                        continue;
-                    }
-                }
+                int j = getPlayerMatchIndex(puuid, participants);
+                playerStats = matchInfo.getJSONArray("participants").getJSONObject(j);
+                playerStats2 = playerStats.getJSONObject("challenges");
 
                 if (playerStats.getBoolean("win")) {
                     totalWins += 1;
-                }
-                else {
+                } else {
                     totalLosses += 1;
                 }
 
@@ -82,8 +73,7 @@ public class RiotAPIFunFactsDataAccess {
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
                         + e.getMessage());
                 continue;
@@ -105,5 +95,13 @@ public class RiotAPIFunFactsDataAccess {
         funFacts.setTotalSavedAllies(totalSavedAllies);
 
         return funFacts;
+    }
+
+    public int getPlayerMatchIndex(String puuId, JSONArray participants) {
+        for (int j = 0; j < participants.length(); j++) {
+            if (puuId.equals(participants.getString(j))) {
+                return j;
+            }
+        }
     }
 }
