@@ -88,5 +88,6 @@ public class Rank {
         if (rank.equalsIgnoreCase("Challenger")) {
             return new ImageIcon("images/Rank=Challenger.png");
         }
+        return new ImageIcon();
     }
 }
