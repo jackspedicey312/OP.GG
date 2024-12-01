@@ -101,7 +101,7 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
         this.add(performanceStatsPanel);
 
         JScrollPane scrollPane = new JScrollPane(this);
-        add(scrollPane);
+        this.add(scrollPane);
     }
 
     public String getViewName() {

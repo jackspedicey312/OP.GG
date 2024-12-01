@@ -22,8 +22,8 @@ import javax.swing.*;
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
 public class LoggedInView extends JPanel implements ActionListener {
     private final String viewName = "loggedIn";
+    private final JButton profileButton = new JButton("Profile");
     private final JButton matchHistoryButton = new JButton("Match History");
-    private final JButton friendsButton = new JButton("Friends");
     private final JButton championsButton = new JButton("Champions");
     private final JButton freeChampionRotationButton = new JButton("Free Champion Rotation");
     private final JButton funFactsButton = new JButton("Fun Facts");
@@ -54,7 +54,7 @@ public class LoggedInView extends JPanel implements ActionListener {
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
         secondPanel.add(matchHistoryButton);
-        secondPanel.add(friendsButton);
+        secondPanel.add(profileButton);
         secondPanel.add(championsButton);
         secondPanel.add(freeChampionRotationButton);
         secondPanel.add(funFactsButton);
@@ -65,7 +65,7 @@ public class LoggedInView extends JPanel implements ActionListener {
         add(mainPanel);
 
         matchHistoryButton.addActionListener(this);
-        friendsButton.addActionListener(this);
+        profileButton.addActionListener(this);
         championsButton.addActionListener(this);
         freeChampionRotationButton.addActionListener(this);
         funFactsButton.addActionListener(this);
@@ -80,7 +80,10 @@ public class LoggedInView extends JPanel implements ActionListener {
             matchHistoryController.execute();
         } else if (e.getSource() == funFactsButton) {
             funFactController.execute();
-        } else {
+        } else if (e.getSource() == profileButton) {
+            profileController.execute();
+        }
+        else {
             profileController.execute();
         }
     }
