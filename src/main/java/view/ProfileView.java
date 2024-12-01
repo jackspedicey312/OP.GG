@@ -2,6 +2,7 @@ package view;
 
 import entity.OverviewProfile.ProfileOverview;
 import entity.OverviewProfile.Rank;
+import interface_adapter.back.BackController;
 import interface_adapter.profile.ProfilePresenter;
 import interface_adapter.profile.ProfileViewModel;
 
@@ -9,21 +10,26 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
-public class ProfileView extends JFrame {
+public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
+
+    private final String viewName = "Main Profile";
     private final ProfileViewModel profileViewModel;
+    private final BackController backController;
+    private final JPanel mainPanel = new JPanel();
 
-    public ProfileView(ProfileViewModel profileViewModel) throws IOException {
+    public ProfileView(ProfileViewModel profileViewModel, BackController backController) throws IOException {
         this.profileViewModel = profileViewModel;
-        setTitle("Player Profile");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 300);
+        this.backController = backController;
 
-        // Main Panel
-        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
@@ -33,43 +39,6 @@ public class ProfileView extends JFrame {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(title);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-
-        // SummonerIcon Section
-        ImageIcon profileIcon = profilePresenter.getProfileIcon();
-        JLabel profileIconLabel = new JLabel(profileIcon);
-        profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(profileIconLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-
-        // Profile Stats Section
-        JPanel profileStatsPanel = createInfoPanel("Profile Stats", new String[]{
-                "Level: " + profilePresenter.getProfileLevel(),
-
-        });
-        mainPanel.add(profileStatsPanel);
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
-
-        // Rank Stats Section
-        ImageIcon rankIcon = profilePresenter.getRankIcon();
-        JLabel rankIconLabel = new JLabel(rankIcon);
-        rankIconLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        mainPanel.add(rankIconLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-
-        JPanel performanceStatsPanel = createInfoPanel("Performance Stats", new String[]{
-                "Rank: " + profilePresenter.getRank() + " " + profilePresenter.getDivision(),
-                "Game Mode: " + profilePresenter.getGameMode(),
-                "LP: " + profilePresenter.getLeaguePoints(),
-                "Wins: " + profilePresenter.getWins(),
-                "Losses: " + profilePresenter.getLosses(),
-                "Win Rate: " + profilePresenter.getWinRate() + "%",
-        });
-        mainPanel.add(performanceStatsPanel);
-
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        add(scrollPane);
-
-        setVisible(true);
     }
 
     /**
@@ -91,7 +60,55 @@ public class ProfileView extends JFrame {
             panel.add(label);
             panel.add(Box.createRigidArea(new Dimension(0, 5))); // Spacing between rows
         }
-
         return panel;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        backController.execute();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // SummonerIcon Section
+        ImageIcon profileIcon = profileViewModel.getState().getProfileIcon();
+        JLabel profileIconLabel = new JLabel(profileIcon);
+        profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(profileIconLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // Profile Stats Section
+        JPanel profileStatsPanel = createInfoPanel("Profile Stats", new String[]{
+                "Level: " + profileViewModel.getState().getProfileLevel(),
+
+        });
+        mainPanel.add(profileStatsPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
+
+        // Rank Stats Section
+        ImageIcon rankIcon = profileViewModel.getState().getRankIcon();
+        JLabel rankIconLabel = new JLabel(rankIcon);
+        rankIconLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(rankIconLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        JPanel performanceStatsPanel = createInfoPanel("Performance Stats", new String[]{
+                "Rank: " + profileViewModel.getState().getRank() + " " + profileViewModel.getState().getDivision(),
+                "Game Mode: " + profileViewModel.getState().getGameMode(),
+                "LP: " + profileViewModel.getState().getLeaguePoints(),
+                "Wins: " + profileViewModel.getState().getWins(),
+                "Losses: " + profileViewModel.getState().getLosses(),
+                "Win Rate: " + profileViewModel.getState().getWinRate() + "%",
+        });
+        mainPanel.add(performanceStatsPanel);
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        add(scrollPane);
+
+        setVisible(true);
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }
