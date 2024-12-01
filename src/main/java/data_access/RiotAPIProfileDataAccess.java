@@ -33,7 +33,7 @@ public class RiotAPIProfileDataAccess {
                 int summonerLevel = playerData.getInt("summonerLevel");
                 int iconID = playerData.getInt("profileIconId");
 
-                BufferedReader in2 = new BufferedReader(new InputStreamReader(request2.getInputStream();
+                BufferedReader in2 = new BufferedReader(new InputStreamReader(request2.getInputStream()));
                 final JSONObject playerData2 = new JSONObject(new JSONTokener(in2));
 
                 String username = playerData2.getString("gameName");
