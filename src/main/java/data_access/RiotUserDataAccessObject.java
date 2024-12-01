@@ -1,10 +1,9 @@
 package data_access;
 
+import entity.FunFacts.FunFacts;
 import entity.FunFacts.FunFactsFactory;
 import entity.OverviewProfile.ProfileOverview;
-import entity.OverviewProfile.ProfileOverviewFactory;
 import entity.OverviewProfile.Rank;
-import entity.OverviewProfile.RankFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
@@ -18,7 +17,6 @@ import entity.user.UserFactory;
 import org.json.JSONObject;
 import use_case.login.LoginUserDataAccessInterface;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,6 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
-    private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
-    private final RankFactory rankFactory = new RankFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
@@ -46,13 +42,12 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
     }
 
-    public ProfileOverview getProfileOverview(String puuId, String region) {
-
+    public ProfileOverview getProfileOverview(String puuId, String region) throws IOException {
         return profileDataAccess.generateProfileData(puuId, region);
     }
 
-    public Rank getRank(String summonerId, String region) {
-        return rankDataAccess.generateRank();
+    public Rank getRank(String summonerId, String region) throws IOException {
+        return rankDataAccess.generateRank(summonerId, region);
     }
 
     public MatchHistory getMatchHistory(String puuId, String region, int count) throws Exception {
@@ -82,5 +77,9 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     public FreeChampionRotation getFreeChampionRotation() throws IOException {
         return freeChampionRotationFactory.createFreeChampionRotation(freeRotationDataAccess.getFreeChampionsNames(),
                 freeRotationDataAccess.getFreeChampionsIcons());
+    }
+
+    public FunFacts getFunFacts(String puuId, String region) throws Exception {
+        return funFactsDataAccess.getFunFacts(puuId, region);
     }
 }
