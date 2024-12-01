@@ -18,12 +18,12 @@ public class Match {
     private final String gameMode;
     private final String date;
 
-    public Match(ImageIcon championIcon, int kills, int deaths, int assissts, int duration, String gameMode, long unixTime) {
+    public Match(ImageIcon championIcon, int kills, int deaths, int assissts, int time, String gameMode, long unixTime) {
         this.championIcon = championIcon;
         this.kills = kills;
         this.deaths = deaths;
         this.assissts = assissts;
-        this.duration = secondsToMinutes(duration);
+        this.duration = secondsToMinutes(time);
         this.gameMode = gameMode;
         this.date = unixConverter(unixTime);
     }
@@ -67,9 +67,9 @@ public class Match {
     }
 
     public String secondsToMinutes(int time) {
-        final int hour = duration / 3600;
-        final int minute = (duration - hour * 3600) / 60;
-        final int second = (duration - hour * 3600) % 60;
+        final int hour = time / 3600;
+        final int minute = (time - hour * 3600) / 60;
+        final int second = (time - hour * 3600) % 60;
         final String hours = String.valueOf(hour);
         final String minutes = String.valueOf(minute);
         final String seconds = String.valueOf(second);
