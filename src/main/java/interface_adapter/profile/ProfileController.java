@@ -11,6 +11,10 @@ public class ProfileController {
 
     }
 
+    public void execute() {
+        overviewInputBoundary.execute();
+    }
+
     public void fetchOverview(String puuid, String region) {
         overviewInputBoundary.fetchOverview(puuid, region);
     }
