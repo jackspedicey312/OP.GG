@@ -1,89 +1,79 @@
 package view;
 
+import interface_adapter.back.BackController;
 import interface_adapter.funfacts.FunFactPresenter;
+import interface_adapter.funfacts.FunFactViewModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class FunFactView extends JFrame {
+public class FunFactView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final FunFactViewModel funFactViewModel;
+    private final BackController backController;
+    private final JPanel mainPanel = new JPanel();
+    private final JPanel contentPanel = new JPanel();
 
-    public FunFactView(FunFactPresenter presenter) {
+    public FunFactView(FunFactViewModel funFactViewModel, BackController backController) {
+        this.funFactViewModel = funFactViewModel;
+        this.backController = backController;
 
-        setTitle("Fun Facts");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 1250);
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        // Main panel with padding
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout(10, 10));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel title = new JLabel("Fun Facts");
-        title.setFont(new Font("Arial", Font.BOLD, 18));
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(title);
+        // Title
+        JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        mainPanel.add(title, BorderLayout.NORTH);
 
-        final int playtime = presenter.getTotalPlaytime();
-        final JLabel playtimeLabel = new JLabel(String.valueOf(playtime));
-        playtimeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(playtimeLabel);
+        // Content panel for stats
+        contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+    }
 
-        final int wins = presenter.getTotalWins();
-        final JLabel winLabel = new JLabel(String.valueOf(wins));
-        winLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(winLabel);
+    /**
+     * Helper method to add a statistic label and value to the panel.
+     */
+    private void addStat(JPanel panel, String labelText, Object value) {
+        JLabel label = new JLabel(labelText);
+        label.setFont(new Font("Arial", Font.PLAIN, 16));
+        panel.add(label);
 
-        final int losses = presenter.getTotalLosses();
-        final JLabel lossLabel = new JLabel(String.valueOf(losses));
-        lossLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(lossLabel);
+        JLabel valueLabel = new JLabel(String.valueOf(value));
+        valueLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(valueLabel);
+    }
 
-        final int totalKills = presenter.getTotalKills();
-        final JLabel killLabel = new JLabel(String.valueOf(totalKills));
-        killLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(killLabel);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        backController.execute();
+    }
 
-        final int totalDeaths = presenter.getTotalDeaths();
-        final JLabel deathLabel = new JLabel(String.valueOf(totalDeaths));
-        deathLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(deathLabel);
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // Helper method to add labeled statistics
+        addStat(contentPanel, "The oldest match analyzed:", funFactViewModel.getState().getOldestGamePlayed());
+        addStat(contentPanel, "Total Playtime (Hours):", funFactViewModel.getState().getTotalPlaytime());
+        addStat(contentPanel, "Total Wins:", funFactViewModel.getState().getTotalWins());
+        addStat(contentPanel, "Total Losses:", funFactViewModel.getState().getTotalLosses());
+        addStat(contentPanel, "Total Kills:", funFactViewModel.getState().getTotalKills());
+        addStat(contentPanel, "Total Deaths:", funFactViewModel.getState().getTotalDeaths());
+        addStat(contentPanel, "Longest game you played (Minutes):", funFactViewModel.getState().getLongestGamePlayed());
+        addStat(contentPanel, "What a great use of time! You played that super long game on :",
+                funFactViewModel.getState().getLongestGamePlayedDate());
+        addStat(contentPanel, "Total times you have surrendered:", funFactViewModel.getState().getTotalSurrenders());
+        addStat(contentPanel, "Total Pentakills:", funFactViewModel.getState().getTotalPentakills());
+        addStat(contentPanel, "Total times you have survived with single digit HP:",
+                funFactViewModel.getState().getTotalSurvivedSingleDigitHp());
+        addStat(contentPanel, "Total Snowballs Hit:", funFactViewModel.getState().getTotalSnowballsHit());
+        addStat(contentPanel, "Total times you have saved your teammate:", funFactViewModel.getState().getTotalSavedAllies());
 
-        final String oldestGamePlayed = presenter.getOldestGamePlayed();
-        final JLabel oldestGamePlayedLabel = new JLabel(oldestGamePlayed);
-        oldestGamePlayedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(oldestGamePlayedLabel);
-
-        final int longestGamePlayed = presenter.getLongestGamePlayed();
-        final JLabel longestGamePlayedLabel = new JLabel(String.valueOf(longestGamePlayed));
-        longestGamePlayedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(longestGamePlayedLabel);
-
-        final String longestGamePlayedDate = presenter.getLongestGamePlayedDate();
-        final JLabel longestGamePlayedDateLabel = new JLabel(longestGamePlayedDate);
-        longestGamePlayedDateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(longestGamePlayedDateLabel);
-
-        final int totalSurrenders = presenter.getTotalSurrenders();
-        final JLabel surrenderLabel = new JLabel(String.valueOf(totalSurrenders));
-        surrenderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(surrenderLabel);
-
-        final int totalPentakills = presenter.getTotalPentakills();
-        final JLabel pentakillLabel = new JLabel(String.valueOf(totalPentakills));
-        pentakillLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(pentakillLabel);
-
-        final int totalSurvivedSingleDigitHp = presenter.getTotalSurvivedSingleDigitHp();
-        final JLabel singleHpLabel = new JLabel(String.valueOf(totalSurvivedSingleDigitHp));
-        singleHpLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(singleHpLabel);
-
-        final int totalSnowballs = presenter.getTotalSnowballsHit();
-        final JLabel snowballLabel = new JLabel(String.valueOf(totalSnowballs));
-        snowballLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(snowballLabel);
-
-        final int totalSavedAllies = presenter.getTotalSavedAllies();
-        final JLabel savedAlliesLabel = new JLabel(String.valueOf(totalSavedAllies));
-        savedAlliesLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(savedAlliesLabel);
-
+        // Show frame
+        mainPanel.setVisible(true);
     }
 }

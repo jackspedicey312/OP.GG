@@ -1,6 +1,7 @@
 package data_access;
 
-import entity.FunFacts;
+import entity.FunFacts.FunFacts;
+import entity.FunFacts.FunFactsFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,9 +9,11 @@ import java.util.List;
 
 public class RiotAPIFunFactsDataAccess {
 
-    public FunFacts fetchFunFacts(String puuid, String region) throws Exception {
+    private final FunFactsFactory funFactsFactory = new FunFactsFactory();
+
+    public FunFacts getFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
-        final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
+        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 100);
         int totalPlaytime = 0;
         int totalWins = 0;
         int totalLosses = 0;
@@ -28,7 +31,7 @@ public class RiotAPIFunFactsDataAccess {
         for (int i = 0; i < matches.size(); i++) {
 
             try {
-                JSONObject matchDetail = riotAPIMatchDataAccess.fetchMatchDetails(matches.get(i), region);
+                JSONObject matchDetail = riotAPIMatchDataAccess.getMatchDetails(matches.get(i), region);
 
                 // The json file is split into 2 sections. We want the info section for the stats.
                 JSONObject matchInfo = matchDetail.getJSONObject("info");
@@ -49,22 +52,13 @@ public class RiotAPIFunFactsDataAccess {
                 JSONObject playerStats = null;
                 JSONObject playerStats2 = null;
                 JSONArray participants = metaData.getJSONArray("participants");
-                for (int j = 0; j < participants.length(); j++) {
-                    String player = participants.getString(j);
-                    if (puuid.equals(player)) {
-                        playerStats = matchInfo.getJSONArray("participants").getJSONObject(j);
-                        playerStats2 = playerStats.getJSONObject("challenges");
-                        break;
-                    }
-                    else {
-                        continue;
-                    }
-                }
+                final int j = getPlayerMatchIndex(puuid, participants);
+                playerStats = matchInfo.getJSONArray("participants").getJSONObject(j);
+                playerStats2 = playerStats.getJSONObject("challenges");
 
                 if (playerStats.getBoolean("win")) {
                     totalWins += 1;
-                }
-                else {
+                } else {
                     totalLosses += 1;
                 }
 
@@ -82,14 +76,13 @@ public class RiotAPIFunFactsDataAccess {
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
                         + e.getMessage());
                 continue;
             }
         }
-        final FunFacts funFacts = new FunFacts();
+        final FunFacts funFacts = funFactsFactory.createFunFacts();
         funFacts.setLongestGamePlayedDate(longestGamePlayedDate);
         funFacts.setLongestGamePlayed(longestGamePlayed);
         funFacts.setTotalDeaths(totalDeaths);
@@ -106,4 +99,14 @@ public class RiotAPIFunFactsDataAccess {
 
         return funFacts;
     }
+
+    public int getPlayerMatchIndex(String puuId, JSONArray participants) {
+        for (int j = 0; j < participants.length(); j++) {
+            if (puuId.equals(participants.getString(j))) {
+                return j;
+            }
+        }
+        return 0;
+    }
+
 }

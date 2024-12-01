@@ -1,5 +1,6 @@
 package view;
 
+import data_access.RiotAPIChampionIconDataAccess;
 import interface_adapter.Champion.ChampionController;
 import interface_adapter.Champion.ChampionPresenter;
 
@@ -59,10 +60,13 @@ public class ChampionView extends JFrame {
 
             try {
                 // Fetch icon using ChampionIcon utility
-                JLabel iconLabel = new JLabel(ChampionIcon.getChampionIcon(champion.getChampionName()));
+                RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
+                ImageIcon championIcon = championIconDataAccess.getChampionIcon(champion.getChampionName());
+                JLabel iconLabel = new JLabel(championIcon);
                 iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 championPanel.add(iconLabel);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 JLabel errorLabel = new JLabel("Icon not available");
                 errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 championPanel.add(errorLabel);

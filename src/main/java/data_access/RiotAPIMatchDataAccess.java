@@ -26,7 +26,7 @@ public class RiotAPIMatchDataAccess {
      * @return A list of recent match IDs.
      * @throws Exception If the API call fails.
      */
-    public List<String> fetchRecentMatchIds(String puuid, String region, int count) throws Exception {
+    public List<String> getRecentMatchIds(String puuid, String region, int count) throws Exception {
         String baseURL;
         switch (region.toLowerCase()) {
             case "na":
@@ -90,7 +90,7 @@ public class RiotAPIMatchDataAccess {
      * @return A JSONObject containing match details.
      * @throws Exception If the API call fails.
      */
-    public JSONObject fetchMatchDetails(String matchId, String region) throws Exception {
+    public JSONObject getMatchDetails(String matchId, String region) throws Exception {
         String baseURL = getRegionBaseURL(region);
         String urlString = baseURL + matchId;
         URL url = new URL(urlString);

@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 
 import data_access.RiotAPIFreeRotationDataAccess;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
+import interface_adapter.freeChampionRotation.FreeChampionRotationState;
 import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import interface_adapter.back.BackController;
 
@@ -26,13 +27,65 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         this.viewModel = viewModel;
         this.viewModel.addPropertyChangeListener(this);
         this.backController = backController;
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         backbutton.addActionListener(this);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        mainPanel.add(new JPanel());
+        final JPanel panelone = new JPanel();
+        panelone.setLayout(new BoxLayout(panelone, BoxLayout.X_AXIS));
+        final JPanel paneltwo = new JPanel();
+        paneltwo.setLayout(new BoxLayout(paneltwo, BoxLayout.X_AXIS));
+        final JPanel panelthree = new JPanel();
+        panelthree.setLayout(new BoxLayout(panelthree, BoxLayout.X_AXIS));
+        final JPanel panelfour = new JPanel();
+        panelfour.setLayout(new BoxLayout(panelfour, BoxLayout.X_AXIS));
+        final JPanel panelfive = new JPanel();
+        panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
+        mainPanel.removeAll();
+        mainPanel.add(panelone);
+        mainPanel.add(paneltwo);
+        mainPanel.add(panelthree);
+        mainPanel.add(panelfour);
+        mainPanel.add(panelfive);
+        final FreeChampionRotationState freeChampionRotationState = viewModel.getState();
+        final int length = freeChampionRotationState.getChampionCount();
+        for (int i = 0; i < length; i++) {
+            if (i <= 5) {
+                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                panelone.add(eachPanel);
+            }
+            else if (i <= 11) {
+                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                paneltwo.add(eachPanel);
+            }
+            else if (i <= 17) {
+                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                panelthree.add(eachPanel);
+            }
+            else if (i <= 23) {
+                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                panelfour.add(eachPanel);
+            }
+            else {
+                final JPanel eachPanel = geteachPanel(freeChampionRotationState, i);
+                panelfive.add(eachPanel);
+            }
+        }
+    }
+
+    private JPanel geteachPanel(FreeChampionRotationState state, int ind) {
+        final JPanel eachPanel = new JPanel();
+        eachPanel.setLayout(new BoxLayout(eachPanel, BoxLayout.Y_AXIS));
+        final String name = state.getFreeChampionsName(ind);
+        final JLabel namelabel = new JLabel(name);
+        final ImageIcon icon = state.getFreeChampionIcons(ind);
+        final JLabel iconLabel = new JLabel(icon);
+        eachPanel.add(namelabel);
+        eachPanel.add(iconLabel);
+        return eachPanel;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -43,7 +96,7 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         return viewName;
     }
 
-    public void setFreeChampionRotationController(FreeChampionRotationController controller) {
-        this.controller = controller;
+    public void setFreeChampionRotationController(FreeChampionRotationController newcontroller) {
+        this.controller = newcontroller;
     }
 }

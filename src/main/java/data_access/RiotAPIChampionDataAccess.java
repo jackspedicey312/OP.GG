@@ -1,7 +1,7 @@
 package data_access;
 
-import entity.Champion.Champion;
-import entity.Champion.ChampionFactory;
+import entity.champion.Champion;
+import entity.champion.ChampionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -110,7 +110,8 @@ public class RiotAPIChampionDataAccess {
             baseURL = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
         } else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/";
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
