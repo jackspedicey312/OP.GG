@@ -28,7 +28,7 @@ public class OverviewUseCase implements OverviewInputBoundary {
             presenter.presentProfileIcon(profileOverview.getSummonerImage());
             presenter.presentProfileLevel(profileOverview.getSummonerLevel());
 
-            final String summonerId = profileOverview.getSummonerID();
+            final String summonerId = profileOverview.getSummonerId();
             Rank rank = rankDataAccess.generateRank(summonerId, region);
 
             presenter.presentGamemode(rank.getGameMode());

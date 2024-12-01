@@ -8,28 +8,28 @@ import java.net.URL;
 
 public class ProfileOverview {
     private String username;
-    private String tag;
-    private String summonerID;
+    private String tagline;
+    private String summonerId;
     private int summonerLevel;
     private ImageIcon summonerImage;
 
-    public ProfileOverview(String username, String tag, String summonerID, int summonerLevel, int iconID)
+    public ProfileOverview(String username, String tagline, String summonerId, int summonerLevel, int iconID)
             throws IOException {
         this.username = username;
-        this.tag = tag;
-        this.summonerID = summonerID;
+        this.tagline = tagline;
+        this.summonerId = summonerId;
         this.summonerLevel = summonerLevel;
         this.summonerImage = getIconPng(iconID);
     }
     public String getUsername() {
         return username;
     }
-    public String getTag() {
-        return tag;
+    public String getTagline() {
+        return tagline;
     }
 
-    public String getSummonerID() {
-        return summonerID;
+    public String getSummonerId() {
+        return summonerId;
     }
 
     public int getSummonerLevel() {

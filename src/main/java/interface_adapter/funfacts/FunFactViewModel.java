@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 public class FunFactViewModel extends ViewModel<FunFactState> {
 
     public FunFactViewModel() {
-        super("Fun Facts");
+        super("funFacts");
         setState(new FunFactState());
     }
 }
