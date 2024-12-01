@@ -1,7 +1,7 @@
 package data_access;
 
-import entity.Champion.Champion;
-import entity.Champion.ChampionFactory;
+import entity.champion.Champion;
+import entity.champion.ChampionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;

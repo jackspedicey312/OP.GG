@@ -1,4 +1,4 @@
-package entity.PlayerStats;
+package entity.playerStats;
 
 public class PlayerStatsFactory {
 

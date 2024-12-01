@@ -1,4 +1,4 @@
-package entity.Champion;
+package entity.champion;
 
 /**
  * Factory class for creating Champion objects.

@@ -1,12 +1,12 @@
 package data_access;
 
-import entity.FreeChampionRotation.FreeChampionRotation;
-import entity.FreeChampionRotation.FreeChampionRotationFactory;
+import entity.freeChampionRotation.FreeChampionRotation;
+import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.MatchFactory;
-import entity.MatchList.MatchListFactory;
-import entity.PlayerStats.PlayerStatsFactory;
-import entity.User.User;
-import entity.User.UserFactory;
+import entity.matchHistory.MatchHistoryFactory;
+import entity.playerStats.PlayerStatsFactory;
+import entity.user.User;
+import entity.user.UserFactory;
 
 import use_case.login.LoginUserDataAccessInterface;
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
     private final UserFactory userFactory = new UserFactory();
-    private final MatchListFactory matchListFactory = new MatchListFactory();
+    private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final PlayerStatsFactory playerStatsFactory = new PlayerStatsFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
