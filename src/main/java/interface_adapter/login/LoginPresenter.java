@@ -49,9 +49,13 @@ public class LoginPresenter implements LoginOutputBoundary {
         final MatchHistoryState matchHistoryState = matchHistoryViewModel.getState();
         final FreeChampionRotationState freeChampionRotationState = freeChampionRotationViewModel.getState();
         final FunFactState funFactState = funFactViewModel.getState();
-        loggedInState.setUser(outputData.getUser());
 
+        loggedInState.setUser(outputData.getUser());
+        profileState.setProfileOverview(outputData.getProfileOverview());
+        profileState.setRank(outputData.getRank());
+        matchHistoryState.setMatchHistory(outputData.getMatchHistory());
         freeChampionRotationState.setFreeChampionRotation(outputData.getFreeChampionRotation());
+        funFactState.setFunFacts(outputData.getFunFacts());
 
         this.loggedInViewModel.setState(loggedInState);
 

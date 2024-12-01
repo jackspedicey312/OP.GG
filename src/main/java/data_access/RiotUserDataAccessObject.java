@@ -1,11 +1,8 @@
 package data_access;
 
 import entity.FunFacts.FunFacts;
-import entity.FunFacts.FunFactsFactory;
 import entity.OverviewProfile.ProfileOverview;
-import entity.OverviewProfile.ProfileOverviewFactory;
 import entity.OverviewProfile.Rank;
-import entity.OverviewProfile.RankFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
@@ -16,14 +13,12 @@ import entity.user.User;
 import entity.user.UserFactory;
 
 import org.json.JSONObject;
-import use_case.login.LoginUserDataAccessInterface;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
+public class RiotUserDataAccessObject {
     private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
