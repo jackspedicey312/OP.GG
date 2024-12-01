@@ -28,6 +28,7 @@ public class FunFactState {
     public String getLongestGamePlayedDate() {
         return funFacts.getLongestGamePlayedDate();
     }
+
     public int getTotalSurvivedSingleDigitHp() {
         return funFacts.getTotalSurvivedSingleDigitHp();
     }

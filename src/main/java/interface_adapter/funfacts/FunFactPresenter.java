@@ -1,7 +1,6 @@
 package interface_adapter.funfacts;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.matchHistory.MatchHistoryViewModel;
 import use_case.funfacts.FunFactsOutputBoundary;
 
 public class FunFactPresenter implements FunFactsOutputBoundary {
