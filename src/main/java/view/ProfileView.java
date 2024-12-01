@@ -3,6 +3,7 @@ package view;
 import entity.OverviewProfile.ProfileOverview;
 import entity.OverviewProfile.Rank;
 import interface_adapter.profile.ProfilePresenter;
+import interface_adapter.profile.ProfileViewModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,8 +14,10 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ProfileView extends JFrame {
+    private final ProfileViewModel profileViewModel;
 
-    public ProfileView(ProfilePresenter profilePresenter) throws IOException {
+    public ProfileView(ProfileViewModel profileViewModel) throws IOException {
+        this.profileViewModel = profileViewModel;
         setTitle("Player Profile");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
