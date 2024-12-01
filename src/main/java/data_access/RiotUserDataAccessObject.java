@@ -51,7 +51,7 @@ public class RiotUserDataAccessObject {
         for (String matchId : matchListId) {
             final JSONObject matchData = matchDataAccess.getMatchDetails(matchId, region);
             final int j = funFactsDataAccess.getPlayerMatchIndex(puuId,
-                    matchData.getJSONObject("metaData").getJSONArray("participants"));
+                    matchData.getJSONObject("metadata").getJSONArray("participants"));
 
             final JSONObject gameInfo = matchData.getJSONObject("info");
             final JSONObject playerData = gameInfo.getJSONArray("participants").getJSONObject(j);
