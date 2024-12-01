@@ -21,6 +21,7 @@ import java.util.Properties;
 
 public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
+    private final String viewName = "Main Profile";
     private final ProfileViewModel profileViewModel;
     private final BackController backController;
     private final JPanel mainPanel = new JPanel();
@@ -105,5 +106,9 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
         add(scrollPane);
 
         setVisible(true);
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

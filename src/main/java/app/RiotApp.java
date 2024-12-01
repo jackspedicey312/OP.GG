@@ -88,6 +88,12 @@ public class RiotApp {
         return this;
     }
 
+    public RiotApp addProfileView() throws IOException {
+        profileViewModel = new ProfileViewModel();
+        profileView = new ProfileView(profileViewModel, backController);
+        cardPanel.add(profileView, profileView.getViewName());
+    }
+
     public RiotApp addMatchHistoryView() {
         matchHistoryViewModel = new MatchHistoryViewModel();
         matchHistoryView = new MatchHistoryView(matchHistoryViewModel, backController);

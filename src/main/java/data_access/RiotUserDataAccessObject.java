@@ -1,22 +1,23 @@
 package data_access;
 
-import entity.FunFacts.FunFacts;
 import entity.FunFacts.FunFactsFactory;
 import entity.OverviewProfile.ProfileOverview;
+import entity.OverviewProfile.ProfileOverviewFactory;
 import entity.OverviewProfile.Rank;
+import entity.OverviewProfile.RankFactory;
 import entity.freeChampionRotation.FreeChampionRotation;
 import entity.freeChampionRotation.FreeChampionRotationFactory;
 import entity.match.Match;
 import entity.match.MatchFactory;
 import entity.matchHistory.MatchHistory;
 import entity.matchHistory.MatchHistoryFactory;
-import entity.playerStats.PlayerStatsFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 
 import org.json.JSONObject;
 import use_case.login.LoginUserDataAccessInterface;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIRankDataAccess rankDataAccess = new RiotAPIRankDataAccess();
 
     private final UserFactory userFactory = new UserFactory();
+    private final ProfileOverviewFactory profileOverviewFactory = new ProfileOverviewFactory();
+    private final RankFactory rankFactory = new RankFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
     private final FreeChampionRotationFactory freeChampionRotationFactory = new FreeChampionRotationFactory();
@@ -43,6 +46,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     }
 
     public ProfileOverview getProfileOverview(String puuId, String region) throws IOException {
+
         return profileDataAccess.generateProfileData(puuId, region);
     }
 
@@ -77,9 +81,5 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     public FreeChampionRotation getFreeChampionRotation() throws IOException {
         return freeChampionRotationFactory.createFreeChampionRotation(freeRotationDataAccess.getFreeChampionsNames(),
                 freeRotationDataAccess.getFreeChampionsIcons());
-    }
-
-    public FunFacts getFunFacts(String puuId, String region) throws Exception {
-        return funFactsDataAccess.getFunFacts(puuId, region);
     }
 }
