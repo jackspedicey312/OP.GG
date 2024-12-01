@@ -84,7 +84,7 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
                 freeRotationDataAccess.getFreeChampionsIcons());
     }
 
-    public FunFacts getFunFactsFactory(String puuId, String region) throws Exception {
+    public FunFacts getFunFacts(String puuId, String region) throws Exception {
         return funFactsDataAccess.getFunFacts(puuId, region);
     }
 }
