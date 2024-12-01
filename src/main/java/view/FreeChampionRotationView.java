@@ -45,12 +45,12 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         panelfour.setLayout(new BoxLayout(panelfour, BoxLayout.X_AXIS));
         final JPanel panelfive = new JPanel();
         panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
-        mainPanel.removeAll();
-        mainPanel.add(panelone);
-        mainPanel.add(paneltwo);
-        mainPanel.add(panelthree);
-        mainPanel.add(panelfour);
-        mainPanel.add(panelfive);
+        this.removeAll();
+        this.add(panelone);
+        this.add(paneltwo);
+        this.add(panelthree);
+        this.add(panelfour);
+        this.add(panelfive);
         final int length = state.getChampionCount();
         for (int i = 0; i < length; i++) {
             if (i <= 5) {
