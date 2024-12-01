@@ -1,6 +1,7 @@
 package use_case.login;
 
 import entity.freeChampionRotation.FreeChampionRotation;
+import entity.matchHistory.MatchHistory;
 import entity.user.User;
 
 /**
@@ -8,13 +9,13 @@ import entity.user.User;
  */
 public class LoginOutputData {
     private final User user;
-//    private final MatchList matchList;
+    private final MatchHistory matchHistory;
     private final FreeChampionRotation freeChampionRotation;
 
-    public LoginOutputData(User user, /*MatchList matchList,*/
+    public LoginOutputData(User user, MatchHistory matchList,
                            FreeChampionRotation freeChampionRotation) {
         this.user = user;
-//        this.matchList = matchList;
+        this.matchHistory = matchList;
         this.freeChampionRotation = freeChampionRotation;
     }
 
@@ -22,9 +23,9 @@ public class LoginOutputData {
         return user;
     }
 
-//    public MatchList getMatchList() {
-//        return matchList;
-//    }
+    public MatchHistory getMatchHistory() {
+        return matchHistory;
+    }
 
     public FreeChampionRotation getFreeChampionRotation() {
         return freeChampionRotation;

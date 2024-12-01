@@ -1,15 +1,16 @@
-package view;
+package data_access;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  * Get champion icon for champion view.
  */
-public class ChampionIcon {
+public class RiotAPIChampionIconDataAccess {
 
     private static final String CHAMPION_ICON_BASE_URL = "https://ddragon.canisback.com/img/champion/tiles/";
 
@@ -20,7 +21,7 @@ public class ChampionIcon {
      * @return The ImageIcon for the champion.
      * @throws IOException If there is an issue fetching the icon.
      */
-    public static ImageIcon getChampionIcon(String championName) throws IOException {
+    public ImageIcon getChampionIcon(String championName) throws IOException {
         final String url = CHAMPION_ICON_BASE_URL + championName + "_0.jpg";
         final URL completeUrl = new URL(url);
 

@@ -10,7 +10,7 @@ public class RiotAPIFunFactsDataAccess {
 
     public FunFacts fetchFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
-        final List<String> matches = riotAPIMatchDataAccess.fetchRecentMatchIds(puuid, region, 100);
+        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 100);
         int totalPlaytime = 0;
         int totalWins = 0;
         int totalLosses = 0;
@@ -28,7 +28,7 @@ public class RiotAPIFunFactsDataAccess {
         for (int i = 0; i < matches.size(); i++) {
 
             try {
-                JSONObject matchDetail = riotAPIMatchDataAccess.fetchMatchDetails(matches.get(i), region);
+                JSONObject matchDetail = riotAPIMatchDataAccess.getMatchDetails(matches.get(i), region);
 
                 // The json file is split into 2 sections. We want the info section for the stats.
                 JSONObject matchInfo = matchDetail.getJSONObject("info");
@@ -49,7 +49,7 @@ public class RiotAPIFunFactsDataAccess {
                 JSONObject playerStats = null;
                 JSONObject playerStats2 = null;
                 JSONArray participants = metaData.getJSONArray("participants");
-                int j = getPlayerMatchIndex(puuid, participants);
+                final int j = getPlayerMatchIndex(puuid, participants);
                 playerStats = matchInfo.getJSONArray("participants").getJSONObject(j);
                 playerStats2 = playerStats.getJSONObject("challenges");
 

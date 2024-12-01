@@ -1,5 +1,6 @@
 package view;
 
+import data_access.RiotAPIChampionIconDataAccess;
 import interface_adapter.Champion.ChampionController;
 import interface_adapter.Champion.ChampionPresenter;
 
@@ -59,7 +60,7 @@ public class ChampionView extends JFrame {
 
             try {
                 // Fetch icon using ChampionIcon utility
-                JLabel iconLabel = new JLabel(ChampionIcon.getChampionIcon(champion.getChampionName()));
+                JLabel iconLabel = new JLabel(RiotAPIChampionIconDataAccess.getChampionIcon(champion.getChampionName()));
                 iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 championPanel.add(iconLabel);
             } catch (IOException e) {

@@ -2,6 +2,7 @@ package use_case.login;
 
 import data_access.RiotUserDataAccessObject;
 import entity.freeChampionRotation.FreeChampionRotation;
+import entity.matchHistory.MatchHistory;
 import entity.user.User;
 
 /**
@@ -22,11 +23,11 @@ public class LoginInteractor implements LoginInputBoundary {
         try {
             final User user = userDataAccessObject.getUser(inputData.getUsername(),
                     inputData.getTagline(), inputData.getRegion());
-//            final MatchList matchList = userDataAccessObject.getMatchList(user.getPuuid(), user.getRegion(), 20);
+            final MatchHistory matchHistory = userDataAccessObject.getMatchHistory(user.getPuuid(), user.getRegion(), 20);
             final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
-            loginPresenter.prepareSuccessView(new LoginOutputData(user, /*matchListZ,*/ freeChampionRotation));
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, matchHistory, freeChampionRotation));
         } catch (Exception e) {
-            loginPresenter.prepareFailView(new LoginOutputData(null, /*null,*/ null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, null, null));
         }
     }
 }

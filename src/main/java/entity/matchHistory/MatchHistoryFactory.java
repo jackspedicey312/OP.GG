@@ -6,11 +6,11 @@ import java.util.List;
 
 public class MatchHistoryFactory {
 
-    public static MatchHistory createMatchHistory(List<Match> matchList) {
+    public MatchHistory createMatchHistory(List<Match> matchList) {
         return new MatchHistory(matchList);
     }
 
-    public static MatchHistory createMatchHistory(Match match) {
+    public MatchHistory createMatchHistory(Match match) {
         return new MatchHistory(match);
     }
 }

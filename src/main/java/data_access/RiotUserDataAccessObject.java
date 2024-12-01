@@ -10,9 +10,10 @@ import entity.playerStats.PlayerStatsFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import use_case.login.LoginUserDataAccessInterface;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
     private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotAPIMatchDataAccess matchDataAccess = new RiotAPIMatchDataAccess();
     private final RiotAPIFreeRotationDataAccess freeRotationDataAccess = new RiotAPIFreeRotationDataAccess();
+    private final RiotAPIFunFactsDataAccess funFactsDataAccess = new RiotAPIFunFactsDataAccess();
+    private final RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
+
     private final UserFactory userFactory = new UserFactory();
     private final MatchHistoryFactory matchHistoryFactory = new MatchHistoryFactory();
     private final MatchFactory matchFactory = new MatchFactory();
@@ -33,18 +37,27 @@ public class RiotUserDataAccessObject implements LoginUserDataAccessInterface {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
     }
 
-    public MatchHistory getMatchList(String puuId, String region, int count) throws Exception {
-        List<Match> matchList = new ArrayList<>();
-        final List<String> matchListId = matchDataAccess.fetchRecentMatchIds(puuId, region, count);
+    public MatchHistory getMatchHistory(String puuId, String region, int count) throws Exception {
+        final List<Match> matchList = new ArrayList<>();
+        final List<String> matchListId = matchDataAccess.getRecentMatchIds(puuId, region, count);
         for (String matchId : matchListId) {
-            final JSONObject matchData = matchDataAccess.fetchMatchDetails(matchId, region);
-            JSONArray participants = matchData.getJSONObject("metaData").getJSONArray("participants")
-            for (int i = 0; i < participants.length(); i++ ) {
-                if
-            }
+            final JSONObject matchData = matchDataAccess.getMatchDetails(matchId, region);
+            final int j = funFactsDataAccess.getPlayerMatchIndex(puuId,
+                    matchData.getJSONObject("metaData").getJSONArray("participants"));
 
+            final JSONObject gameInfo = matchData.getJSONObject("info");
+            final JSONObject playerData = gameInfo.getJSONArray("participants").getJSONObject(j);
 
+            matchList.add(matchFactory.createMatch(
+                    championIconDataAccess.getChampionIcon(playerData.getString("championName")),
+                    playerData.getInt("kills"),
+                    playerData.getInt("deaths"),
+                    playerData.getInt("assists"),
+                    gameInfo.getInt("gameDuration"),
+                    gameInfo.getString("gameMode"),
+                    gameInfo.getInt("gameCreation")));
         }
+        return matchHistoryFactory.createMatchHistory(matchList);
     }
 
     public FreeChampionRotation getFreeChampionRotation() throws IOException {
