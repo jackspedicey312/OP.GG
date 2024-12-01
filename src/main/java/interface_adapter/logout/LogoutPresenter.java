@@ -1,41 +1,27 @@
 package interface_adapter.logout;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-import use_case.logout.LogoutOutputBoundary;
-import use_case.logout.LogoutOutputData;
 
 /**
- * The Presenter for the Logout Use Case.
+ * The presenter for the Logout Use Case.
+ * Handles the transition back to the login view after logout.
  */
-public class LogoutPresenter implements LogoutOutputBoundary {
-
+public class LogoutPresenter {
     private final ViewManagerModel viewManagerModel;
-    private final LoginViewModel loginViewModel;
 
-    public LogoutPresenter(ViewManagerModel viewManagerModel,
-                           LoginViewModel loginViewModel) {
+    public LogoutPresenter(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
-        this.loginViewModel = loginViewModel;
     }
 
-    @Override
-    public void prepareSuccessView(LogoutOutputData response) {
+    /**
+     * Prepares the view for logout by transitioning to the login state.
+     */
+    public void prepareLogoutView() {
+        // Set the state of the ViewManagerModel to "login"
+        viewManagerModel.setState("login");
 
-        final LoginState loginState = loginViewModel.getState();
-        loginState.setUsername("");
-        loginState.setTagline("");
-        loginViewModel.setState(loginState);
-        loginViewModel.firePropertyChanged();
-
-        // Switch to the Login view
-        viewManagerModel.setState(loginViewModel.getViewName());
+        // Notify listeners about the state change
         viewManagerModel.firePropertyChanged();
     }
-
-    @Override
-    public void prepareFailView(String error) {
-        // Assuming logout cannot fail, so no action is required here.
-    }
 }
+
