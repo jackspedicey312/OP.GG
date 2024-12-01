@@ -5,7 +5,6 @@ import entity.OverviewProfile.Rank;
 import interface_adapter.back.BackController;
 import interface_adapter.profile.ProfilePresenter;
 import interface_adapter.profile.ProfileViewModel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
