@@ -7,10 +7,6 @@ import javax.swing.ImageIcon;
 public class MatchHistoryState {
     private MatchHistory matchHistory;
 
-    public MatchHistory getMatchHistory() {
-        return matchHistory;
-    }
-
     public ImageIcon getChampionIcon(int index) {
         return matchHistory.getMatch(index).getChampionIcon();
     }
@@ -37,6 +33,14 @@ public class MatchHistoryState {
 
     public String getDate(int index) {
         return matchHistory.getMatch(index).getDate();
+    }
+
+    public int getLength() {
+        return matchHistory.getLength();
+    }
+
+    public MatchHistory getMatchHistory() {
+        return matchHistory;
     }
 
     public void setMatchHistory(MatchHistory matchHistory) {
