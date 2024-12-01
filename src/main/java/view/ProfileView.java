@@ -32,7 +32,6 @@ public class ProfileView extends JFrame {
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // SummonerIcon Section
-
         ImageIcon profileIcon = profilePresenter.getProfileIcon();
         JLabel profileIconLabel = new JLabel(profileIcon);
         profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

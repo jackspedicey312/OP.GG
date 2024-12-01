@@ -92,6 +92,7 @@ public class FunFacts {
     public int getTotalPentakills() {
         return totalPentakills;
     }
+
     public int getTotalKills() {
         return totalKills;
     }

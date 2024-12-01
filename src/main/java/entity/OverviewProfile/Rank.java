@@ -52,35 +52,35 @@ public class Rank {
     }
 
     public ImageIcon getRankImage() {
-        if (rank.equalsIgnoreCase("iron")) {
-            return new ImageIcon("images/RankImages/Rank=Bronze.png");
+        if (rank.equalsIgnoreCase("Iron")) {
+            return new ImageIcon("images/Rank=Bronze.png");
         }
-        if (rank.equalsIgnoreCase("bronze")) {
-            return new ImageIcon("images/RankImages/Rank=Bronze.png");
+        if (rank.equalsIgnoreCase("Bronze")) {
+            return new ImageIcon("images/Rank=Bronze.png");
         }
-        if (rank.equalsIgnoreCase("silver")) {
-            return new ImageIcon("images/RankImages/Rank=Silver.png");
+        if (rank.equalsIgnoreCase("Silver")) {
+            return new ImageIcon("images/Rank=Silver.png");
         }
-        if (rank.equalsIgnoreCase("gold")) {
-            return new ImageIcon("images/RankImages/Rank=Gold.png");
+        if (rank.equalsIgnoreCase("Gold")) {
+            return new ImageIcon("images/Rank=Gold.png");
         }
-        if (rank.equalsIgnoreCase("platinum")) {
-            return new ImageIcon("images/RankImages/Rank=Platinum.png");
+        if (rank.equalsIgnoreCase("Platinum")) {
+            return new ImageIcon("images/Rank=Platinum.png");
         }
-        if (rank.equalsIgnoreCase("emerald")) {
-            return new ImageIcon("images/RankImages/Rank=Emerald.png");
+        if (rank.equalsIgnoreCase("Emerald")) {
+            return new ImageIcon("images/Rank=Emerald.png");
         }
-        if (rank.equalsIgnoreCase("diamond")) {
-            return new ImageIcon("images/RankImages/Rank=Diamond.png");
+        if (rank.equalsIgnoreCase("Diamond")) {
+            return new ImageIcon("images/Rank=Diamond.png");
         }
         if (rank.equalsIgnoreCase("Master")) {
-            return new ImageIcon("images/RankImages/Rank=Master.png");
+            return new ImageIcon("images/Rank=Master.png");
         }
         if (rank.equalsIgnoreCase("Grandmaster")) {
-            return new ImageIcon("images/RankImages/Rank=Grandmaster.png");
+            return new ImageIcon("images/Rank=Grandmaster.png");
         }
-        if (rank.equalsIgnoreCase("challenger")) {
-            return new ImageIcon("images/RankImages/Rank=Challenger.png");
+        if (rank.equalsIgnoreCase("Challenger")) {
+            return new ImageIcon("images/Rank=Challenger.png");
         }
     }
 }

@@ -13,7 +13,7 @@ public class FunFactView extends JFrame {
         setTitle("Fun Facts");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600); // Adjusted size for better layout
-        setLocationRelativeTo(null); // Center the window
+        setLocationRelativeTo(null);
 
         // Main panel with padding
         JPanel mainPanel = new JPanel();

@@ -8,6 +8,7 @@ public class ProfileController {
 
     public ProfileController(OverviewInputBoundary overviewInputBoundary) {
         this.overviewInputBoundary = overviewInputBoundary;
+
     }
 
     public void fetchOverview(String puuid, String region) {

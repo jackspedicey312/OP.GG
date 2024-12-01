@@ -41,6 +41,7 @@ public class ProfilePresenter implements OverviewOutputBoundary {
     public void presentRankIcon(ImageIcon icon) {
         this.rankIcon = icon;
     }
+    
     public void presentDivision(String division) {
         this.division = division;
         System.out.println(division);

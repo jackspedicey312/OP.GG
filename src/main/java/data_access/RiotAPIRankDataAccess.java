@@ -77,6 +77,7 @@ public class RiotAPIRankDataAccess {
         final HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
+
         return request;
     }
 

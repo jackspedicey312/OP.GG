@@ -47,6 +47,7 @@ public class ProfileOverview {
             return iconPng;
         }
         catch (IOException e) {
+
             System.err.println("Error fetching the icon: " + e.getMessage());
             return null;
         }

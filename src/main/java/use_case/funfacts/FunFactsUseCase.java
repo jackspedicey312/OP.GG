@@ -20,6 +20,7 @@ public class FunFactsUseCase implements FunFactsInputBoundary {
         presenter.presentTotalDeaths(funFacts.getTotalDeaths());
         presenter.presentTotalPlaytime(funFacts.getTotalPlaytime());
         presenter.presentLongestGamePlayed(funFacts.getLongestGamePlayed());
+
         presenter.presentLongestGamePlayedDate(funFacts.getLongestGamePlayedDate());
         presenter.presentTotalSurrenders(funFacts.getTotalSurrenders());
         presenter.presentTotalPentakills(funFacts.getTotalPentakills());
