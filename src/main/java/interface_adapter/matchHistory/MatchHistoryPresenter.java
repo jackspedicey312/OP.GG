@@ -14,5 +14,9 @@ public class MatchHistoryPresenter implements MatchHistoryOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-
+    @Override
+    public void prepareView() {
+        viewManagerModel.setState(matchHistoryViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
 }

@@ -13,7 +13,9 @@ public class RiotMain {
         final JFrame application = app
                 .addBackUseCase()
                 .addLoginView()
+                .addMatchHistoryView()
                 .addFreeChampionRotationView()
+                .addMatchHistoryUseCase()
                 .addFreeChampionRotationUseCase()
                 .addLoggedInView()
                 .addLoginUseCase()
