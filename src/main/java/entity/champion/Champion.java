@@ -18,7 +18,7 @@ public class Champion {
     private static final int KILLS_MAX = 30;
 
     public Champion(String championName, int championId, int magicDamage, int physicalDamage,
-                    int totalDamage, int trueDamage, int kills) {
+                    int totalDamage, int trueDamage, int kills, int masteryPoints) {
         this.championName = championName;
         this.championId = championId;
         this.magicDamage = magicDamage;
