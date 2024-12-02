@@ -95,7 +95,7 @@ public class RiotApp {
     private FunFactView funFactView;
     private FunFactViewModel funFactViewModel;
 
-    private ChampionMasteryView championMasteryView;
+    private ChampionView championView;
     private ChampionViewModel championViewModel;
 
     public RiotApp() {
@@ -147,8 +147,8 @@ public class RiotApp {
 
     public RiotApp addChampionView() throws IOException {
         championViewModel = new ChampionViewModel();
-        championMasteryView = new ChampionMasteryView(championViewModel, backController);
-        cardPanel.add(championMasteryView, championMasteryView.getViewName());
+        championView = new ChampionView(championViewModel, backController);
+        cardPanel.add(championView, championView.getViewName());
         return this;
     }
 
@@ -193,7 +193,7 @@ public class RiotApp {
     public RiotApp addChampionUseCase() {
         final ChampionOutputBoundary championOutputBoundary = new ChampionPresenter(championViewModel, viewManagerModel);
         final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
-        final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary, championDataAccess);
+        final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary);
         championController = new ChampionController(championInteractor);
         return this;
     }
