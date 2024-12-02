@@ -69,7 +69,7 @@ public class RiotUserDataAccessObject {
                     playerData.getBoolean("win"),
                     gameInfo.getInt("gameDuration"),
                     gameInfo.getString("gameMode"),
-                    gameInfo.getInt("gameCreation")));
+                    gameInfo.getLong("gameCreation")));
         }
         return matchHistoryFactory.createMatchHistory(matchList);
     }
