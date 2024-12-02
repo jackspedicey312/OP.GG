@@ -12,5 +12,4 @@ public class ChampionController {
     public void execute() {
         championInputBoundary.execute();
     }
-
 }

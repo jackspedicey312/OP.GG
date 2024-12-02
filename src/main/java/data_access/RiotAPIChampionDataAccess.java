@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.champion.Champion;
-import entity.champion.ChampionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -14,7 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/***
+/**
  * Fetches champion data for a summoner from the Riot API.
  */
 public class RiotAPIChampionDataAccess {
@@ -22,14 +21,14 @@ public class RiotAPIChampionDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
 
     /**
-     * Fetch all champion data for a summoner.
+     * Fetch the top 5 champions for a summoner.
      *
      * @param puuid  The player's unique identifier.
      * @param region The region of the player (e.g., NA, EU).
-     * @return A list of Champion entities.
+     * @return A list of the top 5 Champion entities containing only championId, championLevel, and championPoints.
      * @throws IOException If there's an error in fetching the data.
      */
-    public List<Champion> fetchAllChampions(String puuid, String region) throws IOException {
+    public List<Champion> fetchTop5Champions(String puuid, String region) throws IOException {
         final List<Champion> championList = new ArrayList<>();
 
         final HttpURLConnection request = getHttpURLConnection(puuid, region);
@@ -39,119 +38,24 @@ public class RiotAPIChampionDataAccess {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONArray championDataArray = new JSONArray(new JSONTokener(in));
 
-                for (int i = 0; i < championDataArray.length(); i++) {
+                for (int i = 0; i < Math.min(5, championDataArray.length()); i++) {
                     final JSONObject championData = championDataArray.getJSONObject(i);
 
-                    ChampionFactory championFactory = new ChampionFactory();
-                    Champion champion = championFactory.createChampion(
-                            getChampionName(championData),
-                            getChampionId(championData),
-                            getMagicDamage(championData),
-                            getPhysicalDamage(championData),
-                            getTotalDamage(championData),
-                            getTrueDamage(championData),
-                            getKills(championData),
-                            getMasteryPoints(championData)
+                    Champion champion = new Champion(
+
+                            championData.getInt("championId"),
+                            championData.getInt("championLevel"),
+                            championData.getInt("championPoints")
                     );
 
                     championList.add(champion);
                 }
             }
-        }
-        else {
+        } else {
             throw new IOException("HTTP error code: " + responseCode);
         }
+
         return championList;
-    }
-
-    /**
-     * Gets the champion name based on champion data.
-     */
-    public String getChampionName(JSONObject championData) throws IOException {
-        int championId = championData.getInt("championId");
-        final URL url = new URL("https://ddragon.leagueoflegends.com/cdn/14.22.1/data/en_US/champion.json");
-        final JSONObject championDatabase = getJsonObject(url);
-
-        for (String key : championDatabase.keySet()) {
-            JSONObject champion = championDatabase.getJSONObject(key);
-            if (champion.getInt("key") == championId) {
-                return champion.getString("id");
-            }
-        }
-        return "Unknown";
-    }
-
-    /**
-     * Gets the champion ID from champion data.
-     */
-    public int getChampionId(JSONObject championData) {
-        return championData.getInt("championId");
-    }
-
-
-    /**
-     * Gets the magic damage dealt from champion data.
-     */
-    public int getMagicDamage(JSONObject championData) {
-        return championData.optInt("magicDamageDealt", 0);
-    }
-
-    /**
-     * Gets the physical damage dealt from champion data.
-     */
-    public int getPhysicalDamage(JSONObject championData) {
-        return championData.optInt("physicalDamageDealt", 0);
-    }
-
-    /**
-     * Gets the total damage dealt from champion data.
-     */
-    public int getTotalDamage(JSONObject championData) {
-        return championData.optInt("totalDamageDealt", 0);
-    }
-
-    /**
-     * Gets the true damage dealt from champion data.
-     */
-    public int getTrueDamage(JSONObject championData) {
-        return championData.optInt("trueDamageDealt", 0);
-    }
-
-    /**
-     * Gets the number of kills from champion data.
-     */
-    public int getKills(JSONObject championData) {
-        return championData.optInt("kills", 0);
-    }
-
-    /**
-     * Gets the mastery points from champion data.
-     */
-    public int getMasteryPoints(JSONObject championData) {
-        return championData.optInt("championPoints", 0);
-    }
-
-
-    /**
-     * Retrieves the JSON object for champion metadata.
-     *
-     * @param url The URL to fetch the JSON data.
-     * @return A JSONObject containing champion metadata.
-     * @throws IOException If there's an error fetching the data.
-     */
-    private JSONObject getJsonObject(URL url) throws IOException {
-        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        request.setRequestMethod("GET");
-        request.connect();
-
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
-            final StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = in.readLine()) != null) {
-                response.append(line);
-            }
-            return new JSONObject(response.toString()).getJSONObject("data");
-        }
     }
 
     /**
