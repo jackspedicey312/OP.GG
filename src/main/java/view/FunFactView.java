@@ -14,32 +14,29 @@ import java.beans.PropertyChangeListener;
 public class FunFactView extends JPanel implements ActionListener, PropertyChangeListener {
     private final FunFactViewModel funFactViewModel;
     private final BackController backController;
-    private final JPanel contentPanel = new JPanel();
     private JButton backbutton = new JButton("Back");
 
     public FunFactView(FunFactViewModel funFactViewModel, BackController backController) {
         this.funFactViewModel = funFactViewModel;
         this.backController = backController;
+        this.funFactViewModel.addPropertyChangeListener(this);
 
         // Main panel with padding
-        JPanel mainPanel = new JPanel();
         this.setLayout(new BorderLayout(10, 10));
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Back button
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+        this.add(buttonPanel, BorderLayout.NORTH);
 
         // Title
         JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
-        this.add(title, BorderLayout.NORTH);
-
-        final JPanel buttonPanel = new JPanel();
-        backbutton.addActionListener(this);
-        buttonPanel.add(backbutton);
-        backbutton.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.add(buttonPanel);
-
-        // Content panel for stats
-        contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns
-        this.add(contentPanel, BorderLayout.CENTER);
+        JPanel titlePanel = new JPanel();
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        this.add(title, BorderLayout.CENTER);
     }
 
     /**
@@ -63,6 +60,11 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // Helper method to add labeled statistics
+        // Content panel for stats
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setMinimumSize(new Dimension(800, 600));
+        contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns
         addStat(contentPanel, "The oldest match analyzed:", funFactViewModel.getState().getOldestGamePlayed());
         addStat(contentPanel, "Total Playtime (Hours):", funFactViewModel.getState().getTotalPlaytime());
         addStat(contentPanel, "Total Wins:", funFactViewModel.getState().getTotalWins());
@@ -78,5 +80,6 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
                 funFactViewModel.getState().getTotalSurvivedSingleDigitHp());
         addStat(contentPanel, "Total Snowballs Hit:", funFactViewModel.getState().getTotalSnowballsHit());
         addStat(contentPanel, "Total times you have saved your teammate:", funFactViewModel.getState().getTotalSavedAllies());
+        this.add(contentPanel, BorderLayout.SOUTH);
     }
 }
