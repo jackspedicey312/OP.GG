@@ -17,14 +17,15 @@ import interface_adapter.funfacts.FunFactViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.logout.LogoutController;
-import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.matchHistory.MatchHistoryController;
 import interface_adapter.matchHistory.MatchHistoryPresenter;
 import interface_adapter.matchHistory.MatchHistoryViewModel;
 import interface_adapter.ProfilePresenter.ProfileController;
 import interface_adapter.profile.ProfilePresenter;
 import interface_adapter.profile.ProfileViewModel;
+import interface_adapter.champion.ChampionController;
+import interface_adapter.champion.ChampionPresenter;
+import interface_adapter.champion.ChampionViewModel;
 import use_case.back.BackInputBoundary;
 import use_case.back.BackInteractor;
 import use_case.back.BackOutputBoundary;
@@ -37,15 +38,15 @@ import use_case.funfacts.FunFactsUseCase;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
-import use_case.logout.LogoutInputBoundary;
-import use_case.logout.LogoutInteractor;
-import use_case.logout.LogoutOutputBoundary;
 import use_case.matchHistory.MatchHistoryInputBoundary;
 import use_case.matchHistory.MatchHistoryInteractor;
 import use_case.matchHistory.MatchHistoryOutputBoundary;
 import use_case.overview.ProfileInputBoundary;
 import use_case.overview.ProfileInteractor;
 import use_case.overview.ProfileOutputBoundary;
+import use_case.champion.ChampionInteractor;
+import use_case.champion.ChampionInputBoundary;
+import use_case.champion.ChampionOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -60,6 +61,7 @@ public class RiotApp {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
+    private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
     private ProfileController profileController;
@@ -67,7 +69,7 @@ public class RiotApp {
     private FreeChampionRotationController freeChampionRotationController;
     private BackController backController;
     private FunFactController funFactController;
-    private LogoutController logoutController;
+    private ChampionController championController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -87,6 +89,9 @@ public class RiotApp {
     private FunFactView funFactView;
     private FunFactViewModel funFactViewModel;
 
+    private ChampionMasteryView championMasteryView;
+    private ChampionViewModel championViewModel;
+
     public RiotApp() {
         cardPanel.setLayout(cardLayout);
     }
@@ -100,7 +105,7 @@ public class RiotApp {
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController, logoutController);
+        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController, championController);
         cardPanel.add(loggedInView, loggedInView.getViewName());
         return this;
     }
@@ -130,6 +135,13 @@ public class RiotApp {
         freeChampionRotationViewModel = new FreeChampionRotationViewModel();
         freeChampionRotationView = new FreeChampionRotationView(freeChampionRotationViewModel, backController);
         cardPanel.add(freeChampionRotationView, freeChampionRotationView.getViewName());
+        return this;
+    }
+
+    public RiotApp addChampionView() throws IOException {
+        championViewModel = new ChampionViewModel();
+        championMasteryView = new ChampionMasteryView(championViewModel, backController);
+        cardPanel.add(championMasteryView, championMasteryView.getViewName());
         return this;
     }
 
@@ -171,17 +183,18 @@ public class RiotApp {
         return this;
     }
 
+    public RiotApp addChampionUseCase() {
+        final ChampionOutputBoundary championOutputBoundary = new ChampionPresenter(championViewModel, viewManagerModel);
+        final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
+        final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary, championDataAccess);
+        championController = new ChampionController(championInteractor);
+        return this;
+    }
+
     public RiotApp addBackUseCase() {
         final BackOutputBoundary backPresenter = new BackPresenter(viewManagerModel);
         final BackInputBoundary backInteractor = new BackInteractor(backPresenter);
         backController = new BackController(backInteractor);
-        return this;
-    }
-
-    public RiotApp addLogoutUseCase() {
-        final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(viewManagerModel);
-        final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
-        logoutController = new LogoutController(logoutInteractor);
         return this;
     }
 

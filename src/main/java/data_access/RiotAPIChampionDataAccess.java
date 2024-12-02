@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.champion.Champion;
+import entity.champion.ChampionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -41,7 +42,8 @@ public class RiotAPIChampionDataAccess {
                 for (int i = 0; i < championDataArray.length(); i++) {
                     final JSONObject championData = championDataArray.getJSONObject(i);
 
-                    Champion champion = new Champion(
+                    ChampionFactory championFactory = new ChampionFactory();
+                    Champion champion = championFactory.createChampion(
                             getChampionName(championData),
                             getChampionId(championData),
                             getMagicDamage(championData),
@@ -55,7 +57,8 @@ public class RiotAPIChampionDataAccess {
                     championList.add(champion);
                 }
             }
-        } else {
+        }
+        else {
             throw new IOException("HTTP error code: " + responseCode);
         }
 

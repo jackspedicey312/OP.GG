@@ -26,7 +26,6 @@ public class Champion {
         this.totalDamage = totalDamage;
         this.trueDamage = trueDamage;
         this.kills = kills;
-
         this.masteryPoints = calculateMasteryPoints(totalDamage, magicDamage, physicalDamage, trueDamage, kills);
     }
 
@@ -75,4 +74,19 @@ public class Champion {
     private int normalize(int value, int min, int max) {
         return (int) (((double) (value - min) / (max - min)) * 1000);
     }
+
+    @Override
+    public String toString() {
+        return "Champion{" +
+                "championName='" + championName + '\'' +
+                ", championId=" + championId +
+                ", magicDamage=" + magicDamage +
+                ", physicalDamage=" + physicalDamage +
+                ", totalDamage=" + totalDamage +
+                ", trueDamage=" + trueDamage +
+                ", kills=" + kills +
+                ", masteryPoints=" + masteryPoints +
+                '}';
+    }
 }
+

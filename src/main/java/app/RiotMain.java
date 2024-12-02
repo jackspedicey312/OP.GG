@@ -18,10 +18,12 @@ public class RiotMain {
                 .addMatchHistoryView()
                 .addFreeChampionRotationView()
                 .addFunFactView()
+                .addChampionView()
                 .addProfileUseCase()
                 .addMatchHistoryUseCase()
                 .addFreeChampionRotationUseCase()
                 .addFunFactsUseCase()
+                .addChampionUseCase()
                 .addLoggedInView()
                 .addLoginUseCase()
                 .build();

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d4628ef2-871e-4ad5-928d-f1a052c5201c" name="Changes" comment="LogOut finished">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homework-5.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/champion/ChampionFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/champion/ChampionState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/champion/ChampionViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/use_case/logout/LogoutInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/RiotAPIChampionDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/RiotAPIChampionDataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data_access/RiotUserDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data_access/RiotUserDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/champion/Champion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/Champion/ChampionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/champion/ChampionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/Champion/ChampionPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/champion/ChampionPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/champion/ChampionOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/champion/FetchTopChampionsUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/logout/LogoutInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/logout/LogoutInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/logout/LogoutOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/logout/LogoutOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ChampionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ChampionView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoggedInView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoggedInView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MatchView.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Kha-branch",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="OP.GG" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="OP.GG" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="LogOut finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="LogOut finished" />
+  </component>
+</project>
