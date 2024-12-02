@@ -3,9 +3,6 @@ package view;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.match.MatchController;
-import interface_adapter.login.LoginPresenter;
-import interface_adapter.match.MatchPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +52,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         panel.add(loginButton);
 
         add(panel);
-        setVisible(true);
     }
 
     public String getViewName() {

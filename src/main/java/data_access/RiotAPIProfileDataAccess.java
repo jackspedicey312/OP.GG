@@ -1,12 +1,10 @@
 package data_access;
 
+import entity.OverviewProfile.ProfileOverview;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,25 +13,37 @@ import java.net.URL;
 
 public class RiotAPIProfileDataAccess {
     private static final String API_KEY = "RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87";
-    private String summonerID;
-    private int summonerLevel;
-    private int iconID;
-    private ImageIcon iconPng;
 
     // PUUID AND REGION NEEDED TO CALL API
-    public void generateProfileData(String puuid, String region) throws IOException {
+    public ProfileOverview generateProfileData(String puuid, String region) throws IOException {
+
         final HttpURLConnection request = getHttpURLConnection(puuid, region);
 
+        // This is for getting the username and tagline.
+        final HttpURLConnection request2 = getHttpURLConnection2(puuid, region);
+
+        final int responseCode2 = request2.getResponseCode();
         final int responseCode = request.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
+
+        if (responseCode == HttpURLConnection.HTTP_OK && responseCode2 == HttpURLConnection.HTTP_OK)  {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONObject playerData = new JSONObject(new JSONTokener(in));
 
-                this.summonerID = playerData.getString("id");
-                this.summonerLevel = playerData.getInt("summonerLevel");
-                this.iconID = playerData.getInt("profileIconId");
+                String summonerID = playerData.getString("id");
+                int summonerLevel = playerData.getInt("summonerLevel");
+                int iconID = playerData.getInt("profileIconId");
+
+                BufferedReader in2 = new BufferedReader(new InputStreamReader(request2.getInputStream()));
+                final JSONObject playerData2 = new JSONObject(new JSONTokener(in2));
+
+                String username = playerData2.getString("gameName");
+                String tag = playerData2.getString("tagLine");
+
+                ProfileOverview profile = new ProfileOverview(username, tag, summonerID, summonerLevel, iconID);
+                return profile;
             }
-        } else {
+        }
+        else {
             throw new IOException("HTTP error code: " + responseCode);
         }
     }
@@ -43,11 +53,14 @@ public class RiotAPIProfileDataAccess {
         final String baseURL;
         if (region.equalsIgnoreCase("NA")) {
             baseURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else if (region.equalsIgnoreCase("EU")) {
+        }
+        else if (region.equalsIgnoreCase("EU")) {
             baseURL = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else if (region.equalsIgnoreCase("ASIA")) {
+        }
+        else if (region.equalsIgnoreCase("ASIA")) {
             baseURL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported region: " + region);
         }
 
@@ -56,36 +69,32 @@ public class RiotAPIProfileDataAccess {
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.setRequestMethod("GET");
         request.setRequestProperty("X-Riot-Token", API_KEY);
+
         return request;
     }
 
-    public String getSummonerID() {
-        return summonerID;
-    }
-
-    public int getSummonerLevel() {
-        return summonerLevel;
-    }
-
-    /**
-     * @throws IOException if icon png cannot be found with the given iconID.
-     *                     Returns the icon png with the given iconID.
-     */
-
-    public ImageIcon getIconPng() throws IOException {
-        final String iconId2 = Integer.toString(this.iconID);
-        final String pngURL = "https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/"
-                + iconId2 + ".png";
-
-        try {
-            final URL url = new URL(pngURL);
-            final BufferedImage img = ImageIO.read(url);
-            this.iconPng = new ImageIcon(img);
-            return iconPng;
+    private HttpURLConnection getHttpURLConnection2(String puuid, String region) throws IOException {
+        final String baseURL;
+        if (region.equalsIgnoreCase("NA")) {
+            baseURL = "https://americas.api.riotgames.com/riot/account/v1/accounts/by-puuid/";
         }
-        catch (IOException e) {
-            System.err.println("Error fetching the icon: " + e.getMessage());
-            return null;
+        else if (region.equalsIgnoreCase("EU")) {
+            baseURL = "https://europe.api.riotgames.com/riot/account/v1/accounts/by-puuid/";
         }
+        else if (region.equalsIgnoreCase("ASIA")) {
+            baseURL = "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/";
+        }
+        else {
+            throw new IllegalArgumentException("Unsupported region: " + region);
+        }
+
+        String urlComplete = baseURL + puuid;
+        URL url = new URL(urlComplete);
+        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.setRequestMethod("GET");
+        request.setRequestProperty("X-Riot-Token", API_KEY);
+
+        return request;
     }
+
 }

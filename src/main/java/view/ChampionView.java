@@ -1,10 +1,11 @@
 package view;
 
+import data_access.RiotAPIChampionIconDataAccess;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.champion.ChampionState;
 import interface_adapter.champion.ChampionViewModel;
+import interface_adapter.back.BackController;
 import entity.champion.Champion;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,11 +20,12 @@ import java.util.List;
 public class ChampionView extends JPanel implements PropertyChangeListener {
     private final String viewName = "champion";
     private final ChampionViewModel championViewModel;
+    private final BackController backController;
     private final JPanel championListPanel = new JPanel();
-    private final JLabel errorLabel = new JLabel();
 
-    public ChampionView(ChampionViewModel championViewModel, ViewManagerModel viewManagerModel) {
+    public ChampionView(ChampionViewModel championViewModel, BackController backController) {
         this.championViewModel = championViewModel;
+        this.backController = backController;
         this.championViewModel.addPropertyChangeListener(this);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -36,19 +38,11 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         championListPanel.setLayout(new BoxLayout(championListPanel, BoxLayout.Y_AXIS));
         add(new JScrollPane(championListPanel));
 
-        // Back button
-        JButton backButton = new JButton("Back to Login");
+        // Back button using BackController
+        JButton backButton = new JButton("Back");
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.addActionListener(e -> {
-            viewManagerModel.setState("login");
-            viewManagerModel.firePropertyChanged();
-        });
+        backButton.addActionListener(e -> backController.execute());
         add(backButton);
-
-        // Error label
-        errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        errorLabel.setForeground(Color.RED);
-        add(errorLabel);
     }
 
     public String getViewName() {
@@ -59,26 +53,23 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if ("state".equals(evt.getPropertyName())) {
             ChampionState state = (ChampionState) evt.getNewValue();
-            updateUIFromState(state);
-        }
-    }
 
-    private void updateUIFromState(ChampionState state) {
-        championListPanel.removeAll();
-        errorLabel.setText("");
+            // Clear the panel
+            championListPanel.removeAll();
 
-        if (state.getFetchError() != null) {
-            errorLabel.setText(state.getFetchError());
-        } else {
+            // Display champions
             List<Champion> champions = state.getChampions();
-            for (Champion champion : champions) {
-                JPanel championPanel = createChampionPanel(champion);
-                championListPanel.add(championPanel);
+            if (champions != null && !champions.isEmpty()) {
+                for (Champion champion : champions) {
+                    JPanel championPanel = createChampionPanel(champion);
+                    championListPanel.add(championPanel);
+                }
             }
-        }
 
-        championListPanel.revalidate();
-        championListPanel.repaint();
+            // Revalidate and repaint the panel
+            championListPanel.revalidate();
+            championListPanel.repaint();
+        }
     }
 
     private JPanel createChampionPanel(Champion champion) {
@@ -88,7 +79,8 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         championPanel.setPreferredSize(new Dimension(200, 250));
 
         try {
-            JLabel iconLabel = new JLabel(ChampionIcon.getChampionIcon(champion.getChampionName()));
+            RiotAPIChampionIconDataAccess championIconDataAccess = new RiotAPIChampionIconDataAccess();
+            JLabel iconLabel = new JLabel(championIconDataAccess.getChampionIcon(champion.getChampionName()));
             iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             championPanel.add(iconLabel);
         } catch (IOException e) {
@@ -101,6 +93,11 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         championPanel.add(nameLabel);
+
+        JLabel idLabel = new JLabel("ID: " + champion.getChampionId());
+        idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        idLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        championPanel.add(idLabel);
 
         JLabel killsLabel = new JLabel("Kills: " + champion.getKills());
         killsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -122,7 +119,7 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         totalDamageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         championPanel.add(totalDamageLabel);
 
-        JLabel masteryPointsLabel = new JLabel("Mastery Point: " + champion.getMasteryPoints());
+        JLabel masteryPointsLabel = new JLabel("Mastery Points: " + champion.getMasteryPoints());
         masteryPointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         championPanel.add(masteryPointsLabel);
 

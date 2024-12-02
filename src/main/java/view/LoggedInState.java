@@ -1,6 +1,6 @@
 package view;
 
-import entity.User.User;
+import entity.user.User;
 
 public class LoggedInState {
     private User user;

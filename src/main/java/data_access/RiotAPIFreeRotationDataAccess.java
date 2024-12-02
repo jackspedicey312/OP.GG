@@ -97,7 +97,7 @@ public class RiotAPIFreeRotationDataAccess {
                 return new ImageIcon(img);
             }
             catch (IOException e) {
-                return new ImageIcon();
+                return null;
             }
         }
         return null;
