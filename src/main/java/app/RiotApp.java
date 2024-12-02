@@ -61,7 +61,7 @@ public class RiotApp {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
-    private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess()
+    private final RiotAPIUserDataAccess userDataAccess = new RiotAPIUserDataAccess();
     private final RiotUserDataAccessObject userDataAccessObject = new RiotUserDataAccessObject();
     private LoginController loginController;
     private ProfileController profileController;
@@ -182,17 +182,10 @@ public class RiotApp {
         funFactController = new FunFactController(funFactsInteractor);
         return this;
     }
-
     public RiotApp addChampionUseCase() {
         final ChampionOutputBoundary championOutputBoundary = new ChampionPresenter(championViewModel, viewManagerModel);
-        final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
-        final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary, championDataAccess);
-
-
-        String puuId = userDataAccess.fetchPuuId();
-        String region = userDataAccessObject.getRegion();
-
-        championController = new ChampionController(championInteractor, puuId, region);
+        final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary);
+        championController = new ChampionController(championInteractor);
         return this;
     }
 

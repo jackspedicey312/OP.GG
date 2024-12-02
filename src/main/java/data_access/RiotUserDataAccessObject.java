@@ -83,27 +83,33 @@ public class RiotUserDataAccessObject {
         return funFactsDataAccess.getFunFacts(puuId, region);
     }
 
-    public List<Champion> getChampions(String puuId, String region) throws Exception {
-        final List<Champion> championList = new ArrayList<>();
+    /**
+     * Fetches a list of champions for the given player.
+     *
+     * @param puuId  The player's unique identifier.
+     * @param region The region of the player.
+     * @return A list of Champion objects.
+     * @throws IOException If an error occurs while fetching data.
+     */
+    public List<Champion> getChampions(String puuId, String region) throws IOException {
+        List<Champion> champions = championDataAccess.fetchTop5Champions(puuId, region);
 
-        final List<Champion> allChampions = championDataAccess.fetchAllChampions(puuId, region);
-
-        for (Champion champion : allChampions) {
-            championList.add(championFactory.createChampion(
-                    champion.getChampionName(),
+        List<Champion> championList = new ArrayList<>();
+        for (Champion champion : champions) {
+            Champion newChampion = championFactory.createChampion(
                     champion.getChampionId(),
-                    champion.getMagicDamage(),
-                    champion.getPhysicalDamage(),
-                    champion.getTotalDamage(),
-                    champion.getTrueDamage(),
-                    champion.getKills(),
-                    champion.getMasteryPoints()
-            ));
+                    champion.getChampionLevel(),
+                    champion.getChampionPoints()
+                    );
+
+            championList.add(newChampion);
         }
 
-        // Return the processed list of champions
         return championList;
     }
-
 }
+
+
+
+
 
