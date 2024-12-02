@@ -17,6 +17,10 @@ public class ProfileState {
         this.rank = rank;
     }
 
+    public String getRank() {
+        return rank.getRank();
+    }
+
     public String getUsername() {
         return profileOverview.getUsername();
     }
@@ -65,7 +69,4 @@ public class ProfileState {
         return profileOverview;
     }
 
-    public Rank getRank() {
-        return rank;
-    }
 }

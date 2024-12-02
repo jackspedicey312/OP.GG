@@ -22,7 +22,7 @@ public class Rank {
         this.wins = wins;
         this.losses = losses;
         this.winRate = winRate;
-        this.rankIcon = getRankImage();
+        this.rankIcon = getRankImage(rank);
     }
 
     public int getLeaguePoints() {
@@ -57,7 +57,11 @@ public class Rank {
         return rankIcon;
     }
 
-    public ImageIcon getRankImage() {
+    public ImageIcon getRankImage(String rank) {
+        if (rank.equalsIgnoreCase("Unranked")) {
+            return new ImageIcon("images/Rank=Unranked.png");
+        }
+
         if (rank.equalsIgnoreCase("Iron")) {
             return new ImageIcon("images/Rank=Bronze.png");
         }
