@@ -47,6 +47,7 @@ public class ChampionView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        listPanel.removeAll();
         System.out.println("Champion Mastery being generated");
         final int length = championViewModel.getState().getLength();
         System.out.println("Number of champions: " + length);
