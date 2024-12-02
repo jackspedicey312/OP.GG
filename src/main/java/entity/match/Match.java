@@ -36,12 +36,13 @@ public class Match {
     }
 
     public static String unixConverter(long unixCode) {
-        final Instant instant = Instant.ofEpochSecond(unixCode);
+        Instant instant = Instant.ofEpochMilli(unixCode);
 
-        // Define a formatter for a readable date-time format
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")
+        // Define a formatter for a readable date-time format with the system's time zone
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")
                 .withZone(ZoneId.systemDefault());
 
+        // Format the Instant to a human-readable string
         return formatter.format(instant);
     }
 

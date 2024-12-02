@@ -1,244 +1,186 @@
-# League of Legends Player Stats (change this to a proper name)
+# Summoner Buddy  
 
-## Authors
-- [Jason](https://github.com/jhao5)
-- [Kha](https://github.com/kha-act)
-- [Bryan](https://github.com/DBRYAN350)
-- [Jack](https://github.com/jackspedicey312)
-- [Patricia](https://github.com/pwatana)
+## Authors  
+- [Jason Hao](https://github.com/jhao5)
+- [Kha Le](https://github.com/kha-act)
+- [Boyuan Dong](https://github.com/DBRYAN350)
+- [Jack Li](https://github.com/jackspedicey312)
+- [Patricia Watanabe](https://github.com/pwatana)
+---
 
-## Summary
+## Summary  
 This project is a companion app for _League of Legends_ players and provides detailed game data and 
 statistics using the Riot API. This application was design to help players track their progress, 
 improve their gameplay, analyze match performance features like player profiles, match history,
 and champion mastery.  
-
-## Table of Contents
+---
+## Table of Contents  
 1. [Features](#features)
 2. [Installation Instructions](#installation-instructions)
 3. [Usage Guide](#usage-guide)
 4. [License](#license)
-5. [Feedback](#feedback)
+5. [Feedback](#feedback-and-discussions-)
 6. [Contributing](#contributing)
+7. [Code of Conduct](#code-of-conduct)
+---
+## Features  
 
-## Features
-- Player Profile (Overview Summoner Data):
-  - Provides player details like rank, summoner level, and account stats.
-- Match History:
-  - Provides the five most recent match stats including KDA and win/loss ratio.
-- Champion Mastery:
-  - Track performance for specific champions and evaluate mastery progress.
-- Friends:
-  - Track friends played with in the five most recent matches with the game stats.
-- Fun Facts:
-  - Provides player's fun facts including total play time, wins, losses kills, 
-  deaths, oldest played unix and so on.
-- Riot API Real-Time Data Fetching
-  - Uses Riot API to fetch data directly from the game's servers.
+**Feature Overview**  
+Our application provides features that provides insights into League of Legends gameplay:  
+- Player Profile (Overview Summoner Data):  
+Provides player details like rank, summoner level, and account stats with the summoner ID and icon.
+- Match History:  
+Provides information about the five most recent matches including Kills, Deaths, Assists and match outcome. 
+- Champion Mastery:  
+Evaluates performance for specific champions played by calculating the mastery points using performance metrics
+such as Damage Dealt to opponent champions.
+- Friends:  
+Track friends played with in the most recent matches with the game outcomes.
+- Fun Facts:  
+Provides player's fun facts including total play time, wins, losses kills, deaths, oldest played unix and so on.
+- Riot API Real-Time Data Fetching  
+Uses Riot API to fetch data directly from the League of Legends's servers.
 
 Here is an example code for Player Profile (overview) feature:
 1. Add your Riot API key to the API_KEY variable in the RiotAPIProfileDataAccess class.
 2. Execute the OverviewUseCase
+---
+## Installation Instructions  
+To set up and the run Summoner Buddy, one person needs to clone the repository first:
 
-## Installation Instructions
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/jackspedicey312/OP.GG.git
-2. Register for an API key at the [Riot Developer Portal](https://developer.riotgames.com/)
-3. Add your API key to the api_key variable in the RiotAPIDataAccess class:
+### **Step1: Clone the Repository**  
+Begin by cloning the project repository from GitHub to your local development environment:  
+``` 
+    git clone https://github.com/jackspedicey312/OP.GG.git  
+```
+This will create a local copy of the codebase.  
+
+
+### **Step 2: Register for a Riot API Key**  
+The application uses the Riot Games API for fetching player and match data. To acquire API key:
+1. Visit the [Riot Developer Portal](https://developer.riotgames.com/)
+2. Sign up for an account or log in if you already have one.
+3. Navigate to the API Keys section.
+4. Generate Development API Key. Note that development keys expire after 24 hours, so you will need to regenerate them
+if necessary.  
+
+### **Step 3: Add the API Key to the project**  
+1. Open the project in your preferred IDE  (e.g., IntelliJ).
+2. Locate any RiotAPIDataAccess class in the data_access package (e.g., RiotAPIUserDataAccess).
+3. Replace the placeholder API_KEY with your actual API key:
    public class RiotAPIDataAccess {
    private static final String API_KEY = "your_api_key_here";
    }
-4. Build and run the project
+4. Save your changes and your key is now securely added!  
 
-## Usage Guide
-
-# Instruction on How to Use the Software
-
-1. Clone the Repository
-    ```bash
-    git clone https://github.com/jackspedicey312/OP.GG.git
-    cd OP.GG
-
-2. Install Dependencies
-    We are using Maven for this project:
-    ```bash
+### **Step 4: Install Project Dependencies**  
+The application may rely on external libraries to function. To make sure all dependencies are properly installed, follow
+these steps:
+1. Open the pom.xml (Maven) file in the root directory.
+2. Use the terminal or IDE to install the dependencies:
+   ```
    mvn install
+3. Your dependencies are now downloaded in the project! 
+
+### **Step 5: Build and Run the Project**
+1. Compile the codebase:
+    In IntelliJ: Click Build > Build Project.
+    In the terminal (for Maven)
+    ```
+   mvn compile
    
-3. Run the application
+2. Run the project:
+    Locate RiotMain.java in the app main/java/app folder.
+    Run the main method to start the application.
+    You should now be able to navigate through the application from the main menu or login interface.
 
+### **Step 6: Verify Functionality**  
 
+To test the main features:
+- Log in using a summoner's name and region.
+- View the player profile, match history, champion mastery and other stats and pages.
+To troubleshoot any errors:
+- Double check that your API key is active.
+- Check network connectivity to Riot's servers.
 
-## License
+**Important Notes:**  
+Please consider that the Riot's development API keys are temporary. Always verify the key's validity if requests fail.
+And please make sure that you are connected to the internet to fetch real-time data from the Riot API.
 
-## Feedbacks
+---
+## License  
+Please refer to the LICENSE file for details about usage permissions and restrictions. The software is licensed under 
+the MIT License, allowing developers to use, modify, and distribute the software freely, provided that the original 
+copyright notice is retained. Note that the software is provided 'as-is' without any warranties.
 
-We welcome your feedback to improve the project :)
+---
+## Feedback and Discussions  
+We are excited to hear your feedback and suggestions to make our League of Legends analytics application better! This 
+repository is the official space for public feedback discussions related to all aspects of the project, including 
+features, design, performance, and documentation.
 
-# How to provide Feedback:
-- Google Form: submit your feedba
+Your input is valuable to us, and we aim to foster productive and collaborative conversations. If you have ideas or 
+concerns, this is the place to share them with the community, including the developers of the project.
 
-## Contributing
+### How to provide Feedback  
+- We encourage you to create a new discussion in the Discussion Tab to suggest features, report bugs, or share other 
+feedback. 
+- You don’t need to have a solution for the problem you're addressing; we value all constructive discussions. 
+- Before creating a new discussion, please search through existing issues to check if your suggestion has already been 
+raised. If so, feel free to contribute additional details or reactions to signal your support instead of creating a 
+duplicate issue.  
 
+### Disclaimer  
+Please note that any forward-looking statements or development plans shared in this repository are subject to change. 
+These discussion are not guarantees or commitments to deliver specific features by a particular date.
+Thank you for helping us improve the project and creating a better experience for all users!
+---
+## Contributing  
+We're excited to welcome contributions to our League of Legends analytics app! Whether you’re fixing bugs, adding new 
+features, improving documentation, or sharing feedback, your contributions help make this project better for everyone.
 
-**To get started, one team member should fork this repo on GitHub and share it with the team. 
-All of you should then clone it.**
+### How to Contribute
+1. Fork the Repository
+    Click the "Fork" button on the top-right of the repository to create your own copy.
+2. Clone Your Fork
+    Clone your fork to your local machine using:
+    ```
+   git clone https://github.com/YOUR_USERNAME/OP.GG.git
+3. Create a Branch
+    Create a new branch to isolate your changes:
+    ```
+   git checkout -b feature-or-bugfix-name
+4. Make Your Changes
+    Fix a bug, implement a feature, or improve the documentation. Please ensure your code follows the project's style 
+    guide. 
+5. Test Your Changes
+    Run the tests provided to ensure your changes don't break existing functionality. If you're adding new features,
+    write tests to cover them.
+6. Submit Pull Request
+    Push you changes to your forked repository:
+    ```
+   git push origin feature-or-bugfix-name 
+    ```
+   Open a pull request from your branch to the main branch of this repository. Include a clear and descriptive title,
+    and provide details about the changes made.
 
-* * *
+### Discussion for Bugs, Features, and Feedback  
+If you encounter a bug, please start a new discussion using the "Discussion" tab in this repository. Please include the 
+following in your post under the appropriate category:
+- **Bug Reports:** Describe the issue clearly, steps to reproduce, and include screenshots or error messages if
+applicable.
+- **Feature Requests:** Share your idea, explain why it's valuable, and provide details on how it could work.
+- **General Feedback:** Let us know how we're doing or suggest improvements.
 
-Suggested logistics: One of you should invite the others to collaborate on their fork of the
-original repo on GitHub. You can do this in your repo on GitHub under `Settings -> Collaborators`.
-This will allow you to push branches to a common repo and then use pull requests to contribute
-your code and review. To prevent others from pushing directly to the main branch,
-we recommend you set branch protection rules on GitHub. Below are how the settings might look if you
-add branch protection rules:
+### Guidelines  
+- Follow our [Code of Conduct] to maintain a welcoming collaborative environment,
+- Check out existing discussions before creating a new one to avoid duplicates.
+- Ensure your pull request passes all tests before submission.
 
-![image of branch protection rules for main with the
-requirement of two approvers to merge in pull requests.
-](images/branch_protection_rules.png)
+### Recognition
+All contributors will be recognized in the "Contributors" section of our README. Your efforts help us build a better
+tools for League of Legends players and analysts-thank you for your contributions!
 
-* * *
-
-Open the project in IntelliJ and make sure you can successfully run `app/Main.java`.
-Note: you may need to set the Project SDK in the `Project Structure...` menu, and possibly
-also manually link the Maven project, as you did in Phase 1.
-
-## Task 1: Understanding the Program
-
-You may notice that we have refactored the CA engine code _slightly_ since Phase 1, but the
-way we build the engine is drastically different: we have switched from using Factories to
-using the Builder design pattern, which we'll be discussing in lecture soon. 
-
-Open up `app.Main` and read it as a team.
-- What are the Views and what are the current Use Cases?
-- Which Uses Cases are triggered from each View?
-- Which version of the DAO is `app.Main` using?
-
-The major change since Phase 1 is that we have added the `app.AppBuilder` class which makes
-it easier to understand how our CA engine is being constructed — it also makes `app.Main` nice and concise!
-- Why do all those `addX` methods end in `return this;`? 
-
-Run the program and make sure the signup and login Use Cases work.
-
-Currently, you'll notice that the "Log Out" button still doesn't actually log you out. It's time to fix
-that button, which is part of the `LoggedInView`.
-We have created all the classes for you, but some of the code is missing.
-As a team, your task is to fill in the missing code so that the Logout Use Case is implemented.
-**The next part of the readme describes how your team will do this.**
-
-* * *
-
-**Your team will know when you are done when:**
-
-- Clicking the "Log Out" button takes the user back to the Login View when you use the program.
-- The provided `LogoutInteractorTest` test passes.
-
-The "Log Out" button is an instance variable in class `LoggedInVew`. Go find it.
-Also look at the `interface_adapter.change_password.LoggedInViewModel`, which contains any
-data showing on the `LoggedInVew`.
-
-* * *
-
-## Task 2: Dividing up the work
-
-There are `TODO` comments left in the files
-Recall that you can use the TODO tool window to conveniently pull up a complete list.
-
-Once the TODOs are all complete, the "Log Out" button _should_ work!
-
-As a team, split up the TODOs (see below) between the members of your team.
-
-There are TODOs in seven of the files.
-Make sure each member has at least one TODO which they will be responsible for completing.
-If your team prefers to work in pairs, that is fine too. Your individual branches
-will not be graded for this — only the final, working version.
-
-The TODOs are summarized below (by file) to help your team decide how to split them up:
-
-* * *
-
-- `Main.java`
-
-  - [ ] TODO: add the Logout Use Case to the app using the appBuilder
-
-* * *
-
-- `LoggedInView.java` (tip: refer to the other views for similar code)
-
-  - [ ] TODO: save the logout controller in the instance variable.
-  - [ ] TODO: execute the logout use case through the Controller
-
-* * *
-
-- `LogoutController.java` (tip: refer to the other controllers for similar code)
-
-  - [ ] TODO: Save the interactor in the instance variable.
-  - [ ] TODO: run the use case interactor for the logout use case
-
-* * *
-
-- `LogoutInputData.java` (should be done with the LogoutInteractor TODOs below)
-
-  - [ ] TODO: save the current username in an instance variable and add a getter.
-
-- `LogoutInteractor.java` (tip: refer to `ChangePasswordInteractor.java` for similar code)
-
-  - [ ] TODO: save the DAO and Presenter in the instance variables.
-  - [ ] TODO: implement the logic of the Logout Use Case
-
-* * *
-
-- `LogoutOutputData.java`
-
-  - [ ] TODO: save the parameters in the instance variables.
-
-* * *
-
-- `LogoutPresenter.java` (tip: refer to `SignupPresenter.java` for similar code)
-
-  - [ ] TODO: assign to the three instance variables.
-  - [ ] TODO: have prepareSuccessView update the LoggedInState
-  - [ ] TODO: have prepareSuccessView update the LoginState
-
-* * *
-
-1. Make a branch named the first part of your UofT email address, everything before the `@`.
-For example, if your email address is `paul.gries@mail.utoronto.ca`, then the branch name would
-be `paul.gries`.
-
-Make sure you switch to the new branch.
-
-In the terminal, this would look like below, but replaced with your own information:
-```
-git branch paul.gries
-git switch paul.gries
-```
-
-2. Complete your assigned TODOs and make a pull request on GitHub. In your pull request,
-   briefly describe what your TODOs were and how you implemented them. If you aren't sure
-   about part of it, include this in your pull request so everyone knows what to look
-   for when reviewing — or you can of course discuss with your team before making your
-   pull request since you are physically working in the same space.
-   - **Important: don't push any changes to the `.idea` folder, as that
-     may cause issues for your other teammates, as some files contain
-     configurations specific to your individual IntelliJ projects.**
-
-3. Review each other's pull requests to ensure each TODO is correctly implemented and that
-   there are no Checkstyle issues in the files that were modified.
-
-4. Once all TODOs are completed, your team should debug as needed to ensure the
-   correctness of the code. Setting a breakpoint where the log-out use case
-   interactor starts its work will likely be a great place to start when debugging.
-
-And that's it; you now have a working Logout Use Case! Instructions for
-how to submit your work on MarkUs will be posted later.
-
-Your team should spend the rest of the lab working on your project blueprint.
-
-* * *
-
-# Project Blueprint
-
-See Quercus for details about the project blueprint! By the end of the week,
-the goal is for your team to have a fully drafted blueprint so that your team
-will be ready to get started on your project after Reading Week.
+## Code of Conduct
+We are committed to fostering a welcoming and inclusive community. Please be respectful of others, and ensure that your
+contributions align with our guidelines. Harassment, discrimination, or any form of misconduct will not be tolerated.

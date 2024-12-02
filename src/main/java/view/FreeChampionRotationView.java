@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -22,19 +23,36 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
     private final FreeChampionRotationViewModel viewModel;
     private BackController backController;
 
+
     public FreeChampionRotationView(FreeChampionRotationViewModel viewModel,
-                                    BackController backController) throws IOException {
+                                    BackController backController) {
         this.viewModel = viewModel;
         this.viewModel.addPropertyChangeListener(this);
         this.backController = backController;
+
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        backbutton.addActionListener(this);
+        this.add(mainPanel, BorderLayout.CENTER);
+
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final FreeChampionRotationState state = (FreeChampionRotationState) evt.getNewValue();
+
+
+        final JPanel titlePanel = new JPanel();
+        JLabel titleLabel = new JLabel("Free Champion Rotation");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titlePanel.add(titleLabel);
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        final JPanel buttonPanel = new JPanel();
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+        backbutton.setLayout(new FlowLayout(FlowLayout.LEFT));
+
         final JPanel panelone = new JPanel();
         panelone.setLayout(new BoxLayout(panelone, BoxLayout.X_AXIS));
         final JPanel paneltwo = new JPanel();
@@ -46,6 +64,9 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         final JPanel panelfive = new JPanel();
         panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
         this.removeAll();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(titlePanel, BorderLayout.NORTH);
+        this.add(buttonPanel, BorderLayout.WEST);
         this.add(panelone);
         this.add(paneltwo);
         this.add(panelthree);
@@ -79,10 +100,26 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
     private JPanel geteachPanel(FreeChampionRotationState state, int ind) {
         final JPanel eachPanel = new JPanel();
         eachPanel.setLayout(new BoxLayout(eachPanel, BoxLayout.Y_AXIS));
+
         final String name = state.getFreeChampionsName(ind);
         final JLabel namelabel = new JLabel(name);
-        final ImageIcon icon = state.getFreeChampionIcons(ind);
-        final JLabel iconLabel = new JLabel(icon);
+
+        // Image Icon needs to be reduced in size here.
+        final ImageIcon originalIcon = state.getFreeChampionIcons(ind);
+
+        JLabel iconLabel;
+        if (originalIcon != null) {
+            // Resize the icon if it is not null
+            final Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            iconLabel = new JLabel(scaledIcon);
+        }
+        else {
+            // Use a placeholder or default text if the icon is null
+            iconLabel = new JLabel("No Image Available");
+            iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        }
+
         eachPanel.add(namelabel);
         eachPanel.add(iconLabel);
         return eachPanel;

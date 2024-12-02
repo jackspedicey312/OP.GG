@@ -40,6 +40,7 @@ public class RiotUserDataAccessObject {
         return userFactory.createUser(username, tagline, region, userDataAccess.fetchPuuId(username, tagline, region));
     }
 
+
     public ProfileOverview getProfileOverview(String puuId, String region) throws IOException {
 
         return profileDataAccess.generateProfileData(puuId, region);

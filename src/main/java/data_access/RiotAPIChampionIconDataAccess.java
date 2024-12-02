@@ -31,7 +31,7 @@ public class RiotAPIChampionIconDataAccess {
         }
         catch (IOException e) {
             System.err.println("Error fetching icon for champion: " + championName);
-            return new ImageIcon();
+            return null;
         }
     }
 }

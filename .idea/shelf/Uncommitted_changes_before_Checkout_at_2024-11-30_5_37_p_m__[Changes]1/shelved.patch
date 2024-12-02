@@ -1,0 +1,758 @@
+Index: .idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1732929428304)
++++ b/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]/shelved.patch	(date 1732929428304)
+@@ -0,0 +1,573 @@
++Index: .idea/.gitignore
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/.gitignore b/.idea/.gitignore
++deleted file mode 100644
++--- a/.idea/.gitignore	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ /dev/null	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
++@@ -1,8 +0,0 @@
++-# Default ignored files
++-/shelf/
++-/workspace.xml
++-# Editor-based HTTP Client requests
++-/httpRequests/
++-# Datasource local storage ignored files
++-/dataSources/
++-/dataSources.local.xml
++Index: .idea/uiDesigner.xml
++===================================================================
++diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
++deleted file mode 100644
++--- a/.idea/uiDesigner.xml	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ /dev/null	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
++@@ -1,124 +0,0 @@
++-<?xml version="1.0" encoding="UTF-8"?>
++-<project version="4">
++-  <component name="Palette2">
++-    <group name="Swing">
++-      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++-      </item>
++-      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++-      </item>
++-      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++-      </item>
++-      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++-        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++-      </item>
++-      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++-        <initial-values>
++-          <property name="text" value="Button" />
++-        </initial-values>
++-      </item>
++-      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++-        <initial-values>
++-          <property name="text" value="RadioButton" />
++-        </initial-values>
++-      </item>
++-      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++-        <initial-values>
++-          <property name="text" value="CheckBox" />
++-        </initial-values>
++-      </item>
++-      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++-        <initial-values>
++-          <property name="text" value="Label" />
++-        </initial-values>
++-      </item>
++-      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++-          <preferred-size width="150" height="-1" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++-          <preferred-size width="150" height="-1" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++-          <preferred-size width="150" height="-1" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++-      </item>
++-      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++-          <preferred-size width="150" height="50" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++-          <preferred-size width="200" height="200" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++-          <preferred-size width="200" height="200" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++-      </item>
++-      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++-      </item>
++-      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++-      </item>
++-      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++-      </item>
++-      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++-          <preferred-size width="-1" height="20" />
++-        </default-constraints>
++-      </item>
++-      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++-        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++-      </item>
++-      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++-        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++-      </item>
++-    </group>
++-  </component>
++-</project>
++\ No newline at end of file
++Index: src/main/java/use_case/champion/FetchTopChampionsUseCase.java
++===================================================================
++diff --git a/src/main/java/use_case/champion/FetchTopChampionsUseCase.java b/src/main/java/use_case/champion/FetchTopChampionsUseCase.java
++deleted file mode 100644
++--- a/src/main/java/use_case/champion/FetchTopChampionsUseCase.java	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ /dev/null	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
++@@ -1,33 +0,0 @@
++-package use_case.champion;
++-
++-import data_access.RiotAPIChampionDataAccess;
++-
++-import java.util.Comparator;
++-import java.util.List;
++-
++-public class FetchTopChampionsUseCase implements ChampionInputBoundary {
++-
++-    private final RiotAPIChampionDataAccess championDataAccess;
++-    private final ChampionOutputBoundary outputBoundary;
++-
++-    public FetchTopChampionsUseCase(RiotAPIChampionDataAccess championDataAccess, ChampionOutputBoundary outputBoundary) {
++-        this.championDataAccess = championDataAccess;
++-        this.outputBoundary = outputBoundary;
++-    }
++-
++-    @Override
++-    public void fetchTopChampions(String summonerID, String region) {
++-        try {
++-            championDataAccess.setSummonerIDAndRegion(summonerID, region);
++-            List<ChampionOutputData> champions = championDataAccess.fetchAllChampions();
++-
++-            // Sort by mastery points and pick the top 3
++-            champions.sort(Comparator.comparingInt(ChampionOutputData::getMasteryPoints).reversed());
++-            List<ChampionOutputData> topChampions = champions.subList(0, Math.min(3, champions.size()));
++-
++-            outputBoundary.presentTopChampions(topChampions);
++-        } catch (Exception e) {
++-            System.err.println("Error fetching champion data: " + e.getMessage());
++-        }
++-    }
++-}
++Index: homework-5.iml
++===================================================================
++diff --git a/homework-5.iml b/homework-5.iml
++deleted file mode 100644
++--- a/homework-5.iml	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ /dev/null	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
++@@ -1,6 +0,0 @@
++-<?xml version="1.0" encoding="UTF-8"?>
++-<module version="4">
++-  <component name="CheckStyle-IDEA-Module" serialisationVersion="2">
++-    <option name="activeLocationsIds" />
++-  </component>
++-</module>
++\ No newline at end of file
++Index: src/main/java/entity/PlayerStats.java
++===================================================================
++diff --git a/src/main/java/entity/PlayerStats.java b/src/main/java/entity/PlayerStats.java
++deleted file mode 100644
++--- a/src/main/java/entity/PlayerStats.java	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ /dev/null	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
++@@ -1,51 +0,0 @@
++-package entity;
++-
++-/**
++- * Represents a player's performance in a match.
++- */
++-public class PlayerStats {
++-    private final String playerName;
++-    private final int kills;
++-    private final int deaths;
++-    private final int assists;
++-    private final int totalScore;
++-
++-    public PlayerStats(String playerName, int kills, int deaths, int assists, int totalScore) {
++-        this.playerName = playerName;
++-        this.kills = kills;
++-        this.deaths = deaths;
++-        this.assists = assists;
++-        this.totalScore = totalScore;
++-    }
++-
++-    public String getPlayerName() {
++-        return playerName;
++-    }
++-
++-    public int getKills() {
++-        return kills;
++-    }
++-
++-    public int getDeaths() {
++-        return deaths;
++-    }
++-
++-    public int getAssists() {
++-        return assists;
++-    }
++-
++-    public int getTotalScore() {
++-        return totalScore;
++-    }
++-
++-    @Override
++-    public String toString() {
++-        return "PlayerStats{" +
++-                "playerName='" + playerName + '\'' +
++-                ", kills=" + kills +
++-                ", deaths=" + deaths +
++-                ", assists=" + assists +
++-                ", totalScore=" + totalScore +
++-                '}';
++-    }
++-}
++Index: src/main/java/entity/User.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package entity;\r\n\r\n/**\r\n * Represents a user in the system.\r\n */\r\npublic class User {\r\n    private final String username;\r\n    private final String tagline;\r\n    private final String region;\r\n    private final String puuid; // Unique identifier from Riot API\r\n\r\n    public User(String username, String tagline, String region, String puuid) {\r\n        this.username = username;\r\n        this.tagline = tagline;\r\n        this.region = region;\r\n        this.puuid = puuid;\r\n    }\r\n\r\n    public String getUsername() {\r\n        return username;\r\n    }\r\n\r\n    public String getTagline() {\r\n        return tagline;\r\n    }\r\n\r\n    public String getRegion() {\r\n        return region;\r\n    }\r\n\r\n    public String getPuuid() {\r\n        return puuid;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"User{\" +\r\n                \"username='\" + username + '\\'' +\r\n                \", tagline='\" + tagline + '\\'' +\r\n                \", region='\" + region + '\\'' +\r\n                \", puuid='\" + puuid + '\\'' +\r\n                '}';\r\n    }\r\n}\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/src/main/java/entity/User.java b/src/main/java/entity/User.java
++--- a/src/main/java/entity/User.java	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ b/src/main/java/entity/User.java	(date 1732842476320)
++@@ -7,7 +7,7 @@
++     private final String username;
++     private final String tagline;
++     private final String region;
++-    private final String puuid; // Unique identifier from Riot API
+++    private final String puuid;
++ 
++     public User(String username, String tagline, String region, String puuid) {
++         this.username = username;
++Index: .idea/misc.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n<<<<<<< HEAD\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_23\" default=\"true\" project-jdk-name=\"openjdk-23\" project-jdk-type=\"JavaSDK\" />\r\n=======\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" default=\"true\" project-jdk-name=\"openjdk-22\" project-jdk-type=\"JavaSDK\" />\r\n>>>>>>> c216508b93cb8d6a537c2d425909c16aeffcb9a7\r\n</project>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/misc.xml b/.idea/misc.xml
++--- a/.idea/misc.xml	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ b/.idea/misc.xml	(date 1732929399773)
++@@ -8,9 +8,5 @@
++       </list>
++     </option>
++   </component>
++-<<<<<<< HEAD
++   <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK" />
++-=======
++-  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK" />
++->>>>>>> c216508b93cb8d6a537c2d425909c16aeffcb9a7
++ </project>
++\ No newline at end of file
++Index: .idea/checkstyle-idea.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CheckStyle-IDEA\" serialisationVersion=\"2\">\r\n    <checkstyleVersion>10.18.0</checkstyleVersion>\r\n    <scanScope>JavaOnly</scanScope>\r\n    <option name=\"thirdPartyClasspath\" />\r\n    <option name=\"activeLocationIds\">\r\n      <option value=\"a12e12d0-c511-43fb-8087-db6b548f5394\" />\r\n    </option>\r\n    <option name=\"locations\">\r\n      <list>\r\n        <ConfigurationLocation id=\"bundled-sun-checks\" type=\"BUNDLED\" scope=\"All\" description=\"Sun Checks\">(bundled)</ConfigurationLocation>\r\n        <ConfigurationLocation id=\"bundled-google-checks\" type=\"BUNDLED\" scope=\"All\" description=\"Google Checks\">(bundled)</ConfigurationLocation>\r\n        <ConfigurationLocation id=\"a12e12d0-c511-43fb-8087-db6b548f5394\" type=\"PROJECT_RELATIVE\" scope=\"All\" description=\"207 Checks\">$PROJECT_DIR$/mystyle.xml</ConfigurationLocation>\r\n      </list>\r\n    </option>\r\n  </component>\r\n</project>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/checkstyle-idea.xml b/.idea/checkstyle-idea.xml
++--- a/.idea/checkstyle-idea.xml	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ b/.idea/checkstyle-idea.xml	(date 1732929399768)
++@@ -1,17 +1,15 @@
++ <?xml version="1.0" encoding="UTF-8"?>
++ <project version="4">
++   <component name="CheckStyle-IDEA" serialisationVersion="2">
++-    <checkstyleVersion>10.18.0</checkstyleVersion>
+++    <checkstyleVersion>10.18.1</checkstyleVersion>
++     <scanScope>JavaOnly</scanScope>
+++    <copyLibs>true</copyLibs>
++     <option name="thirdPartyClasspath" />
++-    <option name="activeLocationIds">
++-      <option value="a12e12d0-c511-43fb-8087-db6b548f5394" />
++-    </option>
+++    <option name="activeLocationIds" />
++     <option name="locations">
++       <list>
++         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
++         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
++-        <ConfigurationLocation id="a12e12d0-c511-43fb-8087-db6b548f5394" type="PROJECT_RELATIVE" scope="All" description="207 Checks">$PROJECT_DIR$/mystyle.xml</ConfigurationLocation>
++       </list>
++     </option>
++   </component>
++Index: src/main/java/interface_adapter/champion/ChampionDataAccessInterface.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/src/main/java/interface_adapter/champion/ChampionDataAccessInterface.java b/src/main/java/interface_adapter/champion/ChampionDataAccessInterface.java
++new file mode 100644
++--- /dev/null	(date 1732911666811)
+++++ b/src/main/java/interface_adapter/champion/ChampionDataAccessInterface.java	(date 1732911666811)
++@@ -0,0 +1,9 @@
+++package interface_adapter.champion;
+++
+++import java.io.IOException;
+++import java.util.List;
+++
+++public interface ChampionDataAccessInterface {
+++    List<RawChampionData> fetchAllChampions(String summonerID, String region) throws IOException;
+++}
+++
++Index: .idea/workspace.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/workspace.xml b/.idea/workspace.xml
++new file mode 100644
++--- /dev/null	(date 1732929399762)
+++++ b/.idea/workspace.xml	(date 1732929399762)
++@@ -0,0 +1,19 @@
+++<?xml version="1.0" encoding="UTF-8"?>
+++<project version="4">
+++  <component name="PropertiesComponent">{}</component>
+++  <component name="RunManager">
+++    <configuration default="true" type="JetRunConfigurationType">
+++      <module name="OP.GG" />
+++      <method v="2">
+++        <option name="Make" enabled="true" />
+++      </method>
+++    </configuration>
+++    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+++      <module name="OP.GG" />
+++      <option name="filePath" />
+++      <method v="2">
+++        <option name="Make" enabled="true" />
+++      </method>
+++    </configuration>
+++  </component>
+++</project>
++\ No newline at end of file
++Index: src/main/java/use_case/champion/ChampionInteractor.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/src/main/java/use_case/champion/ChampionInteractor.java b/src/main/java/use_case/champion/ChampionInteractor.java
++new file mode 100644
++--- /dev/null	(date 1732917461470)
+++++ b/src/main/java/use_case/champion/ChampionInteractor.java	(date 1732917461470)
++@@ -0,0 +1,56 @@
+++package use_case.champion;
+++
+++import interface_adapter.champion.ChampionDataAccessInterface;
+++import data_access.RiotAPIChampionDataAccess;
+++import java.io.IOException;
+++import java.util.List;
+++
+++public class ChampionInteractor {
+++    private final ChampionDataAccessInterface championDataGateway;
+++
+++    public ChampionInteractor(ChampionDataAccessInterface championDataGateway) {
+++        this.championDataGateway = championDataGateway;
+++    }
+++
+++    public List<ChampionOutputData> getChampionData(String summonerID, String region) throws IOException {
+++        List<RawChampionData> rawChampionDataList = championDataGateway.fetchAllChampions(summonerID, region);
+++        List<ChampionOutputData> outputDataList = new ArrayList<>();
+++
+++
+++        for (RawChampionData rawData : rawChampionDataList) {
+++            int masteryPoints = calculateMasteryPoints(
+++                    rawData.getTotalDamage(), rawData.getMagicDamage(),
+++                    rawData.getPhysicalDamage(), rawData.getTrueDamage(), rawData.getKills()
+++            );
+++
+++            outputDataList.add(new ChampionOutputData(
+++                    rawData.getChampionName(), rawData.getChampionId(),
+++                    rawData.getMagicDamage(), rawData.getPhysicalDamage(),
+++                    rawData.getTotalDamage(), rawData.getTrueDamage(),
+++                    rawData.getKills(), masteryPoints
+++            ));
+++        }
+++
+++        return outputDataList;
+++    }
+++
+++    private int calculateMasteryPoints(int totalDamage, int magicDamage, int physicalDamage, int trueDamage, int kills) {
+++        final int totalDamageMax = 100000;
+++        final int magicDamageMax = 50000;
+++        final int physicalDamageMax = 90000;
+++        final int trueDamageMax = 2000;
+++        final int killsMax = 30;
+++
+++        int normTotalDamage = normalize(totalDamage, 0, totalDamageMax);
+++        int normMagicDamage = normalize(magicDamage, 0, magicDamageMax);
+++        int normPhysicalDamage = normalize(physicalDamage, 0, physicalDamageMax);
+++        int normTrueDamage = normalize(trueDamage, 0, trueDamageMax);
+++        int normKills = normalize(kills, 0, killsMax);
+++
+++        return normTotalDamage + normMagicDamage + normPhysicalDamage + normTrueDamage + normKills;
+++    }
+++
+++    private int normalize(int value, int min, int max) {
+++        return (int) (((double) (value - min) / (max - min)) * 1000);
+++    }
+++}
++Index: src/main/java/data_access/RiotAPIChampionDataAccess.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package data_access;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONObject;\r\nimport org.json.JSONTokener;\r\nimport use_case.champion.ChampionOutputData;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.URL;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class RiotAPIChampionDataAccess {\r\n    private static final String API_KEY = \"RGAPI-f4800267-6eb1-45a5-89d8-b130ffff4f87\";\r\n    private String summonerID;\r\n    private String region;\r\n\r\n    public RiotAPIChampionDataAccess(String summonerID, String region) {\r\n        this.summonerID = summonerID;\r\n        this.region = region;\r\n    }\r\n\r\n    public void setSummonerIDAndRegion(String summonerID, String region) {\r\n        this.summonerID = summonerID;\r\n        this.region = region;\r\n    }\r\n\r\n    public List<ChampionOutputData> fetchAllChampions() throws IOException {\r\n        List<ChampionOutputData> championDataList = new ArrayList<>();\r\n\r\n        final HttpURLConnection request = getHttpURLConnection();\r\n        final int responseCode = request.getResponseCode();\r\n\r\n        if (responseCode == HttpURLConnection.HTTP_OK) {\r\n            try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {\r\n                final JSONArray championInfoArray = new JSONArray(new JSONTokener(in));\r\n\r\n                for (int i = 0; i < championInfoArray.length(); i++) {\r\n                    JSONObject championData = championInfoArray.getJSONObject(i);\r\n\r\n                    String championName = championData.getString(\"championName\");\r\n                    int championId = championData.getInt(\"championId\");\r\n                    int magicDamage = championData.getInt(\"magicDamageDealt\");\r\n                    int physicalDamage = championData.getInt(\"physicalDamageDealt\");\r\n                    int totalDamage = championData.getInt(\"totalDamageDealt\");\r\n                    int trueDamage = championData.getInt(\"trueDamageDealt\");\r\n                    int kills = championData.getInt(\"kills\");\r\n\r\n                    int masteryPoints = calculateMasteryPoints(\r\n                            totalDamage, magicDamage, physicalDamage, trueDamage, kills\r\n                    );\r\n\r\n                    ChampionOutputData championOutput = new ChampionOutputData(\r\n                            championName, championId, magicDamage, physicalDamage, totalDamage, trueDamage, kills, masteryPoints\r\n                    );\r\n\r\n                    championDataList.add(championOutput);\r\n                }\r\n            }\r\n        } else {\r\n            throw new IOException(\"HTTP error code: \" + responseCode);\r\n        }\r\n\r\n        return championDataList;\r\n    }\r\n\r\n    private HttpURLConnection getHttpURLConnection() throws IOException {\r\n        final String baseURL;\r\n        if (region.equalsIgnoreCase(\"NA\")) {\r\n            baseURL = \"https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/\";\r\n        } else if (region.equalsIgnoreCase(\"EU\")) {\r\n            baseURL = \"https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/\";\r\n        } else if (region.equalsIgnoreCase(\"ASIA\")) {\r\n            baseURL = \"https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/\";\r\n        } else {\r\n            throw new IllegalArgumentException(\"Unsupported region: \" + region);\r\n        }\r\n\r\n        final String urlComplete = baseURL + summonerID;\r\n        final URL url = new URL(urlComplete);\r\n        final HttpURLConnection request = (HttpURLConnection) url.openConnection();\r\n        request.setRequestMethod(\"GET\");\r\n        request.setRequestProperty(\"X-Riot-Token\", API_KEY);\r\n        return request;\r\n    }\r\n\r\n    private int calculateMasteryPoints(int totalDamage, int magicDamage, int physicalDamage, int trueDamage, int kills) {\r\n        final int totalDamageMax = 100000;\r\n        final int magicDamageMax = 50000;\r\n        final int physicalDamageMax = 90000;\r\n        final int trueDamageMax = 2000;\r\n        final int killsMax = 30;\r\n\r\n        int normTotalDamage = normalize(totalDamage, 0, totalDamageMax);\r\n        int normMagicDamage = normalize(magicDamage, 0, magicDamageMax);\r\n        int normPhysicalDamage = normalize(physicalDamage, 0, physicalDamageMax);\r\n        int normTrueDamage = normalize(trueDamage, 0, trueDamageMax);\r\n        int normKills = normalize(kills, 0, killsMax);\r\n\r\n        return normTotalDamage + normMagicDamage + normPhysicalDamage + normTrueDamage + normKills;\r\n    }\r\n\r\n    private int normalize(int value, int min, int max) {\r\n        return (int) (((double) (value - min) / (max - min)) * 1000);\r\n    }\r\n}\r\n\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/src/main/java/data_access/RiotAPIChampionDataAccess.java b/src/main/java/data_access/RiotAPIChampionDataAccess.java
++--- a/src/main/java/data_access/RiotAPIChampionDataAccess.java	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ b/src/main/java/data_access/RiotAPIChampionDataAccess.java	(date 1732920165914)
++@@ -3,7 +3,7 @@
++ import org.json.JSONArray;
++ import org.json.JSONObject;
++ import org.json.JSONTokener;
++-import use_case.champion.ChampionOutputData;
+++
++ 
++ import java.io.BufferedReader;
++ import java.io.IOException;
++@@ -23,13 +23,10 @@
++         this.region = region;
++     }
++ 
++-    public void setSummonerIDAndRegion(String summonerID, String region) {
++-        this.summonerID = summonerID;
++-        this.region = region;
++-    }
++-
++-    public List<ChampionOutputData> fetchAllChampions() throws IOException {
++-        List<ChampionOutputData> championDataList = new ArrayList<>();
+++
+++    public List<RawChampionData> fetchAllChampions(String summonerID, String region) throws IOException {
+++
+++
++ 
++         final HttpURLConnection request = getHttpURLConnection();
++         final int responseCode = request.getResponseCode();
++@@ -41,30 +38,22 @@
++                 for (int i = 0; i < championInfoArray.length(); i++) {
++                     JSONObject championData = championInfoArray.getJSONObject(i);
++ 
++-                    String championName = championData.getString("championName");
++-                    int championId = championData.getInt("championId");
++-                    int magicDamage = championData.getInt("magicDamageDealt");
++-                    int physicalDamage = championData.getInt("physicalDamageDealt");
++-                    int totalDamage = championData.getInt("totalDamageDealt");
++-                    int trueDamage = championData.getInt("trueDamageDealt");
++-                    int kills = championData.getInt("kills");
++-
++-                    int masteryPoints = calculateMasteryPoints(
++-                            totalDamage, magicDamage, physicalDamage, trueDamage, kills
++-                    );
++-
++-                    ChampionOutputData championOutput = new ChampionOutputData(
++-                            championName, championId, magicDamage, physicalDamage, totalDamage, trueDamage, kills, masteryPoints
++-                    );
++-
++-                    championDataList.add(championOutput);
+++                    rawChampionDataList.add(new RawChampionData(
+++                            championData.getString("championName"),
+++                            championData.getInt("championId"),
+++                            championData.getInt("magicDamageDealt"),
+++                            championData.getInt("physicalDamageDealt"),
+++                            championData.getInt("totalDamageDealt"),
+++                            championData.getInt("trueDamageDealt"),
+++                            championData.getInt("kills")
+++                    ));
++                 }
+++
+++                return rawChampionDataList;
++             }
++         } else {
++             throw new IOException("HTTP error code: " + responseCode);
++         }
++-
++-        return championDataList;
++     }
++ 
++     private HttpURLConnection getHttpURLConnection() throws IOException {
++@@ -86,25 +75,9 @@
++         request.setRequestProperty("X-Riot-Token", API_KEY);
++         return request;
++     }
+++}
++ 
++-    private int calculateMasteryPoints(int totalDamage, int magicDamage, int physicalDamage, int trueDamage, int kills) {
++-        final int totalDamageMax = 100000;
++-        final int magicDamageMax = 50000;
++-        final int physicalDamageMax = 90000;
++-        final int trueDamageMax = 2000;
++-        final int killsMax = 30;
++ 
++-        int normTotalDamage = normalize(totalDamage, 0, totalDamageMax);
++-        int normMagicDamage = normalize(magicDamage, 0, magicDamageMax);
++-        int normPhysicalDamage = normalize(physicalDamage, 0, physicalDamageMax);
++-        int normTrueDamage = normalize(trueDamage, 0, trueDamageMax);
++-        int normKills = normalize(kills, 0, killsMax);
++ 
++-        return normTotalDamage + normMagicDamage + normPhysicalDamage + normTrueDamage + normKills;
++-    }
++ 
++-    private int normalize(int value, int min, int max) {
++-        return (int) (((double) (value - min) / (max - min)) * 1000);
++-    }
++-}
++ 
++Index: .idea/vcs.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"\" vcs=\"Git\" />\r\n  </component>\r\n</project>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/vcs.xml b/.idea/vcs.xml
++--- a/.idea/vcs.xml	(revision a0c1c419ce02e2c2144f2e93200895831aec5501)
+++++ b/.idea/vcs.xml	(date 1732929392299)
++@@ -1,6 +1,4 @@
++ <?xml version="1.0" encoding="UTF-8"?>
++ <project version="4">
++-  <component name="VcsDirectoryMappings">
++-    <mapping directory="" vcs="Git" />
++-  </component>
+++  <component name="VcsDirectoryMappings" defaultProject="true" />
++ </project>
++\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m___Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m___Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m___Changes_.xml
+new file mode 100644
+--- /dev/null	(date 1732929444954)
++++ b/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m___Changes_.xml	(date 1732929444954)
+@@ -0,0 +1,4 @@
++<changelist name="Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]" date="1732929429474" recycled="true" deleted="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024-11-29_8_17_p_m__[Changes]/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Merge at 2024-11-29 8:17 p.m. [Changes]" />
++</changelist>
+\ No newline at end of file
+Index: .idea/checkstyle-idea.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CheckStyle-IDEA\" serialisationVersion=\"2\">\r\n    <checkstyleVersion>10.18.0</checkstyleVersion>\r\n    <scanScope>JavaOnly</scanScope>\r\n    <option name=\"thirdPartyClasspath\" />\r\n    <option name=\"activeLocationIds\">\r\n      <option value=\"a12e12d0-c511-43fb-8087-db6b548f5394\" />\r\n    </option>\r\n    <option name=\"locations\">\r\n      <list>\r\n        <ConfigurationLocation id=\"bundled-sun-checks\" type=\"BUNDLED\" scope=\"All\" description=\"Sun Checks\">(bundled)</ConfigurationLocation>\r\n        <ConfigurationLocation id=\"bundled-google-checks\" type=\"BUNDLED\" scope=\"All\" description=\"Google Checks\">(bundled)</ConfigurationLocation>\r\n        <ConfigurationLocation id=\"a12e12d0-c511-43fb-8087-db6b548f5394\" type=\"PROJECT_RELATIVE\" scope=\"All\" description=\"207 Checks\">$PROJECT_DIR$/mystyle.xml</ConfigurationLocation>\r\n      </list>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/checkstyle-idea.xml b/.idea/checkstyle-idea.xml
+--- a/.idea/checkstyle-idea.xml	(revision 682ca50624f32b24cdaac657047afa33ab9e0848)
++++ b/.idea/checkstyle-idea.xml	(date 1732947534808)
+@@ -1,17 +1,15 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CheckStyle-IDEA" serialisationVersion="2">
+-    <checkstyleVersion>10.18.0</checkstyleVersion>
++    <checkstyleVersion>10.18.1</checkstyleVersion>
+     <scanScope>JavaOnly</scanScope>
++    <copyLibs>true</copyLibs>
+     <option name="thirdPartyClasspath" />
+-    <option name="activeLocationIds">
+-      <option value="a12e12d0-c511-43fb-8087-db6b548f5394" />
+-    </option>
++    <option name="activeLocationIds" />
+     <option name="locations">
+       <list>
+         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
+         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+-        <ConfigurationLocation id="a12e12d0-c511-43fb-8087-db6b548f5394" type="PROJECT_RELATIVE" scope="All" description="207 Checks">$PROJECT_DIR$/mystyle.xml</ConfigurationLocation>
+       </list>
+     </option>
+   </component>
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1732945459484)
++++ b/.idea/uiDesigner.xml	(date 1732945459484)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
