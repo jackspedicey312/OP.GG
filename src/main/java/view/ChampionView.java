@@ -90,7 +90,7 @@ public class ChampionView extends JPanel implements ActionListener, PropertyChan
         gbc.gridheight = 3;
         championPanel.add(championLabel, gbc);
 
-        JLabel championId = new JLabel("Champion Name: " + championViewModel.getState().getChampionName(index));
+        JLabel championId = new JLabel("Champion: " + championViewModel.getState().getChampionName(index));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 1;
