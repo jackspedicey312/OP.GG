@@ -40,18 +40,17 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
     public void propertyChange(PropertyChangeEvent evt) {
         final FreeChampionRotationState state = (FreeChampionRotationState) evt.getNewValue();
 
-
         final JPanel titlePanel = new JPanel();
         JLabel titleLabel = new JLabel("Free Champion Rotation");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(titleLabel);
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        titlePanel.setMaximumSize(new Dimension(400, 200));
 
-        final JPanel buttonPanel = new JPanel();
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         backbutton.addActionListener(this);
-        buttonPanel.add(backbutton);
-        backbutton.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.add(backbutton, BorderLayout.NORTH);
 
         final JPanel panelone = new JPanel();
         panelone.setLayout(new BoxLayout(panelone, BoxLayout.X_AXIS));
@@ -65,8 +64,8 @@ public class FreeChampionRotationView extends JPanel implements PropertyChangeLi
         panelfive.setLayout(new BoxLayout(panelfive, BoxLayout.X_AXIS));
         this.removeAll();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(titlePanel, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.WEST);
+        this.add(titlePanel, BorderLayout.NORTH);
         this.add(panelone);
         this.add(paneltwo);
         this.add(panelthree);

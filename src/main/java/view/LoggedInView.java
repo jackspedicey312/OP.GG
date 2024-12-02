@@ -2,21 +2,12 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import data_access.RiotAPIChampionDataAccess;
-import data_access.RiotUserDataAccessObject;
-import entity.match.Match;
-import interface_adapter.champion.ChampionController;
-import interface_adapter.champion.ChampionPresenter;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.funfacts.FunFactController;
-import interface_adapter.login.LoginController;
 import interface_adapter.ProfilePresenter.ProfileController;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.matchHistory.MatchHistoryController;
-import use_case.champion.ChampionInteractor;
 
 import javax.swing.*;
 
@@ -54,7 +45,6 @@ public class LoggedInView extends JPanel implements ActionListener {
         final JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
         firstPanel.add(logoutButton);
-        firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
         secondPanel.add(profileButton);

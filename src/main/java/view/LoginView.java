@@ -55,7 +55,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         panel.add(regionField);
         panel.add(new JLabel()); // Spacer
         panel.add(loginButton);
-        panel.setMaximumSize(new Dimension(300, 150));
+        panel.setMaximumSize(new Dimension(400, 200));
 
         add(title, BorderLayout.NORTH);
         add(panel);
