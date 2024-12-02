@@ -16,13 +16,6 @@ public class ChampionPresenter implements ChampionOutputBoundary {
     }
 
     @Override
-    public void presentChampions(List<Champion> champions) {
-        ChampionState state = championViewModel.getState();
-        state.setChampions(champions);
-        championViewModel.setState(state);
-        championViewModel.firePropertyChanged();
-    }
-
     public void prepareView() {
         viewManagerModel.setState(championViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

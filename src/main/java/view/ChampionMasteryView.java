@@ -17,13 +17,13 @@ import java.util.List;
 /**
  * The View for displaying the top champions and their stats.
  */
-public class ChampionView extends JPanel implements PropertyChangeListener {
-    private final String viewName = "champion";
+public class ChampionMasteryView extends JPanel implements PropertyChangeListener {
+    private final String viewName = "Champion Mastery";
     private final ChampionViewModel championViewModel;
     private final BackController backController;
     private final JPanel championListPanel = new JPanel();
 
-    public ChampionView(ChampionViewModel championViewModel, BackController backController) {
+    public ChampionMasteryView(ChampionViewModel championViewModel, BackController backController) {
         this.championViewModel = championViewModel;
         this.backController = backController;
         this.championViewModel.addPropertyChangeListener(this);
@@ -51,26 +51,24 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if ("state".equals(evt.getPropertyName())) {
-            ChampionState state = (ChampionState) evt.getNewValue();
+        final ChampionState state = championViewModel.getState();
+        // Clear the panel
+        championListPanel.removeAll();
 
-            // Clear the panel
-            championListPanel.removeAll();
-
-            // Display champions
-            List<Champion> champions = state.getChampions();
-            if (champions != null && !champions.isEmpty()) {
-                for (Champion champion : champions) {
-                    JPanel championPanel = createChampionPanel(champion);
-                    championListPanel.add(championPanel);
-                }
+        // Display champions
+        List<Champion> champions = state.getChampions();
+        if (champions != null && !champions.isEmpty()) {
+            for (Champion champion : champions) {
+                JPanel championPanel = createChampionPanel(champion);
+                championListPanel.add(championPanel);
             }
-
-            // Revalidate and repaint the panel
-            championListPanel.revalidate();
-            championListPanel.repaint();
         }
+
+        // Revalidate and repaint the panel
+        championListPanel.revalidate();
+        championListPanel.repaint();
     }
+
 
     private JPanel createChampionPanel(Champion champion) {
         JPanel championPanel = new JPanel();
@@ -126,3 +124,6 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         return championPanel;
     }
 }
+
+
+
