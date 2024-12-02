@@ -17,6 +17,8 @@ import interface_adapter.funfacts.FunFactViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.logout.LogoutController;
+import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.matchHistory.MatchHistoryController;
 import interface_adapter.matchHistory.MatchHistoryPresenter;
 import interface_adapter.matchHistory.MatchHistoryViewModel;
@@ -35,6 +37,9 @@ import use_case.funfacts.FunFactsUseCase;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
+import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
+import use_case.logout.LogoutOutputBoundary;
 import use_case.matchHistory.MatchHistoryInputBoundary;
 import use_case.matchHistory.MatchHistoryInteractor;
 import use_case.matchHistory.MatchHistoryOutputBoundary;
@@ -62,6 +67,7 @@ public class RiotApp {
     private FreeChampionRotationController freeChampionRotationController;
     private BackController backController;
     private FunFactController funFactController;
+    private LogoutController logoutController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -94,7 +100,7 @@ public class RiotApp {
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController);
+        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController, logoutController);
         cardPanel.add(loggedInView, loggedInView.getViewName());
         return this;
     }
@@ -169,6 +175,13 @@ public class RiotApp {
         final BackOutputBoundary backPresenter = new BackPresenter(viewManagerModel);
         final BackInputBoundary backInteractor = new BackInteractor(backPresenter);
         backController = new BackController(backInteractor);
+        return this;
+    }
+
+    public RiotApp addLogoutUseCase() {
+        final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(viewManagerModel);
+        final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
+        logoutController = new LogoutController(logoutInteractor);
         return this;
     }
 

@@ -14,6 +14,7 @@ import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.funfacts.FunFactController;
 import interface_adapter.login.LoginController;
 import interface_adapter.ProfilePresenter.ProfileController;
+import interface_adapter.logout.LogoutController;
 import interface_adapter.matchHistory.MatchHistoryController;
 import use_case.champion.ChampionInteractor;
 
@@ -35,17 +36,20 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final MatchHistoryController matchHistoryController;
     private final FreeChampionRotationController freeChampionRotationController;
     private final FunFactController funFactController;
+    private final LogoutController logoutController;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel,
                         ProfileController profileController,
                         FreeChampionRotationController freeChampionRotationController,
                         MatchHistoryController matchHistoryController,
-                        FunFactController funFactController) {
+                        FunFactController funFactController,
+                        LogoutController logoutController) {
         this.loggedInViewModel = loggedInViewModel;
         this.profileController = profileController;
         this.freeChampionRotationController = freeChampionRotationController;
         this.funFactController = funFactController;
         this.matchHistoryController = matchHistoryController;
+        this.logoutController = logoutController;
 
         final JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
@@ -53,8 +57,8 @@ public class LoggedInView extends JPanel implements ActionListener {
         firstPanel.add(Box.createRigidArea(new Dimension(248, 0)));
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
-        secondPanel.add(matchHistoryButton);
         secondPanel.add(profileButton);
+        secondPanel.add(matchHistoryButton);
         secondPanel.add(championsButton);
         secondPanel.add(freeChampionRotationButton);
         secondPanel.add(funFactsButton);
@@ -76,16 +80,21 @@ public class LoggedInView extends JPanel implements ActionListener {
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (e.getSource() == freeChampionRotationButton) {
             freeChampionRotationController.execute();
-        } else if (e.getSource() == matchHistoryButton) {
+        }
+        else if (e.getSource() == matchHistoryButton) {
             matchHistoryController.execute();
-        } else if (e.getSource() == funFactsButton) {
+        }
+        else if (e.getSource() == funFactsButton) {
             funFactController.execute();
         }
         else if (e.getSource() == profileButton) {
             profileController.execute();
         }
-        else {
+        else if (e.getSource() == championsButton) {
             profileController.execute();
+        }
+        else if (e.getSource() == logoutButton) {
+            logoutController.execute();
         }
     }
 

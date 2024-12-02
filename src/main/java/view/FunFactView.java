@@ -15,6 +15,7 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
     private final FunFactViewModel funFactViewModel;
     private final BackController backController;
     private final JPanel contentPanel = new JPanel();
+    private JButton backbutton = new JButton("Back");
 
     public FunFactView(FunFactViewModel funFactViewModel, BackController backController) {
         this.funFactViewModel = funFactViewModel;
@@ -29,6 +30,12 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
         JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
         this.add(title, BorderLayout.NORTH);
+
+        final JPanel buttonPanel = new JPanel();
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+        backbutton.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.add(buttonPanel);
 
         // Content panel for stats
         contentPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Grid with two columns

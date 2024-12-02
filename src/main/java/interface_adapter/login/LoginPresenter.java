@@ -49,6 +49,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         final MatchHistoryState matchHistoryState = matchHistoryViewModel.getState();
         final FreeChampionRotationState freeChampionRotationState = freeChampionRotationViewModel.getState();
         final FunFactState funFactState = funFactViewModel.getState();
+        final LoginState loginState = loginViewModel.getState();
 
         loggedInState.setUser(outputData.getUser());
         profileState.setProfileOverview(outputData.getProfileOverview());
@@ -71,8 +72,12 @@ public class LoginPresenter implements LoginOutputBoundary {
         this.funFactViewModel.setState(funFactState);
         this.funFactViewModel.firePropertyChanged();
 
+        this.loginViewModel.setState(loginState);
+        this.loginViewModel.firePropertyChanged();
+
         this.managerModel.setState(loggedInViewModel.getViewName());
         this.managerModel.firePropertyChanged();
+
     }
 
     @Override

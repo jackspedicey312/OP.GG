@@ -27,10 +27,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     public LoginView(LoginViewModel loginViewModel) {
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Create the panel layout
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2));
+
+        // Title
+        JLabel title = new JLabel("Welcome!", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Input fields
         JLabel usernameLabel = new JLabel("Username:");
@@ -50,7 +55,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         panel.add(regionField);
         panel.add(new JLabel()); // Spacer
         panel.add(loginButton);
+        panel.setMaximumSize(new Dimension(300, 150));
 
+        add(title, BorderLayout.NORTH);
         add(panel);
     }
 
@@ -66,6 +73,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     public void propertyChange(PropertyChangeEvent evt) {
         final LoginState state = (LoginState) evt.getNewValue();
+        usernameField.setText("");
+        taglineField.setText("");
+        regionField.setSelectedIndex(0);
     }
 
     public void setLoginController(LoginController loginController) {
