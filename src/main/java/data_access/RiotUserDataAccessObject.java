@@ -85,6 +85,8 @@ public class RiotUserDataAccessObject {
 
     // Champion Mastery returns a list of champions.
     public List<Champion> getChampions(String puuId, String region) throws Exception {
+        System.out.println("Fun Facts generation complete, now generating Champion Mastery");
+        System.out.println("90% complete");
         return championDataAccess.fetchAllChampions(puuId, region);
     }
 

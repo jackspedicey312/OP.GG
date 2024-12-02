@@ -25,6 +25,8 @@ public class RiotAPIProfileDataAccess {
         final int responseCode2 = request2.getResponseCode();
         final int responseCode = request.getResponseCode();
 
+        System.out.println("Generating profile Data");
+
         if (responseCode == HttpURLConnection.HTTP_OK && responseCode2 == HttpURLConnection.HTTP_OK)  {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
                 final JSONObject playerData = new JSONObject(new JSONTokener(in));

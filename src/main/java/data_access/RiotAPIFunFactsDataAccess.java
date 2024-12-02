@@ -13,7 +13,7 @@ public class RiotAPIFunFactsDataAccess {
 
     public FunFacts getFunFacts(String puuid, String region) throws Exception {
         final RiotAPIMatchDataAccess riotAPIMatchDataAccess = new RiotAPIMatchDataAccess();
-        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 3);
+        final List<String> matches = riotAPIMatchDataAccess.getRecentMatchIds(puuid, region, 50);
         int totalPlaytime = 0;
         int totalWins = 0;
         int totalLosses = 0;
@@ -28,8 +28,10 @@ public class RiotAPIFunFactsDataAccess {
         int totalSnowballsHit = 0;
         int totalSavedAllies = 0;
 
-        for (int i = 0; i < matches.size(); i++) {
+        System.out.println("Generating Fun Facts");
 
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println("analyzing match " + i);
             try {
                 JSONObject matchDetail = riotAPIMatchDataAccess.getMatchDetails(matches.get(i), region);
 
@@ -58,7 +60,8 @@ public class RiotAPIFunFactsDataAccess {
 
                 if (playerStats.getBoolean("win")) {
                     totalWins += 1;
-                } else {
+                }
+                else {
                     totalLosses += 1;
                 }
 
@@ -76,8 +79,9 @@ public class RiotAPIFunFactsDataAccess {
                 // oldestGamePlayed is the date of the very last game in the match history. IT'S IN UNIX FORM!!
                 oldestGamePlayedUnix = matchInfo.getLong("gameEndTimestamp");
 
-            } catch (Exception e) {
-                System.err.println("Could not retrieve details for this match: " + matches.get(i) + "->"
+            }
+            catch (Exception e) {
+                System.err.println("Could not retrieve details for this match: " + matches.get(i) + " -> "
                         + e.getMessage());
                 continue;
             }

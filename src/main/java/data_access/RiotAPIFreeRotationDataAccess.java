@@ -20,6 +20,9 @@ public class RiotAPIFreeRotationDataAccess {
         final HttpURLConnection request = getHttpURLConnection();
 
         final int responseCode = request.getResponseCode();
+
+        System.out.println("Generating free champion rotation");
+
         if (responseCode == HttpURLConnection.HTTP_OK) {
             final JSONArray freeChampions;
             try (BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
@@ -90,7 +93,6 @@ public class RiotAPIFreeRotationDataAccess {
         if (champName != null) {
             final String url = "https://ddragon.canisback.com/img/champion/tiles/" + champName + "_0.jpg";
             final URL completeUrl = new URL(url);
-            System.out.println("Constructed URL: " + url);
 
             try {
                 final BufferedImage img = ImageIO.read(completeUrl);

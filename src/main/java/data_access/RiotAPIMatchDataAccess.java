@@ -54,6 +54,7 @@ public class RiotAPIMatchDataAccess {
         URL url = new URL(urlString);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        System.out.println("Match being generated");
         connection.setRequestMethod("GET");
         connection.setRequestProperty("X-Riot-Token", API_KEY);
 
