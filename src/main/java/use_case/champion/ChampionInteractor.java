@@ -19,16 +19,13 @@ public class ChampionInteractor implements ChampionInputBoundary {
     @Override
     public void execute(String puuId, String region) {
         try {
-            // Fetch all champions from the data access layer
             List<Champion> allChampions = championDataAccess.fetchAllChampions(puuId, region);
 
-            // Sort by mastery points and take the top 3
             List<Champion> top3Champions = allChampions.stream()
                     .sorted((c1, c2) -> Integer.compare(c2.getMasteryPoints(), c1.getMasteryPoints()))
                     .limit(3)
                     .collect(Collectors.toList());
 
-            // Pass the champions directly to the presenter
             championPresenter.presentChampions(top3Champions);
         } catch (IOException e) {
             // Handle the exception (log it or notify the presenter of failure)

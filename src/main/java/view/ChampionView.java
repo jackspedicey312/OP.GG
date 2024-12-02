@@ -4,6 +4,7 @@ import data_access.RiotAPIChampionIconDataAccess;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.champion.ChampionState;
 import interface_adapter.champion.ChampionViewModel;
+import interface_adapter.back.BackController;
 import entity.champion.Champion;
 
 import javax.swing.*;
@@ -19,11 +20,12 @@ import java.util.List;
 public class ChampionView extends JPanel implements PropertyChangeListener {
     private final String viewName = "champion";
     private final ChampionViewModel championViewModel;
+    private final BackController backController;
     private final JPanel championListPanel = new JPanel();
-    private final JLabel errorLabel = new JLabel();
 
-    public ChampionView(ChampionViewModel championViewModel, ViewManagerModel viewManagerModel) {
+    public ChampionView(ChampionViewModel championViewModel, BackController backController) {
         this.championViewModel = championViewModel;
+        this.backController = backController;
         this.championViewModel.addPropertyChangeListener(this);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -36,19 +38,11 @@ public class ChampionView extends JPanel implements PropertyChangeListener {
         championListPanel.setLayout(new BoxLayout(championListPanel, BoxLayout.Y_AXIS));
         add(new JScrollPane(championListPanel));
 
-        // Back button
-        JButton backButton = new JButton("Back to Login");
+        // Back button using BackController
+        JButton backButton = new JButton("Back");
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.addActionListener(e -> {
-            viewManagerModel.setState("login");
-            viewManagerModel.firePropertyChanged();
-        });
+        backButton.addActionListener(e -> backController.execute());
         add(backButton);
-
-        // Error label
-        errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        errorLabel.setForeground(Color.RED);
-        add(errorLabel);
     }
 
     public String getViewName() {

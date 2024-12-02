@@ -35,17 +35,19 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final MatchHistoryController matchHistoryController;
     private final FreeChampionRotationController freeChampionRotationController;
     private final FunFactController funFactController;
+    private final ChampionController championController;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel,
                         ProfileController profileController,
                         FreeChampionRotationController freeChampionRotationController,
                         MatchHistoryController matchHistoryController,
-                        FunFactController funFactController) {
+                        FunFactController funFactController, ChampionController championController) {
         this.loggedInViewModel = loggedInViewModel;
         this.profileController = profileController;
         this.freeChampionRotationController = freeChampionRotationController;
         this.funFactController = funFactController;
         this.matchHistoryController = matchHistoryController;
+        this.championController = championController;
 
         final JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.X_AXIS));
@@ -83,6 +85,9 @@ public class LoggedInView extends JPanel implements ActionListener {
         }
         else if (e.getSource() == profileButton) {
             profileController.execute();
+        }
+        else if (e.getSource() == championsButton) {
+            championController.execute();
         }
         else {
             profileController.execute();
