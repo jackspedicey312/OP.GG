@@ -3,6 +3,8 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -17,7 +19,7 @@ import interface_adapter.back.BackController;
 import interface_adapter.matchHistory.MatchHistoryViewModel;
 
 @SuppressWarnings({"checkstyle:WriteTag", "checkstyle:SuppressWarnings"})
-public class MatchHistoryView extends JPanel implements ActionListener, PropertyChangeListener {
+public class MatchHistoryView extends JPanel implements ActionListener, PropertyChangeListener, MouseWheelListener {
     private final String viewName = "matchHistory";
     private MatchHistoryViewModel matchHistoryViewModel;
     private BackController backController;
@@ -33,25 +35,42 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         this.backController = backController;
         this.matchHistoryViewModel.addPropertyChangeListener(this);
 
+        // Set up main layout
         this.mainPanel = new JPanel(new BorderLayout());
-        this.listPanel = new JPanel(new BorderLayout());
+        this.listPanel = new JPanel();
         listPanel.setBorder(BorderFactory.createTitledBorder("Match History"));
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        this.buttonPanel = new JPanel(new BorderLayout());
+
+        // Add scroll functionality to the listPanel
+        JScrollPane scrollPane = new JScrollPane(listPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Set up button panel and add the back button
+        this.buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         backbutton.addActionListener(this);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        this.add(listPanel);
-        this.add(buttonPanel);
+        buttonPanel.add(backbutton);
+
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        this.setLayout(new BorderLayout());
+        this.add(mainPanel, BorderLayout.CENTER);
+
+        // Add mouse wheel listener to the main panel for scrolling
+        this.addMouseWheelListener(this);
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
         final MatchHistoryState match = matchHistoryViewModel.getState();
         final int length = match.getLength();
         listPanel.removeAll();
+
         for (int i = 0; i < length; i++) {
             final JPanel eachmatch = createMatchDetails(match, i);
             listPanel.add(eachmatch);
         }
+        listPanel.revalidate();
+        listPanel.repaint();
     }
 
     @SuppressWarnings({"checkstyle:MethodName", "checkstyle:SuppressWarnings"})
@@ -60,17 +79,16 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.X_AXIS));
 
         final JPanel leftPanel = getleftjPanel(match, ind);
-
         final JPanel middlePanel = new JPanel();
         middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
         ImageIcon icon = match.getChampionIcon(ind);
 
         if (icon != null) {
             Image image = icon.getImage();
-            Image newimage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            icon = new ImageIcon(newimage);
-            final JLabel iconlabel = new JLabel(icon);
-            middlePanel.add(iconlabel);
+            Image newImage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newImage);
+            final JLabel iconLabel = new JLabel(icon);
+            middlePanel.add(iconLabel);
         }
         else {
             JLabel iconLabel = new JLabel("No Image Available");
@@ -78,7 +96,6 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         }
 
         final JPanel rightPanel = getrightjPanel(match, ind);
-
         backPanel.add(leftPanel);
         backPanel.add(middlePanel);
         backPanel.add(rightPanel);
@@ -88,16 +105,12 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     @NotNull
     private static JPanel getleftjPanel(MatchHistoryState match, int ind) {
         final JPanel leftPanel = new JPanel();
-
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        final JPanel leftupPanel = new JPanel();
-        leftupPanel.setLayout(new BoxLayout(leftupPanel, BoxLayout.Y_AXIS));
+
         final JLabel aram = new JLabel(match.getGameMode(ind));
         final JLabel date = new JLabel(match.getDate(ind));
         leftPanel.add(aram);
         leftPanel.add(date);
-
-        final JPanel leftmiddlePanel = new JPanel();
 
         final JPanel leftdownPanel = new JPanel();
         leftdownPanel.setLayout(new BoxLayout(leftdownPanel, BoxLayout.Y_AXIS));
@@ -106,8 +119,6 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         leftdownPanel.add(result);
         leftdownPanel.add(duration);
 
-        leftPanel.add(leftupPanel);
-        leftPanel.add(leftmiddlePanel);
         leftPanel.add(leftdownPanel);
         return leftPanel;
     }
@@ -116,15 +127,9 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     private JPanel getrightjPanel(MatchHistoryState match, int ind) {
         final JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        final JPanel rightupPanel = new JPanel();
-        final JPanel rightmiddlePanel = new JPanel();
-        final JLabel kda = new JLabel(getkda(match, ind));
-        rightmiddlePanel.add(kda);
-        final JPanel rightdownPanel = new JPanel();
 
-        rightPanel.add(rightupPanel);
-        rightPanel.add(rightmiddlePanel);
-        rightPanel.add(rightdownPanel);
+        final JLabel kda = new JLabel(getkda(match, ind));
+        rightPanel.add(kda);
         return rightPanel;
     }
 
@@ -132,14 +137,23 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         final int k = match.getKills(ind);
         final int d = match.getDeaths(ind);
         final int a = match.getAssissts(ind);
-        final String strk = String.valueOf(k);
-        final String strd = String.valueOf(d);
-        final String stra = String.valueOf(a);
-        return strk + "/" + strd + "/" + stra;
+        return k + "/" + d + "/" + a;
     }
 
     public void actionPerformed(ActionEvent e) {
         this.backController.execute();
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        JScrollPane scrollPane = (JScrollPane) mainPanel.getComponent(1);
+        if (e.getWheelRotation() < 0) {
+            // Scroll up
+            scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getValue() - 30);
+        } else {
+            // Scroll down
+            scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getValue() + 30);
+        }
     }
 
     public String getViewName() {
@@ -149,5 +163,4 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
     public void setBackController(BackController backController) {
         this.backController = backController;
     }
-
 }

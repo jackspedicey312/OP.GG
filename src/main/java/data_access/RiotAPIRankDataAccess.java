@@ -20,7 +20,7 @@ public class RiotAPIRankDataAccess {
 
     public Rank generateRank(String summonerID, String region) throws IOException {
         final HttpURLConnection request = getHttpURLConnection(summonerID, region);
-        String rank;
+        String rank = "Unranked";
         String division = "1";
         int leaguePoints = 0;
         int wins = 0;
@@ -34,8 +34,9 @@ public class RiotAPIRankDataAccess {
                 final JSONArray rankInfo = new JSONArray(new JSONTokener(in));
 
                 if (rankInfo.isEmpty()) {
-                    rank = "unranked";
-                    gameMode = "RANKED_SOLO_5x5";
+                    rank = "UNRANKED";
+                    gameMode = "RANKED SOLO 5x5";
+                    division = "You haven't played any ranked games this season.";
                 }
                 else {
                     final JSONObject playerData = rankInfo.getJSONObject(0);
