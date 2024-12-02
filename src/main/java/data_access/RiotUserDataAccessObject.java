@@ -83,6 +83,7 @@ public class RiotUserDataAccessObject {
         return funFactsDataAccess.getFunFacts(puuId, region);
     }
 
+    // Champion Mastery returns a list of champions.
     public List<Champion> getChampions(String puuId, String region) throws Exception {
         return championDataAccess.fetchAllChampions(puuId, region);
     }

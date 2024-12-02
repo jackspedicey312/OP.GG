@@ -35,10 +35,12 @@ public class LoginInteractor implements LoginInputBoundary {
             final FreeChampionRotation freeChampionRotation = userDataAccessObject.getFreeChampionRotation();
             final FunFacts funFacts = userDataAccessObject.getFunFacts(user.getPuuid(), user.getRegion());
             final List<Champion> champion = userDataAccessObject.getChampions(user.getPuuid(), user.getRegion());
-            loginPresenter.prepareSuccessView(new LoginOutputData(user, profileOverview, rank, matchHistory, freeChampionRotation, funFacts));
+            loginPresenter.prepareSuccessView(new LoginOutputData(user, profileOverview, rank, matchHistory,
+                    freeChampionRotation, funFacts, champion));
         }
         catch (Exception e) {
-            loginPresenter.prepareFailView(new LoginOutputData(null, null, null, null, null, null));
+            loginPresenter.prepareFailView(new LoginOutputData(null, null, null, null,
+                    null, null, null));
         }
     }
 }

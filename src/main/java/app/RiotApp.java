@@ -17,6 +17,8 @@ import interface_adapter.funfacts.FunFactViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.logout.LogoutController;
+import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.matchHistory.MatchHistoryController;
 import interface_adapter.matchHistory.MatchHistoryPresenter;
 import interface_adapter.matchHistory.MatchHistoryViewModel;
@@ -38,6 +40,9 @@ import use_case.funfacts.FunFactsUseCase;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
+import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
+import use_case.logout.LogoutOutputBoundary;
 import use_case.matchHistory.MatchHistoryInputBoundary;
 import use_case.matchHistory.MatchHistoryInteractor;
 import use_case.matchHistory.MatchHistoryOutputBoundary;
@@ -57,7 +62,7 @@ import javax.swing.*;
 public class RiotApp {
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
-    // thought question: is the hard dependency below a problem?
+
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
@@ -70,6 +75,7 @@ public class RiotApp {
     private BackController backController;
     private FunFactController funFactController;
     private ChampionController championController;
+    private LogoutController logoutController;
 
     private LoginView loginView;
     private LoginViewModel loginViewModel;
@@ -105,7 +111,8 @@ public class RiotApp {
 
     public RiotApp addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
-        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController, matchHistoryController, funFactController, championController);
+        loggedInView = new LoggedInView(loggedInViewModel, profileController, freeChampionRotationController,
+                matchHistoryController, funFactController, championController, logoutController);
         cardPanel.add(loggedInView, loggedInView.getViewName());
         return this;
     }
@@ -197,6 +204,14 @@ public class RiotApp {
         backController = new BackController(backInteractor);
         return this;
     }
+
+    public RiotApp addLogoutUseCase() {
+        final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(viewManagerModel);
+        final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
+        logoutController = new LogoutController(logoutInteractor);
+        return this;
+    }
+
 
     public JFrame build() {
         final JFrame application = new JFrame();

@@ -67,8 +67,8 @@ public class ChampionMasteryView extends JPanel implements PropertyChangeListene
         // Revalidate and repaint the panel
         championListPanel.revalidate();
         championListPanel.repaint();
-    }
 
+    }
 
     private JPanel createChampionPanel(Champion champion) {
         JPanel championPanel = new JPanel();

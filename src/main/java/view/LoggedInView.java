@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import interface_adapter.champion.ChampionController;
 import interface_adapter.freeChampionRotation.FreeChampionRotationController;
 import interface_adapter.funfacts.FunFactController;
 import interface_adapter.ProfilePresenter.ProfileController;
@@ -27,19 +28,21 @@ public class LoggedInView extends JPanel implements ActionListener {
     private final MatchHistoryController matchHistoryController;
     private final FreeChampionRotationController freeChampionRotationController;
     private final FunFactController funFactController;
+    private final ChampionController championController;
     private final LogoutController logoutController;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel,
                         ProfileController profileController,
                         FreeChampionRotationController freeChampionRotationController,
                         MatchHistoryController matchHistoryController,
-                        FunFactController funFactController,
+                        FunFactController funFactController, ChampionController championController,
                         LogoutController logoutController) {
         this.loggedInViewModel = loggedInViewModel;
         this.profileController = profileController;
         this.freeChampionRotationController = freeChampionRotationController;
         this.funFactController = funFactController;
         this.matchHistoryController = matchHistoryController;
+        this.championController = championController;
         this.logoutController = logoutController;
 
         final JPanel firstPanel = new JPanel();

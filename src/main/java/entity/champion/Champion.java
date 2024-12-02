@@ -10,7 +10,7 @@ public class Champion {
     private final int kills;
     private final int masteryPoints;
 
-    // Constants for mastery calculation
+    // Constants for mastery calculation.
     private static final int TOTAL_DAMAGE_MAX = 100000;
     private static final int MAGIC_DAMAGE_MAX = 50000;
     private static final int PHYSICAL_DAMAGE_MAX = 90000;

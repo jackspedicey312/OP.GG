@@ -61,7 +61,6 @@ public class RiotAPIChampionDataAccess {
         else {
             throw new IOException("HTTP error code: " + responseCode);
         }
-
         return championList;
     }
 

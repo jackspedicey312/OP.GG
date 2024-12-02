@@ -20,4 +20,5 @@ public class ChampionPresenter implements ChampionOutputBoundary {
         viewManagerModel.setState(championViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+
 }
