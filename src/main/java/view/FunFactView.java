@@ -24,19 +24,6 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
         // Main panel with padding
         this.setLayout(new BorderLayout(10, 10));
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        // Back button
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        backbutton.addActionListener(this);
-        buttonPanel.add(backbutton);
-        this.add(buttonPanel, BorderLayout.NORTH);
-
-        // Title
-        JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 24));
-        JPanel titlePanel = new JPanel();
-        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
-        this.add(title, BorderLayout.CENTER);
     }
 
     /**
@@ -61,6 +48,19 @@ public class FunFactView extends JPanel implements ActionListener, PropertyChang
     public void propertyChange(PropertyChangeEvent evt) {
         // Helper method to add labeled statistics
         // Content panel for stats
+        this.removeAll();
+        // Back button
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+        this.add(buttonPanel, BorderLayout.NORTH);
+
+        // Title
+        JLabel title = new JLabel("Fun Facts", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        JPanel titlePanel = new JPanel();
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        this.add(title, BorderLayout.CENTER);
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setMinimumSize(new Dimension(800, 600));

@@ -34,7 +34,10 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
         this.matchHistoryViewModel = matchHistoryViewModel;
         this.backController = backController;
         this.matchHistoryViewModel.addPropertyChangeListener(this);
+    }
 
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.removeAll();
         // Set up main layout
         this.mainPanel = new JPanel(new BorderLayout());
         this.listPanel = new JPanel();
@@ -58,9 +61,7 @@ public class MatchHistoryView extends JPanel implements ActionListener, Property
 
         // Add mouse wheel listener to the main panel for scrolling
         this.addMouseWheelListener(this);
-    }
 
-    public void propertyChange(PropertyChangeEvent evt) {
         final MatchHistoryState match = matchHistoryViewModel.getState();
         final int length = match.getLength();
         listPanel.removeAll();

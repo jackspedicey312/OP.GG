@@ -30,20 +30,6 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
 
         // Initialize main layout and panels
         this.setLayout(new BorderLayout());
-        this.profilePanel = new JPanel();
-        this.rankPanel = new JPanel();
-        this.profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
-        this.rankPanel.setLayout(new BoxLayout(rankPanel, BoxLayout.Y_AXIS));
-
-        // Button panel for the back button
-        this.buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        backbutton.addActionListener(this);
-        buttonPanel.add(backbutton);
-
-        // Add the button panel to the top of the main layout
-        this.add(buttonPanel, BorderLayout.NORTH);
-        this.add(profilePanel, BorderLayout.CENTER);
-        this.add(rankPanel, BorderLayout.SOUTH);
     }
 
     /**
@@ -76,6 +62,22 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // Update profile icon
+        this.removeAll();
+        this.profilePanel = new JPanel();
+        this.rankPanel = new JPanel();
+        this.profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
+        this.rankPanel.setLayout(new BoxLayout(rankPanel, BoxLayout.Y_AXIS));
+
+        // Button panel for the back button
+        this.buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        backbutton.addActionListener(this);
+        buttonPanel.add(backbutton);
+
+        // Add the button panel to the top of the main layout
+        this.add(buttonPanel, BorderLayout.NORTH);
+        this.add(profilePanel, BorderLayout.CENTER);
+        this.add(rankPanel, BorderLayout.SOUTH);
+
         ImageIcon profileIcon = profileViewModel.getState().getProfileIcon();
         JLabel profileIconLabel = new JLabel(profileIcon);
         profileIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
