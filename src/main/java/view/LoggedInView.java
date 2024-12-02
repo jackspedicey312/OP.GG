@@ -66,6 +66,7 @@ public class LoggedInView extends JPanel implements ActionListener {
         championsButton.addActionListener(this);
         freeChampionRotationButton.addActionListener(this);
         funFactsButton.addActionListener(this);
+        championsButton.addActionListener(this);
         logoutButton.addActionListener(this);
     }
 
@@ -84,11 +85,12 @@ public class LoggedInView extends JPanel implements ActionListener {
             profileController.execute();
         }
         else if (e.getSource() == championsButton) {
-            profileController.execute();
+            championController.execute();
         }
         else if (e.getSource() == logoutButton) {
             logoutController.execute();
         }
+
     }
 
     public String getViewName() {

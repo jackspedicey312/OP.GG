@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 public class ChampionViewModel extends ViewModel<ChampionState> {
 
     public ChampionViewModel() {
-        super("champion");
+        super("championView");
         setState(new ChampionState());
     }
 }

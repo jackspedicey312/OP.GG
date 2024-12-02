@@ -154,7 +154,7 @@ public class RiotApp {
 
     public RiotApp addLoginUseCase() {
         final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel, profileViewModel,
-                matchHistoryViewModel, freeChampionRotationViewModel, funFactViewModel, viewManagerModel);
+                matchHistoryViewModel, freeChampionRotationViewModel, funFactViewModel, championViewModel, viewManagerModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
         loginController = new LoginController(loginInteractor);
         loginView.setLoginController(loginController);
@@ -192,7 +192,6 @@ public class RiotApp {
 
     public RiotApp addChampionUseCase() {
         final ChampionOutputBoundary championOutputBoundary = new ChampionPresenter(championViewModel, viewManagerModel);
-        final RiotAPIChampionDataAccess championDataAccess = new RiotAPIChampionDataAccess();
         final ChampionInputBoundary championInteractor = new ChampionInteractor(championOutputBoundary);
         championController = new ChampionController(championInteractor);
         return this;

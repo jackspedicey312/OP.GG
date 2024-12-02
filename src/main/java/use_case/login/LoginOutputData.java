@@ -61,4 +61,8 @@ public class LoginOutputData {
     public FunFacts getFunFacts() {
         return funFacts;
     }
+
+    public List<Champion> getChampion() {
+        return champion;
+    }
 }

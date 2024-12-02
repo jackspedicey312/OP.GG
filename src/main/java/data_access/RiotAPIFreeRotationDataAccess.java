@@ -99,6 +99,7 @@ public class RiotAPIFreeRotationDataAccess {
                 return new ImageIcon(img);
             }
             catch (IOException e) {
+                System.err.println("Error fetching icon for champion: " + e.getMessage());
                 return null;
             }
         }

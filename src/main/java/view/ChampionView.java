@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 
 public class ChampionView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -23,11 +24,10 @@ public class ChampionView extends JPanel implements ActionListener, PropertyChan
     public ChampionView(ChampionViewModel championViewModel, BackController backController) {
         this.championViewModel = championViewModel;
         this.backController = backController;
-
-        // Listen for changes in the ViewModel
         this.championViewModel.addPropertyChangeListener(this);
 
-        // Set up main panel
+        setLayout(new BorderLayout());
+
         this.mainPanel = new JPanel(new BorderLayout());
         this.listPanel = new JPanel();
         listPanel.setBorder(BorderFactory.createTitledBorder("Champion Details"));
@@ -41,40 +41,67 @@ public class ChampionView extends JPanel implements ActionListener, PropertyChan
         // Add panels to the main panel
         mainPanel.add(listPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-        this.add(mainPanel);
+        this.add(mainPanel, BorderLayout.CENTER);
 
-        // Populate the list panel initially
-        updateChampionList();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        updateChampionList();
-    }
-
-    private void updateChampionList() {
-        listPanel.removeAll();
+        System.out.println("Champion Mastery being generated");
         final int length = championViewModel.getState().getLength();
+        System.out.println("Number of champions: " + length);
         for (int i = 0; i < length; i++) {
-            final JPanel championPanel = createChampionDetails(i);
+            final JPanel championPanel;
+            try {
+                championPanel = createChampionDetails(i);
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             listPanel.add(championPanel);
         }
         listPanel.revalidate();
         listPanel.repaint();
+
     }
 
-    private JPanel createChampionDetails(int index) {
-        JPanel championPanel = new JPanel();
-        championPanel.setLayout(new BoxLayout(championPanel, BoxLayout.Y_AXIS));
-        championPanel.setBorder(BorderFactory.createTitledBorder("Champion " + (index + 1)));
+    private JPanel createChampionDetails(int index) throws IOException {
+        JPanel championPanel = new JPanel(new GridBagLayout());
+        championPanel.setBorder(BorderFactory.createTitledBorder("Highest Mastery Champion " + (index + 1)));
 
-        JLabel championId = new JLabel("Champion ID: " + championViewModel.getState().getChampionId(index));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel championLabel;
+        ImageIcon championIcon1 = championViewModel.getState().getChampionIcon(index);
+        if (championIcon1 != null) {
+            final Image scaledImage = championIcon1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final ImageIcon championIcon2 = new ImageIcon(scaledImage);
+            championLabel = new JLabel(championIcon2);
+        }
+        else {
+            championLabel = new JLabel("No champion icon found");
+        }
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 3;
+        championPanel.add(championLabel, gbc);
+
+        JLabel championId = new JLabel("Champion Name: " + championViewModel.getState().getChampionName(index));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        championPanel.add(championId, gbc);
+
         JLabel level = new JLabel("Level: " + championViewModel.getState().getChampionLevel(index));
-        JLabel points = new JLabel("Points: " + championViewModel.getState().getChampionPoints(index));
+        gbc.gridy = 1;
+        championPanel.add(level, gbc);
 
-        championPanel.add(championId);
-        championPanel.add(level);
-        championPanel.add(points);
+        JLabel points = new JLabel("Points: " + championViewModel.getState().getChampionPoints(index));
+        gbc.gridy = 2;
+        championPanel.add(points, gbc);
 
         return championPanel;
     }
@@ -90,8 +117,4 @@ public class ChampionView extends JPanel implements ActionListener, PropertyChan
         return viewName;
     }
 
-    public void setChampionViewModel(ChampionViewModel championViewModel) {
-        this.championViewModel = championViewModel;
-        updateChampionList();
-    }
 }

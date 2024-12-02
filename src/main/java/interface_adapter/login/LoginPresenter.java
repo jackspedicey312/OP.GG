@@ -1,6 +1,8 @@
 package interface_adapter.login;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.champion.ChampionState;
+import interface_adapter.champion.ChampionViewModel;
 import interface_adapter.freeChampionRotation.FreeChampionRotationState;
 import interface_adapter.freeChampionRotation.FreeChampionRotationViewModel;
 import interface_adapter.funfacts.FunFactState;
@@ -25,13 +27,14 @@ public class LoginPresenter implements LoginOutputBoundary {
     private final FreeChampionRotationViewModel freeChampionRotationViewModel;
     private final FunFactViewModel funFactViewModel;
     private final ViewManagerModel managerModel;
+    private final ChampionViewModel championViewModel;
 
     public LoginPresenter(LoginViewModel loginViewModel,
                           LoggedInViewModel loggedInViewModel,
                           ProfileViewModel profileViewModel,
                           MatchHistoryViewModel matchHistoryViewModel,
                           FreeChampionRotationViewModel freeChampionRotationViewModel,
-                          FunFactViewModel funFactViewModel,
+                          FunFactViewModel funFactViewModel, ChampionViewModel championViewModel,
                           ViewManagerModel viewManagerModel) {
         this.loginViewModel = loginViewModel;
         this.loggedInViewModel = loggedInViewModel;
@@ -39,6 +42,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         this.matchHistoryViewModel = matchHistoryViewModel;
         this.freeChampionRotationViewModel = freeChampionRotationViewModel;
         this.funFactViewModel = funFactViewModel;
+        this.championViewModel = championViewModel;
         this.managerModel = viewManagerModel;
     }
 
@@ -49,6 +53,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         final MatchHistoryState matchHistoryState = matchHistoryViewModel.getState();
         final FreeChampionRotationState freeChampionRotationState = freeChampionRotationViewModel.getState();
         final FunFactState funFactState = funFactViewModel.getState();
+        final ChampionState championState = championViewModel.getState();
         final LoginState loginState = loginViewModel.getState();
 
         loggedInState.setUser(outputData.getUser());
@@ -56,6 +61,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         profileState.setRank(outputData.getRank());
         matchHistoryState.setMatchHistory(outputData.getMatchHistory());
         freeChampionRotationState.setFreeChampionRotation(outputData.getFreeChampionRotation());
+        championState.setChampion(outputData.getChampion());
         funFactState.setFunFacts(outputData.getFunFacts());
 
         this.loggedInViewModel.setState(loggedInState);
@@ -71,6 +77,9 @@ public class LoginPresenter implements LoginOutputBoundary {
 
         this.funFactViewModel.setState(funFactState);
         this.funFactViewModel.firePropertyChanged();
+
+        this.championViewModel.setState(championState);
+        this.championViewModel.firePropertyChanged();
 
         this.loginViewModel.setState(loginState);
         this.loginViewModel.firePropertyChanged();
