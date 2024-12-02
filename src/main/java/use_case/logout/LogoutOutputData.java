@@ -18,7 +18,9 @@ public class LogoutOutputData {
     public String getUsername() {
         return username;
     }
-    public String getTagline() {return tagline;
+
+    public String getTagline() {
+        return tagline;
     }
 
     public boolean isUseCaseFailed() {
